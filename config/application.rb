@@ -22,8 +22,9 @@ module Ifsimply
 
     # Skip RSpec tests for views and helpers
     config.generators do |g|
-      g.view_specs   false
-      g.helper_specs false
+      g.test_framework :rspec
+      g.helper_specs   false
+      g.view_specs     false
     end
 
     # Settings in config/environments/* take precedence over those specified here.

@@ -14,7 +14,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :test do
+  gem 'cucumber-rails', :require => false
+  gem 'faker'
+end
+
 group :test, :development do
   gem 'factory_girl_rails'
+  gem 'rspec'
+  gem 'rspec-rails'
 end
 
