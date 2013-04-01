@@ -1,0 +1,82 @@
+== ifsimply
+
+=== Dependencies
+
+==== ImageMagick
+
+OSX:
+
+```
+brew install ImageMagick
+export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+ln -s /usr/local/include/ImageMagick/wand /usr/local/include/wand
+ln -s /usr/local/include/ImageMagick/magick /usr/local/include/magick
+```
+
+CentOS:
+
+```
+yum install ImageMagick ImageMagick-devel
+```
+
+==== FFMPEG
+
+Good sample video downloads for testing: http://www.clipcanvas.com/a/video-clip-downloads/
+
+OSX:
+
+```
+brew install ffmpeg
+```
+- Download the preset files from http://www.mediasoftpro.com/aspnet-x264-presets.html,
+  and put them into /usr/local/share/ffmpeg/
+
+CentOS:
+```
+rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
+yum install ffmpeg ffmpeg-devel
+```
+
+=== Background Mailers
+
+- Ensure that you enter the correct settings into the following file:
+config/initializers/setup_mail.rb
+
+- Start the mailer
+```
+RAILS_ENV=development script/delayed_job start
+RAILS_ENV=development script/delayed_job stop
+```
+
+=== Apache Web / Passenger
+
+- Install Apache Web and Passenger:
+
+```
+yum install httpd
+gem install passenger
+passenger-install-apache2-module  # PAY ATTENTION TO END OF THIS - COPY 3 REQUIRED LINES
+```
+
+- Add required lines from the step above into /etc/httpd/conf/httpd.conf
+
+- Add the following to the /etc/httpd/conf/httpd.conf:
+
+<VirtualHost *:3999>
+  ServerName www.example.com
+  DocumentRoot /opt/ifsimply/public
+
+  <Directory /opt/ifsimply/public>
+    RailsEnv development
+    PassengerEnabled on
+    PassengerMinInstances 3
+    Options Indexes FollowSymLinks
+    Order allow,deny
+    Allow from all
+  </Directory>
+</VirtualHost>
+
+=== Stripe
+
+- Currently, the Stripe account linked to is under justin.karimi@me.com under the application
+  name 'If Simply'.

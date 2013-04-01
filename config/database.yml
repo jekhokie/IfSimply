@@ -1,0 +1,31 @@
+# adapter-specific values
+sqlite: &sqlite
+  adapter: sqlite3
+  pool:    5
+  timeout: 5000
+
+mysql: &mysql
+  adapter:  mysql2
+  username: root
+  password:
+
+# default values
+defaults: &defaults
+  min_messages: ERROR
+  <<: *sqlite
+
+# databases
+development:
+  database: db/development.sqlite3
+  <<: *defaults
+
+test: &test
+  database: db/test.sqlite3
+  <<: *defaults
+
+production:
+  database: db/production.sqlite3
+  <<: *defaults
+
+cucumber:
+  <<: *test
