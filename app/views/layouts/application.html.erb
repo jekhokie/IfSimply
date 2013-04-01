@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Ifsimply</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Ifsimply</title>
 
-<%= yield %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render "shared/flash_messages" %>
+      <%= yield :header if content_for? :header %>
+    </header>
 
-</body>
+    <%= yield %>
+
+    <footer>
+      <%= yield :footer if content_for? :footer %>
+    </footer>
+  </body>
 </html>
