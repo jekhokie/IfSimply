@@ -1,0 +1,20 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="container-inner">
+        <div class="logo icon">
+          <a class="brand" href="/">
+            <span class="logo-if">i</span>
+            <span class="logo-simply">S</span>
+          </a>
+        </div>
+
+        <%- unless user_signed_in? -%>
+          <ul class="nav pull-right">
+            <li><%= link_to 'Login', new_user_session_path %></li>
+          </ul>
+        <%- end -%>
+      </div>
+    </div>
+  </div>
+</div>

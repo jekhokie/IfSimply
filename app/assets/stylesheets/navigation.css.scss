@@ -1,0 +1,35 @@
+.navbar {
+  z-index: 1000;
+
+  .navbar-inner {
+    height: 30px;
+
+    .container {
+      width: 100%;
+
+      .container-inner {
+        margin: 0px auto;
+        width:  900px;
+      }
+    }
+  }
+
+  .logo {
+    font-family: "Trebuchet MS";
+    font-size:   5.25em;
+    font-weight: bold;
+
+    .brand {
+      width: 25px;
+
+      .logo-if {
+        color: #FDA600;
+      }
+
+      .logo-simply {
+        color:       #008BC5;
+        margin-left: -3px;
+      }
+    }
+  }
+}
