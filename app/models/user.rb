@@ -4,4 +4,7 @@ class User < ActiveRecord::Base
          :confirmable, :lockable, :validatable, :timeoutable
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+
+  validates :name,  :presence => true, :uniqueness => true
+  validates :email, :presence => true, :uniqueness => true
 end
