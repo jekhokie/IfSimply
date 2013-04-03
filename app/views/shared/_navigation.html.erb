@@ -1,0 +1,23 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="container-inner">
+        <div class="logo icon">
+          <a class="brand" href="/">
+            <span class="logo-if">i</span>
+            <span class="logo-simply">S</span>
+          </a>
+        </div>
+
+        <ul class="nav pull-right">
+          <%- if user_signed_in? -%>
+            <li><%= link_to 'Account', edit_user_registration_path %></li>
+            <li><%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %></li>
+          <%- else %>
+            <li><%= link_to 'Login', new_user_session_path %></li>
+          <%- end -%>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,8 @@
   </head>
   <body>
     <header>
-      <%= render "shared/flash_messages" %>
+      <%= render 'shared/navigation' %>
+      <%= render 'shared/flash_messages' %>
       <%= yield :header if content_for? :header %>
     </header>
 

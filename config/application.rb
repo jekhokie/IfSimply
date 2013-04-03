@@ -17,10 +17,14 @@ end
 
 module Ifsimply
   class Application < Rails::Application
+    # Default host for emails
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
     # Skip RSpec tests for views and helpers
     config.generators do |g|
-      g.view_specs   false
-      g.helper_specs false
+      g.test_framework :rspec, :fixture => false
+      g.helper_specs   false
+      g.view_specs     false
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -28,7 +32,7 @@ module Ifsimply
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -49,7 +53,7 @@ module Ifsimply
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [ :password, :password_confirmation ]
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
