@@ -14,4 +14,11 @@ describe HomeController do
       response.should be_success
     end
   end
+
+  describe "GET 'registration_notify'" do
+    it 'should be successful' do
+      get 'registration_notify'
+      response.should be_success
+    end
+  end
 end
