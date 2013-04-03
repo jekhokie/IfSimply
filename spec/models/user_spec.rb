@@ -87,4 +87,14 @@ describe User do
       @user.encrypted_password.should_not be_blank
     end
   end
+
+  describe "club" do
+    before :each do
+      @user = FactoryGirl.create :user_with_club
+    end
+
+    it "should be destroyed when the user is destroyed" do
+      expect { @user.destroy }.to change(Club, :count).by(-1)
+    end
+  end
 end
