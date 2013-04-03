@@ -22,8 +22,9 @@
 public/uploads/*
 private/*
 
-# Ignore email initializers
-config/initializers/setup_mail.rb
-
 # Ignore any sample files
 config/settings.yml
+
+# Ignore email debugging
+config/initializers/setup_mail.rb
+config/development_mail_interceptor.rb
