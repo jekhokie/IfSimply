@@ -120,6 +120,8 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
+    rails_config (0.3.2)
+      activesupport (>= 3.0)
     railties (3.2.8)
       actionpack (= 3.2.8)
       activesupport (= 3.2.8)
@@ -200,6 +202,7 @@ DEPENDENCIES
   less-rails
   money-rails
   rails (= 3.2.8)
+  rails_config
   rspec
   rspec-rails
   sass-rails (~> 3.2.3)
