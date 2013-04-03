@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'devise'
 gem 'jquery-rails'
+gem 'money-rails'
 gem 'rails', '3.2.8'
 gem 'sqlite3'
 
