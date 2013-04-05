@@ -97,4 +97,10 @@ describe User do
       expect { @user.destroy }.to change(Club, :count).by(-1)
     end
   end
+
+  describe "confirm registration" do
+    it "should create a club" do
+      expect { FactoryGirl.create(:user) }.to change(Club, :count).by(+1)
+    end
+  end
 end
