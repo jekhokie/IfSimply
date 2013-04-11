@@ -7,4 +7,6 @@ Ifsimply::Application.routes.draw do
     match '/learn_more'          => 'home#learn_more',          :as => :learn_more
     match '/registration_notify' => 'home#registration_notify', :as => :registration_notify
   end
+
+  resources :clubs, :only => [ :edit ]
 end
