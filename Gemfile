@@ -24,9 +24,11 @@ group :test do
 end
 
 group :test, :development do
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec'
   gem 'rspec-rails'
 end
-
