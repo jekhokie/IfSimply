@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'cancan'
 gem 'devise'
 gem 'jquery-rails'
 gem 'money-rails'
