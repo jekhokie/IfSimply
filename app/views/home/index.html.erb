@@ -1,53 +1,55 @@
-<div class="logo-signup-container">
-  <div class="logo">
-    <span></span>
-  </div>
-
-  <div class="signup">
-    <div class="capture-signup">Have something to share?</div>
-
-    <a type="button" class="btn btn-primary learn-more-button" href="<%= learn_more_path %>">
-      <i class="icon-info-sign"><span class="btn-text"> Learn More</span></i>
-    </a>
-  </div>
-</div>
-
-<div class="capture-search-container">
-  <div class="capture-search-wrapper">
-    <div class="capture">
-      So much to learn,<br/>
-      so little time
+<%= content_for :home_container do %>
+  <div class="logo-signup-container">
+    <div class="logo">
+      <span></span>
     </div>
 
-    <div class="search">
-      <div class="search-container">
-        <input type="text" class="search-box" placeholder=" ifSimply I could..." />
+    <div class="signup">
+      <div class="capture-signup">Have something to share?</div>
 
-        <a type="button" class="btn btn-large btn-warning submit-search" href="#">
-          <i class="icon-search"><span class="btn-text"> Search</span></i>
-        </a>
+      <a type="button" class="btn btn-primary learn-more-button" href="<%= learn_more_path %>">
+        <i class="icon-info-sign"><span class="btn-text"> Learn More</span></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="capture-search-container">
+    <div class="capture-search-wrapper">
+      <div class="capture">
+        So much to learn,<br/>
+        so little time
+      </div>
+
+      <div class="search">
+        <div class="search-container">
+          <input type="text" class="search-box" placeholder=" ifSimply I could..." />
+
+          <a type="button" class="btn btn-large btn-warning submit-search" href="#">
+            <i class="icon-search"><span class="btn-text"> Search</span></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="about-container">
-  <div class="row">
-    <div class="about-item span4">
-      <h3><i class="icon-eye-open"> Learn</i></h3>
-      Each of our clubs center on one main idea.
-      Get insider knowledge from the people who share your passion.
-      Find a club and change your life.
-    </div>
-    <div class="about-item span4">
-      <h3><i class="icon-gift"> Share</i></h3>
-      Engage with like-minded dreamers who are changing their wishes into reality.
-      Each club is full of people like you.
-    </div>
-    <div class="about-item span4">
-      <h3><i class="icon-fullscreen"> Grow</i></h3>
-      Choose to invest in yourself and grow in a dynamic environment.
-      It's more than just an online course.
+  <div class="about-container">
+    <div class="row">
+      <div class="about-item span4">
+        <h3><i class="icon-eye-open"> Learn</i></h3>
+        Each of our clubs center on one main idea.
+        Get insider knowledge from the people who share your passion.
+        Find a club and change your life.
+      </div>
+      <div class="about-item span4">
+        <h3><i class="icon-gift"> Share</i></h3>
+        Engage with like-minded dreamers who are changing their wishes into reality.
+        Each club is full of people like you.
+      </div>
+      <div class="about-item span4">
+        <h3><i class="icon-fullscreen"> Grow</i></h3>
+        Choose to invest in yourself and grow in a dynamic environment.
+        It's more than just an online course.
+      </div>
     </div>
   </div>
-</div>
+<%- end %>
