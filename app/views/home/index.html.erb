@@ -5,11 +5,17 @@
     </div>
 
     <div class="signup">
-      <div class="capture-signup">Have something to share?</div>
+      <%- if user_signed_in? %>
+        <a type="button" class="btn btn-primary myclub-button" href="<%= edit_club_path current_user.club %>">
+          <i class="icon-info-sign"><span class="btn-text"> My Club</span></i>
+        </a>
+      <%- else %>
+        <div class="capture-signup">Have something to share?</div>
 
-      <a type="button" class="btn btn-primary learn-more-button" href="<%= learn_more_path %>">
-        <i class="icon-info-sign"><span class="btn-text"> Learn More</span></i>
-      </a>
+        <a type="button" class="btn btn-primary learn-more-button" href="<%= learn_more_path %>">
+          <i class="icon-info-sign"><span class="btn-text"> Learn More</span></i>
+        </a>
+      <%- end %>
     </div>
   </div>
 
