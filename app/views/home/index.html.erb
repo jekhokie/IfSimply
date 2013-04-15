@@ -6,7 +6,7 @@
 
     <div class="signup">
       <%- if user_signed_in? %>
-        <a type="button" class="btn btn-primary myclub-button" href="<%= edit_club_path current_user.club %>">
+        <a type="button" class="btn btn-primary myclub-button" href="<%= edit_club_path current_user.clubs.first %>">
           <i class="icon-info-sign"><span class="btn-text"> My Club</span></i>
         </a>
       <%- else %>

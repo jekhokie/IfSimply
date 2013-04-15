@@ -46,7 +46,7 @@
         <div class="sign-up-form">
           <%- if user_signed_in? -%>
             <h2>You are already signed in</h2>
-            <%= link_to 'Go to My Club', edit_club_path(current_user.club), :class => 'btn btn-primary' %>
+            <%= link_to 'Go to My Club', edit_club_path(current_user.clubs.first), :class => 'btn btn-primary' %>
           <%- else -%>
             <%= render :template => 'devise/registrations/new' %>
           <%- end -%>

@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
   validates :name,  :presence => true, :uniqueness => true
   validates :email, :presence => true, :uniqueness => true
 
-  has_one :club, :dependent => :destroy
+  has_many :clubs, :dependent => :destroy
 
   private
 
   def create_club
-    self.club ||= Club.create
+    self.clubs.create
   end
 end
