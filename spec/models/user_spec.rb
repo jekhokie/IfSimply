@@ -92,7 +92,7 @@ describe User do
 
   describe "club" do
     before :each do
-      @user = FactoryGirl.create :user_with_club
+      @user = FactoryGirl.create :user
     end
 
     it "should be destroyed when the user is destroyed" do

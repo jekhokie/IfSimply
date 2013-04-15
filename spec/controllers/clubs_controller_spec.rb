@@ -16,7 +16,7 @@ describe ClubsController do
 
       describe "for a club belonging to user" do
         it "should redirect for user sign in" do
-          get 'edit', :id => user.club.id
+          get 'edit', :id => user.clubs.first.id
 
           response.should be_redirect
           response.should redirect_to new_user_session_path
@@ -42,7 +42,7 @@ describe ClubsController do
 
       describe "for club belonging to user" do
         before :each do
-          get 'edit', :id => user.club.id
+          get 'edit', :id => user.clubs.first.id
         end
 
         it "returns http success" do
