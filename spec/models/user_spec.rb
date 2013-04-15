@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe User do
+  it { should have_many :clubs }
+
   it "can be instantiated" do
     User.new.should be_an_instance_of(User)
   end
