@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     @exception = exception
-    render :file => 'public/403', :status => 403
+    render :template => 'home/access_violation', :status => 403
   end
 end
