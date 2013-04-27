@@ -1,2 +1,12 @@
-<h1>Clubs#edit</h1>
-<p>Find me in app/views/clubs/edit.html.erb</p>
+<div class="inner-container">
+  <div class="club-avatar-name-description row-fluid">
+    <div class="club-avatar span4">
+      <%= image_tag "#{@club.logo}" %>
+    </div>
+
+    <div class="club-name-description span8">
+      <div class="club-name"><%= @club.name %></div>
+      <div class="club-description"><%= @club.description %></div>
+    </div>
+  </div>
+</div>
