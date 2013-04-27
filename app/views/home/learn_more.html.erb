@@ -1,55 +1,57 @@
-<div class="learn-more-container">
-  <div class="internal-pitch">
-    <div class="span12">
-      <h2>Stop Wishing, Start Marketing...</h2>
-      <p>
-        At ifSimply, we understand that you already have a lot of content spread across
-        the web. That's why we're making it super easy to monetize your content in a
-        standardized/market-friendly fashion.
-      </p>
+<%= content_for :home_container do %>
+  <div class="learn-more-container">
+    <div class="internal-pitch">
+      <div class="span12">
+        <h2>Stop Wishing, Start Marketing...</h2>
+        <p>
+          At ifSimply, we understand that you already have a lot of content spread across
+          the web. That's why we're making it super easy to monetize your content in a
+          standardized/market-friendly fashion.
+        </p>
+      </div>
     </div>
-  </div>
 
-  <div class="three-step">
-    <div class="span4">
-      <h3>
-        <i class="icon-large icon-wrench"></i> Create
-      </h3>
-      <p>
-        Post content to the site utilizing our easy-to-use tools
-        and standard templates, making your content easier to find
-      </p>
+    <div class="three-step">
+      <div class="span4">
+        <h3>
+          <i class="icon-large icon-wrench"></i> Create
+        </h3>
+        <p>
+          Post content to the site utilizing our easy-to-use tools
+          and standard templates, making your content easier to find
+        </p>
+      </div>
+      <div class="span4">
+        <h3>
+          <i class="icon-large icon-phone"></i> Market
+        </h3>
+        <p>
+          Configure automailer options and content to attract new
+          potential customers and retain existing customers
+        </p>
+      </div>
+      <div class="span4">
+        <h3>
+          <i class="icon-large icon-credit-card"></i> Collect
+        </h3>
+        <p>
+          Receive monthly payments from subscribers to your
+          premium content minus a low transaction fee of 15%
+        </p>
+      </div>
     </div>
-    <div class="span4">
-      <h3>
-        <i class="icon-large icon-phone"></i> Market
-      </h3>
-      <p>
-        Configure automailer options and content to attract new
-        potential customers and retain existing customers
-      </p>
-    </div>
-    <div class="span4">
-      <h3>
-        <i class="icon-large icon-credit-card"></i> Collect
-      </h3>
-      <p>
-        Receive monthly payments from subscribers to your
-        premium content minus a low transaction fee of 15%
-      </p>
-    </div>
-  </div>
 
-  <div class="sign-up">
-    <div class="span12">
-      <div class="sign-up-form">
-        <%- if user_signed_in? -%>
-          <h2>You are already signed in</h2>
-          <%= link_to 'Go to My Club', "#", :class => 'btn btn-primary' %>
-        <%- else -%>
-          <%= render :template => 'devise/registrations/new' %>
-        <%- end -%>
+    <div class="sign-up">
+      <div class="span12">
+        <div class="sign-up-form">
+          <%- if user_signed_in? -%>
+            <h2>You are already signed in</h2>
+            <%= link_to 'Go to My Club', edit_club_path(current_user.clubs.first), :class => 'btn btn-primary' %>
+          <%- else -%>
+            <%= render :template => 'devise/registrations/new' %>
+          <%- end -%>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<%- end %>

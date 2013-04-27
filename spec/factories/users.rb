@@ -4,5 +4,6 @@ FactoryGirl.define do
     email                 { Faker::Internet.email }
     password              { "testing1" }
     password_confirmation { "testing1" }
+    confirmed_at          { Time.now }
   end
 end

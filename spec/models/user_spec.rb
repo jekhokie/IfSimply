@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe User do
+  it { should have_many :clubs }
+
   it "can be instantiated" do
     User.new.should be_an_instance_of(User)
   end
@@ -85,6 +87,22 @@ describe User do
 
     it "should set the encrypted password attribute" do
       @user.encrypted_password.should_not be_blank
+    end
+  end
+
+  describe "club" do
+    before :each do
+      @user = FactoryGirl.create :user
+    end
+
+    it "should be destroyed when the user is destroyed" do
+      expect { @user.destroy }.to change(Club, :count).by(-1)
+    end
+  end
+
+  describe "confirm registration" do
+    it "should create a club" do
+      expect { FactoryGirl.create(:user) }.to change(Club, :count).by(+1)
     end
   end
 end

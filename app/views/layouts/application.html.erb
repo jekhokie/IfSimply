@@ -14,7 +14,13 @@
       <%= yield :header if content_for? :header %>
     </header>
 
-    <%= yield %>
+    <%- if content_for? :home_container %>
+      <%= yield :home_container %>
+    <%- else %>
+      <div class="container">
+        <%= yield %>
+      </div>
+    <%- end %>
 
     <footer>
       <%= yield :footer if content_for? :footer %>

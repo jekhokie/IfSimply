@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'cancan'
 gem 'devise'
 gem 'jquery-rails'
+gem 'money-rails'
 gem 'rails', '3.2.8'
+gem 'rails_config'
 gem 'sqlite3'
 
 group :assets do
@@ -21,8 +24,12 @@ group :test do
 end
 
 group :test, :development do
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
-
