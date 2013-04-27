@@ -1,4 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
+# Simplecov code test coverage
+require 'simplecov'
+
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'capybara/rspec'
