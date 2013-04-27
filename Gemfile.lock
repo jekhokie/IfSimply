@@ -82,6 +82,8 @@ GEM
     ffi (1.6.0)
     gherkin (2.11.6)
       json (>= 1.7.6)
+    google-webfonts (0.1.2)
+      actionpack (>= 3.0.0)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -213,6 +215,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  google-webfonts
   jquery-rails
   less-rails
   money-rails

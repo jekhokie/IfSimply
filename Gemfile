@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'cancan'
 gem 'devise'
+gem 'google-webfonts'
 gem 'jquery-rails'
 gem 'money-rails'
 gem 'rails', '3.2.8'
