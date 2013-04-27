@@ -38,6 +38,10 @@ describe ClubsController do
         it "returns 403 unauthorized forbidden code" do
           response.response_code.should == 403
         end
+
+        it "should render the access_violation template" do
+          response.should render_template('home/access_violation')
+        end
       end
 
       describe "for club belonging to user" do
