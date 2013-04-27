@@ -1,0 +1,14 @@
+:clubs:
+  default_name:        Your Club Name Goes Here
+  default_description: Your club description goes here
+  default_logo:        /images/iS_club_thumb.jpg
+  default_price_cents: 1000
+  min_price_cents:     1000
+:email:
+  address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
+  port:                 <SMTP_PORT>         # common: 587
+  domain:               <SMTP_DOMAIN>       # common: 'gmail.com'
+  user_name:            <ACCOUNT_USERNAME>
+  password:             <ACCOUNT_PASSWORD>
+  authentication:       <AUTH_TYPE>         # common: 'plain'
+  enable_starttls_auto: <BOOLEAN_ENABLE>    # common: 'true'
