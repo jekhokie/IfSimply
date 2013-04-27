@@ -6,7 +6,7 @@ describe ClubsController do
   describe "GET 'edit'" do
     describe "for a non signed-in user" do
       describe "for a club not belonging to user" do
-        it "should redirect for user sign in" do
+        it "redirects for user sign in" do
           get 'edit', :id => FactoryGirl.create(:club).id
 
           response.should be_redirect
@@ -15,7 +15,7 @@ describe ClubsController do
       end
 
       describe "for a club belonging to user" do
-        it "should redirect for user sign in" do
+        it "redirects for user sign in" do
           get 'edit', :id => user.clubs.first.id
 
           response.should be_redirect
@@ -39,7 +39,7 @@ describe ClubsController do
           response.response_code.should == 403
         end
 
-        it "should render the access_violation template" do
+        it "renders the access_violation template" do
           response.should render_template('home/access_violation')
         end
       end
