@@ -1,0 +1,40 @@
+.club-welcome-container {
+  border-bottom: 1px solid #DDDDDD;
+  height:        35px;
+  padding:       12px 0px;
+
+  .club-welcome {
+    .club-welcome-text {
+      font-size:   25px;
+      line-height: 34px;
+    }
+  }
+}
+
+.club-avatar-name-description {
+  height:     270px;
+  margin-top: 20px;
+
+  .club-avatar {
+    img {
+      height:    100%;
+      max-width: 100%;
+    }
+  }
+
+  .club-name-description {
+    height: 100%;
+
+    .club-name {
+      font-size:   50px;
+      font-weight: bold;
+      height:      55px;
+      line-height: 35px;
+      text-align:  center;
+    }
+
+    .club-description {
+      font-size: 18px;
+    }
+  }
+}
