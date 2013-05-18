@@ -13,6 +13,7 @@ class Club < ActiveRecord::Base
                                           :message => "must be at least $#{Settings.clubs[:min_price_cents]/100}"
 
   belongs_to :user
+  has_many   :courses, :dependent => :destroy
 
   def assign_defaults
     self.name        = Settings.clubs[:default_name]
