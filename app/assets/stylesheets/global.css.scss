@@ -1,3 +1,17 @@
 body .container {
   width: 900px;
 }
+
+.purr {
+  background-color: #FCC;
+  border:           2px solid #C66;
+  padding:          20px;
+  position:         fixed;
+  right:            100px;
+  top:              50px;
+  width:            250px;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
