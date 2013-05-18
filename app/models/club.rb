@@ -1,8 +1,6 @@
 class Club < ActiveRecord::Base
   attr_accessible :name, :description, :price_cents, :logo
 
-  after_initialize :assign_defaults
-
   monetize :price_cents
 
   validates :name,        :presence => true
@@ -15,8 +13,6 @@ class Club < ActiveRecord::Base
                                           :message => "must be at least $#{Settings.clubs[:min_price_cents]/100}"
 
   belongs_to :user
-
-  private
 
   def assign_defaults
     self.name        = Settings.clubs[:default_name]

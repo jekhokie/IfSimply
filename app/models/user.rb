@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   private
 
   def create_club
-    self.clubs.create
+    club = self.clubs.new
+    club.assign_defaults
+    club.save :validate => false
   end
 end

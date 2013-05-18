@@ -9,7 +9,7 @@ describe Club do
 
   describe "initialize" do
     before(:all) do
-      @club = Club.create
+      @club = FactoryGirl.create(:user).clubs.first
     end
 
     it "assigns the default name" do
