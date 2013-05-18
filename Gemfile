@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'best_in_place'
 gem 'cancan'
 gem 'devise'
 gem 'google-webfonts'

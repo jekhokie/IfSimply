@@ -3,8 +3,8 @@ class Club < ActiveRecord::Base
 
   monetize :price_cents
 
-  validates :name,        :presence => true
-  validates :description, :presence => true
+  validates :name,        :presence => { :message => "for club can't be blank" }
+  validates :description, :presence => { :message => "for club can't be blank" }
   validates :logo,        :presence => true
   validates :price_cents, :presence => true
   validates :user_id,     :presence => true

@@ -11,8 +11,8 @@
     </div>
 
     <div class="club-name-description span8">
-      <div class="club-name"><%= @club.name %></div>
-      <div class="club-description"><%= @club.description %></div>
+      <div class="club-name"><%= best_in_place_if can?(:update, @club), @club, :name, :type => :input, :html_attrs => { :rows => '1' } %></div>
+      <div class="club-description"><%= best_in_place_if can?(:update, @club), @club, :description, :type => :textarea, :html_attrs => { :rows => '10' } %></div>
     </div>
   </div>
 </div>
