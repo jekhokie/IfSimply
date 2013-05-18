@@ -31,6 +31,7 @@
       height:      55px;
       line-height: 35px;
       text-align:  center;
+      width:       100%;
 
       input {
         width: 100%;
@@ -39,6 +40,12 @@
 
     .club-description {
       font-size: 18px;
+      height:    215px;
+      width:     100%;
+
+      textarea {
+        width: 100%;
+      }
     }
   }
 }
