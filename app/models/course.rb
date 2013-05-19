@@ -9,6 +9,10 @@ class Course < ActiveRecord::Base
 
   has_many :lessons, :dependent => :destroy
 
+  def user
+    club.user
+  end
+
   def assign_defaults
     self.title       = Settings.courses[:default_title]
     self.description = Settings.courses[:default_description]

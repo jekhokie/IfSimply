@@ -6,6 +6,14 @@ class Lesson < ActiveRecord::Base
 
   belongs_to :course
 
+  def club
+    course.club
+  end
+
+  def user
+    club.user
+  end
+
   def assign_defaults
     self.title      = Settings.lessons[:default_title]
     self.background = Settings.lessons[:default_background]
