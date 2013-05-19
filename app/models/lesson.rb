@@ -1,5 +1,5 @@
 class Lesson < ActiveRecord::Base
-  attr_accessible :background, :title
+  attr_accessible :background, :free, :title
 
   validates :title,      :presence => { :message => "for lesson can't be blank" }
   validates :background, :presence => { :message => "for lesson can't be blank" }
@@ -17,5 +17,6 @@ class Lesson < ActiveRecord::Base
   def assign_defaults
     self.title      = "Lesson #{(course.lessons.count + 1)} - #{Settings.lessons[:default_title]}"
     self.background = Settings.lessons[:default_background]
+    self.free       = Settings.lessons[:default_free]
   end
 end
