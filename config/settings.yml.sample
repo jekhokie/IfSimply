@@ -10,6 +10,7 @@
 :lessons:
   default_title:      Lesson Title Here
   default_background: Lesson background here
+  default_free:       false
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
   port:                 <SMTP_PORT>         # common: 587
