@@ -19,6 +19,23 @@ describe Lesson do
     end
   end
 
+  describe "club" do
+    let(:course) { FactoryGirl.create :course }
+
+    it "returns the corresponding courses' club" do
+      FactoryGirl.create(:lesson, :course_id => course.id).club.should == course.club
+    end
+  end
+
+  describe "user" do
+    let(:club)   { FactoryGirl.create :club }
+    let(:course) { FactoryGirl.create :course, :club_id => club }
+
+    it "returns the corresponding course's user" do
+      FactoryGirl.create(:lesson, :course_id => course.id).user.should == course.user
+    end
+  end
+
   describe "assign_defaults" do
     let(:course) { FactoryGirl.create :course }
 

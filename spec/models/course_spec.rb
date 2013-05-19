@@ -44,6 +44,14 @@ describe Course do
     end
   end
 
+  describe "user" do
+    let(:club) { FactoryGirl.create :club }
+
+    it "returns the corresponding clubs' user" do
+      FactoryGirl.create(:course, :club_id => club.id).user.should == club.user
+    end
+  end
+
   describe "lessons" do
     before :each do
       @course = FactoryGirl.create :course
