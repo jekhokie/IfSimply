@@ -27,22 +27,22 @@
 
       <%- if can? :update, @club %>
         <div class="add-club-course">
-          <a href="#" class="add-club-course-link">Add Course</a>
+          <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-club-course-link">Add Course</a>
         </div>
       <%- end %>
     </div>
 
     <div class="club-course-listing span12">
       <%- if @club.courses.blank? %>
-        <h2>No Courses Yet<%= raw(' - Go Ahead and <a href="#" class="create-first-course-link">Create your First!</a>') if can?(:update, @club) %></h2>
+        <h2>No Courses Yet
+          <%- if can? :update, @club %>
+            - Go Ahead and <a href="<%= club_courses_path(@club) %>" data-method="post" class="create-first-course-link">Create your First!</a>
+          <%- end %>
+        </h2>
       <%- else %>
         <div class="courses-listing">
-          <%- @club.courses.each_with_index do |course, i| %>
-            <div class="course <%= 'course-first' if i == 0 %>">
-              <div class="course-logo"><%= image_tag course.logo_url.to_s, :class => 'course-logo' %></div>
-            <div class="course-title"><%= link_to course.title, club_course_path(@club, course) %></div>
-          </div>
-        <%- end %>
+          <%= render :partial => 'courses/list', :locals => { :courses => @club.courses } %>
+        </div>
       <%- end %>
     </div>
   </div>
