@@ -6,6 +6,10 @@
     max-height:  100px;
     text-align:  center;
     width:       800px;
+
+    input {
+      width: 100%;
+    }
   }
 
   .course-description {
@@ -13,6 +17,10 @@
     line-height: 18px;
     margin:      0px auto;
     width:       800px;
+
+    textarea {
+      width: 100%;
+    }
   }
 
   hr.course-divider {
