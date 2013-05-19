@@ -53,5 +53,9 @@ describe Lesson do
     it "assigns the correct default description" do
       @lesson.background.should == Settings.lessons[:default_background]
     end
+
+    it "assigns the correct default free boolean" do
+      @lesson.free.should == Settings.lessons[:default_free]
+    end
   end
 end
