@@ -11,4 +11,12 @@ class CoursesController < ApplicationController
 
     render :edit
   end
+
+  def edit
+    @course = Course.find params[:id]
+
+    authorize! :edit, @course
+
+    @club = @course.club
+  end
 end
