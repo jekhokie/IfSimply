@@ -3,10 +3,11 @@ class CoursesController < ApplicationController
   before_filter :get_course, :only => [ :edit, :update ]
 
   def create
-    authorize! :create, Course
-
     @club = Club.find params[:club_id]
     @course = @club.courses.new
+
+    authorize! :create, @course
+
     @course.assign_defaults
     @course.save
 

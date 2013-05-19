@@ -1,0 +1,36 @@
+<%- lessons.each_with_index do |lesson, i| %>
+  <%- if i > 0 %>
+    <hr />
+  <%- end %>
+
+  <div class="lesson">
+    <div class="lesson-title">
+      <div class="lesson-title-text">
+        <%= best_in_place_if can?(:update, lesson), lesson, :title, :type       => :input,
+                                                                    :path       => course_lesson_path(lesson.course, lesson),
+                                                                    :html_attrs => { :rows => '1' } %>
+      </div>
+
+      <%- if can? :update, lesson %>
+        <div class="free-select">
+          (Free?
+          <%= best_in_place lesson, :free, :type       => :checkbox,
+                                           :path       => course_lesson_path(lesson.course, lesson),
+                                           :html_attrs => { :rows => '1' } %>
+          )
+        </div>
+      <%- end %>
+    </div>
+
+
+    <div class="lesson-video">
+      <video id="player" controls webkit-playsinline></video>
+    </div>
+
+    <p class="lesson-background">
+      <%= best_in_place_if can?(:update, lesson), lesson, :background, :type       => :textarea,
+                                                                       :path       => course_lesson_path(lesson.course, lesson),
+                                                                       :html_attrs => { :rows => '10' } %>
+    </p>
+  </div>
+<%- end %>

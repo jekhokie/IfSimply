@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Course do
   it { should belong_to :club }
+  it { should have_many :lessons }
 
   it "can be instantiated" do
     Course.new.should be_an_instance_of(Course)
@@ -40,6 +41,25 @@ describe Course do
 
     it "assigns the correct default description" do
       @course.description.should == Settings.courses[:default_description]
+    end
+  end
+
+  describe "user" do
+    let(:club) { FactoryGirl.create :club }
+
+    it "returns the corresponding clubs' user" do
+      FactoryGirl.create(:course, :club_id => club.id).user.should == club.user
+    end
+  end
+
+  describe "lessons" do
+    before :each do
+      @course = FactoryGirl.create :course
+      FactoryGirl.create :lesson, :course_id => @course.id
+    end
+
+    it "should be destroyed when the course is destroyed" do
+      expect { @course.destroy }.to change(Lesson, :count).by(-1)
     end
   end
 end

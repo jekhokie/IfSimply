@@ -3,7 +3,15 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    can :update,                     Club,   :user_id => user.id
-    can [ :create, :edit, :update ], Course, :club_id => user.clubs.first.id # TODO: Figure out how to restrict to course_id in user.clubs.map(&:id)
+
+    can :update, Club, :user_id => user.id
+
+    can [ :create, :edit, :update ], Course do |course|
+      course.user == user
+    end
+
+    can [ :create, :update ], Lesson do |lesson|
+      lesson.user == user
+    end
   end
 end

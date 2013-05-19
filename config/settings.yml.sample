@@ -1,9 +1,16 @@
 :clubs:
   default_name:        Your Club Name Here
   default_description: Your club description here
-  default_logo:        /images/iS_club_thumb.jpg
+  default_logo:        iS_club_thumb.jpg
   default_price_cents: 1000
   min_price_cents:     1000
+:courses:
+  default_title:       Course Title Here
+  default_description: Course description here
+:lessons:
+  default_title:      Lesson Title Here
+  default_background: Lesson background here
+  default_free:       false
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
   port:                 <SMTP_PORT>         # common: 587

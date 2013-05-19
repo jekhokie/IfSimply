@@ -8,14 +8,15 @@
     width:       800px;
 
     input {
-      width: 100%;
+      text-align: center;
+      width:      100%;
     }
   }
 
   .course-description {
     font-size:   18px;
     line-height: 18px;
-    margin:      0px auto;
+    margin:      25px auto;
     width:       800px;
 
     textarea {
@@ -23,32 +24,105 @@
     }
   }
 
-  hr.course-divider {
-    background-color: #777;
-    height:           4px;
-  }
-
   .course-lessons {
-    width:  800px;
-    margin: 25px auto;
+    margin: 35px auto;
 
-    hr {
-      background-color: #CCC;
-      height:           2px;
+    .lesson-listing-heading {
+      -webkit-border-radius: 4px;
+      -moz-border-radius:    4px;
+      border-radius:         4px;
+
+      background-color: #333;
+      color:            #FFF;
+      height:           45px;
+      margin-bottom:    12px;
+      margin-top:       8px;
+      padding-left:     12px;
+      position:         relative;
+
+      h2 {
+        display:     inline;
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 200;
+        position:    relative;
+        top:         2px;
+      }
+
+      .add-course-lesson {
+        display:  inline;
+        position: absolute;
+        right:    15px;
+        top:      13px;
+
+        .add-course-lesson-link {
+          color:          #FFF;
+          padding-bottom: 3px;
+        }
+      }
     }
 
-    .lesson {
-      .lesson-title {
-        font-size:   30px;
-        line-height: 30px;
+    .course-lesson-listing {
+      margin-left: 0px;
+
+      h2 {
+        font-size:   24px;
+        font-weight: normal;
+
+        .create-first-lesson-link {
+          color:       #333;
+          font-style:  italic;
+          font-weight: bold;
+        }
       }
 
-      .lesson-video {
-        margin:     15px auto;
-        text-align: center;
+      hr {
+        background-color: #CCC;
+        height:           2px;
       }
 
-      .lesson-background {
+      .lesson {
+        .lesson-title {
+          .lesson-title-text {
+            display:     inline;
+            float:       left;
+            font-size:   30px;
+            line-height: 30px;
+            width:       650px;
+
+            input {
+              width: 650px;
+            }
+          }
+
+          .free-select {
+            display:     inline;
+            float:       right;
+            font-size:   20px;
+            line-height: 30px;
+
+            span.best_in_place {
+              display:    inline-block;
+              font-style: italic;
+              text-align: right;
+              width:      35px;
+            }
+
+            span.best_in_place:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .lesson-video {
+          margin:     15px auto;
+          text-align: center;
+        }
+
+        .lesson-background {
+          textarea {
+            width: 100%;
+          }
+        }
       }
     }
   }
