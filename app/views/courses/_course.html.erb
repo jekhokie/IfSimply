@@ -9,5 +9,29 @@
     <%= best_in_place_if can?(:update, course), course, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
   </p>
 
-  <hr class="course-divider" />
+  <div class="course-lessons row-fluid">
+    <div class="lesson-listing-heading">
+      <h2>Lessons</h2>
+
+      <%- if can? :update, course %>
+        <div class="add-course-lesson">
+          <a href="<%= course_lessons_path(course) %>" data-method="post" class="add-course-lesson-link">Add Lesson</a>
+        </div>
+      <%- end %>
+    </div>
+
+    <div class="course-lesson-listing span12">
+      <%- if course.lessons.blank? %>
+        <h2>No Lessons Yet
+          <%- if can? :update, course %>
+            - Go Ahead and <a href="<%= course_lessons_path(course) %>" data-method="post" class="create-first-lesson-link">Create your First!</a>
+          <%- end %>
+        </h2>
+      <%- else %>
+        <div class="lessons-listing">
+          <%= render :partial => 'lessons/list', :locals => { :lessons => course.lessons } %>
+        </div>
+      <%- end %>
+    </div>
+  </div>
 </div>

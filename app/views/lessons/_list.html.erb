@@ -1,0 +1,19 @@
+<%- lessons.each_with_index do |lesson, i| %>
+  <%- if i > 0 %>
+    <hr />
+  <%- end %>
+
+  <div class="lesson">
+    <h2 class="lesson-title">
+      Lesson <%= i + 1 %>: <%= lesson.title %>
+    </h2>
+
+    <div class="lesson-video">
+      <video id="player" controls webkit-playsinline></video>
+    </div>
+
+    <p class="lesson-background">
+      <%= lesson.background.to_s %>
+    </p>
+  </div>
+<%- end %>
