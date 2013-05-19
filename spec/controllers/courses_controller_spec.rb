@@ -3,11 +3,13 @@ require 'spec_helper'
 describe CoursesController do
   let(:user) { FactoryGirl.create :user }
 
+  before :each do
+    @request.env["devise.mapping"] = Devise.mappings[:users]
+    sign_in user
+  end
+
   describe "POST 'create'" do
     before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
-
       post 'create', :club_id => user.clubs.first.id
     end
 
@@ -34,6 +36,26 @@ describe CoursesController do
 
     it "assigns the default description" do
       assigns(:course).description.should == Settings.courses[:default_description]
+    end
+  end
+
+  describe "GET 'edit'" do
+    let(:course) { FactoryGirl.create :course }
+
+    before :each do
+      get 'edit', :club_id => course.club.id, :id => course.id
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "returns the club" do
+      assigns(:club).should == course.club
+    end
+
+    it "returns the course" do
+      assigns(:course).should == course
     end
   end
 end
