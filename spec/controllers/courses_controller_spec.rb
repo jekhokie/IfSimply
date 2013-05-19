@@ -15,6 +15,10 @@ describe CoursesController do
       response.should be_success
     end
 
+    it "should render the edit view" do
+      response.should render_template("courses/edit")
+    end
+
     it "returns the club" do
       assigns(:club).should_not be_nil
     end

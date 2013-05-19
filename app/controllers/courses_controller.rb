@@ -6,5 +6,7 @@ class CoursesController < ApplicationController
     @course = @club.courses.new
     @course.assign_defaults
     @course.save
+
+    render :edit
   end
 end
