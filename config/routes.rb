@@ -12,4 +12,6 @@ Ifsimply::Application.routes.draw do
   resources :clubs, :only => [ :edit, :update ] do
     resources :courses, :only => [ :create ]
   end
+
+  resources :courses, :only => [ :edit ]
 end
