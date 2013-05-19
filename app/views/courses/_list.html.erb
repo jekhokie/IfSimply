@@ -1,5 +1,5 @@
 <%- courses.each_with_index do |course, i| %>
   <div class="course <%= 'course-first' if i == 0 %>">
-    <div class="course-title"><%= link_to course.title, "#" %></div>
+    <div class="course-title"><%= link_to course.title, edit_course_path(course) %></div>
   </div>
 <%- end %>
