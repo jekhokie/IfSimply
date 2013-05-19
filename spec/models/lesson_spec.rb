@@ -47,7 +47,7 @@ describe Lesson do
     end
 
     it "assigns the correct default title" do
-      @lesson.title.should == Settings.lessons[:default_title]
+      @lesson.title.should == "Lesson 1 - #{Settings.lessons[:default_title]}"
     end
 
     it "assigns the correct default description" do
