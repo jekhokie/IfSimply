@@ -1,0 +1,47 @@
+.course-information {
+  .course-title {
+    font-size:   45px;
+    line-height: 45px;
+    margin:      15px auto;
+    max-height:  100px;
+    text-align:  center;
+    width:       800px;
+  }
+
+  .course-description {
+    font-size:   18px;
+    line-height: 18px;
+    margin:      0px auto;
+    width:       800px;
+  }
+
+  hr.course-divider {
+    background-color: #777;
+    height:           4px;
+  }
+
+  .course-lessons {
+    width:  800px;
+    margin: 25px auto;
+
+    hr {
+      background-color: #CCC;
+      height:           2px;
+    }
+
+    .lesson {
+      .lesson-title {
+        font-size:   30px;
+        line-height: 30px;
+      }
+
+      .lesson-video {
+        margin:     15px auto;
+        text-align: center;
+      }
+
+      .lesson-background {
+      }
+    }
+  }
+}
