@@ -73,5 +73,15 @@ describe Ability do
         ability.should_not be_able_to(:create, non_owned_lesson)
       end
     end
+
+    context "update" do
+      it "succeeds when the user owns the corresponding club" do
+        ability.should be_able_to(:update, owned_lesson)
+      end
+
+      it "fails when the user does not own the corresponding club" do
+        ability.should_not be_able_to(:update, non_owned_lesson)
+      end
+    end
   end
 end
