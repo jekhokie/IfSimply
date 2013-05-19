@@ -1,9 +1,5 @@
 <div class="inner-container">
-  <div class="club-welcome-container row-fluid">
-    <div class="club-welcome span12">
-      <span class="club-welcome-text">Welcome, <%= current_user.name %>!</span>
-    </div>
-  </div>
+  <%= render :partial => 'shared/welcome_message' %>
 
   <div class="club-avatar-name-description row-fluid">
     <div class="club-avatar span4">

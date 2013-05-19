@@ -15,3 +15,16 @@ body .container {
     text-transform: uppercase;
   }
 }
+
+.welcome-container {
+  border-bottom: 1px solid #DDDDDD;
+  height:        35px;
+  padding:       12px 0px;
+
+  .welcome {
+    .welcome-text {
+      font-size:   25px;
+      line-height: 34px;
+    }
+  }
+}
