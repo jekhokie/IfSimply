@@ -62,6 +62,8 @@
     }
 
     .course-lesson-listing {
+      margin-left: 0px;
+
       h2 {
         font-size:   24px;
         font-weight: normal;
@@ -80,8 +82,35 @@
 
       .lesson {
         .lesson-title {
-          font-size:   30px;
-          line-height: 30px;
+          .lesson-title-text {
+            display:     inline;
+            float:       left;
+            font-size:   30px;
+            line-height: 30px;
+            width:       650px;
+
+            input {
+              width: 650px;
+            }
+          }
+
+          .free-select {
+            display:     inline;
+            float:       right;
+            font-size:   20px;
+            line-height: 30px;
+
+            span.best_in_place {
+              display:    inline-block;
+              font-style: italic;
+              text-align: right;
+              width:      35px;
+            }
+
+            span.best_in_place:hover {
+              cursor: pointer;
+            }
+          }
         }
 
         .lesson-video {
@@ -90,6 +119,9 @@
         }
 
         .lesson-background {
+          textarea {
+            width: 100%;
+          }
         }
       }
     }
