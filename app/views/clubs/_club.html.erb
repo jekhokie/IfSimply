@@ -1,0 +1,45 @@
+<div class="inner-container">
+  <%= render :partial => 'shared/welcome_message' %>
+
+  <div class="club-avatar-name-description row-fluid">
+    <div class="club-avatar span4">
+      <%= image_tag "#{club.logo}" %>
+    </div>
+
+    <div class="club-name-description span8">
+      <div class="club-name">
+        <%= best_in_place_if can?(:update, club), club, :name, :type => :input, :html_attrs => { :rows => '1' } %>
+      </div>
+
+      <div class="club-description">
+        <%= best_in_place_if can?(:update, club), club, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="club-courses row-fluid">
+    <div class="course-listing-heading">
+      <h2>Courses</h2>
+
+      <%- if can? :update, club %>
+        <div class="add-club-course">
+          <a href="<%= club_courses_path(club) %>" data-method="post" class="add-club-course-link">Add Course</a>
+        </div>
+      <%- end %>
+    </div>
+
+    <div class="club-course-listing span12">
+      <%- if club.courses.blank? %>
+        <h2>No Courses Yet
+          <%- if can? :update, club %>
+            - Go Ahead and <a href="<%= club_courses_path(club) %>" data-method="post" class="create-first-course-link">Create your First!</a>
+          <%- end %>
+        </h2>
+      <%- else %>
+        <div class="courses-listing">
+          <%= render :partial => 'courses/list', :locals => { :courses => club.courses } %>
+        </div>
+      <%- end %>
+    </div>
+  </div>
+</div>

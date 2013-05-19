@@ -90,7 +90,7 @@ describe User do
     end
   end
 
-  describe "club" do
+  describe "clubs" do
     before :each do
       @user = FactoryGirl.create :user
     end

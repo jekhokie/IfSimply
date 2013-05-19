@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Club do
   it { should belong_to :user }
+  it { should have_many :courses }
 
   it "can be instantiated" do
     Club.new.should be_an_instance_of(Club)
@@ -56,6 +57,17 @@ describe Club do
     # user association
     it "returns false when missing a user_id" do
       FactoryGirl.build(:club, :user_id => nil).should_not be_valid
+    end
+  end
+
+  describe "courses" do
+    before :each do
+      @club = FactoryGirl.create :club
+      FactoryGirl.create :course, :club_id => @club.id
+    end
+
+    it "should be destroyed when the club is destroyed" do
+      expect { @club.destroy }.to change(Course, :count).by(-1)
     end
   end
 end

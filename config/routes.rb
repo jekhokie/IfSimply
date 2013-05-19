@@ -9,5 +9,9 @@ Ifsimply::Application.routes.draw do
     match '/access_violation'    => 'home#access_violation',  :as => :access_violation
   end
 
-  resources :clubs, :only => [ :edit, :update ]
+  resources :clubs, :only => [ :edit, :update ] do
+    resources :courses, :only => [ :create ]
+  end
+
+  resources :courses, :only => [ :edit, :update ]
 end

@@ -10,9 +10,10 @@ class Club < ActiveRecord::Base
   validates :user_id,     :presence => true
 
   validates_numericality_of :price_cents, :greater_than_or_equal_to => Settings.clubs[:min_price_cents],
-                                          :message => "must be at least $#{Settings.clubs[:min_price_cents]/100}"
+                                          :message                  => "must be at least $#{Settings.clubs[:min_price_cents]/100}"
 
   belongs_to :user
+  has_many   :courses, :dependent => :destroy
 
   def assign_defaults
     self.name        = Settings.clubs[:default_name]
