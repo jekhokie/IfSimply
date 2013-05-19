@@ -94,7 +94,7 @@ describe ClubsController do
         put 'update', :id => club.id, :club => { :name => "" }
       end
 
-      it "returns http success" do
+      it "returns http unprocessable" do
         response.response_code.should == 422
       end
 
