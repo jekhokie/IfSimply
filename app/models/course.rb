@@ -1,8 +1,8 @@
 class Course < ActiveRecord::Base
   attr_accessible :description, :title
 
-  validates :title,       :presence => true
-  validates :description, :presence => true
+  validates :title,       :presence => { :message => "for course can't be blank" }
+  validates :description, :presence => { :message => "for course can't be blank" }
   validates :club_id,     :presence => true
 
   belongs_to :club
