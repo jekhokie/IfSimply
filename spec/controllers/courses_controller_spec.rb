@@ -58,4 +58,53 @@ describe CoursesController do
       assigns(:course).should == course
     end
   end
+
+  describe "PUT 'update'" do
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+    end
+
+    let(:course)    { FactoryGirl.create :course, :club_id => user.clubs.first.id }
+    let(:new_title) { "Test Course" }
+
+    describe "for valid attributes" do
+      before :each do
+        put 'update', :id => course.id, :course => { :title => new_title }
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "returns the course" do
+        assigns(:course).should_not be_nil
+      end
+
+      it "assigns the new attributes" do
+        course.reload
+        course.title.should == new_title
+      end
+    end
+
+    describe "for invalid attributes" do
+      before :each do
+        @old_title = course.title
+        put 'update', :id => course.id, :course => { :title => "" }
+      end
+
+      it "returns http unprocessable" do
+        response.response_code.should == 422
+      end
+
+      it "returns the course" do
+        assigns(:course).should_not be_nil
+      end
+
+      it "does not update the attributes" do
+        course.reload
+        course.title.should == @old_title
+      end
+    end
+  end
 end
