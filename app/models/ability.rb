@@ -10,7 +10,7 @@ class Ability
       course.user == user
     end
 
-    can :create, Lesson do |lesson|
+    can [ :create, :update ], Lesson do |lesson|
       lesson.user == user
     end
   end
