@@ -40,7 +40,7 @@ describe CoursesController do
   end
 
   describe "GET 'edit'" do
-    let(:course) { FactoryGirl.create :course }
+    let(:course) { FactoryGirl.create :course, :club_id => user.clubs.first.id }
 
     before :each do
       get 'edit', :club_id => course.club.id, :id => course.id
