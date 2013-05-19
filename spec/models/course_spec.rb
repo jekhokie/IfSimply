@@ -23,4 +23,23 @@ describe Course do
       FactoryGirl.build(:course, :club_id => nil).should_not be_valid
     end
   end
+
+  describe "assign_defaults" do
+    let(:club) { FactoryGirl.create :club }
+
+    before :each do
+      @course = Course.new
+      @course.club_id = club.id
+      @course.assign_defaults
+      @course.save
+    end
+
+    it "assigns the correct default title" do
+      @course.title.should == Settings.courses[:default_title]
+    end
+
+    it "assigns the correct default description" do
+      @course.description.should == Settings.courses[:default_description]
+    end
+  end
 end
