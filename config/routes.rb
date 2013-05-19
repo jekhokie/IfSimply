@@ -14,6 +14,6 @@ Ifsimply::Application.routes.draw do
   end
 
   resources :courses, :only => [ :edit, :update ] do
-    resources :lessons, :only => [ :create ]
+    resources :lessons, :only => [ :create, :update ]
   end
 end
