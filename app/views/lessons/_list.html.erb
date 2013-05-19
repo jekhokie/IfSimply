@@ -5,7 +5,9 @@
 
   <div class="lesson">
     <h2 class="lesson-title">
-      Lesson <%= i + 1 %>: <%= lesson.title %>
+      <%= best_in_place_if can?(:update, lesson), lesson, :title, :type       => :input,
+                                                                  :path       => course_lesson_path(lesson.course, lesson),
+                                                                  :html_attrs => { :rows => '1' } %>
     </h2>
 
     <div class="lesson-video">
@@ -13,7 +15,9 @@
     </div>
 
     <p class="lesson-background">
-      <%= lesson.background.to_s %>
+      <%= best_in_place_if can?(:update, lesson), lesson, :background, :type       => :textarea,
+                                                                       :path       => course_lesson_path(lesson.course, lesson),
+                                                                       :html_attrs => { :rows => '10' } %>
     </p>
   </div>
 <%- end %>
