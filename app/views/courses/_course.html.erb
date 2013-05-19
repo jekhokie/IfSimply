@@ -2,11 +2,11 @@
   <%= render :partial => 'shared/welcome_message' %>
 
   <h1 class="course-title">
-    <%= course.title %>
+    <%= best_in_place_if can?(:update, course), course, :title, :type => :input, :html_attrs => { :rows => '1' } %>
   </h1>
 
   <p class="course-description">
-    <%= course.description %>
+    <%= best_in_place_if can?(:update, course), course, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
   </p>
 
   <hr class="course-divider" />
