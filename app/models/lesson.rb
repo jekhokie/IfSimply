@@ -1,8 +1,8 @@
 class Lesson < ActiveRecord::Base
   attr_accessible :background, :title
 
-  validates :title,       :presence => { :message => "for course can't be blank" }
-  validates :background,  :presence => { :message => "for course can't be blank" }
+  validates :title,      :presence => { :message => "for lesson can't be blank" }
+  validates :background, :presence => { :message => "for lesson can't be blank" }
 
   belongs_to :course
 
@@ -15,7 +15,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def assign_defaults
-    self.title      = Settings.lessons[:default_title]
+    self.title      = "Lesson #{(course.lessons.count + 1)} - #{Settings.lessons[:default_title]}"
     self.background = Settings.lessons[:default_background]
   end
 end
