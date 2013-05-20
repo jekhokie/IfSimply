@@ -23,8 +23,23 @@
     </div>
 
 
-    <div class="lesson-video">
-      <video id="player" controls webkit-playsinline></video>
+    <div class="lesson-video video-container">
+      <iframe src="<%= lesson.video %>"
+              frameborder="0"
+              width="426"
+              height="240"
+              webkitAllowFullScreen mozAllowFullScreen allowFullScreen></iframe>
+
+      <%- if can? :update, lesson %>
+        <div class="video-embed-source">
+          <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
+
+          <%= best_in_place lesson, :video, :type       => :input,
+                                            :path       => course_lesson_path(lesson.course, lesson),
+                                            :classes    => 'video-related',
+                                            :html_attrs => { :rows => '1' } %>
+        </div>
+      <%- end %>
     </div>
 
     <p class="lesson-background">
