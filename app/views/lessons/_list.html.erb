@@ -24,11 +24,9 @@
 
 
     <div class="lesson-video video-container">
-      <iframe src="<%= lesson.video %>"
-              frameborder="0"
-              width="426"
-              height="240"
-              webkitAllowFullScreen mozAllowFullScreen allowFullScreen></iframe>
+      <div class="video-iframe">
+        <%= render :partial => 'shared/video_iframe', :locals => { :video_url => lesson.video } %>
+      </div>
 
       <%- if can? :update, lesson %>
         <div class="video-embed-source">
