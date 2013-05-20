@@ -114,8 +114,41 @@
         }
 
         .lesson-video {
-          margin:     15px auto;
+          display:    inline-block;
+          margin:     25px auto;
           text-align: center;
+          width:      100%;
+
+          iframe {
+            border: 1px solid black;
+          }
+
+          .video-embed-source {
+            font-size: 22px;
+            margin:    15px auto;
+
+            .video-embed-label {
+              display: block;
+
+              i {
+                font-weight: bold;
+              }
+            }
+
+            .video-related {
+              display:    block;
+              margin-top: 8px;
+            }
+
+            .video-related:hover {
+              cursor: pointer;
+            }
+
+            input {
+              text-align: center;
+              width:      600px;
+            }
+          }
         }
 
         .lesson-background {

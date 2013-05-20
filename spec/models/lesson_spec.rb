@@ -17,6 +17,17 @@ describe Lesson do
     it "returns false when no background is specified" do
       FactoryGirl.build(:lesson, :background => "").should_not be_valid
     end
+
+    # video
+    describe "for video" do
+      it "returns false when the URL is malformed" do
+        FactoryGirl.build(:lesson, :video => "bogus url").should_not be_valid
+      end
+
+      it "returns true when the URL is reachable" do
+        FactoryGirl.build(:lesson, :video => "http://localhost:3000/").should be_valid
+      end
+    end
   end
 
   describe "club" do
