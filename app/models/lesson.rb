@@ -1,5 +1,5 @@
 class Lesson < ActiveRecord::Base
-  attr_accessible :background, :free, :title
+  attr_accessible :background, :free, :title, :video
 
   validates :title,      :presence => { :message => "for lesson can't be blank" }
   validates :background, :presence => { :message => "for lesson can't be blank" }
