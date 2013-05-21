@@ -4,6 +4,8 @@ describe Club do
   it { should belong_to :user }
   it { should have_many :courses }
 
+  it { should have_attached_file :logo }
+
   it "can be instantiated" do
     Club.new.should be_an_instance_of(Club)
   end
@@ -22,7 +24,7 @@ describe Club do
     end
 
     it "assigns the default logo" do
-      @club.logo.should == Settings.clubs[:default_logo]
+      @club.logo.to_s.should == Settings.clubs[:default_logo]
     end
 
     it "assigns the default price_cents" do
@@ -53,6 +55,11 @@ describe Club do
     it "returns false when having a price of less than $10" do
       FactoryGirl.build(:club, :price_cents => "1").should_not be_valid
     end
+
+    # logo
+    it { should validate_attachment_content_type(:logo)
+           .allowing('image/jpeg', 'image/png', 'image/gif')
+           .rejecting('text/plain') }
 
     # user association
     it "returns false when missing a user_id" do
