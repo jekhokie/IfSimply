@@ -25,7 +25,7 @@ describe Lesson do
       end
 
       it "returns true when the URL is reachable" do
-        FactoryGirl.build(:lesson, :video => "http://localhost:3000/").should be_valid
+        FactoryGirl.build(:lesson, :video => "http://www.google.com/").should be_valid
       end
     end
   end
