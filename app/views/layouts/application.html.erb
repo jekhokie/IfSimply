@@ -16,6 +16,12 @@
       <%= yield :header if content_for? :header %>
     </header>
 
+    <div class="modal hide fade">
+      <div class="modal-header"></div>
+      <div class="modal-body"></div>
+      <div class="modal-footer"></div>
+    </div>
+
     <%- if content_for? :home_container %>
       <%= yield :home_container %>
     <%- else %>
