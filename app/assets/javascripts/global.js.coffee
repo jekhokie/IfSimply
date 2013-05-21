@@ -8,3 +8,8 @@ jQuery ->
       fileName = $(this).val().replace(/^.*[\\\/]/, '')
       fileText = "<span class='file-preview-text'>New File: </span>" + fileName
       $(this).closest(".new-file-select").find(".selected-file-preview").html fileText
+
+# handle 401 responses (unauthorized) when AJAX requests
+$.ajaxSetup statusCode:
+  401: ->
+    location.href = "/users/sign_in"
