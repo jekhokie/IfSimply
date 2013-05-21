@@ -1,0 +1,24 @@
+<div class="file-upload" data-<%= model_name %>-id="<%= model_instance.id %>">
+  <%= form_for model_instance, :url    => update_route,
+                               :method => "put",
+                               :html   => { :class     => "file-upload",
+                                            :id        => "#{model_name}-#{attribute_name}",
+                                            :multipart => true } do |form| %>
+    <div class="file-info row-fluid">
+      <div class="existing-file-image span5">
+        Current File
+
+        <img src="<%= model_instance.send(attribute_name) %>" alt="Current Image Cannot be Displayed"></img>
+      </div>
+
+      <div class="new-file-select span7">
+        <label class="btn file-upload-label">
+          Upload New File...
+          <%= form.file_field :logo %>
+        </label>
+
+        <div class="selected-file-preview"></div>
+      </div>
+    </div>
+  <% end %>
+</div>

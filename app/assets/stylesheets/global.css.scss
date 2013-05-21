@@ -2,6 +2,71 @@ body .container {
   width: 900px;
 }
 
+.modal {
+  .modal-header {
+    font-size:   18px;
+    font-weight: bold;
+  }
+}
+
+.file-upload {
+  .file-info {
+    height: 200px;
+
+    .existing-file-image {
+      font-size:       18px;
+      font-weight:     bold;
+      margin:          0px 25px;
+      max-height:      190px;
+      max-width:       150px;
+      text-align:      center;
+      text-decoration: underline;
+
+      img {
+        margin-top: 12px;
+      }
+    }
+
+    .new-file-select {
+      height:     100%;
+      text-align: center;
+
+      label.file-upload-label {
+        cursor:     pointer;
+        height:     18px;
+        margin-top: 60px;
+        overflow:   hidden;
+        width:      150px;
+
+        input {
+          opacity:         0;
+          -moz-opacity:    0;
+          -webkit-opacity: 0;
+          filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+
+          height:   100%;
+          position: relative;
+          width:    auto;
+        }
+      }
+
+      .selected-file-preview {
+        font-size:  16px;
+        font-style: italic;
+        height:     25px;
+        margin-top: 14px;
+        width:      100%;
+
+        .file-preview-text {
+          font-style:   normal;
+          font-weight:  bold;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}
+
 .purr {
   background-color: #FCC;
   border:           2px solid #C66;

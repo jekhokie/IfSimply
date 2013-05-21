@@ -1,11 +1,34 @@
 .club-avatar-name-description {
-  height:     270px;
   margin-top: 20px;
+  max-height: 300px;
+  min-height: 200px;
 
   .club-avatar {
+    position:   relative;
+    text-align: center;
+
     img {
-      height:    100%;
-      max-width: 100%;
+      max-height: 100%;
+      max-width:  100%;
+    }
+
+    .upload-logo-button {
+      opacity:         0.85;
+      -moz-opacity:    0.85;
+      -webkit-opacity: 0.85;
+      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0.85);
+
+      font-size: 14px;
+      left:      33%;
+      position:  absolute;
+      top:       10%;
+    }
+
+    .upload-logo-button:hover {
+      opacity:         1;
+      -moz-opacity:    1;
+      -webkit-opacity: 1;
+      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=1);
     }
   }
 
@@ -27,9 +50,9 @@
     }
 
     .club-description {
-      font-size: 18px;
-      height:    215px;
-      width:     100%;
+      font-size:  18px;
+      max-height: 215px;
+      width:      100%;
 
       textarea {
         width: 575px;
