@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520212750) do
+ActiveRecord::Schema.define(:version => 20130521220241) do
+
+  create_table "blogs", :force => true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "club_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "blogs", ["club_id"], :name => "index_blogs_on_club_id"
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
