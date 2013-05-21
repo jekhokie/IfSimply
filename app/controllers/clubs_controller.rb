@@ -16,6 +16,20 @@ class ClubsController < ApplicationController
     respond_with_bip @club
   end
 
+  def change_logo
+    authorize! :update, @club
+  end
+
+  def upload_logo
+    authorize! :update, @club
+
+    if @club.update_attributes params[:club]
+      redirect_to edit_club_path(@club)
+    else
+      render :change_logo, :formats => [ :js ]
+    end
+  end
+
   private
 
   def get_club
