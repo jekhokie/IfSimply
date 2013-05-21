@@ -13,5 +13,9 @@ class Ability
     can [ :create, :update ], Lesson do |lesson|
       lesson.user == user
     end
+
+    can [ :create ], Blog do |blog|
+      blog.user == user
+    end
   end
 end
