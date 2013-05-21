@@ -10,6 +10,9 @@ gem 'rails', '3.2.8'
 gem 'rails_config'
 gem 'sqlite3'
 
+# handling of uploads
+gem 'paperclip'
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'less-rails'
