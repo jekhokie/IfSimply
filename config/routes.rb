@@ -10,6 +10,12 @@ Ifsimply::Application.routes.draw do
   end
 
   resources :clubs, :only => [ :edit, :update ] do
+    member do
+      # handle image updates
+      match '/change_logo' => 'clubs#change_logo', :as => :change_logo_for
+      match '/upload_logo' => 'clubs#upload_logo', :as => :upload_logo_for
+    end
+
     resources :courses, :only => [ :create ]
   end
 
