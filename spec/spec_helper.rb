@@ -9,6 +9,7 @@ require 'capybara/rspec'
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
+require 'paperclip/matchers'
 
 Capybara.javascript_driver = :webkit
 
@@ -54,4 +55,7 @@ RSpec.configure do |config|
 
   # Include the Capybara helper methods
   config.include Capybara::DSL
+
+  # Include matches for Paperclip
+  config.include Paperclip::Shoulda::Matchers
 end
