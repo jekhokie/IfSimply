@@ -19,6 +19,7 @@
 *.swo
 
 # Ignore dynamically uploaded digital media
+public/system/*
 public/uploads/*
 private/*
 

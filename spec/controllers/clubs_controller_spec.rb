@@ -61,13 +61,13 @@ describe ClubsController do
   end
 
   describe "PUT 'update'" do
+    let(:club)     { user.clubs.first }
+    let(:new_name) { "Test Club" }
+
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:users]
       sign_in user
     end
-
-    let(:club)     { user.clubs.first }
-    let(:new_name) { "Test Club" }
 
     describe "for valid attributes" do
       before :each do
@@ -105,6 +105,80 @@ describe ClubsController do
       it "does not update the attributes" do
         club.reload
         club.name.should == @old_name
+      end
+    end
+  end
+
+  describe "GET 'change_logo'" do
+    let(:club) { user.clubs.first }
+
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
+      put 'change_logo', :id => club.id, :format => :js
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "returns the club" do
+      assigns(:club).should == club
+    end
+  end
+
+  describe "PUT 'upload_logo'" do
+    let(:club)         { user.clubs.first }
+    let(:valid_logo)   { fixture_file_upload('/soccer_ball.jpg', 'image/jpeg') }
+    let(:invalid_logo) { fixture_file_upload('/soccer_ball.txt', 'text/plain') }
+
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+    end
+
+    describe "for a valid image format" do
+      before :each do
+        put 'upload_logo', :id => club.id, :club => { :logo => valid_logo }, :format => :js
+      end
+
+      it "returns http redirect" do
+        response.should be_redirect
+      end
+
+      it "redirects to edit club path" do
+        response.should redirect_to edit_club_path(club)
+      end
+
+      it "returns the club" do
+        assigns(:club).should == club
+      end
+
+      it "assigns the club logo" do
+        File.basename(assigns(:club).logo.to_s.sub(/\?.*/, '')).should == valid_logo.original_filename
+      end
+    end
+
+    describe "for an invalid image format" do
+      before :each do
+        put 'upload_logo', :id => club.id, :club => { :logo => invalid_logo }, :format => :js
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "renders change_logo" do
+        response.should render_template("clubs/change_logo")
+      end
+
+      it "returns the club" do
+        assigns(:club).should == club
+      end
+
+      it "does not assign the club logo" do
+        File.basename(assigns(:club).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
       end
     end
   end
