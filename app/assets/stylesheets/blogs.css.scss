@@ -14,15 +14,42 @@
         right:    0px;
         top:      0px;
       }
+
+      .upload-image-button {
+        opacity:         0.85;
+        -moz-opacity:    0.85;
+        -webkit-opacity: 0.85;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0.85);
+
+        font-size: 14px;
+        left:      20%;
+        position:  absolute;
+        top:       100%;
+      }
+
+      .upload-image-button:hover {
+        opacity:         1;
+        -moz-opacity:    1;
+        -webkit-opacity: 1;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=1);
+      }
     }
 
     .blog-title-content {
       .blog-title {
         margin-top: 0px;
         text-align: center;
+
+        input {
+          text-align: center;
+          width:      100%;
+        }
       }
 
       .blog-content {
+        textarea {
+          width: 100%;
+        }
       }
     }
   }

@@ -4,15 +4,19 @@
   <div class="blog-container row-fluid">
     <div class="blog-image span3">
       <%= image_tag "#{blog.image}" %>
+
+      <%- if can? :update, blog %>
+        <a href="<%= change_image_for_blog_path(@blog) %>" data-remote="true" class="btn btn-primary upload-image-button">Change Image</a>
+      <%- end %>
     </div>
 
     <div class="blog-title-content span9">
       <h1 class="blog-title">
-        <%= blog.title %>
+        <%= best_in_place_if can?(:update, blog), blog, :title, :type => :input, :html_attrs => { :rows => '1' } %>
       </h1>
 
       <p class="blog-content">
-        <%= blog.content %>
+        <%= best_in_place_if can?(:update, blog), blog, :content, :type => :textarea, :html_attrs => { :rows => '10' } %>
       </p>
     </div>
   </div>
