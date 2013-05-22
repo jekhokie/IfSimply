@@ -21,10 +21,10 @@
         -webkit-opacity: 0.85;
         filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0.85);
 
+        bottom:    -30px;
         font-size: 14px;
         left:      20%;
         position:  absolute;
-        top:       100%;
       }
 
       .upload-image-button:hover {
@@ -32,6 +32,27 @@
         -moz-opacity:    1;
         -webkit-opacity: 1;
         filter:progid:DXImageTransform.Microsoft.Alpha(opacity=1);
+      }
+
+      .free-select {
+        bottom:      -65px;
+        font-size:   20px;
+        font-weight: bold;
+        left:        22%;
+        line-height: 30px;
+        position:    absolute;
+
+        span.best_in_place {
+          display:     inline-block;
+          font-style:  italic;
+          font-weight: normal;
+          text-align:  right;
+          width:       35px;
+        }
+
+        span.best_in_place:hover {
+          cursor: pointer;
+        }
       }
     }
 

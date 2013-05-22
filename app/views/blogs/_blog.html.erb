@@ -7,6 +7,14 @@
 
       <%- if can? :update, blog %>
         <a href="<%= change_image_for_blog_path(@blog) %>" data-remote="true" class="btn btn-primary upload-image-button">Change Image</a>
+
+        <div class="free-select">
+          (Free?
+          <%= best_in_place blog, :free, :type       => :checkbox,
+                                         :path       => blog_path(blog),
+                                         :html_attrs => { :rows => '1' } %>
+          )
+        </div>
       <%- end %>
     </div>
 
