@@ -14,7 +14,7 @@ class Ability
       lesson.user == user
     end
 
-    can [ :create, :edit ], Blog do |blog|
+    can [ :create, :edit, :update ], Blog do |blog|
       blog.user == user
     end
   end

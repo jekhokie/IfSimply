@@ -109,5 +109,15 @@ describe Ability do
         ability.should_not be_able_to(:edit, non_owned_blog)
       end
     end
+
+    context "update" do
+      it "succeeds when the user owns the club" do
+        ability.should be_able_to(:update, owned_blog)
+      end
+
+      it "fails when the user does not own the club" do
+        ability.should_not be_able_to(:update, non_owned_blog)
+      end
+    end
   end
 end
