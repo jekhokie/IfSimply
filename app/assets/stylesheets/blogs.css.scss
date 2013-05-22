@@ -1,0 +1,29 @@
+.blog-information {
+  .blog-container {
+    margin-top: 15px;
+
+    .blog-image {
+      height:   200px;
+      position: relative;
+      width:    200px;
+
+      img {
+        left:     0px;
+        margin:   auto;
+        position: absolute;
+        right:    0px;
+        top:      0px;
+      }
+    }
+
+    .blog-title-content {
+      .blog-title {
+        margin-top: 0px;
+        text-align: center;
+      }
+
+      .blog-content {
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div class="blog-information">
+  <%= render :partial => 'shared/welcome_message' %>
+
+  <div class="blog-container row-fluid">
+    <div class="blog-image span3">
+      <%= image_tag "#{blog.image}" %>
+    </div>
+
+    <div class="blog-title-content span9">
+      <h1 class="blog-title">
+        <%= blog.title %>
+      </h1>
+
+      <p class="blog-content">
+        <%= blog.content %>
+      </p>
+    </div>
+  </div>
+</div>
