@@ -84,4 +84,40 @@ describe Ability do
       end
     end
   end
+
+  describe "Blog" do
+    let(:club)           { FactoryGirl.create :club, :user_id => user.id }
+    let(:owned_blog)     { FactoryGirl.create :blog, :club_id => club.id }
+    let(:non_owned_blog) { FactoryGirl.create :blog }
+
+    context "create" do
+      it "succeeds when the user owns the corresponding club" do
+        ability.should be_able_to(:create, owned_blog)
+      end
+
+      it "fails when the user does not own the corresponding club" do
+        ability.should_not be_able_to(:create, non_owned_blog)
+      end
+    end
+
+    context "edit" do
+      it "succeeds when the user owns the corresponding club" do
+        ability.should be_able_to(:edit, owned_blog)
+      end
+
+      it "fails when the user does not own the corresponding club" do
+        ability.should_not be_able_to(:edit, non_owned_blog)
+      end
+    end
+
+    context "update" do
+      it "succeeds when the user owns the club" do
+        ability.should be_able_to(:update, owned_blog)
+      end
+
+      it "fails when the user does not own the club" do
+        ability.should_not be_able_to(:update, non_owned_blog)
+      end
+    end
+  end
 end

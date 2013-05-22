@@ -13,7 +13,7 @@ describe Lesson do
       FactoryGirl.build(:lesson, :title => "").should_not be_valid
     end
 
-    # description
+    # background
     it "returns false when no background is specified" do
       FactoryGirl.build(:lesson, :background => "").should_not be_valid
     end
@@ -61,7 +61,7 @@ describe Lesson do
       @lesson.title.should == "Lesson 1 - #{Settings.lessons[:default_title]}"
     end
 
-    it "assigns the correct default description" do
+    it "assigns the correct default background" do
       @lesson.background.should == Settings.lessons[:default_background]
     end
 

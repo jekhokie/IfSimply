@@ -62,7 +62,7 @@
 }
 
 .club-courses {
-  height:     380px;
+  height:     355px;
   margin-top: 15px;
 
   .course-listing-heading {
@@ -83,6 +83,12 @@
       font-weight: 200;
       position:    relative;
       top:         2px;
+
+      span.courses-count {
+        font-size:   22px;
+        position:    absolute;
+        margin-left: 12px;
+      }
     }
 
     .add-club-course {
@@ -99,11 +105,9 @@
   }
 
   .club-course-listing {
-    height:      300px;
-    margin:      0px;
-    padding:     15px auto;
-    overflow-x:  auto;
-    overflow-y:  hidden;
+    height:  290px;
+    margin:  0px;
+    padding: 15px auto;
 
     h2 {
       font-size:   24px;
@@ -137,7 +141,7 @@
         padding:          12px;
         position:         relative;
         text-align:       center;
-        width:            252px;
+        width:            250px;
 
         .course-logo {
           height:        170px;
@@ -166,6 +170,121 @@
 
       .course.course-first {
         margin-left: 7px;
+      }
+    }
+  }
+}
+
+.club-blogs-discussions {
+  height: 325px;
+
+  .club-blogs {
+    height: 100%;
+
+    .blog-listing-heading {
+      -webkit-border-radius: 4px;
+      -moz-border-radius:    4px;
+      border-radius:         4px;
+
+      background-color: #333;
+      color:            #FFF;
+      height:           45px;
+      margin-bottom:    12px;
+      padding-left:     12px;
+      position:         relative;
+
+      h2 {
+        display:     inline;
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 200;
+        position:    relative;
+        top:         2px;
+
+        span.blogs-count {
+          font-size:   22px;
+          position:    absolute;
+          margin-left: 12px;
+        }
+      }
+
+      .add-club-blog {
+        display:  inline;
+        position: absolute;
+        right:    15px;
+        top:      13px;
+
+        .add-club-blog-link {
+          color:          #FFF;
+          padding-bottom: 3px;
+        }
+      }
+    }
+
+    .club-blog-listing {
+      height:      300px;
+      margin:      0px;
+      padding:     15px auto;
+      overflow-x:  auto;
+      overflow-y:  hidden;
+
+      h2 {
+        font-size:   24px;
+        font-weight: normal;
+
+        .create-first-blog-link {
+          color:       #333;
+          font-style:  italic;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .blog-most-recent {
+      height:  270px;
+      padding: 8px 0px;
+
+      .blog-title-date {
+        max-height:    80px;
+        margin-bottom: 12px;
+        overflow:      hidden;
+
+        .blog-title {
+          display:     block;
+          font-size:   26px;
+          font-weight: bold;
+          line-height: 30px;
+          max-height:  62px;
+          overflow:    hidden;
+
+          a {
+            color: black;
+          }
+        }
+
+        .blog-date {
+          display:    block;
+          font-style: italic;
+        }
+      }
+
+      .blog-info {
+        height:        185px;
+        margin-bottom: 4px;
+
+        .blog-image {
+          display:   inline-table;
+          max-width: 128px;
+        }
+
+        .blog-content {
+          display:        inline-block;
+          max-height:     162px;
+          margin-left:    8px;
+          margin-top:     -5px;
+          overflow:       hidden;
+          vertical-align: top;
+          width:          290px;
+        }
       }
     }
   }

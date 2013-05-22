@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Club do
   it { should belong_to :user }
   it { should have_many :courses }
+  it { should have_many :blogs }
 
   it { should have_attached_file :logo }
 
@@ -75,6 +76,17 @@ describe Club do
 
     it "should be destroyed when the club is destroyed" do
       expect { @club.destroy }.to change(Course, :count).by(-1)
+    end
+  end
+
+  describe "blogs" do
+    before :each do
+      @club = FactoryGirl.create :club
+      FactoryGirl.create :blog, :club_id => @club.id
+    end
+
+    it "should be destroyed when the club is destroyed" do
+      expect { @club.destroy }.to change(Blog, :count).by(-1)
     end
   end
 end

@@ -23,7 +23,7 @@
 
   <div class="club-courses row-fluid">
     <div class="course-listing-heading">
-      <h2>Courses</h2>
+      <h2>Courses <span class="courses-count header-count">(<%= club.courses.count %>)</span></h2>
 
       <%- if can? :update, club %>
         <div class="add-club-course">
@@ -41,9 +41,57 @@
         </h2>
       <%- else %>
         <div class="courses-listing">
-          <%= render :partial => 'courses/list', :locals => { :courses => club.courses } %>
+          <%= render :partial => 'courses/list', :locals => { :courses => club.courses.sort_by(&:updated_at).reverse[0..2] } %>
         </div>
       <%- end %>
+    </div>
+  </div>
+
+  <div class="club-blogs-discussions row-fluid">
+    <div class="club-blogs span6">
+      <div class="blog-listing-heading">
+        <h2>Blog <span class="blogs-count header-count">(<%= club.blogs.count %>)</span></h2>
+
+        <%- if can? :update, club %>
+          <div class="add-club-blog">
+            <a href="<%= club_blogs_path(club) %>" data-method="post" class="add-club-blog-link">Add Blog</a>
+          </div>
+        <%- end %>
+      </div>
+
+      <div class="club-blog-listing">
+        <%- if club.blogs.blank? %>
+          <h2>No Blog Posts Yet
+            <%- if can? :update, club %>
+              - <a href="<%= club_blogs_path(club) %>" data-method="post" class="create-first-blog-link">Create your First!</a>
+            <%- end %>
+          </h2>
+        <%- else %>
+          <div class="blog-most-recent">
+            <%- club.blogs.sort_by(&:created_at).last.tap do |blog| %>
+              <div class="blog-title-date">
+                <span class="blog-title"><%= link_to blog.title, edit_blog_path(blog) %></span>
+                <span class="blog-date"><%= I18n.l blog.created_at, :format => :default %></span>
+              </div>
+
+              <div class="blog-info">
+                <div class="blog-image">
+                  <a class="blog-image-link" href="<%= edit_blog_path(blog) %>">
+                    <%= image_tag "#{blog.image}", :class => 'blog-image' %>
+                  </a>
+                </div>
+
+                <div class="blog-content">
+                  <%= blog.content %>
+                </div>
+              </div>
+            <%- end %>
+          </div>
+        <%- end %>
+      </div>
+    </div>
+
+    <div class="club-discussions span6">
     </div>
   </div>
 </div>
