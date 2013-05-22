@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20130521220241) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
-    t.string   "content"
+    t.text     "content"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
