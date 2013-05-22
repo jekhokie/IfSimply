@@ -23,7 +23,7 @@
 
   <div class="club-courses row-fluid">
     <div class="course-listing-heading">
-      <h2>Courses</h2>
+      <h2>Courses <span class="courses-count header-count">(<%= club.courses.count %>)</span></h2>
 
       <%- if can? :update, club %>
         <div class="add-club-course">
@@ -50,7 +50,7 @@
   <div class="club-blogs-discussions row-fluid">
     <div class="club-blogs span6">
       <div class="blog-listing-heading">
-        <h2>Blog</h2>
+        <h2>Blog <span class="blogs-count header-count">(<%= club.blogs.count %>)</span></h2>
 
         <%- if can? :update, club %>
           <div class="add-club-blog">
@@ -61,7 +61,7 @@
 
       <div class="club-blog-listing">
         <%- if club.blogs.blank? %>
-          <h2>No Blogs Yet
+          <h2>No Blog Posts Yet
             <%- if can? :update, club %>
               - <a href="<%= club_blogs_path(club) %>" data-method="post" class="create-first-blog-link">Create your First!</a>
             <%- end %>

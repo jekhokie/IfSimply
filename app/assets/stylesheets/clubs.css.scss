@@ -83,6 +83,12 @@
       font-weight: 200;
       position:    relative;
       top:         2px;
+
+      span.courses-count {
+        font-size:   22px;
+        position:    absolute;
+        margin-left: 12px;
+      }
     }
 
     .add-club-course {
@@ -195,6 +201,12 @@
         font-weight: 200;
         position:    relative;
         top:         2px;
+
+        span.blogs-count {
+          font-size:   22px;
+          position:    absolute;
+          margin-left: 12px;
+        }
       }
 
       .add-club-blog {
