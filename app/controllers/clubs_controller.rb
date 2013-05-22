@@ -1,6 +1,4 @@
 class ClubsController < ApplicationController
-  respond_to :html, :json
-
   before_filter :authenticate_user!
   before_filter :get_club
 
