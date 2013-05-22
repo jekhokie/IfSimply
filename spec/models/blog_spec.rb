@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Blog do
   it { should belong_to :club }
 
+  it { should have_attached_file :image }
+
   it "can be instantiated" do
     Blog.new.should be_an_instance_of(Blog)
   end
@@ -17,6 +19,11 @@ describe Blog do
     it "returns false when no content is specified" do
       FactoryGirl.build(:blog, :content => "").should_not be_valid
     end
+
+    # image
+    it { should validate_attachment_content_type(:image)
+           .allowing('image/jpeg', 'image/png', 'image/gif')
+           .rejecting('text/plain') }
   end
 
   describe "user" do
