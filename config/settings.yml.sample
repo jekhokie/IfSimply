@@ -14,6 +14,7 @@
 :blogs:
   default_title:   Blog Title Here
   default_content: Blog content here
+  default_free:    false
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
   port:                 <SMTP_PORT>         # common: 587
