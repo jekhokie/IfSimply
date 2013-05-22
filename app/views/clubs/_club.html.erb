@@ -41,7 +41,7 @@
         </h2>
       <%- else %>
         <div class="courses-listing">
-          <%= render :partial => 'courses/list', :locals => { :courses => club.courses } %>
+          <%= render :partial => 'courses/list', :locals => { :courses => club.courses.sort_by(&:updated_at).reverse[0..2] } %>
         </div>
       <%- end %>
     </div>
