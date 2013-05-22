@@ -76,7 +76,9 @@
 
               <div class="blog-info">
                 <div class="blog-image">
-                  <%= image_tag "#{blog.image}", :class => 'blog-image' %>
+                  <a class="blog-image-link" href="<%= edit_blog_path(blog) %>">
+                    <%= image_tag "#{blog.image}", :class => 'blog-image' %>
+                  </a>
                 </div>
 
                 <div class="blog-content">
