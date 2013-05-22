@@ -52,5 +52,9 @@ describe Blog do
     it "assigns the correct default content" do
       @blog.content.should == Settings.blogs[:default_content]
     end
+
+    it "assigns the correct default free boolean" do
+      @blog.free.should == Settings.blogs[:default_free]
+    end
   end
 end
