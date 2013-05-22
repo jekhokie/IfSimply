@@ -99,5 +99,15 @@ describe Ability do
         ability.should_not be_able_to(:create, non_owned_blog)
       end
     end
+
+    context "edit" do
+      it "succeeds when the user owns the corresponding club" do
+        ability.should be_able_to(:edit, owned_blog)
+      end
+
+      it "fails when the user does not own the corresponding club" do
+        ability.should_not be_able_to(:edit, non_owned_blog)
+      end
+    end
   end
 end
