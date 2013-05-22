@@ -1,5 +1,5 @@
 class Blog < ActiveRecord::Base
-  attr_accessible :content, :image, :title
+  attr_accessible :content, :free, :image, :title
 
   has_attached_file :image, :styles     => { :medium => "256x256>" },
                             :default_url => Settings.clubs[:default_logo]
@@ -18,5 +18,6 @@ class Blog < ActiveRecord::Base
   def assign_defaults
     self.title   = Settings.blogs[:default_title]
     self.content = Settings.blogs[:default_content]
+    self.free    = Settings.blogs[:default_free]
   end
 end
