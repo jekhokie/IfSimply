@@ -1,0 +1,15 @@
+<div class="discussion-board-information">
+  <%= render :partial => 'shared/welcome_message' %>
+
+  <div class="discussion-board-container row-fluid">
+    <div class="discussion-board-name-description span12">
+      <h1 class="discussion-board-name">
+        <%= best_in_place_if can?(:update, discussion_board), discussion_board, :name, :type => :input, :html_attrs => { :rows => '1' } %>
+      </h1>
+
+      <p class="discussion-board-description">
+        <%= best_in_place_if can?(:update, discussion_board), discussion_board, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
+      </p>
+    </div>
+  </div>
+</div>

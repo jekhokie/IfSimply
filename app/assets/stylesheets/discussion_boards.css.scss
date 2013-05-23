@@ -1,0 +1,23 @@
+.discussion-board-information {
+  .discussion-board-container {
+    margin-top: 15px;
+
+    .discussion-board-name-description {
+      .discussion-board-name {
+        margin-top: 0px;
+        text-align: center;
+
+        input {
+          text-align: center;
+          width:      100%;
+        }
+      }
+
+      .discussion-board-description {
+        textarea {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

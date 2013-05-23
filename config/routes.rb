@@ -31,4 +31,6 @@ Ifsimply::Application.routes.draw do
       match '/upload_image' => 'blogs#upload_image', :as => :upload_image_for
     end
   end
+
+  resources :discussion_boards, :only => [ :edit, :update ]
 end

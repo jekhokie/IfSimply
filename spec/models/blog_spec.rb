@@ -28,7 +28,6 @@ describe Blog do
 
   describe "user" do
     let(:club) { FactoryGirl.create :club }
-    let(:blog) { FactoryGirl.create :blog, :club_id => club }
 
     it "returns the corresponding blog's user" do
       FactoryGirl.create(:blog, :club_id => club.id).user.should == club.user

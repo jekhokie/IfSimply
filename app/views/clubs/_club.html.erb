@@ -23,7 +23,9 @@
 
   <div class="club-courses row-fluid">
     <div class="course-listing-heading">
-      <h2>Courses <span class="courses-count header-count">(<%= club.courses.count %>)</span></h2>
+      <h2>
+        <a href="#" class="hover-heading">Courses <span class="courses-count header-count">(<%= club.courses.count %>)</span></a>
+      </h2>
 
       <%- if can? :update, club %>
         <div class="add-club-course">
@@ -50,7 +52,9 @@
   <div class="club-blogs-discussions row-fluid">
     <div class="club-blogs span6">
       <div class="blog-listing-heading">
-        <h2>Blog <span class="blogs-count header-count">(<%= club.blogs.count %>)</span></h2>
+        <h2>
+          <a href="#" class="hover-heading">Blog <span class="blogs-count header-count">(<%= club.blogs.count %>)</span></a>
+        </h2>
 
         <%- if can? :update, club %>
           <div class="add-club-blog">
@@ -91,7 +95,15 @@
       </div>
     </div>
 
-    <div class="club-discussions span6">
+    <div class="club-discussion-board span6">
+      <div class="discussion-board-listing-heading">
+        <h2>
+          <a href="<%= edit_discussion_board_path(club.discussion_board) %>" class="hover-heading">Discussions <span class="discussion-board-count header-count">(<%= club.blogs.count %>)</span></a>
+        </h2>
+      </div>
+
+      <div class="club-discussion-board-listing">
+      </div>
     </div>
   </div>
 </div>

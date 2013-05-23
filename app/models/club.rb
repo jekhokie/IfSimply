@@ -1,6 +1,8 @@
 class Club < ActiveRecord::Base
   attr_accessible :name, :description, :price_cents, :logo
 
+  after_create :create_discussion_board
+
   has_attached_file :logo, :styles      => { :medium => "256x256>", :thumb => "100x100>" },
                            :default_url => Settings.clubs[:default_logo]
 
@@ -17,12 +19,22 @@ class Club < ActiveRecord::Base
                                           :message                  => "must be at least $#{Settings.clubs[:min_price_cents]/100}"
 
   belongs_to :user
-  has_many   :courses, :dependent => :destroy
-  has_many   :blogs,   :dependent => :destroy
+  has_many   :courses,          :dependent => :destroy
+  has_many   :blogs,            :dependent => :destroy
+  has_one    :discussion_board, :dependent => :destroy
 
   def assign_defaults
     self.name        = Settings.clubs[:default_name]
     self.description = Settings.clubs[:default_description]
     self.price_cents = Settings.clubs[:default_price_cents]
+  end
+
+  private
+
+  def create_discussion_board
+    discussion_board = DiscussionBoard.new
+    discussion_board.club = self
+    discussion_board.assign_defaults
+    discussion_board.save :validate => false
   end
 end
