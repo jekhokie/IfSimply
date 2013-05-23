@@ -1,3 +1,23 @@
-// Place all the styles related to the DiscussionBoards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.discussion-board-information {
+  .discussion-board-container {
+    margin-top: 15px;
+
+    .discussion-board-name-description {
+      .discussion-board-name {
+        margin-top: 0px;
+        text-align: center;
+
+        input {
+          text-align: center;
+          width:      100%;
+        }
+      }
+
+      .discussion-board-description {
+        textarea {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
