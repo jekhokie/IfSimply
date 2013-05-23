@@ -13,24 +13,27 @@ describe Club do
   end
 
   describe "initialize" do
-    before(:all) do
-      @club = FactoryGirl.create(:user).clubs.first
-    end
+    let!(:club) { FactoryGirl.create(:user).clubs.first }
 
     it "assigns the default name" do
-      @club.name.should == Settings.clubs[:default_name]
+      club.name.should == Settings.clubs[:default_name]
     end
 
     it "assigns the default description" do
-      @club.description.should == Settings.clubs[:default_description]
+      club.description.should == Settings.clubs[:default_description]
     end
 
     it "assigns the default logo" do
-      @club.logo.to_s.should == Settings.clubs[:default_logo]
+      club.logo.to_s.should == Settings.clubs[:default_logo]
     end
 
     it "assigns the default price_cents" do
-      @club.price_cents.should == Settings.clubs[:default_price_cents]
+      club.price_cents.should == Settings.clubs[:default_price_cents]
+    end
+
+    # discussion_board
+    it "builds a default discussion_board" do
+      club.discussion_board.should_not be_blank
     end
   end
 
