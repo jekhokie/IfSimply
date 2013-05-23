@@ -97,7 +97,7 @@ describe BlogsController do
         response.response_code.should == 422
       end
 
-      it "returns the course" do
+      it "returns the blog" do
         assigns(:blog).should_not be_nil
       end
 
