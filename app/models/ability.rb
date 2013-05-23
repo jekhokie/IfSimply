@@ -18,7 +18,7 @@ class Ability
       blog.user == user
     end
 
-    can [ :edit ], DiscussionBoard do |discussion_board|
+    can [ :edit, :update ], DiscussionBoard do |discussion_board|
       discussion_board.user == user
     end
   end
