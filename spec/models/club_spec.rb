@@ -4,6 +4,7 @@ describe Club do
   it { should belong_to :user }
   it { should have_many :courses }
   it { should have_many :blogs }
+  it { should have_one  :discussion_board }
 
   it { should have_attached_file :logo }
 
@@ -87,6 +88,17 @@ describe Club do
 
     it "should be destroyed when the club is destroyed" do
       expect { @club.destroy }.to change(Blog, :count).by(-1)
+    end
+  end
+
+  describe "discussion_board" do
+    before :each do
+      @club = FactoryGirl.create :club
+      FactoryGirl.create :discussion_board, :club_id => @club.id
+    end
+
+    it "should be destroyed when the club is destroyed" do
+      expect { @club.destroy }.to change(DiscussionBoard, :count).by(-1)
     end
   end
 end
