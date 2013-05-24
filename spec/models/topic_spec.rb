@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Topic do
   it { should belong_to :discussion_board }
+  it { should have_many :posts }
 
   it "can be instantiated" do
     DiscussionBoard.new.should be_an_instance_of(DiscussionBoard)
@@ -33,6 +34,17 @@ describe Topic do
 
     it "returns the latest update date and time" do
       topic.last_updated_time.should == updated_at
+    end
+  end
+
+  describe "posts" do
+    before :each do
+      @topic = FactoryGirl.create :topic
+      FactoryGirl.create :post, :topic_id => @topic.id
+    end
+
+    it "should be destroyed when the topic is destroyed" do
+      expect { @topic.destroy }.to change(Post, :count).by(-1)
     end
   end
 end
