@@ -26,4 +26,13 @@ describe Topic do
       FactoryGirl.create(:topic, :discussion_board_id => discussion_board.id).user.should == discussion_board.user
     end
   end
+
+  describe "last_updated_time" do
+    let!(:updated_at) { Time.new }
+    let!(:topic)      { FactoryGirl.create :topic, :updated_at => updated_at }
+
+    it "returns the latest update date and time" do
+      topic.last_updated_time.should == updated_at
+    end
+  end
 end

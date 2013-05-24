@@ -9,4 +9,8 @@ class Topic < ActiveRecord::Base
   def user
     discussion_board.user
   end
+
+  def last_updated_time
+    updated_at
+  end
 end
