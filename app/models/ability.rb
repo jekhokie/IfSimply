@@ -22,6 +22,10 @@ class Ability
       discussion_board.user == user
     end
 
+    can [ :update ], Topic do |topic|
+      topic.user == user
+    end
+
     # global defaults
     can [ :read ], Topic
   end
