@@ -1,0 +1,16 @@
+<div class="new-topic-information">
+  <%= render :partial => 'shared/welcome_message' %>
+
+  <div class="new-topic">
+    <div class="new-topic-heading">
+      Create New Topic
+    </div>
+
+    <%= simple_form_for [ @discussion_board, @topic], :validate => true, :html => { :method => :post, :class => "form-horizontal" } do |f| %>
+      <%= f.input :subject,     :required => true, :autofocus => true %>
+      <%= f.input :description, :required => true, :as => :text, :input_html => { :rows => "10" } %>
+
+      <%= f.button :submit, "Create Topic", :class => "btn btn-primary" %>
+    <%- end %>
+  </div>
+</div>
