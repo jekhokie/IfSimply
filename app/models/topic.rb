@@ -6,6 +6,8 @@ class Topic < ActiveRecord::Base
 
   belongs_to :discussion_board
 
+  has_many :posts, :dependent => :destroy
+
   def user
     discussion_board.user
   end
