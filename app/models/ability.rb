@@ -21,5 +21,8 @@ class Ability
     can [ :edit, :update ], DiscussionBoard do |discussion_board|
       discussion_board.user == user
     end
+
+    # global defaults
+    can [ :read ], Topic
   end
 end

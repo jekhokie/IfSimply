@@ -146,4 +146,15 @@ describe Ability do
       end
     end
   end
+
+  describe "Topic" do
+    let(:topic)   { FactoryGirl.create :topic }
+    let(:ability) { Ability.new FactoryGirl.create(:user) }
+
+    context "read" do
+      it "succeeds for any user" do
+        ability.should be_able_to(:read, topic)
+      end
+    end
+  end
 end
