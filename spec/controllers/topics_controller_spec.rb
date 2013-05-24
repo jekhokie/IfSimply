@@ -78,4 +78,21 @@ describe TopicsController do
       end
     end
   end
+
+  describe "GET 'show'" do
+    let!(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
+    let!(:topic)            { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
+
+    before :each do
+      get 'show', :id => topic.id
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "returns the topic" do
+      assigns(:topic).should == topic
+    end
+  end
 end
