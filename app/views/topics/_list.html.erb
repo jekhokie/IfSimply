@@ -1,0 +1,49 @@
+<div class="topic-listing">
+  <div class="topic-listing-headings">
+    <div class="topic-main-heading">
+      <h2>Topics</h2>
+
+      <%- if can? :update, discussion_board %>
+        <div class="add-discussion-board-topic">
+          <a href="<%= new_discussion_board_topic_path(discussion_board) %>" class="add-discussion-board-topic-link">Add Topic</a>
+        </div>
+      <%- end %>
+    </div>
+
+    <div class="topic-sub-headings">
+      <div class="subject-started-by subject-started-by-heading">Subject/Posted By</div>
+      <div class="posts posts-heading">Posts</div>
+      <div class="latest-post latest-post-heading">Last Post</div>
+    </div>
+  </div>
+
+  <ul class="topic-listing-entries">
+    <%- discussion_board.try(:topics).sort_by(&:updated_at).reverse.each_with_index do |topic, i| %>
+      <li class="<%= "first-topic" if i == 0 %>">
+        <div class="subject-started-by">
+          <div class="subject">
+            <%= topic.subject.length > 50 ? "#{topic.subject[0..60]}..." : topic.subject %>
+          </div>
+
+          <div class="started-by">
+            Created by <%= topic.user.name %> at <%= I18n.l topic.created_at %>
+          </div>
+        </div>
+
+        <div class="posts">
+          Posts: <%= 21 %>
+        </div>
+
+        <div class="latest-post">
+          <div class="latest-post-time">
+            <%= I18n.l topic.last_updated_time %>
+          </div>
+
+          <div class="latest-post-poster">
+            by: <%= topic.user.name %>
+          </div>
+        </div>
+      </li>
+    <%- end %>
+  </ul>
+</div>

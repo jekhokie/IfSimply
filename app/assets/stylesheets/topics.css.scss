@@ -1,0 +1,121 @@
+.new-topic-information {
+  .new-topic {
+    margin-top: 12px;
+
+    .new-topic-heading {
+      font-size:     18px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      label {
+        display:       inline-block;
+        margin-bottom: 12px;
+        width:         120px;
+      }
+
+      input[type='text'],
+      textarea {
+        width: 700px;
+      }
+    }
+  }
+}
+
+.topic-listing {
+  .subject-started-by,
+  .posts,
+  .latest-post {
+    display:        inline-block;
+    vertical-align: top;
+  }
+
+  .subject-started-by {
+    margin-right: 25px;
+    width:        51%;
+
+    .subject {
+      font-size:   16px;
+      font-weight: bold;
+    }
+
+    .started-by {
+      font-style: italic;
+    }
+  }
+
+  .posts {
+    text-align: right;
+    width:      18%;
+  }
+
+  .latest-post {
+    margin-left: 25px;
+    width:       21%;
+  }
+
+  .topic-listing-headings {
+    -webkit-border-top-left-radius:  4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-top-left-radius:     4px;
+    -moz-border-top-right-radius:    4px;
+    border-top-left-radius:          4px;
+    border-top-right-radius:         4px;
+
+    background-color: #333;
+    color:            white;
+    font-size:        16px;
+
+    .topic-main-heading {
+      -webkit-border-radius: 4px;
+      -moz-border-radius:    4px;
+      border-radius:         4px;
+
+      background-color: #333;
+      color:            #FFF;
+      height:           45px;
+      padding:          3px 12px;
+      position:         relative;
+
+      h2 {
+        display:     inline;
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 200;
+        position:    relative;
+        top:         2px;
+      }
+
+      .add-discussion-board-topic {
+        display:  inline;
+        position: absolute;
+        right:    15px;
+        top:      13px;
+
+        .add-discussion-board-topic-link {
+          color: #FFF;
+        }
+      }
+    }
+
+    .topic-sub-headings {
+      background-color: #555;
+      padding:          3px 12px;
+    }
+  }
+
+  .topic-listing-entries {
+    list-style-type: none;
+    margin:          0px;
+
+    li {
+      border-bottom: 1px solid #CCC;
+      border-left:   1px solid #CCC;
+      border-right:  1px solid #CCC;
+      padding:       12px;
+    }
+
+    li.first-topic {
+      border-top: 1px solid #CCC;
+    }
+  }
+}

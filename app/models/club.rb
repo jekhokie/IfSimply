@@ -22,6 +22,7 @@ class Club < ActiveRecord::Base
   has_many   :courses,          :dependent => :destroy
   has_many   :blogs,            :dependent => :destroy
   has_one    :discussion_board, :dependent => :destroy
+  has_many   :topics,           :through   => :discussion_board
 
   def assign_defaults
     self.name        = Settings.clubs[:default_name]

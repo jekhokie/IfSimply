@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe DiscussionBoard do
   it { should belong_to :club }
+  it { should have_many :topics }
 
   it "can be instantiated" do
     DiscussionBoard.new.should be_an_instance_of(DiscussionBoard)
@@ -43,6 +44,17 @@ describe DiscussionBoard do
 
     it "assigns the correct default description" do
       @discussion_board.description.should == Settings.blogs[:default_descripton]
+    end
+  end
+
+  describe "topics" do
+    before :each do
+      @discussion_board = FactoryGirl.create :discussion_board
+      FactoryGirl.create :topic, :discussion_board_id => @discussion_board.id
+    end
+
+    it "should be destroyed when the discussion_board is destroyed" do
+      expect { @discussion_board.destroy }.to change(Topic, :count).by(-1)
     end
   end
 end

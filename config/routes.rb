@@ -32,5 +32,7 @@ Ifsimply::Application.routes.draw do
     end
   end
 
-  resources :discussion_boards, :only => [ :edit, :update ]
+  resources :discussion_boards, :only => [ :edit, :update ] do
+    resources :topics, :only => [ :new, :create ]
+  end
 end

@@ -1,22 +1,51 @@
 .discussion-board-information {
-  .discussion-board-container {
-    margin-top: 15px;
+  margin-top: 15px;
 
-    .discussion-board-name-description {
-      .discussion-board-name {
-        margin-top: 0px;
-        text-align: center;
+  .discussion-board-name {
+    font-size:   45px;
+    line-height: 45px;
+    margin:      15px auto;
+    max-height:  100px;
+    text-align:  center;
+    width:       800px;
 
-        input {
-          text-align: center;
-          width:      100%;
+    input {
+      text-align: center;
+      width:      100%;
+    }
+  }
+
+  .discussion-board-description {
+    font-size:   18px;
+    line-height: 18px;
+    margin:      25px auto;
+    width:       800px;
+
+    textarea {
+      width: 100%;
+    }
+  }
+
+  .discussion-board-topics {
+    margin: 35px auto;
+
+    .discussion-board-topic-listing {
+      margin-left: 0px;
+
+      h2 {
+        font-size:   24px;
+        font-weight: normal;
+
+        .create-first-topic-link {
+          color:       #333;
+          font-style:  italic;
+          font-weight: bold;
         }
       }
 
-      .discussion-board-description {
-        textarea {
-          width: 100%;
-        }
+      hr {
+        background-color: #CCC;
+        height:           2px;
       }
     }
   }

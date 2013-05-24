@@ -87,10 +87,11 @@
             float:       left;
             font-size:   30px;
             line-height: 30px;
-            width:       650px;
+            width:       760px;
 
             input {
-              width: 650px;
+              max-width: 760px;
+              width:     100%;
             }
           }
 
@@ -152,6 +153,9 @@
         }
 
         .lesson-background {
+          margin-bottom: 25px;
+          max-height:    300px;
+
           textarea {
             width: 100%;
           }

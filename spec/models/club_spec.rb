@@ -6,6 +6,8 @@ describe Club do
   it { should have_many :blogs }
   it { should have_one  :discussion_board }
 
+  it { should have_many(:topics).through(:discussion_board) }
+
   it { should have_attached_file :logo }
 
   it "can be instantiated" do
