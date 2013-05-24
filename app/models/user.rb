@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   has_many :clubs, :dependent => :destroy
 
+  has_many :posts, :conditions => proc { "user_id = #{self.id}" }
+
   private
 
   def create_club

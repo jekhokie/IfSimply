@@ -105,4 +105,20 @@ describe User do
       expect { FactoryGirl.create(:user) }.to change(Club, :count).by(+1)
     end
   end
+
+  describe "posts" do
+    let!(:user)             { FactoryGirl.create :user }
+    let!(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
+    let!(:topic)            { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
+    let!(:related_post)     { FactoryGirl.create :post, :topic_id => topic.id, :user_id => user.id }
+    let!(:non_related_post) { FactoryGirl.create :post, :topic_id => topic.id }
+
+    it "returns the posts associated with the user" do
+      user.posts.should include(related_post)
+    end
+
+    it "does not return posts that are not associated with the user" do
+      user.posts.should_not include(non_related_post)
+    end
+  end
 end
