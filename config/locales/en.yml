@@ -4,4 +4,5 @@
 en:
   time:
     formats:
-      default: "%m/%d/%Y, %I:%M%p"
+      default:   "%m/%d/%Y, %I:%M%p"
+      date_only: "%m/%d/%Y"
