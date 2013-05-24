@@ -1,0 +1,45 @@
+<div class="topic-information">
+  <%= render :partial => 'shared/welcome_message' %>
+
+  <h1 class="topic-subject">
+    <%= @topic.subject %>
+  </h1>
+
+  <p class="topic-description">
+    <%= @topic.description %>
+  </p>
+
+  <div class="topic-posts row-fluid">
+    <%- @topic.posts.each_with_index do |post, i| %>
+      <div class="post">
+        <div class="post-heading">
+          <%= I18n.l post.created_at %>
+        </div>
+
+        <div class="post-information-content">
+          <div class="post-information">
+            <div class="poster-name">
+              <%= post.poster.name %>
+            </div>
+
+            <hr/>
+
+            <div class="number-posts">
+              <span class="post-info-label">Posts:</span>
+              <span class="post-info-value"><%= post.poster.posts.count %></span>
+            </div>
+
+            <div class="ifsimply-since">
+              <span class="post-info-label">ifSimply Since:</span>
+              <span class="post-info-value"><%= I18n.l post.poster.created_at, :format => :date_only %></span>
+            </div>
+          </div>
+
+          <div class="post-content">
+            <%= post.content %>
+          </div>
+        </div>
+      </div>
+    <%- end %>
+  </div>
+</div>

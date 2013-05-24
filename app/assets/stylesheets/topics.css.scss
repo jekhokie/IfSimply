@@ -119,3 +119,79 @@
     }
   }
 }
+
+.topic-information {
+  .topic-subject {
+    font-size:   45px;
+    line-height: 45px;
+    margin:      15px auto;
+    text-align:  center;
+    width:       100%;
+  }
+
+  .topic-description {
+    font-size:   18px;
+    line-height: 18px;
+    margin:      25px auto;
+    width:       100%;
+  }
+
+  .topic-posts {
+    width: 100%;
+
+    .post {
+      border: 1px solid #666;
+      margin: 6px auto;
+
+      .post-heading {
+        color:            #FFF;
+        background-color: #555;
+        padding:          3px 8px;
+      }
+
+      .post-information-content {
+        padding: 20px 8px;
+
+        .post-information {
+          border-right:   1px solid #AAA;
+          display:        inline-block;
+          margin-right:   12px;
+          vertical-align: top;
+          width:          20%;
+
+          hr {
+            border-bottom: 1px solid #AAA;
+            border-top:    0px;
+            margin:        6px 0px 3px 0px;
+          }
+
+          .poster-name {
+            font-size:   18px;
+            font-weight: bold;
+          }
+
+          .number-posts,
+          .ifsimply-since {
+            font-size: 12px;
+
+            .post-info-label {
+              display:     inline-block;
+              font-weight: bold;
+              width:       95px;
+            }
+
+            .post-info-value {
+              font-style: italic;
+            }
+          }
+        }
+
+        .post-content {
+          display:        inline-block;
+          vertical-align: top;
+          width:          76%;
+        }
+      }
+    }
+  }
+}
