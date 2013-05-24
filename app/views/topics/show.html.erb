@@ -9,6 +9,14 @@
     <%= @topic.description %>
   </p>
 
+  <div class="topic-controls">
+    <%- if can? :update, @topic %>
+      <div class="add-topic-post">
+        <a href="#" data-method="post" class="btn add-topic-post-link">Post</a>
+      </div>
+    <%- end %>
+  </div>
+
   <div class="topic-posts row-fluid">
     <%- @topic.posts.each_with_index do |post, i| %>
       <div class="post">
@@ -42,4 +50,14 @@
       </div>
     <%- end %>
   </div>
+
+  <%- unless @topic.posts.blank? %>
+    <div class="topic-controls">
+      <%- if can? :update, @topic %>
+        <div class="add-topic-post">
+          <a href="#" data-method="post" class="btn add-topic-post-link">Post</a>
+        </div>
+      <%- end %>
+    </div>
+  <%- end %>
 </div>
