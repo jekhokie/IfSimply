@@ -9,6 +9,17 @@ describe Blog do
     Blog.new.should be_an_instance_of(Blog)
   end
 
+  describe "default sort order" do
+    let!(:club)   { FactoryGirl.create :club }
+    let!(:blog_3) { FactoryGirl.create :blog, :club => club, :created_at => Time.local(2013,"jan",5,20,15,45) }
+    let!(:blog_1) { FactoryGirl.create :blog, :club => club, :created_at => Time.local(2013,"jan",2,20,15,45) }
+    let!(:blog_2) { FactoryGirl.create :blog, :club => club, :created_at => Time.local(2013,"jan",2,20,17,45) }
+
+    it "returns blogs by created_at in ascending order" do
+      club.blogs.should == [ blog_1, blog_2, blog_3 ]
+    end
+  end
+
   describe "valid?" do
     # title
     it "returns false when no title is specified" do

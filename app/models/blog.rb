@@ -1,6 +1,8 @@
 class Blog < ActiveRecord::Base
   attr_accessible :content, :free, :image, :title
 
+  default_scope order('created_at ASC')
+
   has_attached_file :image, :styles     => { :medium => "256x256>" },
                             :default_url => Settings.clubs[:default_logo]
 
