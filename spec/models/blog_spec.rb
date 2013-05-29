@@ -45,6 +45,16 @@ describe Blog do
     end
   end
 
+  describe "premium?" do
+    describe "for a premium blog entry" do
+      FactoryGirl.build(:blog, :free => false).premium?.should == true
+    end
+
+    describe "for a free blog entry" do
+      FactoryGirl.build(:blog, :free => true).premium?.should == false
+    end
+  end
+
   describe "assign_defaults" do
     let(:club) { FactoryGirl.create :club }
 

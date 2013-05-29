@@ -17,6 +17,10 @@ class Blog < ActiveRecord::Base
     club.user
   end
 
+  def premium?
+    free == true ? false : true
+  end
+
   def assign_defaults
     self.title   = Settings.blogs[:default_title]
     self.content = Settings.blogs[:default_content]
