@@ -1,9 +1,9 @@
 class BlogsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :get_club, :only => [ :create, :show_all ]
   before_filter :get_blog, :only => [ :edit, :update, :change_image, :upload_image ]
 
   def create
-    @club = Club.find params[:club_id]
     @blog = @club.blogs.new
 
     authorize! :create, @blog
@@ -28,6 +28,10 @@ class BlogsController < ApplicationController
     respond_with_bip @blog
   end
 
+  def show_all
+    @blogs = @club.blogs
+  end
+
   def change_image
     authorize! :update, @blog
   end
@@ -43,6 +47,10 @@ class BlogsController < ApplicationController
   end
 
   private
+
+  def get_club
+    @club = Club.find params[:club_id]
+  end
 
   def get_blog
     @blog = Blog.find params[:id]
