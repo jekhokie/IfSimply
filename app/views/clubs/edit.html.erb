@@ -53,7 +53,7 @@
     <div class="club-blogs span6">
       <div class="blog-listing-heading">
         <h2>
-          <a href="#" class="hover-heading">Blog <span class="blogs-count header-count">(<%= @club.blogs.count %>)</span></a>
+          <a href="<%= show_all_club_blogs_path(@club) %>" class="hover-heading">Blog <span class="blogs-count header-count">(<%= @club.blogs.count %>)</span></a>
         </h2>
 
         <%- if can? :update, @club %>
@@ -72,7 +72,7 @@
           </h2>
         <%- else %>
           <div class="blog-most-recent">
-            <%- @club.blogs.sort_by(&:created_at).last.tap do |blog| %>
+            <%- @club.blogs.last.tap do |blog| %>
               <div class="blog-title-date">
                 <span class="blog-title"><%= link_to blog.title, edit_blog_path(blog) %></span>
                 <span class="blog-date"><%= I18n.l blog.created_at, :format => :default %></span>

@@ -1,0 +1,63 @@
+<div class="blog-information">
+  <%= render :partial => 'shared/welcome_message' %>
+
+  <div class="blog-controls">
+    <%- if can? :update, @club %>
+      <div class="add-blog-post">
+        <a href="<%= club_blogs_path(@club) %>" data-method="post" class="btn add-blog-post-link">Post</a>
+      </div>
+    <%- end %>
+  </div>
+
+  <div class="blog-posts row-fluid">
+    <%- if @blogs.blank? %>
+      <h2>No Blog Posts Yet
+        <%- if can? :update, @club %>
+          - <a href="<%= club_blogs_path(@club) %>" data-method="post" class="create-first-blog-link">Create your First!</a>
+        <%- end %>
+      </h2>
+    <%- else %>
+      <%- @blogs.reverse.each_with_index do |blog, i| %>
+        <%- unless i == 0 %>
+          <hr/>
+        <%- end %>
+
+        <div class="blog-post">
+          <div class="blog-logo">
+            <a class="blog-image-link" href="<%= edit_blog_path(blog) %>">
+              <%= image_tag "#{blog.image}", :class => 'blog-image' %>
+            </a>
+          </div>
+
+          <div class="blog-title-created-content">
+            <div class="blog-title">
+              <%- if blog.premium? %>
+                <span class="blog-is-premium">Premium</span>
+              <%- end %>
+
+              <%= link_to (blog.title.length > 65 ? "#{blog.title[0..65]}..." : blog.title), edit_blog_path(blog) %>
+            </div>
+
+            <div class="blog-created">
+              <%= I18n.l blog.created_at %>
+            </div>
+
+            <div class="blog-content">
+              <%= blog.content.length > 400 ? "#{blog.content[0..400]}..." : blog.content %>
+            </div>
+          </div>
+        </div>
+      <%- end %>
+    <%- end %>
+  </div>
+
+  <%- unless @blogs.blank? %>
+    <div class="blog-controls">
+      <%- if can? :update, @club %>
+        <div class="add-blog-post">
+          <a href="<%= club_blogs_path(@club) %>" data-method="post" class="btn add-blog-post-link">Post</a>
+        </div>
+      <%- end %>
+    </div>
+  <%- end %>
+</div>
