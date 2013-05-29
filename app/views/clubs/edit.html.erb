@@ -74,7 +74,7 @@
           <div class="blog-most-recent">
             <%- @club.blogs.last.tap do |blog| %>
               <div class="blog-title-date">
-                <span class="blog-title"><%= link_to blog.title, edit_blog_path(blog) %></span>
+                <span class="blog-title"><%= link_to trim_length(blog.title, 65), edit_blog_path(blog) %></span>
                 <span class="blog-date"><%= I18n.l blog.created_at, :format => :default %></span>
               </div>
 
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="blog-content">
-                  <%= blog.content %>
+                  <%= trim_length blog.content, 275 %>
                 </div>
               </div>
             <%- end %>

@@ -35,7 +35,7 @@
                 <span class="blog-is-premium">Premium</span>
               <%- end %>
 
-              <%= link_to (blog.title.length > 65 ? "#{blog.title[0..65]}..." : blog.title), edit_blog_path(blog) %>
+              <%= link_to trim_length(blog.title, 65), edit_blog_path(blog) %>
             </div>
 
             <div class="blog-created">
@@ -43,7 +43,7 @@
             </div>
 
             <div class="blog-content">
-              <%= blog.content.length > 400 ? "#{blog.content[0..400]}..." : blog.content %>
+              <%= trim_length blog.content, 400 %>
             </div>
           </div>
         </div>
