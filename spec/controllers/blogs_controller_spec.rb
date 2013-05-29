@@ -181,4 +181,20 @@ describe BlogsController do
       end
     end
   end
+
+  describe "GET 'show_all'" do
+    let(:blog) { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
+
+    before :each do
+      get 'show_all', :club_id => blog.club.id
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "assigns blogs" do
+      assigns(:blogs).should include(blog)
+    end
+  end
 end
