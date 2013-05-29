@@ -27,4 +27,9 @@ describe ApplicationHelper do
   describe "devise_mapping" do
     it { devise_mapping.should == Devise.mappings[:user] }
   end
+
+  describe "trim_length" do
+    it { trim_length("Something Extra Long", 5).should == "Somet..." }
+    it { trim_length("Something Short", 50).should == "Something Short" }
+  end
 end
