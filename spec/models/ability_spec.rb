@@ -146,4 +146,28 @@ describe Ability do
       end
     end
   end
+
+  describe "Topic" do
+    let(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
+    let(:owned_topic)      { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
+    let(:non_owned_topic)  { FactoryGirl.create :topic }
+
+    context "read" do
+      let(:ability) { Ability.new FactoryGirl.create(:user) }
+
+      it "succeeds for any user" do
+        ability.should be_able_to(:read, non_owned_topic)
+      end
+    end
+
+    context "update" do
+      it "succeeds when the user owns the topic" do
+        ability.should be_able_to(:update, owned_topic)
+      end
+
+      it "fails when the user does not own the topic" do
+        ability.should_not be_able_to(:update, non_owned_topic)
+      end
+    end
+  end
 end

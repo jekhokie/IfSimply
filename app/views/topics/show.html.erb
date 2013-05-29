@@ -1,0 +1,33 @@
+<div class="topic-information">
+  <%= render :partial => 'shared/welcome_message' %>
+
+  <h1 class="topic-subject">
+    <%= @topic.subject %>
+  </h1>
+
+  <p class="topic-description">
+    <%= @topic.description %>
+  </p>
+
+  <div class="topic-controls">
+    <%- if can? :update, @topic %>
+      <div class="add-topic-post">
+        <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="btn add-topic-post-link">Post</a>
+      </div>
+    <%- end %>
+  </div>
+
+  <div class="topic-posts row-fluid">
+    <%= render :partial => "posts/list", :locals => { :topic => @topic } %>
+  </div>
+
+  <%- unless @topic.posts.blank? %>
+    <div class="topic-controls">
+      <%- if can? :update, @topic %>
+        <div class="add-topic-post">
+          <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="btn add-topic-post-link">Post</a>
+        </div>
+      <%- end %>
+    </div>
+  <%- end %>
+</div>

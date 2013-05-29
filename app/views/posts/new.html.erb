@@ -1,0 +1,14 @@
+<div class="new-post">
+  <div class="new-post-heading">
+    New Post
+  </div>
+
+  <div class="new-post-form">
+    <%= simple_form_for [ topic, post ], :remote => true, :validate => true do |f| %>
+      <%= f.input :content, :label => false, :type => :textarea, :html_attrs => { :rows => '10' } %>
+
+      <%= f.submit "Submit Post", :class => "btn" %>
+      <a href="<%= topic_path(topic) %>" class="btn">Cancel</a>
+    <%- end %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_discussion_board
+  before_filter :get_discussion_board, :only => [ :new, :create ]
 
   def new
     authorize! :update, @discussion_board
@@ -21,6 +21,12 @@ class TopicsController < ApplicationController
     end
 
     flash.discard
+  end
+
+  def show
+    @topic = Topic.find params[:id]
+
+    authorize! :read, @topic
   end
 
   private
