@@ -12,7 +12,7 @@
   <div class="topic-controls">
     <%- if can? :update, @topic %>
       <div class="add-topic-post">
-        <a href="#" data-method="post" class="btn add-topic-post-link">Post</a>
+        <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="btn add-topic-post-link">Post</a>
       </div>
     <%- end %>
   </div>
@@ -25,7 +25,7 @@
     <div class="topic-controls">
       <%- if can? :update, @topic %>
         <div class="add-topic-post">
-          <a href="#" data-method="post" class="btn add-topic-post-link">Post</a>
+          <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="btn add-topic-post-link">Post</a>
         </div>
       <%- end %>
     </div>
