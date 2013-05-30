@@ -31,3 +31,6 @@ lib/development_mail_interceptor.rb
 
 # Ignore simplecov output
 coverage
+
+# Ignore TODO file
+TODO
