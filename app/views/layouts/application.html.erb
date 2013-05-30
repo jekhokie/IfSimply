@@ -26,7 +26,9 @@
       <%= yield :home_container %>
     <%- else %>
       <div class="container">
-        <%= yield %>
+        <div class="inner-container">
+          <%= yield %>
+        </div>
       </div>
     <%- end %>
 
