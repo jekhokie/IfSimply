@@ -13,8 +13,8 @@ describe Post do
     let!(:post_1) { FactoryGirl.create :post, :topic => topic, :created_at => Time.local(2013,"jan",2,20,15,45) }
     let!(:post_2) { FactoryGirl.create :post, :topic => topic, :created_at => Time.local(2013,"jan",2,20,17,45) }
 
-    it "returns posts by created_at in ascending order" do
-      topic.posts.should == [ post_1, post_2, post_3 ]
+    it "returns posts by created_at in descending order" do
+      topic.posts.should == [ post_3, post_2, post_1 ]
     end
   end
 
