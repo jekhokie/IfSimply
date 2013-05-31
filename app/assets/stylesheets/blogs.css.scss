@@ -42,7 +42,7 @@
         line-height: 30px;
         position:    absolute;
 
-        span.best_in_place {
+        .best_in_place {
           display:     inline-block;
           font-style:  italic;
           font-weight: normal;
@@ -50,7 +50,7 @@
           width:       35px;
         }
 
-        span.best_in_place:hover {
+        .best_in_place:hover {
           cursor: pointer;
         }
       }
