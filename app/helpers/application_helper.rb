@@ -28,3 +28,12 @@ module ApplicationHelper
     content.length > max_length ? "#{content[0...max_length]}..." : content
   end
 end
+
+module ActionView
+  class Base
+    def markdown_to_html(markdown)
+      renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+      renderer.render(markdown)
+    end
+  end
+end

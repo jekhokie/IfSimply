@@ -24,7 +24,7 @@
       </h1>
 
       <p class="blog-content">
-        <%= best_in_place_if can?(:update, @blog), @blog, :content, :type => :textarea, :html_attrs => { :rows => '10' } %>
+        <%= best_in_place_if can?(:update, @blog), @blog, :content, :display_with => :markdown_to_html, :type => :textarea, :html_attrs => { :rows => '10' } %>
       </p>
     </div>
   </div>

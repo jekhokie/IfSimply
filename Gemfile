@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'best_in_place'
+gem 'best_in_place', :git => 'git://github.com/jekhokie/best_in_place.git'
 gem 'cancan'
 gem 'devise'
 gem 'google-webfonts'
@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'money-rails'
 gem 'rails', '3.2.8'
 gem 'rails_config'
+gem 'redcarpet'
 gem 'sqlite3'
 
 # handling of uploads
