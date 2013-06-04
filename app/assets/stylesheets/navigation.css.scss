@@ -1,35 +1,65 @@
-.navbar {
-  z-index: 1000;
+header {
+  background-color: #3c4348;
+  height:           35px;
+  margin-bottom:    8px;
 
-  .navbar-inner {
-    height: 30px;
+  .header-container {
+    height:      100%;
+    margin:      0px auto;
+    padding-top: 2px;
+    width:       972px;
 
-    .container {
-      width: 100%;
+    .header-container-left.logo {
+      display:        table-cell;
+      font-family:    "Trebuchet MS";
+      font-size:      20px;
+      height:         35px;
+      line-height:    20px;
+      vertical-align: middle;
+      width:          30px;
 
-      .container-inner {
-        margin: 0px auto;
-        width:  900px;
+      .brand {
+        width: 25px;
+
+        .logo-if {
+          color: #FDA600;
+        }
+
+        .logo-simply {
+          color:       #008BC5;
+          margin-left: -3px;
+        }
+      }
+    }
+
+    .header-container-right {
+      display:        table-cell;
+      font-size:      14px;
+      height:         35px;
+      line-height:    14px;
+      text-align:     right;
+      vertical-align: middle;
+      width:          940px;
+
+      span {
+        margin-left: 12px;
+
+        a {
+          color:           #999999;
+          text-decoration: none;
+        }
+
+        a:hover {
+          color: white;
+        }
       }
     }
   }
+}
 
-  .logo {
-    font-family: "Trebuchet MS";
-    font-size:   5.25em;
-    font-weight: bold;
-
-    .brand {
-      width: 25px;
-
-      .logo-if {
-        color: #FDA600;
-      }
-
-      .logo-simply {
-        color:       #008BC5;
-        margin-left: -3px;
-      }
-    }
-  }
+footer {
+  background-color: #3c4348;
+  height:           150px;
+  margin-top:       75px;
+  width:            100%;
 }

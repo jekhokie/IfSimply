@@ -1,23 +1,21 @@
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <div class="container-inner">
-        <div class="logo icon">
-          <a class="brand" href="/">
-            <span class="logo-if">i</span>
-            <span class="logo-simply">S</span>
-          </a>
-        </div>
+<div class="header-container">
+  <div class="header-container-left logo">
+    <a class="brand" href="/">
+      <span class="logo-if">i</span>
+      <span class="logo-simply">S</span>
+    </a>
+  </div>
 
-        <ul class="nav pull-right">
-          <%- if user_signed_in? -%>
-            <li><%= link_to 'Account', edit_user_registration_path %></li>
-            <li><%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %></li>
-          <%- else %>
-            <li><%= link_to 'Login', new_user_session_path %></li>
-          <%- end -%>
-        </ul>
-      </div>
-    </div>
+  <div class="header-container-right">
+    <%- if content_for :navigation %>
+      <%= yield :navigation %>
+    <%- end %>
+
+    <%- if user_signed_in? -%>
+      <span><%= link_to 'Account', edit_user_registration_path %></span>
+      <span><%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %></span>
+    <%- else %>
+      <span><%= link_to 'Login', new_user_session_path %></span>
+    <%- end -%>
   </div>
 </div>
