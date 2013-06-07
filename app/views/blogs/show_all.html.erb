@@ -1,5 +1,5 @@
 <div class="blog-information">
-  <%= render :partial => 'shared/welcome_message' %>
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
 
   <div class="blog-controls">
     <%- if can? :update, @club %>

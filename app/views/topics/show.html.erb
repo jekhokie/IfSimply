@@ -1,5 +1,5 @@
 <div class="topic-information">
-  <%= render :partial => 'shared/welcome_message' %>
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @topic.club } %>
 
   <h1 class="topic-subject">
     <%= @topic.subject %>
