@@ -1,0 +1,156 @@
+.learn-more-container {
+  .logo-container {
+    height: 121px;
+    margin: 0px auto;
+    width:  972px;
+
+    .logo.logo-inverse {
+      span {
+        background: url(logo_200w_121h_inverse.png) no-repeat 0 0;
+        display:    inline-table;
+        height:     200px;
+        margin:     0px auto;
+        width:      331px;
+      }
+    }
+  }
+
+  .capture-graphics-container {
+    margin: 15px auto 0px auto;
+    width:  100%;
+
+    .capture-container {
+      height: 90px;
+      margin: 0px auto 12px auto;
+      width:  780px;
+
+      .capture-super {
+        color:       #fd8500;
+        font-family: "Londrina Solid";
+        font-size:   32px;
+        height:      40px;
+        line-height: 40px;
+
+        .capture-left,
+        .capture-right {
+          display: inline-block;
+          width:   49%;
+        }
+
+        .capture-left {
+          float:      left;
+          text-align: left;
+        }
+
+        .capture-right {
+          float:      right;
+          text-align: right;
+        }
+      }
+
+      .capture-sub {
+        color:       #0077cb;
+        font-family: "Fredericka the Great";
+        font-size:   48px;
+        line-height: 48px;
+        text-align:  center;
+      }
+    }
+
+    .graphics-container {
+      color:            #FFF;
+      background-color: #0077cb;
+      font-family:      "Fredericka the Great";
+      height:           425px;
+      position:         relative;
+      width:            100%;
+
+      .clouds-top {
+        text-align: center;
+        width:      100%;
+
+        span {
+          background: url(clouds_top.png) no-repeat 0 0;
+          display:    inline-table;
+          height:     54px;
+          margin:     0px auto;
+          width:      651px;
+        }
+      }
+
+      .clouds-internal {
+        margin: 0px auto;
+        width:  830px;
+
+        .easy-heading {
+          font-size: 26px;
+          margin:    14px 0px;
+        }
+
+        .easy-steps-container {
+          .easy-step {
+            display:    inline-block;
+            text-align: center;
+            width:      270px;
+
+            .step-heading {
+              font-size: 26px;
+              margin:    18px 0px;
+            }
+          }
+        }
+      }
+
+      .clouds-bottom {
+        bottom:     -5px;
+        position:   absolute;
+        text-align: center;
+        width:      100%;
+
+        span {
+          background: url(clouds_bottom.png) no-repeat 0 0;
+          display:    inline-table;
+          height:     83px;
+          margin:     0px auto;
+          width:      805px;
+        }
+      }
+    }
+  }
+
+  .sign-up-how-it-works {
+    margin:     20px auto;
+    text-align: center;
+    width:      972px;
+
+    .sign-up {
+      margin-bottom: 25px;
+      margin-top:    -35px;
+      position:      relative;
+
+      a.submit-sign-up {
+        height: 20px;
+        width:  250px;
+
+        .btn-text {
+          color:       black;
+          font-size:   24px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .how-it-works {
+      margin-top: 40px;
+
+      .how-video {
+        iframe {
+          border: 8px solid #3c4348;
+        }
+      }
+
+      .how-learn {
+      }
+    }
+  }
+}
