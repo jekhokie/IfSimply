@@ -47,4 +47,13 @@ describe Topic do
       expect { @topic.destroy }.to change(Post, :count).by(-1)
     end
   end
+
+  describe "club" do
+    let!(:club)  { FactoryGirl.create :club }
+    let!(:topic) { FactoryGirl.create :topic, :discussion_board => club.discussion_board }
+
+    it "returns the corresponding club" do
+      topic.club.should == club
+    end
+  end
 end

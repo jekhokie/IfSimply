@@ -45,4 +45,14 @@ describe Post do
       end
     end
   end
+
+  describe "club" do
+    let!(:club)  { FactoryGirl.create :club }
+    let!(:topic) { FactoryGirl.create :topic, :discussion_board => club.discussion_board }
+    let!(:post)  { FactoryGirl.create :post, :topic => topic }
+
+    it "returns the corresponding club" do
+      post.club.should == club
+    end
+  end
 end

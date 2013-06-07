@@ -14,4 +14,8 @@ class Post < ActiveRecord::Base
       'unknown'
     end
   end
+
+  def club
+    topic.club
+  end
 end
