@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524150510) do
+ActiveRecord::Schema.define(:version => 20130607143955) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -87,6 +87,15 @@ ActiveRecord::Schema.define(:version => 20130524150510) do
 
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "sales_pages", :force => true do |t|
+    t.string   "heading"
+    t.string   "sub_heading"
+    t.string   "call_to_action"
+    t.integer  "club_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "topics", :force => true do |t|
     t.string   "subject"
