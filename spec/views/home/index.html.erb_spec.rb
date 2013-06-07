@@ -19,15 +19,15 @@ describe "home/index.html.erb" do
         page.should have_selector('a span', :text => 'My Club')
       end
 
-      describe "navbar" do
+      describe "heading navigation" do
         it "should display a link to the user's account" do
-          within ".navbar" do
+          within ".header-container" do
             page.should have_selector('a', :text => 'Account')
           end
         end
 
         it "should display a link to Logout" do
-          within ".navbar" do
+          within ".header-container" do
             page.should have_selector('a', :text => 'Logout')
           end
         end
@@ -44,7 +44,7 @@ describe "home/index.html.erb" do
       end
 
       it "should display a link to Login" do
-        within ".navbar" do
+        within ".header-container" do
           page.should have_selector('a', :text => 'Login')
         end
       end
