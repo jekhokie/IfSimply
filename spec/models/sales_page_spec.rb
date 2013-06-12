@@ -26,6 +26,17 @@ describe SalesPage do
     it "returns false when no call_to_action is specified" do
       FactoryGirl.build(:sales_page, :call_to_action => "").should_not be_valid
     end
+
+    # video
+    describe "for video" do
+      it "returns false when the URL is malformed" do
+        FactoryGirl.build(:sales_page, :video => "bogus url").should_not be_valid
+      end
+
+      it "returns true when the URL is reachable" do
+        FactoryGirl.build(:sales_page, :video => "http://www.google.com/").should be_valid
+      end
+    end
   end
 
   describe "assign_defaults" do
