@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607143955) do
+ActiveRecord::Schema.define(:version => 20130612120117) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130607143955) do
     t.integer  "club_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "video"
   end
 
   create_table "topics", :force => true do |t|
