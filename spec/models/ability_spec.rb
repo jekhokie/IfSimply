@@ -170,4 +170,16 @@ describe Ability do
       end
     end
   end
+
+  describe "SalesPage" do
+    let(:non_owned_sales_page) { FactoryGirl.create :sales_page }
+
+    context "read" do
+      let(:ability) { Ability.new FactoryGirl.create(:user) }
+
+      it "succeeds for any user" do
+        ability.should be_able_to(:read, non_owned_sales_page)
+      end
+    end
+  end
 end

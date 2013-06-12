@@ -28,5 +28,6 @@ class Ability
 
     # global defaults
     can [ :read ], Topic
+    can [ :read ], SalesPage
   end
 end
