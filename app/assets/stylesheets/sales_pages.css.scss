@@ -1,0 +1,85 @@
+.sales-page-information {
+  margin:     0px auto;
+  text-align: center;
+  width:      900px;
+
+  hr.gradient {
+    height: 2px;
+    margin: 25px auto;
+    width:  90%;
+  }
+
+  .sales-page-heading {
+    font-size: 60px;
+    margin:    25px auto;
+  }
+
+  .sales-page-sub-heading {
+    font-size: 36px;
+    margin:    25px auto;
+  }
+
+  .capture-content {
+    display: inline-block;
+    margin:  0px auto;
+    width:   100%;
+
+    .capture-resource {
+      display:     inline-block;
+      float:       left;
+      height:      240px;
+      margin-left: 125px;
+      margin-top:  -15px;
+    }
+
+    .capture-block {
+      display: inline-block;
+      float:   right;
+      width:   445px;
+
+      .sales-page-call-to-action {
+        font-size:   46px;
+        line-height: 46px;
+        margin:      25px auto;
+      }
+
+      .club-buy-cost {
+        line-height: 63px;
+        margin-top:  15px;
+        text-align:  center;
+
+        .club-cost {
+          display:     inline-block;
+          font-size:   52px;
+          font-weight: bold;
+        }
+
+        .club-buy {
+          display:        inline-block;
+          margin-top:     3px;
+          margin-left:    15px;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+
+  .benefits-container {
+    margin:        25px auto;
+    margin-bottom: 50px;
+    text-align:    left;
+    width:         95%;
+
+    .sales-page-learn {
+      font-size: 26px;
+    }
+
+    .benefits {
+      font-size:   32px;
+
+      ul li {
+        line-height: 40px;
+      }
+    }
+  }
+}
