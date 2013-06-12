@@ -3,10 +3,9 @@ require 'spec_helper'
 describe SalesPagesController do
   describe "GET 'show'" do
     let!(:sales_page) { FactoryGirl.create :sales_page }
-    let!(:club)       { sales_page.club }
 
     before :each do
-      get 'show', :id => sales_page.id
+      get 'show', :club_id => sales_page.club.id
     end
 
     it "returns http success" do
@@ -14,7 +13,7 @@ describe SalesPagesController do
     end
 
     it "returns the club" do
-      assigns(:club).should == club
+      assigns(:club).should == sales_page.club
     end
 
     it "returns the sales_page" do
