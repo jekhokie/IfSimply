@@ -14,6 +14,10 @@ class SalesPage < ActiveRecord::Base
     self.call_to_action = Settings.sales_pages[:default_call_to_action]
   end
 
+  def user
+    club.user
+  end
+
   private
 
   def url_exists

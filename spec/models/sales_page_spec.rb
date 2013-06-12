@@ -39,6 +39,14 @@ describe SalesPage do
     end
   end
 
+  describe "user" do
+    let(:club) { FactoryGirl.create :club }
+
+    it "returns the corresponding sales_page's user" do
+      FactoryGirl.create(:sales_page, :club_id => club.id).user.should == club.user
+    end
+  end
+
   describe "assign_defaults" do
     let(:club) { FactoryGirl.create :club }
 
