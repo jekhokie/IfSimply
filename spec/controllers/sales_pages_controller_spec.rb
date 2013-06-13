@@ -32,7 +32,7 @@ describe SalesPagesController do
     end
 
     before :each do
-      get 'edit', :club_id => sales_page.club.id
+      get 'edit', :id => sales_page.id
     end
 
     it "returns http success" do

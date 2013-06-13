@@ -16,7 +16,7 @@ Ifsimply::Application.routes.draw do
       match '/upload_logo' => 'clubs#upload_logo', :as => :upload_logo_for
     end
 
-    resource  :sales_page, :only => [ :show, :edit ]
+    resource  :sales_page, :only => [ :show ]
     resources :courses,    :only => [ :create ]
     resources :blogs,      :only => [ :create ] do
       collection do
@@ -24,6 +24,8 @@ Ifsimply::Application.routes.draw do
       end
     end
   end
+
+  resources :sales_pages, :only => [ :edit ]
 
   resources :courses, :only => [ :edit, :update ] do
     resources :lessons, :only => [ :create, :update ]
