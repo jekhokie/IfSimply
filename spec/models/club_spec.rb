@@ -5,6 +5,7 @@ describe Club do
   it { should have_many :courses }
   it { should have_many :blogs }
   it { should have_one  :discussion_board }
+  it { should have_one  :sales_page }
 
   it { should have_many(:topics).through(:discussion_board) }
 
@@ -36,6 +37,11 @@ describe Club do
     # discussion_board
     it "builds a default discussion_board" do
       club.discussion_board.should_not be_blank
+    end
+
+    # sales_page
+    it "builds a default sales_page" do
+      club.sales_page.should_not be_blank
     end
   end
 
@@ -104,6 +110,17 @@ describe Club do
 
     it "should be destroyed when the club is destroyed" do
       expect { @club.destroy }.to change(DiscussionBoard, :count).by(-1)
+    end
+  end
+
+  describe "sales_page" do
+    before :each do
+      @club = FactoryGirl.create :club
+      FactoryGirl.create :sales_page, :club_id => @club.id
+    end
+
+    it "should be destroyed when the club is destroyed" do
+      expect { @club.destroy }.to change(SalesPage, :count).by(-1)
     end
   end
 end

@@ -82,15 +82,57 @@ body .container {
   }
 }
 
-.welcome-container {
+.welcome-navigation {
   border-bottom: 1px solid #DDDDDD;
   height:        35px;
   padding:       12px 0px;
 
-  .welcome {
+  .welcome-container {
     .welcome-text {
       font-size:   25px;
       line-height: 34px;
+    }
+  }
+
+  .user-navigation-container {
+    height:     100%;
+    text-align: right;
+
+    a {
+      color:           #000;
+      display:         inline-block;
+      font-weight:     bold;
+      height:          35px;
+      line-height:     35px;
+      margin-left:     12px;
+      text-align:      center;
+      text-decoration: none;
+      vertical-align:  middle;
+    }
+
+    a.selected {
+      color: #008BC5;
+    }
+
+    a:hover {
+      color: #FDA600;
+    }
+
+    a.club-link {
+      width: 50px;
+    }
+
+    a.courses-link {
+      width: 60px;
+    }
+
+    a.blog-posts-link,
+    a.discussions-link {
+      width: 85px;
+    }
+
+    a.sales-page-link {
+      width: 78px;
     }
   }
 }

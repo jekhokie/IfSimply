@@ -1,0 +1,63 @@
+<div class="sales-page-information">
+  <h1 class="sales-page-heading">
+    <%= best_in_place_if can?(:update, sales_page), sales_page, :heading, :type       => :input,
+                                                                          :path       => sales_page_path(sales_page),
+                                                                          :html_attrs => { :rows => '1' } -%>
+  </h1>
+
+  <h3 class="sales-page-sub-heading">
+    <%= best_in_place_if can?(:update, sales_page), sales_page, :sub_heading, :type       => :input,
+                                                                              :path       => sales_page_path(sales_page),
+                                                                              :html_attrs => { :rows => '1' } -%>
+  </h3>
+
+  <hr class="gradient" />
+
+  <div class="capture-content">
+    <div class="capture-resource">
+      <div class="video-iframe">
+        <%= render :partial => 'shared/video_iframe', :locals => { :video_url => sales_page.video } %>
+      </div>
+    </div>
+
+    <div class="capture-block">
+      <div class="sales-page-call-to-action">
+        <%= best_in_place_if can?(:update, sales_page), sales_page, :call_to_action, :type       => :input,
+                                                                                     :path       => sales_page_path(sales_page),
+                                                                                     :html_attrs => { :rows => '1' } -%>
+      </div>
+
+      <div class="club-buy-cost">
+        <div class="club-cost"><%= currency_symbol -%><%= humanized_money club.price -%>/mo</div>
+        <div class="club-buy"><%= button_to "Subscribe", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%></div>
+      </div>
+    </div>
+
+    <div class="update-embed-url">
+      <%- if can? :update, sales_page %>
+        <div class="video-embed-source">
+          <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
+
+          <%= best_in_place sales_page, :video, :type       => :input,
+                                                :path       => sales_page_path(sales_page),
+                                                :classes    => 'video-related',
+                                                :html_attrs => { :rows => '1' } %>
+        </div>
+      <%- end %>
+    </div>
+  </div>
+
+  <hr class="gradient" />
+
+  <div class="benefits-container">
+    <h3 class="sales-page-learn">What you will learn in this training...</h3>
+
+    <div class="benefits">
+      <ul>
+        <li class="benefit benefit1"><%= "" -%></li>
+        <li class="benefit benefit2"><%= "" -%></li>
+        <li class="benefit benefit3"><%= "" -%></li>
+      </ul>
+    </div>
+  </div>
+</div>

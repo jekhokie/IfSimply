@@ -112,6 +112,12 @@
       border-left:   1px solid #CCC;
       border-right:  1px solid #CCC;
       padding:       12px;
+
+      .subject {
+        a {
+          color: #000;
+        }
+      }
     }
 
     li.first-topic {

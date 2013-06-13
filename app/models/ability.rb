@@ -26,7 +26,12 @@ class Ability
       topic.user == user
     end
 
+    can [ :update ], SalesPage do |sales_page|
+      sales_page.user == user
+    end
+
     # global defaults
     can [ :read ], Topic
+    can [ :read ], SalesPage
   end
 end

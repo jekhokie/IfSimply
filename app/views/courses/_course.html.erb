@@ -1,5 +1,5 @@
 <div class="course-information">
-  <%= render :partial => 'shared/welcome_message' %>
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => course.club } %>
 
   <h1 class="course-title">
     <%= best_in_place_if can?(:update, course), course, :title, :type => :input, :html_attrs => { :rows => '1' } %>

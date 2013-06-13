@@ -170,4 +170,27 @@ describe Ability do
       end
     end
   end
+
+  describe "SalesPage" do
+    let(:owned_sales_page)     { FactoryGirl.create :sales_page, :club_id => user.clubs.first.id }
+    let(:non_owned_sales_page) { FactoryGirl.create :sales_page }
+
+    context "read" do
+      let(:ability) { Ability.new FactoryGirl.create(:user) }
+
+      it "succeeds for any user" do
+        ability.should be_able_to(:read, non_owned_sales_page)
+      end
+    end
+
+    context "update" do
+      it "succeeds when the user owns the sales_page" do
+        ability.should be_able_to(:update, owned_sales_page)
+      end
+
+      it "fails when the user does not own the sales_page" do
+        ability.should_not be_able_to(:update, non_owned_sales_page)
+      end
+    end
+  end
 end

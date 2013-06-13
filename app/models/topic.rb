@@ -15,4 +15,8 @@ class Topic < ActiveRecord::Base
   def last_updated_time
     updated_at
   end
+
+  def club
+    discussion_board.club
+  end
 end

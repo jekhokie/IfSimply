@@ -25,13 +25,7 @@ class Lesson < ActiveRecord::Base
 
   def url_exists
     unless video.blank?
-      begin
-        url = URI.parse video
-        req = Net::HTTP.new(url.host, url.port)
-        res = req.request_head(url.path)
-      rescue
-        errors.add :base, "URL is not reachable or malformed - please check your video URL"
-      end
+      errors.add(:base, "URL is not reachable or malformed - please check your video URL") unless VideoManipulator.validate_url(video)
     end
   end
 end
