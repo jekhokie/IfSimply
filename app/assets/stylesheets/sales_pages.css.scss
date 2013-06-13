@@ -21,20 +21,24 @@
 
   .capture-content {
     display: inline-block;
+    height:  280px;
     margin:  0px auto;
     width:   100%;
 
     .capture-resource {
-      display:    inline-block;
-      float:      left;
-      height:     240px;
-      margin-top: -15px;
+      display:        inline-block;
+      height:         240px;
+      vertical-align: middle;
+
+      iframe {
+        border: 1px solid black;
+      }
     }
 
     .capture-block {
-      display: inline-block;
-      float:   right;
-      width:   445px;
+      display:        inline-block;
+      vertical-align: middle;
+      width:          445px;
 
       .sales-page-call-to-action {
         font-size:   46px;
@@ -58,6 +62,42 @@
           margin-top:     3px;
           margin-left:    15px;
           vertical-align: top;
+        }
+      }
+    }
+
+    .update-embed-url {
+      clear:      both;
+      display:    block;
+      text-align: left;
+      width:      100%;
+
+      .video-embed-source {
+        font-size:   22px;
+        line-height: 38px;
+        margin:      10px auto;
+
+        .video-embed-label {
+          display:      inline-block;
+          margin-left:  12px;
+          margin-right: 16px;
+
+          i {
+            font-weight: bold;
+          }
+        }
+
+        .video-related {
+          display:    inline-block;
+          margin-top: 8px;
+        }
+
+        .video-related:hover {
+          cursor: pointer;
+        }
+
+        input {
+          width: 400px;
         }
       }
     }
