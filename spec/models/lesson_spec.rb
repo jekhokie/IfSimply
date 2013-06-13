@@ -27,6 +27,10 @@ describe Lesson do
       it "returns true when the URL is reachable" do
         FactoryGirl.build(:lesson, :video => "http://www.google.com/").should be_valid
       end
+
+      it "returns true when URL is blank/not specified" do
+        FactoryGirl.build(:lesson, :video => "").should be_valid
+      end
     end
   end
 

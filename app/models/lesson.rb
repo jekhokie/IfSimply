@@ -24,6 +24,8 @@ class Lesson < ActiveRecord::Base
   private
 
   def url_exists
-    errors.add(:base, "URL is not reachable or malformed - please check your video URL") unless VideoManipulator.validate_url(video)
+    unless video.blank?
+      errors.add(:base, "URL is not reachable or malformed - please check your video URL") unless VideoManipulator.validate_url(video)
+    end
   end
 end
