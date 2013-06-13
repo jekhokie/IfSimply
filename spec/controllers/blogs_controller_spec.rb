@@ -193,6 +193,10 @@ describe BlogsController do
       response.should be_success
     end
 
+    it "assigns club" do
+      assigns(:club).should == user.clubs.first
+    end
+
     it "assigns blogs" do
       assigns(:blogs).should include(blog)
     end
