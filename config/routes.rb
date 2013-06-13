@@ -17,8 +17,14 @@ Ifsimply::Application.routes.draw do
     end
 
     resource  :sales_page, :only => [ :show ]
-    resources :courses,    :only => [ :create ]
-    resources :blogs,      :only => [ :create ] do
+
+    resources :courses, :only => [ :create ] do
+      collection do
+        get 'show_all'
+      end
+    end
+
+    resources :blogs, :only => [ :create ] do
       collection do
         get 'show_all'
       end
