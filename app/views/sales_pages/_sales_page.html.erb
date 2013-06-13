@@ -1,6 +1,15 @@
 <div class="sales-page-information">
-  <h1 class="sales-page-heading"><%= sales_page.heading -%></h1>
-  <h3 class="sales-page-sub-heading"><%= sales_page.sub_heading -%></h3>
+  <h1 class="sales-page-heading">
+    <%= best_in_place_if can?(:update, sales_page), sales_page, :heading, :type       => :input,
+                                                                          :path       => sales_page_path(sales_page),
+                                                                          :html_attrs => { :rows => '1' } -%>
+  </h1>
+
+  <h3 class="sales-page-sub-heading">
+    <%= best_in_place_if can?(:update, sales_page), sales_page, :sub_heading, :type       => :input,
+                                                                              :path       => sales_page_path(sales_page),
+                                                                              :html_attrs => { :rows => '1' } -%>
+  </h3>
 
   <hr class="gradient" />
 
@@ -12,7 +21,12 @@
     </div>
 
     <div class="capture-block">
-      <div class="sales-page-call-to-action"><%= sales_page.call_to_action -%></div>
+      <div class="sales-page-call-to-action">
+        <%= best_in_place_if can?(:update, sales_page), sales_page, :call_to_action, :type       => :input,
+                                                                                     :path       => sales_page_path(sales_page),
+                                                                                     :html_attrs => { :rows => '1' } -%>
+      </div>
+
       <div class="club-buy-cost">
         <div class="club-cost"><%= currency_symbol -%><%= humanized_money club.price -%>/mo</div>
         <div class="club-buy"><%= button_to "Subscribe", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%></div>
@@ -25,7 +39,7 @@
           <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
 
           <%= best_in_place sales_page, :video, :type       => :input,
-                                                :path       => '#',
+                                                :path       => sales_page_path(sales_page),
                                                 :classes    => 'video-related',
                                                 :html_attrs => { :rows => '1' } %>
         </div>

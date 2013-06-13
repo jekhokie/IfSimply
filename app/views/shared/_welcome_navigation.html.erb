@@ -18,7 +18,7 @@
                                                  controller_name == 'topics' %>">Discussions</a>
 
     <%- if current_user == club.user %>
-      <a href="#"
+      <a href="<%= edit_sales_page_path(club.sales_page) %>"
          class="sales-page-link <%= 'selected' if controller_name == 'sales_pages' %>">Sales Page</a>
     <%- end %>
   </div>
