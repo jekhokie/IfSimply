@@ -7,6 +7,7 @@ class DiscussionBoard < ActiveRecord::Base
   belongs_to :club
 
   has_many :topics, :dependent => :destroy
+  has_many :posts,  :through   => :topics
 
   def user
     club.user
