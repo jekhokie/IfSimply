@@ -13,7 +13,7 @@
 
   <hr class="gradient" />
 
-  <div class="capture-content">
+  <div class="capture-content video-container">
     <div class="capture-resource">
       <div class="video-iframe">
         <%= render :partial => 'shared/video_iframe', :locals => { :video_url => sales_page.video } %>
@@ -54,9 +54,23 @@
 
     <div class="benefits">
       <ul>
-        <li class="benefit benefit1"><%= "" -%></li>
-        <li class="benefit benefit2"><%= "" -%></li>
-        <li class="benefit benefit3"><%= "" -%></li>
+        <li class="benefit benefit1">
+          <%= best_in_place_if can?(:update, sales_page), sales_page, :benefit1, :type       => :input,
+                                                                                 :path       => sales_page_path(sales_page),
+                                                                                 :html_attrs => { :rows => '1' } -%>
+        </li>
+
+        <li class="benefit benefit2">
+          <%= best_in_place_if can?(:update, sales_page), sales_page, :benefit2, :type       => :input,
+                                                                                 :path       => sales_page_path(sales_page),
+                                                                                 :html_attrs => { :rows => '1' } -%>
+        </li>
+
+        <li class="benefit benefit3">
+          <%= best_in_place_if can?(:update, sales_page), sales_page, :benefit3, :type       => :input,
+                                                                                 :path       => sales_page_path(sales_page),
+                                                                                 :html_attrs => { :rows => '1' } -%>
+        </li>
       </ul>
     </div>
   </div>
