@@ -1,4 +1,6 @@
 <div class="sales-page-information">
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => sales_page.club } %>
+
   <h1 class="sales-page-heading">
     <%= best_in_place_if can?(:update, sales_page), sales_page, :heading, :type       => :input,
                                                                           :path       => sales_page_path(sales_page),
