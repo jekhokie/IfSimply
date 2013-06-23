@@ -4,7 +4,7 @@ describe Course do
   it { should belong_to :club }
   it { should have_many :lessons }
 
-  it { should have_attached_file :image }
+  it { should have_attached_file :logo }
 
   it "can be instantiated" do
     Course.new.should be_an_instance_of(Course)
