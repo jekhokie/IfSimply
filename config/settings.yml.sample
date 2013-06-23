@@ -7,6 +7,7 @@
 :courses:
   default_title:       Course Title Here
   default_description: Course description here
+  default_logo:        iS_club_thumb.jpg
 :lessons:
   default_title:      Lesson Title Here
   default_background: Lesson background here
