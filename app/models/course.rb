@@ -1,9 +1,14 @@
 class Course < ActiveRecord::Base
-  attr_accessible :description, :title
+  attr_accessible :description, :logo, :title
+
+  has_attached_file :logo, :styles      => { :medium => "256x256>", :thumb => "100x100>" },
+                           :default_url => Settings.courses[:default_logo]
 
   validates :title,       :presence => { :message => "for course can't be blank" }
   validates :description, :presence => { :message => "for course can't be blank" }
   validates :club_id,     :presence => true
+
+  validates_attachment_content_type :logo, :content_type => [ 'image/jpeg', 'image/gif', 'image/png', 'image/tiff' ]
 
   belongs_to :club
 
