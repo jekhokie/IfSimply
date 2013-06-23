@@ -37,6 +37,7 @@ Ifsimply::Application.routes.draw do
     member do
       # handle image updates
       match '/change_logo' => 'courses#change_logo', :as => :change_logo_for
+      match '/upload_logo' => 'courses#upload_logo', :as => :upload_logo_for
     end
 
     resources :lessons, :only => [ :create, :update ]
