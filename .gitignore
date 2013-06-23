@@ -35,3 +35,6 @@ coverage
 # Ignore TODO and DONE file
 TODO
 DONE
+
+# Ignore any and all image store files
+*.DS_Store
