@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_club, :only => [ :show_all ]
-  before_filter :get_course, :only => [ :edit, :update ]
+  before_filter :get_course, :only => [ :edit, :update, :change_logo ]
 
   def create
     @club = Club.find params[:club_id]
@@ -27,6 +27,10 @@ class CoursesController < ApplicationController
     @course.update_attributes params[:course]
 
     respond_with_bip @course
+  end
+
+  def change_logo
+    authorize! :update, @course
   end
 
   def show_all
