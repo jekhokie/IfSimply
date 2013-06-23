@@ -1,51 +1,36 @@
 require 'spec_helper'
 
-describe "home/index.html.erb" do
+describe "home/learn_more.html.erb" do
   include Warden::Test::Helpers
   Warden.test_mode!
 
-  describe "GET '/'" do
-    describe "for a signed-in user" do
-      before :each do
-        login_as FactoryGirl.create(:user), :scope => :user
-        visit '/'
-      end
+  let(:user) { FactoryGirl.create :user }
 
-      after :each do
-        Warden.test_reset!
-      end
-
-      it "should display a link to the user's club" do
-        page.should have_selector('a span', :text => 'My Club')
-      end
-
-      describe "heading navigation" do
-        it "should display a link to the user's account" do
-          within ".header-container" do
-            page.should have_selector('a', :text => 'Account')
-          end
-        end
-
-        it "should display a link to Logout" do
-          within ".header-container" do
-            page.should have_selector('a', :text => 'Logout')
-          end
-        end
-      end
-    end
-
+  describe "GET '/index'" do
     describe "for a non signed-in guest" do
       before :each do
         visit '/'
       end
 
-      it "should display a 'Learn More' link" do
-        page.should have_selector('a span', :text => 'Learn More')
+      it "should display a sign-up button" do
+        within ".submit-sign-up" do
+          page.should have_selector("span", :text => "Start A Club Now")
+        end
+      end
+    end
+
+    describe "for a signed-in user" do
+      before :each do
+        user = FactoryGirl.create :user
+        user.confirm!
+        login_as user, :scope => :user
+
+        visit '/'
       end
 
-      it "should display a link to Login" do
-        within ".header-container" do
-          page.should have_selector('a', :text => 'Login')
+      it "should display a my club button" do
+        within ".submit-sign-up" do
+          page.should have_selector("span", :text => "My Club")
         end
       end
     end

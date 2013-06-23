@@ -8,13 +8,6 @@ describe HomeController do
     end
   end
 
-  describe "GET 'learn_more'" do
-    it "is successful" do
-      get 'learn_more'
-      response.should be_success
-    end
-  end
-
   describe "GET 'registration_notify'" do
     it "is successful" do
       get 'registration_notify'
