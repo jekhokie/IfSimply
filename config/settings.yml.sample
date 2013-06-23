@@ -20,9 +20,12 @@
   default_name:        Discussion Board Name Here
   default_description: Discussion board description here
 :sales_pages:
+  default_benefit1:       First benefit here
+  default_benefit2:       Second benefit here
+  default_benefit3:       Third benefit here
+  default_call_to_action: Call to Action
   default_heading:        Sales Pages Heading Here
   default_sub_heading:    Sales Page Sub-Heading Here
-  default_call_to_action: Call to Action
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
   port:                 <SMTP_PORT>         # common: 587
