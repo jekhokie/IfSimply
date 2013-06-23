@@ -41,6 +41,21 @@ describe SalesPage do
         FactoryGirl.build(:sales_page, :video => "").should be_valid
       end
     end
+
+    # benefit1
+    it "returns false when no benefit1 is specified" do
+      FactoryGirl.build(:sales_page, :benefit1 => "").should_not be_valid
+    end
+
+    # benefit2
+    it "returns false when no benefit2 is specified" do
+      FactoryGirl.build(:sales_page, :benefit2 => "").should_not be_valid
+    end
+
+    # benefit3
+    it "returns false when no benefit3 is specified" do
+      FactoryGirl.build(:sales_page, :benefit3 => "").should_not be_valid
+    end
   end
 
   describe "user" do
@@ -71,6 +86,18 @@ describe SalesPage do
 
     it "assigns the correct default call_to_action" do
       @sales_page.call_to_action.should == Settings.sales_pages[:default_call_to_action]
+    end
+
+    it "assigns the correct default benefit1" do
+      @sales_page.benefit1.should == Settings.sales_pages[:default_benefit1]
+    end
+
+    it "assigns the correct default benefit2" do
+      @sales_page.benefit2.should == Settings.sales_pages[:default_benefit2]
+    end
+
+    it "assigns the correct default benefit3" do
+      @sales_page.benefit3.should == Settings.sales_pages[:default_benefit3]
     end
   end
 end
