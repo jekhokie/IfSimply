@@ -10,13 +10,25 @@
   }
 
   .sales-page-heading {
-    font-size: 60px;
-    margin:    25px auto;
+    font-size:   60px;
+    line-height: 60px;
+    margin:      25px auto;
+
+    input {
+      text-align: center;
+      width:      100%;
+    }
   }
 
   .sales-page-sub-heading {
-    font-size: 36px;
-    margin:    25px auto;
+    font-size:   36px;
+    line-height: 36px;
+    margin:      25px auto;
+
+    input {
+      text-align: center;
+      width:      100%;
+    }
   }
 
   .capture-content {
@@ -44,6 +56,10 @@
         font-size:   46px;
         line-height: 46px;
         margin:      25px auto;
+
+        input {
+          width: 100%;
+        }
       }
 
       .club-buy-cost {
@@ -118,6 +134,10 @@
 
       ul li {
         line-height: 40px;
+
+        input {
+          width: 95%;
+        }
       }
     }
   }
