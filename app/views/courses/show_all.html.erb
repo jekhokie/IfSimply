@@ -1,0 +1,52 @@
+<div class="course-list-information">
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
+
+  <div class="course-controls">
+    <%- if can? :update, @club %>
+      <div class="add-course">
+        <a href="<%= club_courses_path(@club) %>" data-method="post" class="btn add-course-link">Add Course</a>
+      </div>
+    <%- end %>
+  </div>
+
+  <div class="club-courses-list row-fluid">
+    <%- if @courses.blank? %>
+      <h2>No Courses Yet
+        <%- if can? :update, @club %>
+          - <a href="<%= club_courses_path(@club) %>" data-method="post" class="create-first-course-link">Create your First!</a>
+        <%- end %>
+      </h2>
+    <%- else %>
+      <%- @courses.each_with_index do |course, i| %>
+        <%- if i > 0 %>
+          <hr />
+        <%- end %>
+
+        <div class="club-course">
+          <div class="course-logo">
+          </div>
+
+          <div class="course-title-description">
+            <div class="course-title">
+              <%= link_to trim_length(course.title, 65), edit_course_path(course) %>
+            </div>
+
+            <div class="course-description">
+              <%= trim_length course.description, 400 %>
+            </div>
+          </div>
+        </div>
+      <%- end %>
+    <%- end %>
+  </div>
+
+  <%- unless @courses.blank? %>
+    <div class="course-controls">
+      <%- if can? :update, @club %>
+        <div class="add-course">
+          <a href="<%= club_courses_path(@club) %>" data-method="post" class="btn add-course-link">Add Course</a>
+        </div>
+      <%- end %>
+    </div>
+  <%- end %>
+</div>
