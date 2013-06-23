@@ -53,8 +53,18 @@ describe DiscussionBoard do
       FactoryGirl.create :topic, :discussion_board_id => @discussion_board.id
     end
 
-    it "should be destroyed when the discussion_board is destroyed" do
+    it "is destroyed when the discussion_board is destroyed" do
       expect { @discussion_board.destroy }.to change(Topic, :count).by(-1)
+    end
+  end
+
+  describe "posts" do
+    let(:discussion_board) { FactoryGirl.create :discussion_board }
+    let(:topic)            { FactoryGirl.create :topic, :discussion_board => discussion_board }
+    let(:post)             { FactoryGirl.create :post, :topic => topic }
+
+    it "returns corresponding topics' posts" do
+      discussion_board.posts.should include(post)
     end
   end
 end
