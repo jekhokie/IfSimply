@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :get_club, :only => [ :show_all ]
   before_filter :get_course, :only => [ :edit, :update ]
 
   def create
@@ -28,7 +29,15 @@ class CoursesController < ApplicationController
     respond_with_bip @course
   end
 
+  def show_all
+    @courses = @club.courses
+  end
+
   private
+
+  def get_club
+    @club = Club.find params[:club_id]
+  end
 
   def get_course
     @course = Course.find params[:id]

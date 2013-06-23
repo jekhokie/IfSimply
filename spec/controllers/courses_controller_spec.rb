@@ -107,4 +107,24 @@ describe CoursesController do
       end
     end
   end
+
+  describe "GET 'show_all'" do
+    let(:course) { FactoryGirl.create :course, :club => user.clubs.first }
+
+    before :each do
+      get 'show_all', :club_id => course.club.id
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "assigns club" do
+      assigns(:club).should == user.clubs.first
+    end
+
+    it "assigns courses" do
+      assigns(:courses).should include(course)
+    end
+  end
 end
