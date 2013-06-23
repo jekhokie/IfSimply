@@ -4,6 +4,8 @@ describe Course do
   it { should belong_to :club }
   it { should have_many :lessons }
 
+  it { should have_attached_file :image }
+
   it "can be instantiated" do
     Course.new.should be_an_instance_of(Course)
   end
@@ -23,6 +25,11 @@ describe Course do
     it "returns false when missing a club_id" do
       FactoryGirl.build(:course, :club_id => nil).should_not be_valid
     end
+
+    # logo
+    it { should validate_attachment_content_type(:logo)
+           .allowing('image/jpeg', 'image/png', 'image/gif')
+           .rejecting('text/plain') }
   end
 
   describe "assign_defaults" do
