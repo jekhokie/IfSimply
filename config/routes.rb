@@ -34,6 +34,11 @@ Ifsimply::Application.routes.draw do
   resources :sales_pages, :only => [ :edit, :update ]
 
   resources :courses, :only => [ :edit, :update ] do
+    member do
+      # handle image updates
+      match '/change_logo' => 'courses#change_logo', :as => :change_logo_for
+    end
+
     resources :lessons, :only => [ :create, :update ]
   end
 
