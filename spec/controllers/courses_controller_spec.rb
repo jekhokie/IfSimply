@@ -108,6 +108,25 @@ describe CoursesController do
     end
   end
 
+  describe "GET 'change_logo'" do
+    let(:course) { FactoryGirl.create :course, :club => user.clubs.first }
+
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
+      put 'change_logo', :id => course.id, :format => :js
+    end
+
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "returns the course" do
+      assigns(:course).should == course
+    end
+  end
+
   describe "GET 'show_all'" do
     let(:course) { FactoryGirl.create :course, :club => user.clubs.first }
 
