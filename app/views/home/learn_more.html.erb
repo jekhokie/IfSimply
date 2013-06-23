@@ -62,8 +62,8 @@
 
     <div class="sign-up-how-it-works">
       <div class="sign-up">
-        <a type="button" class="btn btn-large btn-warning submit-sign-up" href="#">
-          <span class="btn-text">Start A Club Now</span>
+        <a type="button" class="btn btn-large btn-warning submit-sign-up" href="<%= user_signed_in? ? edit_club_path(current_user.clubs.first) : new_user_registration_path %>">
+          <span class="btn-text"><%= user_signed_in? ? "My Club" : "Start A Club Now" %></span>
         </a>
       </div>
 
