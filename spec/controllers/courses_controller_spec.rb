@@ -127,6 +127,61 @@ describe CoursesController do
     end
   end
 
+  describe "PUT 'upload_logo'" do
+    let(:course)       { FactoryGirl.create :course, :club => user.clubs.first }
+    let(:valid_logo)   { fixture_file_upload('/soccer_ball.jpg', 'image/jpeg') }
+    let(:invalid_logo) { fixture_file_upload('/soccer_ball.txt', 'text/plain') }
+
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+    end
+
+    describe "for a valid image format" do
+      before :each do
+        put 'upload_logo', :id => course.id, :course => { :logo => valid_logo }, :format => :js
+      end
+
+      it "returns http redirect" do
+        response.should be_redirect
+      end
+
+      it "redirects to edit course path" do
+        response.should redirect_to edit_course_path(course)
+      end
+
+      it "returns the course" do
+        assigns(:course).should == course
+      end
+
+      it "assigns the course logo" do
+        File.basename(assigns(:course).logo.to_s.sub(/\?.*/, '')).should == valid_logo.original_filename
+      end
+    end
+
+    describe "for an invalid image format" do
+      before :each do
+        put 'upload_logo', :id => course.id, :course => { :logo => invalid_logo }, :format => :js
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "renders change_logo" do
+        response.should render_template("courses/change_logo")
+      end
+
+      it "returns the course" do
+        assigns(:course).should == course
+      end
+
+      it "does not assign the course logo" do
+        File.basename(assigns(:course).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
+      end
+    end
+  end
+
   describe "GET 'show_all'" do
     let(:course) { FactoryGirl.create :course, :club => user.clubs.first }
 
