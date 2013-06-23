@@ -45,13 +45,13 @@ describe Blog do
     end
   end
 
-  describe "premium?" do
-    describe "for a premium blog entry" do
-      FactoryGirl.build(:blog, :free => false).premium?.should == true
+  describe "pro?" do
+    describe "for a pro blog entry" do
+      FactoryGirl.build(:blog, :free => false).pro?.should == true
     end
 
     describe "for a free blog entry" do
-      FactoryGirl.build(:blog, :free => true).premium?.should == false
+      FactoryGirl.build(:blog, :free => true).pro?.should == false
     end
   end
 

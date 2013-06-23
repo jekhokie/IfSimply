@@ -17,7 +17,7 @@ class Blog < ActiveRecord::Base
     club.user
   end
 
-  def premium?
+  def pro?
     free == true ? false : true
   end
 

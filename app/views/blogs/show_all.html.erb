@@ -31,8 +31,8 @@
 
           <div class="blog-title-created-content">
             <div class="blog-title">
-              <%- if blog.premium? %>
-                <span class="blog-is-premium">Premium</span>
+              <%- if blog.pro? %>
+                <span class="blog-is-pro">Pro</span>
               <%- end %>
 
               <%= link_to trim_length(blog.title, 65), edit_blog_path(blog) %>
