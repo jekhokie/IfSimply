@@ -1,16 +1,32 @@
 .learn-more-container {
-  .logo-container {
+  .logo-sign-up-container {
     height: 121px;
     margin: 0px auto;
     width:  972px;
 
     .logo.logo-inverse {
+      display: inline-block;
+
       span {
         background: url(logo_200w_121h_inverse.png) no-repeat 0 0;
         display:    inline-table;
         height:     200px;
         margin:     0px auto;
         width:      331px;
+      }
+    }
+
+    .sign-up-club {
+      float:        right;
+      font-size:    18px;
+      font-weight:  bold;
+      margin-right: 45px;
+      margin-top:   53px;
+
+      a {
+        margin-left: 12px;
+        margin-top:  -3px;
+        width:       100px;
       }
     }
   }

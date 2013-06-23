@@ -12,7 +12,13 @@ describe "home/learn_more.html.erb" do
         visit '/'
       end
 
-      it "should display a sign-up button" do
+      it "displays a sign-up header button" do
+        within ".sign-up-club" do
+          page.should have_selector("span", :text => "Sign Up Now!")
+        end
+      end
+
+      it "displays a sign-up main button" do
         within ".submit-sign-up" do
           page.should have_selector("span", :text => "Start A Club Now")
         end
@@ -28,7 +34,13 @@ describe "home/learn_more.html.erb" do
         visit '/'
       end
 
-      it "should display a my club button" do
+      it "displays a my club header button" do
+        within ".sign-up-club" do
+          page.should have_selector("span", :text => "My Club")
+        end
+      end
+
+      it "displays a my club main button" do
         within ".submit-sign-up" do
           page.should have_selector("span", :text => "My Club")
         end

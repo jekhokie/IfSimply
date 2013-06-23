@@ -1,8 +1,21 @@
 <%= content_for :home_container do %>
   <div class="learn-more-container">
-    <div class="logo-container">
+    <div class="logo-sign-up-container">
       <div class="logo logo-inverse">
         <span></span>
+      </div>
+
+      <div class="sign-up-club">
+        <%- if user_signed_in? %>
+          <a type="button" class="btn btn-primary myclub-button" href="<%= edit_club_path current_user.clubs.first %>">
+            <span class="btn-text">My Club</span>
+          </a>
+        <%- else %>
+          Not yet a member?
+          <a type="button" class="btn btn-primary learn-more-button" href="<%= new_user_registration_path %>">
+            <span class="btn-text">Sign Up Now!</span>
+          </a>
+        <%- end %>
       </div>
     </div>
 
