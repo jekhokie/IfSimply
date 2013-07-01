@@ -3,6 +3,10 @@ body .container {
   width:      973px;
 }
 
+div {
+  word-wrap: break-word;
+}
+
 .modal {
   .modal-header {
     font-size:   18px;
