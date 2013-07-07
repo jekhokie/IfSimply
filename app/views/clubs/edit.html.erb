@@ -5,7 +5,7 @@
     <%= image_tag "#{@club.logo}" %>
 
     <%- if can? :update, @club %>
-      <a href="<%= change_logo_for_club_path(@club) %>" data-remote="true" class="btn btn-primary upload-logo-button">Change Logo</a>
+      <a href="<%= change_logo_for_club_path(@club) %>" data-remote="true" class="btn btn-primary upload-logo-button">Change Image</a>
     <%- end %>
   </div>
 
