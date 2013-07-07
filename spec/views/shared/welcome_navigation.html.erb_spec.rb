@@ -17,7 +17,7 @@ describe "home/learn_more.html.erb" do
 
       it "displays welcome with the user's first name" do
         within ".welcome-navigation .welcome-container" do
-          page.should have_selector("span.welcome-text", :text => "Welcome, John!")
+          page.should have_selector("span.welcome-text", :text => "Hi, John!")
         end
       end
     end
@@ -34,7 +34,7 @@ describe "home/learn_more.html.erb" do
 
       it "displays welcome with the user's first name" do
         within ".welcome-navigation .welcome-container" do
-          page.should have_selector("span.welcome-text", :text => "Welcome, John!")
+          page.should have_selector("span.welcome-text", :text => "Hi, John!")
         end
       end
     end
@@ -51,7 +51,7 @@ describe "home/learn_more.html.erb" do
 
       it "displays welcome with the user's first name" do
         within ".welcome-navigation .welcome-container" do
-          page.should have_selector("span.welcome-text", :text => "Welcome, John!")
+          page.should have_selector("span.welcome-text", :text => "Hi, John!")
         end
       end
     end
