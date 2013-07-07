@@ -10,7 +10,7 @@
   default_logo:        iS_club_thumb.jpg
 :lessons:
   default_title:      Lesson Title Here
-  default_background: Lesson background here
+  default_background: Add a Lesson Description (Required). Click here to edit this text.
   default_free:       false
 :blogs:
   default_title:   Blog Title Here
