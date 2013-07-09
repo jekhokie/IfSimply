@@ -30,7 +30,10 @@
       </div>
 
       <div class="club-buy-cost">
-        <div class="club-cost"><%= currency_symbol -%><%= humanized_money club.price -%>/mo</div>
+        <div class="club-cost"><%= currency_symbol -%><%= best_in_place_if can?(:update, club), club, :price, :type => :input,
+          :display_with => :humanized_money,
+                                                                                                              :path => club_path(club),
+                                                                                                              :html_attrs => { :rows => '1' } -%>/mo</div>
         <div class="club-buy"><%= button_to "Subscribe", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%></div>
       </div>
     </div>

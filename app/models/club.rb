@@ -1,5 +1,5 @@
 class Club < ActiveRecord::Base
-  attr_accessible :name, :description, :price_cents, :logo
+  attr_accessible :name, :description, :price_cents, :logo, :price
 
   after_create :create_discussion_board, :create_sales_page
 
