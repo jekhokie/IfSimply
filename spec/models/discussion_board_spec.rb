@@ -39,11 +39,11 @@ describe DiscussionBoard do
     end
 
     it "assigns the correct default name" do
-      @discussion_board.name.should == Settings.blogs[:default_name]
+      @discussion_board.name.should == Settings.discussion_boards[:default_name]
     end
 
     it "assigns the correct default description" do
-      @discussion_board.description.should == Settings.blogs[:default_descripton]
+      @discussion_board.description.should == Settings.discussion_boards[:default_description]
     end
   end
 

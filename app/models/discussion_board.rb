@@ -14,7 +14,7 @@ class DiscussionBoard < ActiveRecord::Base
   end
 
   def assign_defaults
-    self.name        = Settings.blogs[:default_name]
-    self.description = Settings.blogs[:default_description]
+    self.name        = Settings.discussion_boards[:default_name]
+    self.description = Settings.discussion_boards[:default_description]
   end
 end
