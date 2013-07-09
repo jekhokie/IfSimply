@@ -1,6 +1,8 @@
 <div class="welcome-navigation row-fluid">
   <div class="welcome-container span5">
-    <span class="welcome-text">Hi, <%= current_user.name.split(' ').first %>!</span>
+    <%- if user_signed_in? %>
+      <span class="welcome-text">Hi, <%= current_user.name.split(' ').first %>!</span>
+    <%- end %>
   </div>
 
   <div class="user-navigation-container span7">
