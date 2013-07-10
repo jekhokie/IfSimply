@@ -9,6 +9,7 @@ class Club < ActiveRecord::Base
   monetize :price_cents
 
   validates :name,        :presence => { :message => "for club can't be blank" }
+  validate  :name_length
   validates :description, :presence => { :message => "for club can't be blank" }
   validates :price_cents, :presence => true
   validates :user_id,     :presence => true
@@ -47,5 +48,11 @@ class Club < ActiveRecord::Base
     sales_page.club = self
     sales_page.assign_defaults
     sales_page.save :validate => false
+  end
+
+  def name_length
+    unless name.blank?
+      errors.add(:base, "Name length too long - must be #{Settings.clubs[:name_length]} characters or less") unless self.name.length <= 20
+    end
   end
 end

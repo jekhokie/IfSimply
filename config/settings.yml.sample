@@ -4,6 +4,7 @@
   default_logo:        iS_club_thumb.jpg
   default_price_cents: 1000
   min_price_cents:     1000
+  name_length:         20
 :courses:
   default_title:       Course Title Here
   default_description: Course description here

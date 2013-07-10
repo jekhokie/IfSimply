@@ -51,6 +51,10 @@ describe Club do
       FactoryGirl.build(:club, :name => "").should_not be_valid
     end
 
+    it "returns false when name is greater than 20 characters" do
+      FactoryGirl.build(:club, :name => "Something Greater than 20 Characters").should_not be_valid
+    end
+
     # description
     it "returns false when no description is specified" do
       FactoryGirl.build(:club, :description => "").should_not be_valid
