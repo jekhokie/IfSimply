@@ -9,7 +9,7 @@
       <div class="existing-file-image span5">
         Current File
 
-        <img src="<%= model_instance.send(attribute_name) %>" alt="Current Image Cannot be Displayed"></img>
+        <%= image_tag f.object.reload.send(attribute_name) %>
       </div>
 
       <div class="new-file-select span7">
