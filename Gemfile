@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'money-rails'
 gem 'rails', '3.2.8'
 gem 'rails_config'
+gem 'remotipart'
 gem 'redcarpet'
 gem 'sqlite3'
 

@@ -1,20 +1,24 @@
 <div class="file-upload" data-<%= model_name %>-id="<%= model_instance.id %>">
   <%= form_for model_instance, :url    => update_route,
+                               :remote => true,
                                :method => "put",
+                               :builder => ErrorMessagesFormBuilder,
                                :html   => { :class     => "file-upload",
                                             :id        => "#{model_name}-#{attribute_name}",
-                                            :multipart => true } do |form| %>
+                                            :multipart => true } do |f| %>
     <div class="file-info row-fluid">
+      <%= f.error_messages %>
+
       <div class="existing-file-image span5">
         Current File
 
-        <img src="<%= model_instance.send(attribute_name) %>" alt="Current Image Cannot be Displayed"></img>
+        <%= image_tag f.object.reload.send(attribute_name) %>
       </div>
 
       <div class="new-file-select span7">
         <label class="btn file-upload-label">
           Upload New File...
-          <%= form.file_field attribute_name.to_sym %>
+          <%= f.file_field attribute_name.to_sym %>
         </label>
 
         <div class="selected-file-preview"></div>

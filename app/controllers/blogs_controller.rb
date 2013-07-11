@@ -39,8 +39,11 @@ class BlogsController < ApplicationController
   def upload_image
     authorize! :update, @blog
 
-    if @blog.update_attributes params[:blog]
-      redirect_to edit_blog_path(@blog)
+    # if no blog image was specified
+    if params[:blog].blank?
+      render :change_image, :formats => [ :js ]
+    elsif @blog.update_attributes params[:blog]
+      render
     else
       render :change_image, :formats => [ :js ]
     end

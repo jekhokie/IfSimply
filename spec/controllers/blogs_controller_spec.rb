@@ -142,12 +142,12 @@ describe BlogsController do
         put 'upload_image', :id => blog.id, :blog => { :image => valid_image }, :format => :js
       end
 
-      it "returns http redirect" do
-        response.should be_redirect
+      it "returns http success" do
+        response.should be_success
       end
 
-      it "redirects to edit blog path" do
-        response.should redirect_to edit_blog_path(blog)
+      it "renders the upload_image template" do
+        response.should render_template('blogs/upload_image')
       end
 
       it "returns the blog" do
@@ -162,6 +162,28 @@ describe BlogsController do
     describe "for an invalid image format" do
       before :each do
         put 'upload_image', :id => blog.id, :blog => { :image => invalid_image }, :format => :js
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "renders change_image" do
+        response.should render_template("blogs/change_image")
+      end
+
+      it "returns the blog" do
+        assigns(:blog).should == blog
+      end
+
+      it "does not assign the blog image" do
+        File.basename(assigns(:blog).image.to_s.sub(/\?.*/, '')).should_not == valid_image.original_filename
+      end
+    end
+
+    describe "for a non-specified image value" do
+      before :each do
+        put 'upload_image', :id => blog.id, :format => :js
       end
 
       it "returns http success" do

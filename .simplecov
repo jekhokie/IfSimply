@@ -5,6 +5,7 @@ SimpleCov.start 'rails' do
   add_filter "/vendor/"
   add_filter "/lib/development_mail_interceptor.rb"
   add_filter "Rakefile"
+  add_filter "/app/helpers/error_messages_form_builder.rb"
 
   add_group "Models",      "app/models"
   add_group "Views",       "app/views"

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require jquery.livequery.min
 //= require best_in_place.purr
 //= require best_in_place
