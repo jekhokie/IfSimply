@@ -14,6 +14,10 @@
       <%= best_in_place_if can?(:update, @club), @club, :name, :type => :input, :html_attrs => { :rows => '1' } %>
     </div>
 
+    <div class="club-sub-heading">
+      <%= best_in_place_if can?(:update, @club), @club, :sub_heading, :type => :input, :html_attrs => { :rows => '1' } %>
+    </div>
+
     <div class="club-description">
       <%= best_in_place_if can?(:update, @club), @club, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
     </div>

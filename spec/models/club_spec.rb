@@ -22,6 +22,10 @@ describe Club do
       club.name.should == Settings.clubs[:default_name]
     end
 
+    it "assigns the default sub_heading" do
+      club.sub_heading.should == Settings.clubs[:default_sub_heading]
+    end
+
     it "assigns the default description" do
       club.description.should == Settings.clubs[:default_description]
     end
@@ -49,6 +53,19 @@ describe Club do
     # name
     it "returns false when no name is specified" do
       FactoryGirl.build(:club, :name => "").should_not be_valid
+    end
+
+    it "returns false when name is greater than max characters" do
+      FactoryGirl.build(:club, :name => Faker::Lorem.characters(Settings.clubs[:name_max_length] + 1)).should_not be_valid
+    end
+
+    # sub_heading
+    it "returns false when no sub_heading is specified" do
+      FactoryGirl.build(:club, :sub_heading => "").should_not be_valid
+    end
+
+    it "returns false when sub_heading is greater than max characters" do
+      FactoryGirl.build(:club, :sub_heading => Faker::Lorem.characters(Settings.clubs[:sub_heading_max_length] + 1)).should_not be_valid
     end
 
     # description
