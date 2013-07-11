@@ -5,7 +5,7 @@
   default_logo:           iS_club_thumb.jpg
   default_price_cents:    1000
   min_price_cents:        1000
-  name_max_length:        20
+  name_max_length:        25
   sub_heading_max_length: 45
 :courses:
   default_title:       Course Title Here
