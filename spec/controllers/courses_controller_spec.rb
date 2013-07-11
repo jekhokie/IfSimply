@@ -142,12 +142,12 @@ describe CoursesController do
         put 'upload_logo', :id => course.id, :course => { :logo => valid_logo }, :format => :js
       end
 
-      it "returns http redirect" do
-        response.should be_redirect
+      it "returns http success" do
+        response.should be_success
       end
 
-      it "redirects to edit course path" do
-        response.should redirect_to edit_course_path(course)
+      it "renders the upload_logo template" do
+        response.should render_template('courses/upload_logo')
       end
 
       it "returns the course" do
@@ -162,6 +162,28 @@ describe CoursesController do
     describe "for an invalid image format" do
       before :each do
         put 'upload_logo', :id => course.id, :course => { :logo => invalid_logo }, :format => :js
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "renders change_logo" do
+        response.should render_template("courses/change_logo")
+      end
+
+      it "returns the course" do
+        assigns(:course).should == course
+      end
+
+      it "does not assign the course logo" do
+        File.basename(assigns(:course).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
+      end
+    end
+
+    describe "for a non-specified logo value" do
+      before :each do
+        put 'upload_logo', :id => course.id, :format => :js
       end
 
       it "returns http success" do

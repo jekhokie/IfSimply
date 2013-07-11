@@ -143,12 +143,12 @@ describe ClubsController do
         put 'upload_logo', :id => club.id, :club => { :logo => valid_logo }, :format => :js
       end
 
-      it "returns http redirect" do
-        response.should be_redirect
+      it "returns http success" do
+        response.should be_success
       end
 
-      it "redirects to edit club path" do
-        response.should redirect_to edit_club_path(club)
+      it "renders the upload_logo template" do
+        response.should render_template('clubs/upload_logo')
       end
 
       it "returns the club" do
@@ -178,6 +178,28 @@ describe ClubsController do
       end
 
       it "does not assign the club logo" do
+        File.basename(assigns(:club).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
+      end
+    end
+
+    describe "for a non-specified logo value" do
+      before :each do
+        put 'upload_logo', :id => club.id, :format => :js
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "renders change_logo" do
+        response.should render_template("clubs/change_logo")
+      end
+
+      it "returns the course" do
+        assigns(:club).should == club
+      end
+
+      it "does not assign the course logo" do
         File.basename(assigns(:club).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
       end
     end
