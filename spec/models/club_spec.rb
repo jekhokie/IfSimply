@@ -56,7 +56,7 @@ describe Club do
     end
 
     it "returns false when name is greater than max characters" do
-      FactoryGirl.build(:club, :name => "Something Greater than max Characters").should_not be_valid
+      FactoryGirl.build(:club, :name => Faker::Lorem.characters(Settings.clubs[:name_max_length] + 1)).should_not be_valid
     end
 
     # sub_heading
@@ -64,8 +64,8 @@ describe Club do
       FactoryGirl.build(:club, :sub_heading => "").should_not be_valid
     end
 
-    it "returns false when name is greater than max characters" do
-      FactoryGirl.build(:club, :sub_heading => "Something Greater than max Characters").should_not be_valid
+    it "returns false when sub_heading is greater than max characters" do
+      FactoryGirl.build(:club, :sub_heading => Faker::Lorem.characters(Settings.clubs[:sub_heading_max_length] + 1)).should_not be_valid
     end
 
     # description
