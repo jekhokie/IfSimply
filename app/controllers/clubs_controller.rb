@@ -21,8 +21,11 @@ class ClubsController < ApplicationController
   def upload_logo
     authorize! :update, @club
 
-    if @club.update_attributes params[:club]
-      redirect_to edit_club_path(@club)
+    # if no club logo was specified
+    if params[:club].blank?
+      render :change_logo, :formats => [ :js ]
+    elsif @club.update_attributes params[:club]
+      render
     else
       render :change_logo, :formats => [ :js ]
     end

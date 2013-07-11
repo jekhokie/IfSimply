@@ -36,8 +36,11 @@ class CoursesController < ApplicationController
   def upload_logo
     authorize! :update, @course
 
-    if @course.update_attributes params[:course]
-      redirect_to edit_course_path(@course)
+    # if no course logo was specified
+    if params[:course].blank?
+      render :change_logo, :formats => [ :js ]
+    elsif @course.update_attributes params[:course]
+      render
     else
       render :change_logo, :formats => [ :js ]
     end
