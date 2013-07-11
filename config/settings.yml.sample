@@ -1,10 +1,12 @@
 :clubs:
-  default_name:        Your Club Name Here
-  default_description: Your club description here
-  default_logo:        iS_club_thumb.jpg
-  default_price_cents: 1000
-  min_price_cents:     1000
-  name_length:         20
+  default_name:           "Your Club Name Here:"
+  default_sub_heading:    Club sub heading here
+  default_description:    Your club description here
+  default_logo:           iS_club_thumb.jpg
+  default_price_cents:    1000
+  min_price_cents:        1000
+  name_max_length:        20
+  sub_heading_max_length: 25
 :courses:
   default_title:       Course Title Here
   default_description: Course description here
