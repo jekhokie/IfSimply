@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623165315) do
+ActiveRecord::Schema.define(:version => 20130710001215) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -32,15 +32,16 @@ ActiveRecord::Schema.define(:version => 20130623165315) do
     t.string   "name"
     t.string   "description"
     t.string   "logo"
-    t.integer  "price_cents",       :default => 0,     :null => false
-    t.string   "price_currency",    :default => "USD", :null => false
+    t.integer  "price_cents",       :default => 0,                       :null => false
+    t.string   "price_currency",    :default => "USD",                   :null => false
     t.integer  "user_id"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "sub_heading",       :default => "Club sub heading here"
   end
 
   add_index "clubs", ["user_id"], :name => "index_clubs_on_user_id"
