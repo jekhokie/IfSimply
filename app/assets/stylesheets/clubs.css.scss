@@ -38,15 +38,27 @@
     .club-name {
       font-size:   50px;
       font-weight: bold;
-      height:      55px;
+      height:      45px;
       line-height: 35px;
-      text-align:  center;
       width:       100%;
 
       input {
-        text-align: center;
-        max-width:  620px;
-        width:      100%;
+        max-width: 620px;
+        width:     100%;
+      }
+    }
+
+    .club-sub-heading {
+      font-size:   30px;
+      font-style:  italic;
+      font-weight: bold;
+      height:      50px;
+      line-height: 35px;
+      width:       100%;
+
+      input {
+        max-width: 620px;
+        width:     100%;
       }
     }
 
