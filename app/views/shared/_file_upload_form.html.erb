@@ -2,10 +2,13 @@
   <%= form_for model_instance, :url    => update_route,
                                :remote => true,
                                :method => "put",
+                               :builder => ErrorMessagesFormBuilder,
                                :html   => { :class     => "file-upload",
                                             :id        => "#{model_name}-#{attribute_name}",
                                             :multipart => true } do |f| %>
     <div class="file-info row-fluid">
+      <%= f.error_messages %>
+
       <div class="existing-file-image span5">
         Current File
 
