@@ -3,7 +3,7 @@
 
   <div class="course-logo-title-description row-fluid">
     <div class="course-logo span4">
-      <%= image_tag "#{course.logo}" %>
+      <%= image_tag "#{course.logo.url(:medium)}" %>
 
       <%- if can? :update, course %>
         <a href="<%= change_logo_for_course_path(course) %>" data-remote="true" class="btn btn-primary upload-logo-button">Change Logo</a>

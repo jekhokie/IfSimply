@@ -16,7 +16,7 @@ class Club < ActiveRecord::Base
   validates :price_cents, :presence => true
   validates :user_id,     :presence => true
 
-  validates_attachment_content_type :logo, :content_type => [ 'image/jpg', 'image/jpeg', 'image/gif', 'image/png', 'image/tiff' ]
+  validates_attachment_content_type :logo, :content_type => [ 'image/jpeg', 'image/gif', 'image/png', 'image/tiff' ]
 
   validates_numericality_of :price_cents, :greater_than_or_equal_to => Settings.clubs[:min_price_cents],
                                           :message                  => "must be at least $#{Settings.clubs[:min_price_cents]/100}"

@@ -3,7 +3,7 @@
 
   <div class="blog-container row-fluid">
     <div class="blog-image span3">
-      <%= image_tag "#{@blog.image}" %>
+      <%= image_tag "#{@blog.image.url(:medium)}" %>
 
       <%- if can? :update, @blog %>
         <a href="<%= change_image_for_blog_path(@blog) %>" data-remote="true" class="btn btn-primary upload-image-button">Change Image</a>

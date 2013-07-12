@@ -1,4 +1,8 @@
 <div class="file-upload" data-<%= model_name %>-id="<%= model_instance.id %>">
+  <div class="recommended-size">
+    Recommended size of image: <%= image_size %>
+  </div>
+
   <%= form_for model_instance, :url    => update_route,
                                :remote => true,
                                :method => "put",

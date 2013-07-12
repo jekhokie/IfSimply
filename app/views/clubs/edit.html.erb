@@ -2,7 +2,7 @@
 
 <div class="club-avatar-name-description row-fluid">
   <div class="club-avatar span4">
-    <%= image_tag "#{@club.logo}" %>
+    <%= image_tag "#{@club.logo.url(:medium)}" %>
 
     <%- if can? :update, @club %>
       <a href="<%= change_logo_for_club_path(@club) %>" data-remote="true" class="btn btn-primary upload-logo-button">Change Image</a>
@@ -84,7 +84,7 @@
             <div class="blog-info">
               <div class="blog-image">
                 <a class="blog-image-link" href="<%= edit_blog_path(blog) %>">
-                  <%= image_tag "#{blog.image}", :class => 'blog-image' %>
+                  <%= image_tag "#{blog.image.url(:thumb)}", :class => 'blog-image' %>
                 </a>
               </div>
 

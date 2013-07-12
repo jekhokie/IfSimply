@@ -161,6 +161,14 @@
         .course-logo {
           height: 185px;
           width:  274px;
+
+          .course-logo-container {
+            float:    left;
+            height:   185px;
+            margin:   0px auto;
+            overflow: hidden;
+            width:    275px;
+          }
         }
 
         .course-title {

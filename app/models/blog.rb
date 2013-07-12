@@ -3,7 +3,7 @@ class Blog < ActiveRecord::Base
 
   default_scope order('created_at ASC')
 
-  has_attached_file :image, :styles     => { :medium => "256x256>" },
+  has_attached_file :image, :styles     => { :medium => "215x185>", :thumb => "128x128" },
                             :default_url => Settings.clubs[:default_logo]
 
   validates :title,   :presence => { :message => "for blog can't be blank" }

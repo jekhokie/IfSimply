@@ -1,9 +1,11 @@
 <%- courses.each_with_index do |course, i| %>
   <div class="course <%= 'course-first' if i == 0 %>">
     <div class="course-logo">
-      <a class="course-image-link" href="<%= edit_course_path(course) %>">
-        <%= image_tag "#{course.logo}", :class => 'course-image' %>
-      </a>
+      <div class="course-logo-container">
+        <a class="course-image-link" href="<%= edit_course_path(course) %>">
+          <%= image_tag "#{course.logo.url(:medium)}", :class => 'course-image' %>
+        </a>
+      </div>
     </div>
 
     <div class="course-title">

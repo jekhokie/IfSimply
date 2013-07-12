@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
   attr_accessible :description, :logo, :title
 
-  has_attached_file :logo, :styles      => { :medium => "256x256>", :thumb => "100x100>" },
+  has_attached_file :logo, :styles      => { :medium => "275x185>" },
                            :default_url => Settings.courses[:default_logo]
 
   validates :title,       :presence => { :message => "for course can't be blank" }
