@@ -6,8 +6,15 @@
   </div>
 
   <div class="user-navigation-container span7">
-    <a href="<%= edit_club_path(club) %>"
-       class="club-link <%= 'selected' if controller_name == 'clubs' %>">Club Home</a>
+    <%- if user_signed_in? %>
+      <a href="<%= edit_club_path(club) %>"
+         class="user-club-link <%= 'selected' if controller_name == 'clubs' and club == current_user.clubs.first %>">My Club</a>
+    <%- end %>
+
+    <%- if !user_signed_in? or (user_signed_in? and current_user.clubs.first != club) %>
+      <a href="<%= edit_club_path(club) %>"
+         class="club-link <%= 'selected' if controller_name == 'clubs' %>">Club Home</a>
+    <%- end %>
 
     <a href="<%= show_all_club_courses_path(club) %>"
        class="courses-link <%= 'selected' if controller_name == 'courses' %>">Courses</a>
