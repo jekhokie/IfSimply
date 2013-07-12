@@ -71,6 +71,14 @@
           display:     inline-block;
           font-size:   52px;
           font-weight: bold;
+
+          .club-cost-edit {
+            display: inline-block;
+          }
+
+          input {
+            width: 50px;
+          }
         }
 
         .club-buy {
