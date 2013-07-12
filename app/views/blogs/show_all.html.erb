@@ -4,7 +4,7 @@
   <div class="blog-controls">
     <%- if can? :update, @club %>
       <div class="add-blog-post">
-        <a href="<%= club_blogs_path(@club) %>" data-method="post" class="btn add-blog-post-link">Post</a>
+        <a href="<%= club_blogs_path(@club) %>" data-method="post" class="add-blog-post-link">Add Post</a>
       </div>
     <%- end %>
   </div>
@@ -55,7 +55,7 @@
     <div class="blog-controls">
       <%- if can? :update, @club %>
         <div class="add-blog-post">
-          <a href="<%= club_blogs_path(@club) %>" data-method="post" class="btn add-blog-post-link">Post</a>
+          <a href="<%= club_blogs_path(@club) %>" data-method="post" class="add-blog-post-link">Add Post</a>
         </div>
       <%- end %>
     </div>
