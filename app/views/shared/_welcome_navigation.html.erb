@@ -1,27 +1,27 @@
 <div class="welcome-navigation row-fluid">
   <div class="welcome-container span5">
-    <%- if user_signed_in? %>
-      <span class="welcome-text">Hi, <%= current_user.name.split(' ').first %>!</span>
-    <%- end %>
+    <span class="welcome-text">Hi, <%= user_signed_in? ? current_user.name.split(' ').first : "Guest" %>!</span>
   </div>
 
   <div class="user-navigation-container span7">
-    <a href="<%= can?(:update, club) ? edit_club_path(club) : club_path(club) %>"
-       class="club-link <%= 'selected' if controller_name == 'clubs' %>">Club Home</a>
+    <%- unless controller_name == 'sales_pages' %>
+      <a href="<%= can?(:update, club) ? edit_club_path(club) : club_path(club) %>"
+         class="club-link <%= 'selected' if controller_name == 'clubs' %>">Club Home</a>
 
-    <a href="<%= show_all_club_courses_path(club) %>"
-       class="courses-link <%= 'selected' if controller_name == 'courses' %>">Courses</a>
+      <a href="<%= show_all_club_courses_path(club) %>"
+         class="courses-link <%= 'selected' if controller_name == 'courses' %>">Courses</a>
 
-    <a href="<%= show_all_club_blogs_path(club) %>"
-       class="blog-posts-link <%= 'selected' if controller_name == 'blogs'%>">Blog Posts</a>
+      <a href="<%= show_all_club_blogs_path(club) %>"
+         class="blog-posts-link <%= 'selected' if controller_name == 'blogs'%>">Blog Posts</a>
 
-    <a href="<%= edit_discussion_board_path(club.discussion_board) %>"
-       class="discussions-link <%= 'selected' if controller_name == 'discussion_boards' or
-                                                 controller_name == 'topics' %>">Discussions</a>
+      <a href="<%= edit_discussion_board_path(club.discussion_board) %>"
+         class="discussions-link <%= 'selected' if controller_name == 'discussion_boards' or
+                                                   controller_name == 'topics' %>">Discussions</a>
 
-    <%- if current_user == club.user %>
-      <a href="<%= edit_sales_page_path(club.sales_page) %>"
-         class="sales-page-link <%= 'selected' if controller_name == 'sales_pages' %>">Sales Page</a>
+      <%- if user_signed_in? and can?(:update, club) %>
+        <a href="<%= edit_sales_page_path(club.sales_page) %>"
+           class="sales-page-link <%= 'selected' if controller_name == 'sales_pages' %>">Sales Page</a>
+      <%- end %>
     <%- end %>
   </div>
 </div>

@@ -99,8 +99,11 @@ div {
 
   .welcome-container {
     .welcome-text {
+      display:     inline-block;
       font-size:   25px;
       line-height: 34px;
+      text-align:  left;
+      width:       100%;
     }
   }
 
