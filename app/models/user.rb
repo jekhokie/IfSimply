@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   has_many :posts, :conditions => proc { "user_id = #{self.id}" }
 
+  has_many :memberships, :class_name => ClubsUsers
+
   private
 
   def create_club
