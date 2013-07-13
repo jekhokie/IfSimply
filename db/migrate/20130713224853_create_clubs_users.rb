@@ -1,7 +1,7 @@
 class CreateClubsUsers < ActiveRecord::Migration
   def change
     create_table :clubs_users do |t|
-      t.string :type
+      t.string :level
 
       t.references :user, :null => false
       t.references :club, :null => false

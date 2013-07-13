@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20130713224853) do
   add_index "clubs", ["user_id"], :name => "index_clubs_on_user_id"
 
   create_table "clubs_users", :force => true do |t|
-    t.string   "type"
+    t.string   "level"
     t.integer  "user_id",    :null => false
     t.integer  "club_id",    :null => false
     t.datetime "created_at", :null => false
