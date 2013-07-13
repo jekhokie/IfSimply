@@ -11,6 +11,8 @@ describe Club do
 
   it { should have_attached_file :logo }
 
+  it { should have_many :members }
+
   it "can be instantiated" do
     Club.new.should be_an_instance_of(Club)
   end
