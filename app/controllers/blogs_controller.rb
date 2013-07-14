@@ -1,7 +1,11 @@
 class BlogsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_club, :only => [ :create, :show_all ]
-  before_filter :get_blog, :only => [ :edit, :update, :change_image, :upload_image ]
+  before_filter :get_blog, :only => [ :show, :edit, :update, :change_image, :upload_image ]
+
+  def show
+    redirect_to club_sales_page_path(@blog.club) unless user_signed_in? and can?(:read, @blog)
+  end
 
   def create
     @blog = @club.blogs.new
