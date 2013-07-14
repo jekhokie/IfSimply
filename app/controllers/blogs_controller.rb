@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [ :show, :show_all ]
   before_filter :get_club, :only => [ :create, :show_all ]
   before_filter :get_blog, :only => [ :show, :edit, :update, :change_image, :upload_image ]
 
@@ -33,6 +33,8 @@ class BlogsController < ApplicationController
   end
 
   def show_all
+    redirect_to club_sales_page_path(@club) unless user_signed_in? and can?(:read, @club)
+
     @blogs = @club.blogs
   end
 

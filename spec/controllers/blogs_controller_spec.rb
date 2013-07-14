@@ -4,8 +4,6 @@ describe BlogsController do
   let(:user) { FactoryGirl.create :user }
 
   before :each do
-    @request.env["devise.mapping"] = Devise.mappings[:users]
-    sign_in user
   end
 
   describe "GET 'show'" do
@@ -74,6 +72,9 @@ describe BlogsController do
 
   describe "POST 'create'" do
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
       post 'create', :club_id => user.clubs.first.id
     end
 
@@ -107,6 +108,9 @@ describe BlogsController do
     let(:blog) { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
 
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
       get 'edit', :id => blog.id
     end
 
@@ -269,22 +273,61 @@ describe BlogsController do
   end
 
   describe "GET 'show_all'" do
-    let(:blog) { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
+    let(:blog) { FactoryGirl.create :blog, :club => user.clubs.first }
 
-    before :each do
-      get 'show_all', :club_id => blog.club.id
+    describe "for a signed-in user" do
+      describe "for a subscriber" do
+        let!(:subscribed_user) { FactoryGirl.create :user }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => blog.club }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in subscribed_user
+
+          get 'show_all', :club_id => blog.club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the blog show_all view" do
+          response.should render_template("blogs/show_all")
+        end
+
+        it "assigns club" do
+          assigns(:club).should == user.clubs.first
+        end
+
+        it "assigns blogs" do
+          assigns(:blogs).should include(blog)
+        end
+      end
+
+      describe "for a non-subscriber" do
+        let!(:non_subscribed_user) { FactoryGirl.create :user }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in non_subscribed_user
+
+          get 'show_all', :club_id => blog.club.id
+        end
+
+        it "redirects to the sales page" do
+          response.should redirect_to(club_sales_page_path(blog.club))
+        end
+      end
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
+    describe "for a non signed-in user" do
+      before :each do
+        get 'show_all', :club_id => blog.club.id
+      end
 
-    it "assigns club" do
-      assigns(:club).should == user.clubs.first
-    end
-
-    it "assigns blogs" do
-      assigns(:blogs).should include(blog)
+      it "redirects to the sales page" do
+        response.should redirect_to(club_sales_page_path(blog.club))
+      end
     end
   end
 end
