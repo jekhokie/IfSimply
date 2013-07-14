@@ -24,7 +24,7 @@
 
         <div class="blog-post">
           <div class="blog-logo">
-            <a class="blog-image-link" href="<%= edit_blog_path(blog) %>">
+            <a class="blog-image-link" href="<%= can?(:update, @club) ? edit_blog_path(blog) : blog_path(blog) %>">
               <%= image_tag "#{blog.image}", :class => 'blog-image' %>
             </a>
           </div>
@@ -35,7 +35,7 @@
                 <span class="blog-is-pro">Pro</span>
               <%- end %>
 
-              <%= link_to trim_length(blog.title, 65), edit_blog_path(blog) %>
+              <%= link_to trim_length(blog.title, 65), (can?(:update, @club) ? edit_blog_path(blog) : blog_path(blog)) %>
             </div>
 
             <div class="blog-created">
