@@ -1,5 +1,8 @@
 FactoryGirl.define do
-  factory :clubs_user, :class => 'ClubsUsers' do
+  factory :subscription, :class => 'ClubsUsers' do
+    user
+    club
+
     level { [ :basic, :pro ][rand(2)] }
   end
 end
