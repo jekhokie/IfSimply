@@ -135,6 +135,53 @@ describe Ability do
         ability.should_not be_able_to(:update, non_owned_blog)
       end
     end
+
+    context "read" do
+      let(:club) { FactoryGirl.create :club }
+
+      describe "for a subscribed user" do
+        let!(:free_blog) { FactoryGirl.create :blog, :club => club, :free => 'true' }
+        let!(:paid_blog) { FactoryGirl.create :blog, :club => club, :free => 'false' }
+
+        describe "for a pro member" do
+          let!(:pro_user)         { FactoryGirl.create :user }
+          let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => :pro }
+          let!(:pro_ability)      { Ability.new pro_user }
+
+          it "succeeds for a free blog" do
+            pro_ability.should be_able_to(:read, free_blog)
+          end
+
+          it "succeeds for a paid blog" do
+            pro_ability.should be_able_to(:read, paid_blog)
+          end
+        end
+
+        describe "for a basic member" do
+          let!(:basic_user)         { FactoryGirl.create :user }
+          let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => club, :level => :basic }
+          let!(:basic_ability)      { Ability.new basic_user }
+
+          it "succeeds for a free blog" do
+            basic_ability.should be_able_to(:read, free_blog)
+          end
+
+          it "fails for a paid blog" do
+            basic_ability.should_not be_able_to(:read, paid_blog)
+          end
+        end
+      end
+
+      describe "for a non-subscribed user" do
+        let!(:blog)    { FactoryGirl.create :blog }
+        let!(:user)    { FactoryGirl.create :user }
+        let!(:ability) { Ability.new user }
+
+        it "fails" do
+          ability.should_not be_able_to(:read, blog)
+        end
+      end
+    end
   end
 
   describe "DiscussionBoard" do

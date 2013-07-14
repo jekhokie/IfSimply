@@ -35,6 +35,11 @@ class Ability
       club.members.include?(user)
     end
 
+    can :read, Blog do |blog|
+      membership = user.subscriptions.find_by_club_id blog.club.id
+      ! membership.blank? && (blog.free || membership.level.to_s != "basic")
+    end
+
     # global defaults
     can [ :read ], Topic
     can [ :read ], SalesPage
