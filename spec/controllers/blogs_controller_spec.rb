@@ -9,7 +9,7 @@ describe BlogsController do
   end
 
   describe "GET 'show'" do
-    let!(:blog) { FactoryGirl.create :blog }
+    let!(:blog) { FactoryGirl.create :blog, :free => true }
     let!(:club) { blog.club }
 
     describe "for a signed-in user" do
