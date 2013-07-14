@@ -20,6 +20,22 @@ describe Ability do
         ability.should_not be_able_to(:update, non_owned_club)
       end
     end
+
+    context "read" do
+      let!(:subscribed_user)        { FactoryGirl.create :user }
+      let!(:non_subscribed_user)    { FactoryGirl.create :user }
+      let!(:subscription)           { FactoryGirl.create :subscription, :user => subscribed_user, :club => non_owned_club }
+      let!(:subscribed_ability)     { Ability.new subscribed_user }
+      let!(:non_subscribed_ability) { Ability.new non_subscribed_user }
+
+      it "succeeds for a subscribed user" do
+        subscribed_ability.should be_able_to(:read, non_owned_club)
+      end
+
+      it "fails for a non-subscribed user" do
+        non_subscribed_ability.should_not be_able_to(:read, non_owned_club)
+      end
+    end
   end
 
   describe "Course" do
