@@ -6,6 +6,10 @@ class Ability
 
     can :update, Club, :user_id => user.id
 
+    can :read, Club do |club|
+      club.members.include?(user)
+    end
+
     can [ :create, :edit, :update ], Course do |course|
       course.user == user
     end
