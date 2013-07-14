@@ -6,10 +6,6 @@ class Ability
 
     can :update, Club, :user_id => user.id
 
-    can :read, Club do |club|
-      club.members.include?(user)
-    end
-
     can [ :create, :edit, :update ], Course do |course|
       course.user == user
     end
@@ -32,6 +28,11 @@ class Ability
 
     can [ :update ], SalesPage do |sales_page|
       sales_page.user == user
+    end
+
+    # membership-specific capabilities
+    can :read, Club do |club|
+      club.members.include?(user)
     end
 
     # global defaults
