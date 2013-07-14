@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :get_club, :only => [ :show_all ]
+  before_filter :authenticate_user!, :except => [ :show_all ]
+  before_filter :get_club,   :only => [ :show_all ]
   before_filter :get_course, :only => [ :edit, :update, :change_logo, :upload_logo ]
 
   def create
@@ -47,6 +47,8 @@ class CoursesController < ApplicationController
   end
 
   def show_all
+    redirect_to club_sales_page_path(@club) unless user_signed_in? and can?(:read, @club)
+
     @courses = @club.courses
   end
 

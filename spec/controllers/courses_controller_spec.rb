@@ -3,13 +3,11 @@ require 'spec_helper'
 describe CoursesController do
   let(:user) { FactoryGirl.create :user }
 
-  before :each do
-    @request.env["devise.mapping"] = Devise.mappings[:users]
-    sign_in user
-  end
-
   describe "POST 'create'" do
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
       post 'create', :club_id => user.clubs.first.id
     end
 
@@ -43,6 +41,9 @@ describe CoursesController do
     let(:course) { FactoryGirl.create :course, :club_id => user.clubs.first.id }
 
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
       get 'edit', :club_id => course.club.id, :id => course.id
     end
 
@@ -207,20 +208,59 @@ describe CoursesController do
   describe "GET 'show_all'" do
     let(:course) { FactoryGirl.create :course, :club => user.clubs.first }
 
-    before :each do
-      get 'show_all', :club_id => course.club.id
+    describe "for a signed-in user" do
+      describe "for a subscriber" do
+        let!(:subscribed_user) { FactoryGirl.create :user }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in subscribed_user
+
+          get 'show_all', :club_id => course.club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the courses show_all view" do
+          response.should render_template("courses/show_all")
+        end
+
+        it "assigns club" do
+          assigns(:club).should == user.clubs.first
+        end
+
+        it "assigns courses" do
+          assigns(:courses).should include(course)
+        end
+      end
+
+      describe "for a non-subscriber" do
+        let!(:non_subscribed_user) { FactoryGirl.create :user }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in non_subscribed_user
+
+          get 'show_all', :club_id => course.club.id
+        end
+
+        it "redirects to the sales page" do
+          response.should redirect_to(club_sales_page_path(course.club))
+        end
+      end
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
+    describe "for a non signed-in user" do
+      before :each do
+        get 'show_all', :club_id => course.club.id
+      end
 
-    it "assigns club" do
-      assigns(:club).should == user.clubs.first
-    end
-
-    it "assigns courses" do
-      assigns(:courses).should include(course)
+      it "redirects to the sales page" do
+        response.should redirect_to(club_sales_page_path(course.club))
+      end
     end
   end
 end
