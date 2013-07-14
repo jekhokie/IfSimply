@@ -44,10 +44,16 @@
       <tr class="subscription-type">
         <td class="meta">Subscribe</td>
         <td class="basic-number">
-          <%= button_to "Basic", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%>
+          <%= form_tag add_member_to_club_path(@club) do %>
+            <%= hidden_field_tag :level, 'basic' %>
+            <%= submit_tag "Basic", :class => 'btn btn-primary btn-large' %>
+          <%- end %>
         </td>
         <td class="pro-number">
-          <%= button_to "Pro", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%>
+          <%= form_tag add_member_to_club_path(@club) do %>
+            <%= hidden_field_tag :level, 'pro' %>
+            <%= submit_tag "Pro", :class => 'btn btn-primary btn-large' %>
+          <%- end %>
         </td>
       </tr>
     </tbody>
