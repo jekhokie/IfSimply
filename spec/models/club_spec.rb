@@ -11,7 +11,7 @@ describe Club do
 
   it { should have_attached_file :logo }
 
-  it { should have_many :members }
+  it { should have_many :subscriptions }
 
   it { should have_many(:lessons).through(:courses) }
 
@@ -142,6 +142,16 @@ describe Club do
 
     it "should be destroyed when the club is destroyed" do
       expect { @club.destroy }.to change(SalesPage, :count).by(-1)
+    end
+  end
+
+  describe "members" do
+    let!(:club)         { FactoryGirl.create :club }
+    let!(:subscriber)   { FactoryGirl.create :user }
+    let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => subscriber }
+
+    it "should report the list of subscribers" do
+      club.members.should include(subscriber)
     end
   end
 end

@@ -23,15 +23,20 @@ class Club < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :courses, :dependent  => :destroy
-  has_many :blogs,   :dependent  => :destroy
-  has_many :topics,  :through    => :discussion_board
-  has_many :members, :class_name => ClubsUsers
+  has_many :courses, :dependent => :destroy
+  has_many :blogs,   :dependent => :destroy
+  has_many :topics,  :through   => :discussion_board
+
+  has_many :subscriptions, :class_name => ClubsUsers
 
   has_one :discussion_board, :dependent => :destroy
   has_one :sales_page,       :dependent => :destroy
 
   has_many :lessons, :through => :courses
+
+  def members
+    User.find subscriptions.map(&:user_id)
+  end
 
   def assign_defaults
     self.name        = Settings.clubs[:default_name]
