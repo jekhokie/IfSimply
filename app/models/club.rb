@@ -31,6 +31,8 @@ class Club < ActiveRecord::Base
   has_one :discussion_board, :dependent => :destroy
   has_one :sales_page,       :dependent => :destroy
 
+  has_many :lessons, :through => :courses
+
   def assign_defaults
     self.name        = Settings.clubs[:default_name]
     self.sub_heading = Settings.clubs[:default_sub_heading]

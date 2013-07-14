@@ -13,6 +13,8 @@ describe Club do
 
   it { should have_many :members }
 
+  it { should have_many(:lessons).through(:courses) }
+
   it "can be instantiated" do
     Club.new.should be_an_instance_of(Club)
   end
