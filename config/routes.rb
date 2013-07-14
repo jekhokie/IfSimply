@@ -46,7 +46,7 @@ Ifsimply::Application.routes.draw do
     resources :lessons, :only => [ :create, :update ]
   end
 
-  resources :blogs, :only => [ :edit, :update ] do
+  resources :blogs, :only => [ :show, :edit, :update ] do
     member do
       # handle image updates
       match '/change_image' => 'blogs#change_image', :as => :change_image_for
