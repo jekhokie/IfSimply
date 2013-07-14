@@ -1,6 +1,10 @@
 class ClubsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [ :show ]
   before_filter :get_club
+
+  def show
+    redirect_to club_sales_page_path(@club) unless user_signed_in? and can?(:read, @club)
+  end
 
   def edit
     authorize! :update, @club
