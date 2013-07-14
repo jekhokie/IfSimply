@@ -1,0 +1,73 @@
+.club-subscription-information {
+  .club-name {
+    font-size:   35px;
+    line-height: 35px;
+    margin-top:  22px;
+
+    .name {
+      font-weight: bold;
+    }
+
+    .sub-heading {
+      font-style: italic;
+      margin-top: 6px;
+    }
+  }
+
+  .club-subscription-information {
+    margin:     0px auto;
+    margin-top: 35px;
+    width:      700px;
+
+    tr {
+      height: 55px;
+
+      td {
+        padding: 9px;
+      }
+    }
+
+    thead {
+      th {
+        font-size:   28px;
+        font-weight: bold;
+      }
+
+      th.basic-number {
+        border-left: 1px solid gray;
+        border-top:  1px solid gray;
+      }
+
+      th.pro-number {
+        border-top:   1px solid gray;
+        border-left:  1px solid gray;
+        border-right: 1px solid gray;
+      }
+    }
+
+    tbody {
+      tr {
+        border: 1px solid gray;
+      }
+
+      .basic-number,
+      .pro-number {
+        border-left: 1px solid gray;
+        font-size:   22px;
+        text-align:  center;
+      }
+
+      td.meta {
+        font-weight: bold;
+        font-size:   28px;
+      }
+
+      tr.subscription-type {
+        input {
+          margin-top: 18px;
+          width:      150px;
+        }
+      }
+    }
+  }
+}

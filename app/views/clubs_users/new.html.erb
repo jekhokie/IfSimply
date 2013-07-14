@@ -1,0 +1,55 @@
+<div class="club-subscription-information">
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
+
+  <div class="club-name">
+    <div class="name"><%= @club.name.sub(/:$/, '') %>:</div>
+    <div class="sub-heading"><%= @club.sub_heading %></div>
+  </div>
+
+  <table class="club-subscription-information row-fluid">
+    <thead>
+      <tr>
+        <th class="meta meta-heading"></th>
+        <th class="basic-number basic-number-heading">Basic</th>
+        <th class="pro-number pro-number-heading">Pro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="course">
+        <td class="meta">Courses</td>
+        <td class="basic-number"><%= @club.courses.count %></td>
+        <td class="pro-number"><%= @club.courses.count %></td>
+      </tr>
+      <tr class="lessons">
+        <td class="meta">Lessons</td>
+        <td class="basic-number"><%= @club.lessons.blank? ? 0 : @club.lessons.where(:free => true).count %></td>
+        <td class="pro-number"><%= @club.lessons.blank? ? 0 : @club.lessons.count %></td>
+      </tr>
+      <tr class="blog-posts">
+        <td class="meta">Blog Posts</td>
+        <td class="basic-number"><%= @club.blogs.blank? ? 0 : @club.blogs.where(:free => true).count %></td>
+        <td class="pro-number"><%= @club.blogs.blank? ? 0 : @club.blogs.count %></td>
+      </tr>
+      <tr class="discussions">
+        <td class="meta">Discussion Board</td>
+        <td class="basic-number">Read Only</td>
+        <td class="pro-number">Read/Participate</td>
+      </tr>
+      <tr class="cost">
+        <td class="meta">Cost</td>
+        <td class="basic-number">Free</td>
+        <td class="pro-number"><%= currency_symbol %><%= humanized_money @club.price %></td>
+      </tr>
+
+      <tr class="subscription-type">
+        <td class="meta">Subscribe</td>
+        <td class="basic-number">
+          <%= button_to "Basic", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%>
+        </td>
+        <td class="pro-number">
+          <%= button_to "Pro", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
