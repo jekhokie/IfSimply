@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   it { should have_many :clubs }
-  it { should have_many :memberships }
+  it { should have_many :subscriptions }
 
   it "can be instantiated" do
     User.new.should be_an_instance_of(User)
@@ -120,6 +120,16 @@ describe User do
 
     it "does not return posts that are not associated with the user" do
       user.posts.should_not include(non_related_post)
+    end
+  end
+
+  describe "memberships" do
+    let!(:club)         { FactoryGirl.create :club }
+    let!(:subscriber)   { FactoryGirl.create :user }
+    let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => subscriber }
+
+    it "should report the list of memberships" do
+      subscriber.memberships.should include(club)
     end
   end
 end

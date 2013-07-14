@@ -14,7 +14,11 @@ class User < ActiveRecord::Base
 
   has_many :posts, :conditions => proc { "user_id = #{self.id}" }
 
-  has_many :memberships, :class_name => ClubsUsers
+  has_many :subscriptions, :class_name => ClubsUsers
+
+  def memberships
+    Club.find subscriptions.map(&:club_id)
+  end
 
   private
 
