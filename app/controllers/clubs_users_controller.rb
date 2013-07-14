@@ -1,17 +1,47 @@
 class ClubsUsersController < ApplicationController
-  def new
-    @club = Club.find params[:id]
+  before_filter :get_club
 
-    @subscription         = ClubsUsers.new
-    @subscription.club_id = @club.id
+  def new
+    @subscription      = ClubsUsers.new
+    @subscription.club = @club
 
     if user_signed_in?
-      @subscription.user_id = current_user.id
+      @subscription.user = current_user
       session.delete(:subscription) unless session[:subscription].blank?
     else
       session[:subscription] = @subscription
 
       redirect_to new_user_registration_path
     end
+  end
+
+  def create
+    if user_signed_in?
+      if @club.members.include? current_user
+        redirect_to club_path(@club)
+      else
+        @subscription       = ClubsUsers.new
+        @subscription.club  = @club
+        @subscription.user  = current_user
+        @subscription.level = params[:level].blank? ? "" : params[:level].to_sym
+
+        if @subscription.save
+          redirect_to club_path(@club)
+        else
+          flash[:error] = "Invalid membership level specified"
+
+          render :new
+        end
+      end
+    else
+      @sales_page = @club.sales_page
+      redirect_to club_sales_page_path(@club)
+    end
+  end
+
+  private
+
+  def get_club
+    @club = Club.find params[:id]
   end
 end

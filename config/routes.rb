@@ -15,7 +15,8 @@ Ifsimply::Application.routes.draw do
       match '/upload_logo' => 'clubs#upload_logo', :as => :upload_logo_for
 
       # membership subscriptions
-      match '/subscribe' => 'clubs_users#new', :as => 'subscribe_to'
+      match '/subscribe'  => 'clubs_users#new',    :as => 'subscribe_to'
+      match '/add_member' => 'clubs_users#create', :as => 'add_member_to'
     end
 
     resource  :sales_page, :only => [ :show ]
