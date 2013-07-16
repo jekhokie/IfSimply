@@ -32,12 +32,12 @@ class Ability
 
     # membership-specific capabilities
     can :read, Club do |club|
-      club.members.include?(user)
+      user.clubs.include?(club) || club.members.include?(user)
     end
 
     can :read, Blog do |blog|
       membership = user.subscriptions.find_by_club_id blog.club.id
-      ! membership.blank? && (blog.free || membership.level.to_s != "basic")
+      user.clubs.include?(blog.club) || (!membership.blank? && (blog.free || membership.level.to_s != "basic"))
     end
 
     # global defaults

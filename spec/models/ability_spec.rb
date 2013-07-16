@@ -25,8 +25,13 @@ describe Ability do
       let!(:subscribed_user)        { FactoryGirl.create :user }
       let!(:non_subscribed_user)    { FactoryGirl.create :user }
       let!(:subscription)           { FactoryGirl.create :subscription, :user => subscribed_user, :club => non_owned_club }
+      let!(:owner_ability)          { Ability.new owned_club.user }
       let!(:subscribed_ability)     { Ability.new subscribed_user }
       let!(:non_subscribed_ability) { Ability.new non_subscribed_user }
+
+      it "succeeds for the club owner" do
+        owner_ability.should be_able_to(:read, owned_club)
+      end
 
       it "succeeds for a subscribed user" do
         subscribed_ability.should be_able_to(:read, non_owned_club)
@@ -140,8 +145,13 @@ describe Ability do
       let(:club) { FactoryGirl.create :club }
 
       describe "for a subscribed user" do
-        let!(:free_blog) { FactoryGirl.create :blog, :club => club, :free => 'true' }
-        let!(:paid_blog) { FactoryGirl.create :blog, :club => club, :free => 'false' }
+        let!(:free_blog)     { FactoryGirl.create :blog, :club => club, :free => 'true' }
+        let!(:paid_blog)     { FactoryGirl.create :blog, :club => club, :free => 'false' }
+        let!(:owner_ability) { Ability.new club.user }
+
+        it "succeeds for the club owner" do
+          owner_ability.should be_able_to(:read, club)
+        end
 
         describe "for a pro member" do
           let!(:pro_user)         { FactoryGirl.create :user }
