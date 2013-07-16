@@ -209,6 +209,34 @@ describe CoursesController do
     let(:course) { FactoryGirl.create :course, :club => user.clubs.first }
 
     describe "for a signed-in user" do
+      describe "for the club owner" do
+        let!(:club_owner)   { FactoryGirl.create :user }
+        let!(:owned_course) { FactoryGirl.create :course, :club => club_owner.clubs.first }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in club_owner
+
+          get 'show_all', :club_id => owned_course.club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the blog show_all view" do
+          response.should render_template("courses/show_all")
+        end
+
+        it "assigns club" do
+          assigns(:club).should == club_owner.clubs.first
+        end
+
+        it "assigns courses" do
+          assigns(:courses).should include(owned_course)
+        end
+      end
+
       describe "for a subscriber" do
         let!(:subscribed_user) { FactoryGirl.create :user }
         let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club }
