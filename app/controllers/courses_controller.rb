@@ -1,10 +1,13 @@
 class CoursesController < ApplicationController
-  before_filter :authenticate_user!, :except => [ :show_all ]
-  before_filter :get_club,   :only => [ :show_all ]
-  before_filter :get_course, :only => [ :edit, :update, :change_logo, :upload_logo ]
+  before_filter :authenticate_user!, :except => [ :show, :show_all ]
+  before_filter :get_club,   :only => [ :create, :show_all ]
+  before_filter :get_course, :only => [ :show, :edit, :update, :change_logo, :upload_logo ]
+
+  def show
+    redirect_to club_sales_page_path(@course.club) unless user_signed_in? and can?(:read, @course)
+  end
 
   def create
-    @club = Club.find params[:club_id]
     @course = @club.courses.new
 
     authorize! :create, @course
