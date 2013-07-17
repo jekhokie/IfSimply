@@ -55,6 +55,10 @@
         border-left: 1px solid gray;
         font-size:   22px;
         text-align:  center;
+
+        form {
+          margin: 0px;
+        }
       }
 
       td.meta {
@@ -64,8 +68,7 @@
 
       tr.subscription-type {
         input {
-          margin-top: 18px;
-          width:      150px;
+          width: 150px;
         }
       }
     }
