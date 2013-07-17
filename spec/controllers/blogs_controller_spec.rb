@@ -33,27 +33,101 @@ describe BlogsController do
         end
       end
 
-      describe "for a subscriber" do
+      describe "for a basic subscriber" do
         let!(:subscribed_user) { FactoryGirl.create :user }
-        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club, :level => :basic }
 
-        before :each do
-          @request.env["devise.mapping"] = Devise.mappings[:users]
-          sign_in subscribed_user
+        describe "for a free blog" do
+          let!(:free_blog) { FactoryGirl.create :blog, :club => club, :free => true }
 
-          get 'show', :id => blog.id
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => free_blog.id
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "renders the blog show view" do
+            response.should render_template("blogs/show")
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
         end
 
-        it "returns http success" do
-          response.should be_success
+        describe "for a paid blog" do
+          let!(:paid_blog) { FactoryGirl.create :blog, :club => club, :free => false }
+
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => paid_blog.id
+          end
+
+          it "redirects to the sales page" do
+            response.should redirect_to(club_sales_page_path(club))
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
+        end
+      end
+
+      describe "for a pro subscriber" do
+        let!(:subscribed_user) { FactoryGirl.create :user }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club, :level => :pro }
+
+        describe "for a free blog" do
+          let!(:free_blog) { FactoryGirl.create :blog, :club => club, :free => true }
+
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => free_blog.id
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "renders the blog show view" do
+            response.should render_template("blogs/show")
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
         end
 
-        it "renders the blog show view" do
-          response.should render_template("blogs/show")
-        end
+        describe "for a paid blog" do
+          let!(:paid_blog) { FactoryGirl.create :blog, :club => club, :free => false }
 
-        it "returns the blog" do
-          assigns(:blog).should_not be_nil
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => paid_blog.id
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "renders the blog show view" do
+            response.should render_template("blogs/show")
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
         end
       end
 
