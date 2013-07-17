@@ -45,6 +45,11 @@ class Ability
       course.club.user == user || course.club.members.include?(user)
     end
 
+    can :read, Lesson do |lesson|
+      membership = user.subscriptions.find_by_club_id lesson.club.id
+      lesson.club.user == user || (!membership.blank? && (lesson.free || membership.level.to_s != "basic"))
+    end
+
     # global defaults
     can [ :read ], Topic
     can [ :read ], SalesPage
