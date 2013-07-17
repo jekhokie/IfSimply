@@ -4,7 +4,7 @@
   </div>
 
   <div class="user-navigation-container span7">
-    <%- unless controller_name == 'sales_pages' %>
+    <%- unless !user_signed_in? or (controller_name == 'sales_pages' and !can?(:update, club)) %>
       <a href="<%= can?(:update, club) ? edit_club_path(club) : club_path(club) %>"
          class="club-link <%= 'selected' if controller_name == 'clubs' %>">Club Home</a>
 
