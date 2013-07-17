@@ -23,7 +23,7 @@ describe CoursesController do
           response.should be_success
         end
 
-        it "renders the blog show view" do
+        it "renders the course show view" do
           response.should render_template("courses/show")
         end
 
@@ -312,7 +312,7 @@ describe CoursesController do
           response.should be_success
         end
 
-        it "renders the blog show_all view" do
+        it "renders the course show_all view" do
           response.should render_template("courses/show_all")
         end
 

@@ -3,15 +3,13 @@ require 'spec_helper'
 describe LessonsController do
   let(:user) { FactoryGirl.create :user }
 
-  before :each do
-    @request.env["devise.mapping"] = Devise.mappings[:users]
-    sign_in user
-  end
-
   describe "POST 'create'" do
     let(:course) { FactoryGirl.create :course, :club_id => user.clubs.first.id }
 
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
       post 'create', :course_id => course.id
     end
 
