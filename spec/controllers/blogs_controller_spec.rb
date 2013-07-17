@@ -3,8 +3,6 @@ require 'spec_helper'
 describe BlogsController do
   let(:user) { FactoryGirl.create :user }
 
-  before :each do
-  end
 
   describe "GET 'show'" do
     let!(:blog) { FactoryGirl.create :blog, :free => true }

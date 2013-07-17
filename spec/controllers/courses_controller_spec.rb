@@ -3,6 +3,94 @@ require 'spec_helper'
 describe CoursesController do
   let(:user) { FactoryGirl.create :user }
 
+  describe "GET 'show'" do
+    let!(:course) { FactoryGirl.create :course }
+    let!(:club)   { course.club }
+
+    describe "for a signed-in user" do
+      describe "for the club owner" do
+        let!(:club_owner)   { FactoryGirl.create :user }
+        let!(:owned_course) { FactoryGirl.create :course, :club => club_owner.clubs.first }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in club_owner
+
+          get 'show', :id => owned_course.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the blog show view" do
+          response.should render_template("courses/show")
+        end
+
+        it "returns the course" do
+          assigns(:course).should_not be_nil
+        end
+      end
+
+      describe "for a subscriber" do
+        let!(:subscribed_user) { FactoryGirl.create :user }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in subscribed_user
+
+          get 'show', :id => course.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the course show view" do
+          response.should render_template("courses/show")
+        end
+
+        it "returns the course" do
+          assigns(:course).should_not be_nil
+        end
+      end
+
+      describe "for a non-subscriber" do
+        let!(:non_subscribed_user) { FactoryGirl.create :user }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in non_subscribed_user
+
+          get 'show', :id => course.id
+        end
+
+        it "redirects to the sales page" do
+          response.should redirect_to(club_sales_page_path(club))
+        end
+
+        it "returns the course" do
+          assigns(:course).should_not be_nil
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      before :each do
+        get 'show', :id => course.id
+      end
+
+      it "redirects to the sales page" do
+        response.should redirect_to(club_sales_page_path(club))
+      end
+
+      it "returns the course" do
+        assigns(:course).should_not be_nil
+      end
+    end
+  end
+
   describe "POST 'create'" do
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:users]
