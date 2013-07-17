@@ -25,7 +25,13 @@
 
     <div class="lesson-video video-container">
       <div class="video-iframe">
-        <%= render :partial => 'shared/video_iframe', :locals => { :video_url => lesson.video } %>
+        <%- if can?(:read, lesson) %>
+          <%= render :partial => 'shared/video_iframe', :locals => { :video_url => lesson.video } %>
+        <%- else %>
+          <a href="<%= subscribe_to_club_path(lesson.club) %>" class="click-for-pro-link">
+            <%= image_tag "click_for_pro.png", :alt => "click-for-pro" %>
+          </a>
+        <%- end %>
       </div>
 
       <%- if can? :update, lesson %>
