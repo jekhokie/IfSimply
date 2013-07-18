@@ -101,7 +101,9 @@
   <div class="club-discussion-board span6">
     <div class="discussion-board-listing-heading">
       <h2>
-        <a href="<%= edit_discussion_board_path(club.discussion_board) %>" class="hover-heading">Discussions <span class="discussion-board-count header-count">(<%= club.topics.count %>)</span></a>
+        <a href="<%= can?(:update, club) ? edit_discussion_board_path(club.discussion_board) : discussion_board_path(club.discussion_board) %>" class="hover-heading">
+          Discussions <span class="discussion-board-count header-count">(<%= club.topics.count %>)</span>
+        </a>
       </h2>
     </div>
 
