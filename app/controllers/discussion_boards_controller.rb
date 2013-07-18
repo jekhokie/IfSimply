@@ -1,6 +1,12 @@
 class DiscussionBoardsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :get_discussion_board, :only => [ :edit, :update ]
+  before_filter :authenticate_user!, :except => [ :show ]
+  before_filter :get_discussion_board, :only => [ :show, :edit, :update ]
+
+  def show
+    redirect_to club_sales_page_path(@discussion_board.club) unless user_signed_in? and can?(:read, @discussion_board)
+
+    @club = @discussion_board.club
+  end
 
   def edit
     authorize! :edit, @discussion_board
