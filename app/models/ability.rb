@@ -50,8 +50,13 @@ class Ability
       lesson.club.user == user || (!membership.blank? && (lesson.free || membership.level.to_s != "basic"))
     end
 
+    can :read, DiscussionBoard do |discussion_board|
+      membership = user.subscriptions.find_by_club_id discussion_board.club.id
+      discussion_board.club.user == user || discussion_board.club.members.include?(user)
+    end
+
     # global defaults
-    can [ :read ], Topic
+    can [ :read ], Topic      # FIXME - SHOULD NOT BE GLOBAL READ - ONLY READ FOR SUBSCRIBERS
     can [ :read ], SalesPage
   end
 end
