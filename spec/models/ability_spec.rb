@@ -314,6 +314,49 @@ describe Ability do
         ability.should_not be_able_to(:update, non_owned_discussion_board)
       end
     end
+
+    context "read" do
+      let(:club) { FactoryGirl.create :club }
+
+      describe "for a subscribed user" do
+        let!(:discussion_board) { club.discussion_board }
+        let!(:owner_ability)    { Ability.new club.user }
+
+        it "succeeds for the club owner" do
+          owner_ability.should be_able_to(:read, discussion_board)
+        end
+
+        describe "for a pro member" do
+          let!(:pro_user)         { FactoryGirl.create :user }
+          let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => :pro }
+          let!(:pro_ability)      { Ability.new pro_user }
+
+          it "succeeds" do
+            pro_ability.should be_able_to(:read, discussion_board)
+          end
+        end
+
+        describe "for a basic member" do
+          let!(:basic_user)         { FactoryGirl.create :user }
+          let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => club, :level => :basic }
+          let!(:basic_ability)      { Ability.new basic_user }
+
+          it "succeeds" do
+            basic_ability.should be_able_to(:read, discussion_board)
+          end
+        end
+      end
+
+      describe "for a non-subscribed user" do
+        let!(:course)  { FactoryGirl.create :course }
+        let!(:user)    { FactoryGirl.create :user }
+        let!(:ability) { Ability.new user }
+
+        it "fails" do
+          ability.should_not be_able_to(:read, course)
+        end
+      end
+    end
   end
 
   describe "Topic" do
