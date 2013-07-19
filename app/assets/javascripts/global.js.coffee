@@ -13,3 +13,11 @@ jQuery ->
 $.ajaxSetup statusCode:
   401: ->
     location.href = "/users/sign_in"
+
+# show helper modal for video embed source
+$(".video-embed-label i.icon-question-sign").livequery ->
+  $(this).click ->
+    $(".modal .modal-header").html "Video Embed Code Example - YouTube"
+    $(".modal .modal-body").html   "<img alt='video-embed-img' src='/assets/embed_helper.png'>"
+    $(".modal .modal-footer").html "<a onclick=\"$('.modal').modal('hide')\" class='btn btn-info'>Close</a>"
+    $(".modal").modal "show"

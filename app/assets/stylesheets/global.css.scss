@@ -149,3 +149,13 @@ div {
     }
   }
 }
+
+.video-container {
+  .video-embed-source {
+    .video-embed-label {
+      i.icon-question-sign:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
