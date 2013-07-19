@@ -56,7 +56,6 @@ class Ability
     end
 
     # global defaults
-    can [ :read ], Topic      # FIXME - SHOULD NOT BE GLOBAL READ - ONLY READ FOR SUBSCRIBERS
     can [ :read ], SalesPage
   end
 end

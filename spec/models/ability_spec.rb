@@ -364,14 +364,6 @@ describe Ability do
     let(:owned_topic)      { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
     let(:non_owned_topic)  { FactoryGirl.create :topic }
 
-    context "read" do
-      let(:ability) { Ability.new FactoryGirl.create(:user) }
-
-      it "succeeds for any user" do
-        ability.should be_able_to(:read, non_owned_topic)
-      end
-    end
-
     context "update" do
       it "succeeds when the user owns the topic" do
         ability.should be_able_to(:update, owned_topic)
