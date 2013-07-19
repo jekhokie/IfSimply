@@ -32,32 +32,29 @@ class Ability
 
     # membership-specific capabilities
     can :read, Club do |club|
-      club.user == user || club.members.include?(user)
+      club.user == user or club.members.include?(user)
     end
 
     can :read, Blog do |blog|
       membership = user.subscriptions.find_by_club_id blog.club.id
-      blog.club.user == user || (!membership.blank? && (blog.free || membership.level.to_s != "basic"))
+      blog.club.user == user or (!membership.blank? and (blog.free or membership.level.to_s != "basic"))
     end
 
     can :read, Course do |course|
-      membership = user.subscriptions.find_by_club_id course.club.id
-      course.club.user == user || course.club.members.include?(user)
+      course.club.user == user or course.club.members.include?(user)
     end
 
     can :read, Lesson do |lesson|
       membership = user.subscriptions.find_by_club_id lesson.club.id
-      lesson.club.user == user || (!membership.blank? && (lesson.free || membership.level.to_s != "basic"))
+      lesson.club.user == user or (!membership.blank? and (lesson.free or membership.level.to_s != "basic"))
     end
 
     can :read, DiscussionBoard do |discussion_board|
-      membership = user.subscriptions.find_by_club_id discussion_board.club.id
-      discussion_board.club.user == user || discussion_board.club.members.include?(user)
+      discussion_board.club.user == user or discussion_board.club.members.include?(user)
     end
 
     can :read, Topic do |topic|
-      membership = user.subscriptions.find_by_club_id topic.club.id
-      topic.club.user == user || topic.club.members.include?(user)
+      topic.club.user == user or topic.club.members.include?(user)
     end
 
     # global defaults
