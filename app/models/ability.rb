@@ -55,6 +55,11 @@ class Ability
       discussion_board.club.user == user || discussion_board.club.members.include?(user)
     end
 
+    can :read, Topic do |topic|
+      membership = user.subscriptions.find_by_club_id topic.club.id
+      topic.club.user == user || topic.club.members.include?(user)
+    end
+
     # global defaults
     can [ :read ], SalesPage
   end
