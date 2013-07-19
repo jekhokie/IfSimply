@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [ :show ]
   before_filter :get_discussion_board, :only => [ :new, :create ]
 
   def new
@@ -26,7 +26,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find params[:id]
 
-    authorize! :read, @topic
+    redirect_to club_sales_page_path(@topic.club) unless user_signed_in? and can?(:read, @topic)
   end
 
   private
