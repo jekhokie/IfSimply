@@ -57,6 +57,11 @@ class Ability
       topic.club.user == user or topic.club.members.include?(user)
     end
 
+    can :create, Post do |post|
+      membership = user.subscriptions.find_by_club_id post.club.id
+      post.club.user == user or (!membership.blank? and membership.level.to_s != "basic")
+    end
+
     # global defaults
     can [ :read ], SalesPage
   end
