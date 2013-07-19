@@ -14,7 +14,7 @@
       <a href="<%= show_all_club_blogs_path(club) %>"
          class="blog-posts-link <%= 'selected' if controller_name == 'blogs'%>">Blog Posts</a>
 
-      <a href="<%= edit_discussion_board_path(club.discussion_board) %>"
+      <a href="<%= (user_signed_in? and can?(:update, club) ? edit_discussion_board_path(club.discussion_board) : discussion_board_path(club.discussion_board)) %>"
          class="discussions-link <%= 'selected' if controller_name == 'discussion_boards' or
                                                    controller_name == 'topics' %>">Discussions</a>
 
