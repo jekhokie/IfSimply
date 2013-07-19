@@ -4,19 +4,16 @@ describe CoursesController do
   let(:user) { FactoryGirl.create :user }
 
   describe "GET 'show'" do
-    let!(:course) { FactoryGirl.create :course }
-    let!(:club)   { course.club }
+    let!(:club)   { user.clubs.first }
+    let!(:course) { FactoryGirl.create :course, :club => club }
 
     describe "for a signed-in user" do
       describe "for the club owner" do
-        let!(:club_owner)   { FactoryGirl.create :user }
-        let!(:owned_course) { FactoryGirl.create :course, :club => club_owner.clubs.first }
-
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]
-          sign_in club_owner
+          sign_in user
 
-          get 'show', :id => owned_course.id
+          get 'show', :id => course.id
         end
 
         it "returns http success" do

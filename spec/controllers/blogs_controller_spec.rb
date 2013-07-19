@@ -4,19 +4,16 @@ describe BlogsController do
   let(:user) { FactoryGirl.create :user }
 
   describe "GET 'show'" do
-    let!(:blog) { FactoryGirl.create :blog, :free => true }
-    let!(:club) { blog.club }
+    let!(:club) { user.clubs.first }
+    let!(:blog) { FactoryGirl.create :blog, :club => club, :free => false }
 
     describe "for a signed-in user" do
       describe "for the club owner" do
-        let!(:club_owner) { FactoryGirl.create :user }
-        let!(:owned_blog) { FactoryGirl.create :blog, :club => club_owner.clubs.first }
-
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]
-          sign_in club_owner
+          sign_in user
 
-          get 'show', :id => owned_blog.id
+          get 'show', :id => blog.id
         end
 
         it "returns http success" do

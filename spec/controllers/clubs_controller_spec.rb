@@ -4,9 +4,30 @@ describe ClubsController do
   let(:user) { FactoryGirl.create :user }
 
   describe "GET 'show'" do
-    let(:club) { FactoryGirl.create :club }
+    let(:club) { user.clubs.first }
 
     describe "for a signed-in user" do
+      describe "for the club owner" do
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in user
+
+          get 'show', :id => club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the club show view" do
+          response.should render_template("clubs/show")
+        end
+
+        it "returns the club" do
+          assigns(:club).should_not be_nil
+        end
+      end
+
       describe "for a subscriber" do
         let!(:subscribed_user) { FactoryGirl.create :user }
         let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club }
