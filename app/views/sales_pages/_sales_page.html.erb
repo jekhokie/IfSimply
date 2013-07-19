@@ -39,7 +39,7 @@
                                                                   :html_attrs   => { :rows  => '1' } -%>/mo</div>
 
         <div class="club-buy">
-          <%= button_to "Subscribe", "#", :method => 'get', :class => 'btn btn-primary btn-large' -%>
+          <%= button_to "Subscribe", (user_signed_in? and current_user.clubs.first == club ? "#" : subscribe_to_club_path(club)), :method => 'get', :class => 'btn btn-primary btn-large' -%>
         </div>
       </div>
     </div>

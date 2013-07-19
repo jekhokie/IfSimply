@@ -3,13 +3,170 @@ require 'spec_helper'
 describe BlogsController do
   let(:user) { FactoryGirl.create :user }
 
-  before :each do
-    @request.env["devise.mapping"] = Devise.mappings[:users]
-    sign_in user
+  describe "GET 'show'" do
+    let!(:club) { user.clubs.first }
+    let!(:blog) { FactoryGirl.create :blog, :club => club, :free => false }
+
+    describe "for a signed-in user" do
+      describe "for the club owner" do
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in user
+
+          get 'show', :id => blog.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the blog show view" do
+          response.should render_template("blogs/show")
+        end
+
+        it "returns the blog" do
+          assigns(:blog).should_not be_nil
+        end
+      end
+
+      describe "for a basic subscriber" do
+        let!(:subscribed_user) { FactoryGirl.create :user }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club, :level => :basic }
+
+        describe "for a free blog" do
+          let!(:free_blog) { FactoryGirl.create :blog, :club => club, :free => true }
+
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => free_blog.id
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "renders the blog show view" do
+            response.should render_template("blogs/show")
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
+        end
+
+        describe "for a paid blog" do
+          let!(:paid_blog) { FactoryGirl.create :blog, :club => club, :free => false }
+
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => paid_blog.id
+          end
+
+          it "redirects to the sales page" do
+            response.should redirect_to(club_sales_page_path(club))
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
+        end
+      end
+
+      describe "for a pro subscriber" do
+        let!(:subscribed_user) { FactoryGirl.create :user }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club, :level => :pro }
+
+        describe "for a free blog" do
+          let!(:free_blog) { FactoryGirl.create :blog, :club => club, :free => true }
+
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => free_blog.id
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "renders the blog show view" do
+            response.should render_template("blogs/show")
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
+        end
+
+        describe "for a paid blog" do
+          let!(:paid_blog) { FactoryGirl.create :blog, :club => club, :free => false }
+
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribed_user
+
+            get 'show', :id => paid_blog.id
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "renders the blog show view" do
+            response.should render_template("blogs/show")
+          end
+
+          it "returns the blog" do
+            assigns(:blog).should_not be_nil
+          end
+        end
+      end
+
+      describe "for a non-subscriber" do
+        let!(:non_subscribed_user) { FactoryGirl.create :user }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in non_subscribed_user
+
+          get 'show', :id => blog.id
+        end
+
+        it "redirects to the sales page" do
+          response.should redirect_to(club_sales_page_path(club))
+        end
+
+        it "returns the blog" do
+          assigns(:blog).should_not be_nil
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      before :each do
+        get 'show', :id => blog.id
+      end
+
+      it "redirects to the sales page" do
+        response.should redirect_to(club_sales_page_path(club))
+      end
+
+      it "returns the blog" do
+        assigns(:blog).should_not be_nil
+      end
+    end
   end
 
   describe "POST 'create'" do
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
       post 'create', :club_id => user.clubs.first.id
     end
 
@@ -43,6 +200,9 @@ describe BlogsController do
     let(:blog) { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
 
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+
       get 'edit', :id => blog.id
     end
 
@@ -205,22 +365,89 @@ describe BlogsController do
   end
 
   describe "GET 'show_all'" do
-    let(:blog) { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
+    let(:blog) { FactoryGirl.create :blog, :club => user.clubs.first }
 
-    before :each do
-      get 'show_all', :club_id => blog.club.id
+    describe "for a signed-in user" do
+      describe "for the club owner" do
+        let!(:club_owner) { FactoryGirl.create :user }
+        let!(:owned_blog) { FactoryGirl.create :blog, :club => club_owner.clubs.first }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in club_owner
+
+          get 'show_all', :club_id => owned_blog.club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the blog show_all view" do
+          response.should render_template("blogs/show_all")
+        end
+
+        it "assigns club" do
+          assigns(:club).should == club_owner.clubs.first
+        end
+
+        it "assigns blogs" do
+          assigns(:blogs).should include(owned_blog)
+        end
+      end
+
+      describe "for a subscriber" do
+        let!(:subscribed_user) { FactoryGirl.create :user }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => blog.club }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in subscribed_user
+
+          get 'show_all', :club_id => blog.club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "renders the blog show_all view" do
+          response.should render_template("blogs/show_all")
+        end
+
+        it "assigns club" do
+          assigns(:club).should == user.clubs.first
+        end
+
+        it "assigns blogs" do
+          assigns(:blogs).should include(blog)
+        end
+      end
+
+      describe "for a non-subscriber" do
+        let!(:non_subscribed_user) { FactoryGirl.create :user }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in non_subscribed_user
+
+          get 'show_all', :club_id => blog.club.id
+        end
+
+        it "redirects to the sales page" do
+          response.should redirect_to(club_sales_page_path(blog.club))
+        end
+      end
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
+    describe "for a non signed-in user" do
+      before :each do
+        get 'show_all', :club_id => blog.club.id
+      end
 
-    it "assigns club" do
-      assigns(:club).should == user.clubs.first
-    end
-
-    it "assigns blogs" do
-      assigns(:blogs).should include(blog)
+      it "redirects to the sales page" do
+        response.should redirect_to(club_sales_page_path(blog.club))
+      end
     end
   end
 end

@@ -30,8 +30,39 @@ class Ability
       sales_page.user == user
     end
 
+    # membership-specific capabilities
+    can :read, Club do |club|
+      club.user == user or club.members.include?(user)
+    end
+
+    can :read, Blog do |blog|
+      membership = user.subscriptions.find_by_club_id blog.club.id
+      blog.club.user == user or (!membership.blank? and (blog.free or membership.level.to_s != "basic"))
+    end
+
+    can :read, Course do |course|
+      course.club.user == user or course.club.members.include?(user)
+    end
+
+    can :read, Lesson do |lesson|
+      membership = user.subscriptions.find_by_club_id lesson.club.id
+      lesson.club.user == user or (!membership.blank? and (lesson.free or membership.level.to_s != "basic"))
+    end
+
+    can :read, DiscussionBoard do |discussion_board|
+      discussion_board.club.user == user or discussion_board.club.members.include?(user)
+    end
+
+    can :read, Topic do |topic|
+      topic.club.user == user or topic.club.members.include?(user)
+    end
+
+    can :create, Post do |post|
+      membership = user.subscriptions.find_by_club_id post.club.id
+      post.club.user == user or (!membership.blank? and membership.level.to_s != "basic")
+    end
+
     # global defaults
-    can [ :read ], Topic
     can [ :read ], SalesPage
   end
 end

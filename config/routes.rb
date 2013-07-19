@@ -1,5 +1,5 @@
 Ifsimply::Application.routes.draw do
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :users, :controllers => { :registrations => 'registrations', :sessions => 'sessions' }
 
   root :to => 'home#index'
 
@@ -8,11 +8,15 @@ Ifsimply::Application.routes.draw do
     match '/access_violation'    => 'home#access_violation',    :as => :access_violation
   end
 
-  resources :clubs, :only => [ :edit, :update ] do
+  resources :clubs, :only => [ :show, :edit, :update ] do
     member do
       # handle image updates
       match '/change_logo' => 'clubs#change_logo', :as => :change_logo_for
       match '/upload_logo' => 'clubs#upload_logo', :as => :upload_logo_for
+
+      # membership subscriptions
+      match '/subscribe'  => 'clubs_users#new',    :as => 'subscribe_to'
+      match '/add_member' => 'clubs_users#create', :as => 'add_member_to'
     end
 
     resource  :sales_page, :only => [ :show ]
@@ -32,7 +36,7 @@ Ifsimply::Application.routes.draw do
 
   resources :sales_pages, :only => [ :edit, :update ]
 
-  resources :courses, :only => [ :edit, :update ] do
+  resources :courses, :only => [ :show, :edit, :update ] do
     member do
       # handle image updates
       match '/change_logo' => 'courses#change_logo', :as => :change_logo_for
@@ -42,7 +46,7 @@ Ifsimply::Application.routes.draw do
     resources :lessons, :only => [ :create, :update ]
   end
 
-  resources :blogs, :only => [ :edit, :update ] do
+  resources :blogs, :only => [ :show, :edit, :update ] do
     member do
       # handle image updates
       match '/change_image' => 'blogs#change_image', :as => :change_image_for
@@ -50,7 +54,7 @@ Ifsimply::Application.routes.draw do
     end
   end
 
-  resources :discussion_boards, :only => [ :edit, :update ] do
+  resources :discussion_boards, :only => [ :show, :edit, :update ] do
     resources :topics, :only => [ :new, :create ]
   end
 
