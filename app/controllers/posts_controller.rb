@@ -3,16 +3,16 @@ class PostsController < ApplicationController
   before_filter :get_topic, :only => [ :new, :create ]
 
   def new
-    authorize! :update, @topic
-
     @post = @topic.posts.new :user_id => current_user.id
+
+    authorize!(:create, @post)
   end
 
   def create
-    authorize! :update, @topic
-
     @post         = @topic.posts.new params[:post]
     @post.user_id = current_user.id
+
+    authorize!(:create, @post)
 
     if @post.save
       flash[:notice] = "Post created successfully"
