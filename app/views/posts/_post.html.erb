@@ -6,7 +6,11 @@
   <div class="post-information-content">
     <div class="post-information">
       <div class="poster-name">
-        <%= post.poster.name %>
+        <%- if post.poster == post.club.user %>
+          <span class="icon-star"> <%= post.poster.name %></i>
+        <%- else %>
+          <%= post.poster.name %>
+        <%- end %>
       </div>
 
       <hr/>
@@ -14,6 +18,16 @@
       <div class="number-posts">
         <span class="post-info-label">Posts:</span>
         <span class="post-info-value"><%= post.poster.posts.count %></span>
+      </div>
+
+      <div class="member-since">
+        <%- if post.poster == post.club.user %>
+          <span class="post-info-label">Club Owner</span>
+          <span class="post-info-value"></span>
+        <%- else %>
+          <span class="post-info-label">Member Since:</span>
+          <span class="post-info-value"><%= I18n.l post.poster.subscriptions.find_by_club_id(post.club.id).try(:created_at), :format => :date_only %></span>
+        <%- end %>
       </div>
 
       <div class="ifsimply-since">
