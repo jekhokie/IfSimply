@@ -417,6 +417,54 @@ describe Ability do
     end
   end
 
+  describe "Post" do
+    let!(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
+    let!(:topic)            { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
+    let!(:owned_topic)      { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
+    let!(:non_owned_topic)  { FactoryGirl.create :topic }
+
+    context "create" do
+      it "succeeds when the user owns the topic" do
+        ability.should be_able_to(:create, owned_topic.posts.new)
+      end
+
+      it "fails when the user does not own the topic" do
+        ability.should_not be_able_to(:create, non_owned_topic.posts.new)
+      end
+
+      describe "for a subscribed user" do
+        describe "for a pro member" do
+          let!(:pro_user)         { FactoryGirl.create :user }
+          let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => topic.club, :level => :pro }
+          let!(:pro_ability)      { Ability.new pro_user }
+
+          it "succeeds" do
+            pro_ability.should be_able_to(:create, topic.posts.new)
+          end
+        end
+
+        describe "for a basic member" do
+          let!(:basic_user)         { FactoryGirl.create :user }
+          let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => topic.club, :level => :basic }
+          let!(:basic_ability)      { Ability.new basic_user }
+
+          it "fails" do
+            basic_ability.should_not be_able_to(:create, topic.posts.new)
+          end
+        end
+      end
+
+      describe "for a non-subscribed user" do
+        let!(:random_user) { FactoryGirl.create :user }
+        let!(:ability)     { Ability.new random_user }
+
+        it "fails" do
+          ability.should_not be_able_to(:create, topic.posts.new)
+        end
+      end
+    end
+  end
+
   describe "SalesPage" do
     let(:owned_sales_page)     { FactoryGirl.create :sales_page, :club_id => user.clubs.first.id }
     let(:non_owned_sales_page) { FactoryGirl.create :sales_page }
