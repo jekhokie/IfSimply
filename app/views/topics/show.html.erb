@@ -21,7 +21,7 @@
     <%= render :partial => "posts/list", :locals => { :topic => @topic } %>
   </div>
 
-  <%- unless @topic.posts.blank? %>
+  <%- unless @topic.posts.select{ |post| !post.new_record? }.blank? %>
     <div class="topic-controls">
       <%- if can?(:create, @topic.posts.build) %>
         <div class="add-topic-post">
