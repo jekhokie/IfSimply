@@ -8,6 +8,8 @@ Ifsimply::Application.routes.draw do
     match '/access_violation'    => 'home#access_violation',    :as => :access_violation
   end
 
+  resources :users, :only => [ :edit ]
+
   resources :clubs, :only => [ :show, :edit, :update ] do
     member do
       # handle image updates
