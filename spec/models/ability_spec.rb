@@ -487,4 +487,18 @@ describe Ability do
       end
     end
   end
+
+  describe "User" do
+    context "update" do
+      let!(:other_user) { FactoryGirl.create :user }
+
+      it "succeeds when the user is themselves" do
+        ability.should be_able_to(:update, user)
+      end
+
+      it "fails when the user is not themselves" do
+        ability.should_not be_able_to(:update, other_user)
+      end
+    end
+  end
 end

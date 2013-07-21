@@ -30,6 +30,8 @@ class Ability
       sales_page.user == user
     end
 
+    can [ :update ], User, :id => user.id
+
     # membership-specific capabilities
     can :read, Club do |club|
       club.user == user or club.members.include?(user)

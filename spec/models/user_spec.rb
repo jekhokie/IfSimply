@@ -4,8 +4,22 @@ describe User do
   it { should have_many :clubs }
   it { should have_many :subscriptions }
 
+  it { should have_attached_file :icon }
+
   it "can be instantiated" do
     User.new.should be_an_instance_of(User)
+  end
+
+  describe "icon" do
+    it { should validate_attachment_content_type(:icon)
+           .allowing('image/jpeg', 'image/png', 'image/gif')
+           .rejecting('text/plain') }
+  end
+
+  describe "description" do
+    it "should require a description" do
+      FactoryGirl.build(:user, :description => "").should_not be_valid
+    end
   end
 
   describe "name" do
@@ -130,6 +144,18 @@ describe User do
 
     it "should report the list of memberships" do
       subscriber.memberships.should include(club)
+    end
+  end
+
+  describe "assign_defaults" do
+    before :each do
+      @user = User.new
+      @user.assign_defaults
+      @user.save
+    end
+
+    it "assigns the correct default description" do
+      @user.description.should == Settings.users[:default_description]
     end
   end
 end

@@ -5,5 +5,7 @@ FactoryGirl.define do
     password              { "testing1" }
     password_confirmation { "testing1" }
     confirmed_at          { Time.now }
+
+    description { Faker::Lorem.sentences(rand(5) + 5).join " " }
   end
 end
