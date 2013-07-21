@@ -1,6 +1,17 @@
 jQuery ->
-  $(".best_in_place").best_in_place().bind "ajax:success", ->
-    $(this).closest(".video-container").find("iframe").attr "src", $(this).html() if $(this).hasClass("video-related")
+  # set up in-line editing
+  $(".best_in_place").each ->
+    # handle response for successful video definition
+    if $(this).hasClass("video-related")
+      $(this).best_in_place()
+        .bind "best_in_place:pre_update", ->
+          # strip out the src attribute if it exists
+          $(this).find("input").val stripEmbedSource($(this).find("input").val())
+        .bind "ajax:success", ->
+          # update the video container to point at the newly-specified URL
+          $(this).closest(".video-container").find("iframe").attr "src", $(this).html()
+    else
+      $(this).best_in_place()
 
   # handle updating the new file for upload display
   $("label.file-upload-label input").livequery ->
@@ -21,3 +32,14 @@ $(".video-embed-label i.icon-question-sign").livequery ->
     $(".modal .modal-body").html   "<img alt='video-embed-img' src='/assets/embed_helper.png'>"
     $(".modal .modal-footer").html "<a onclick=\"$('.modal').modal('hide')\" class='btn btn-info'>Close</a>"
     $(".modal").modal "show"
+
+# handle stripping out the src attribute of embed source for videos
+stripEmbedSource = (embedCode) ->
+  if embedCode.match(/.*\ssrc=[',"](.*?)[',"][\s]?.*?$/)
+    strippedCode = embedCode.replace(/.*\ssrc=[',"](.*?)[',"][\s]?.*?$/, "$1")
+
+    return strippedCode if strippedCode.match(/^http:\/\/.*/)
+
+    strippedCode.replace(/^(\/\/)?(.*)/, "http://$2")
+  else
+    embedCode
