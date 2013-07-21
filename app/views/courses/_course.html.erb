@@ -43,6 +43,12 @@
         <div class="lessons-listing">
           <%= render :partial => 'lessons/list', :locals => { :lessons => course.lessons } %>
         </div>
+
+        <%- if can? :update, course %>
+          <div class="add-lesson-text">
+            Want to add another lesson? <a href="<%= course_lessons_path(course) %>" data-method="post" class="add-lesson-link">Click Here!</a>
+          </div>
+        <%- end %>
       <%- end %>
     </div>
   </div>

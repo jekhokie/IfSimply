@@ -46,10 +46,10 @@
       <%- end %>
     </div>
 
-    <p class="lesson-background">
+    <div class="lesson-background">
       <%= best_in_place_if can?(:update, lesson), lesson, :background, :type       => :textarea,
                                                                        :path       => course_lesson_path(lesson.course, lesson),
                                                                        :html_attrs => { :rows => '10' } %>
-    </p>
+    </div>
   </div>
 <%- end %>
