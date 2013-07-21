@@ -8,7 +8,13 @@ Ifsimply::Application.routes.draw do
     match '/access_violation'    => 'home#access_violation',    :as => :access_violation
   end
 
-  resources :users, :only => [ :edit ]
+  resources :users, :only => [ :edit, :update ] do
+    member do
+      # handle image updates
+      match '/change_icon' => 'users#change_icon', :as => :change_icon_for
+      match '/upload_icon' => 'users#upload_icon', :as => :upload_icon_for
+    end
+  end
 
   resources :clubs, :only => [ :show, :edit, :update ] do
     member do
