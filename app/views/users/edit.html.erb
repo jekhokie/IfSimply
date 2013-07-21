@@ -1,0 +1,49 @@
+<div class="user-information">
+  <div class="user-logo-name-description row-fluid">
+    <div class="user-logo span3">
+      <%= image_tag "#{@user.icon.url(:medium)}" %>
+    </div>
+
+    <div class="user-name-description span9">
+      <div class="user-name">
+        <%= @user.name %>
+      </div>
+
+      <div class="user-description">
+        <%= @user.description %>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-clubs-listing">
+    <div class="owned-clubs row-fluid">
+      <div class="clubs-label span3">
+        User's Club:
+      </div>
+
+      <div class="clubs-listing span9">
+        <div class="subscription-name first">
+          <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", @user.clubs.first %>
+        </div>
+      </div>
+    </div>
+
+    <div class="subscribed-clubs row-fluid">
+      <div class="clubs-label span3">
+        Subscriptions:
+      </div>
+
+      <div class="clubs-listing span9">
+        <%- if @user.subscriptions.blank? %>
+          None
+        <%- else %>
+          <%- @user.subscriptions.each_with_index do |subscription, i| %>
+            <div class="subscription-name <%= "first" if i == 0 %>">
+              <%= link_to "#{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
+            </div>
+          <%- end %>
+        <%- end %>
+      </div>
+    </div>
+  </div>
+</div>

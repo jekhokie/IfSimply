@@ -1,0 +1,54 @@
+.user-information {
+  .user-logo-name-description {
+    margin-top: 25px;
+
+    .user-logo {
+    }
+
+    .user-name-description {
+      .user-name {
+        font-size:   34px;
+        font-weight: bold;
+        line-height: 34px;
+      }
+
+      .user-description {
+        font-size:   24px;
+        line-height: 24px;
+        margin-top:  15px;
+      }
+    }
+  }
+
+  .user-clubs-listing {
+    margin-top: 32px;
+
+    .owned-clubs,
+    .subscribed-clubs {
+      line-height: 22px;
+      margin-top:  12px;
+
+      .clubs-label {
+        font-size:   22px;
+        font-weight: bold;
+      }
+
+      .clubs-listing {
+        font-size:  20px;
+
+        .subscription-name {
+          font-style: italic;
+          margin-top: 9px;
+
+          a {
+            color: #333;
+          }
+        }
+
+        .subscription-name.first {
+          margin-top: 0px;
+        }
+      }
+    }
+  }
+}
