@@ -1,7 +1,11 @@
 <div class="user-information">
-  <div class="user-logo-name-description row-fluid">
-    <div class="user-logo span3">
+  <div class="user-icon-name-description row-fluid">
+    <div class="user-icon span3">
       <%= image_tag "#{@user.icon.url(:medium)}" %>
+
+      <%- if can? :update, @user %>
+        <a href="<%= change_icon_for_user_path(@user) %>" data-remote="true" class="btn btn-primary upload-icon-button">Change Image</a>
+      <%- end %>
     </div>
 
     <div class="user-name-description span9">

@@ -1,8 +1,34 @@
 .user-information {
-  .user-logo-name-description {
+  .user-icon-name-description {
     margin-top: 25px;
 
-    .user-logo {
+    .user-icon {
+      position:   relative;
+      text-align: center;
+
+      img {
+        max-height: 256px;
+        max-width:  220px;
+      }
+
+      .upload-icon-button {
+        opacity:         0.85;
+        -moz-opacity:    0.85;
+        -webkit-opacity: 0.85;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0.85);
+
+        font-size: 14px;
+        left:      23%;
+        position:  absolute;
+        top:       10%;
+      }
+
+      .upload-icon-button:hover {
+        opacity:         1;
+        -moz-opacity:    1;
+        -webkit-opacity: 1;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=1);
+      }
     }
 
     .user-name-description {
@@ -21,7 +47,7 @@
   }
 
   .user-clubs-listing {
-    margin-top: 32px;
+    margin-top: 52px;
 
     .owned-clubs,
     .subscribed-clubs {
