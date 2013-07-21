@@ -6,7 +6,6 @@
                                 :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
     <%= f.error_notification %>
 
-    <%= f.input :email,                 :required => true,  :autofocus    => true %>
     <%= f.input :password,              :required => false, :hint         => 'Leave blank to not change', :autocomplete => 'off' %>
     <%= f.input :password_confirmation, :required => false, :autocomplete => 'off' %>
     <%= f.input :current_password,      :required => true,  :hint         => 'To confirm changes' %>
