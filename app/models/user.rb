@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   after_create :create_club
 
-  attr_accessible :name, :description, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :description, :email, :icon, :password, :password_confirmation, :remember_me
 
   has_many :clubs, :dependent => :destroy
 
