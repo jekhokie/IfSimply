@@ -146,13 +146,13 @@ describe CoursesController do
   end
 
   describe "PUT 'update'" do
+    let(:course)    { FactoryGirl.create :course, :club_id => user.clubs.first.id }
+    let(:new_title) { "Test Course" }
+
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:users]
       sign_in user
     end
-
-    let(:course)    { FactoryGirl.create :course, :club_id => user.clubs.first.id }
-    let(:new_title) { "Test Course" }
 
     describe "for valid attributes" do
       before :each do
