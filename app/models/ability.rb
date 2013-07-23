@@ -23,7 +23,7 @@ class Ability
     end
 
     can [ :update ], Topic do |topic|
-      topic.user == user
+      topic.poster == user
     end
 
     can [ :update ], SalesPage do |sales_page|
