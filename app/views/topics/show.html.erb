@@ -10,11 +10,13 @@
   </p>
 
   <div class="topic-controls">
-    <%- if can?(:create, @topic.posts.build) %>
-      <div class="add-topic-post">
+    <div class="add-topic-post">
+      <%- if can?(:create, @topic.posts.build) %>
         <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="add-topic-post-link">Post</a>
-      </div>
-    <%- end %>
+      <%- else %>
+        <a href="<%= subscribe_to_club_path(@topic.club) %>" class="add-topic-post-link">Post</a>
+      <%- end %>
+    </div>
   </div>
 
   <div class="topic-posts row-fluid">
@@ -23,11 +25,13 @@
 
   <%- unless @topic.posts.select{ |post| !post.new_record? }.blank? %>
     <div class="topic-controls">
-      <%- if can?(:create, @topic.posts.build) %>
-        <div class="add-topic-post">
+      <div class="add-topic-post">
+        <%- if can?(:create, @topic.posts.build) %>
           <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="add-topic-post-link">Post</a>
-        </div>
-      <%- end %>
+        <%- else %>
+          <a href="<%= subscribe_to_club_path(@topic.club) %>" class="add-topic-post-link">Post</a>
+        <%- end %>
+      </div>
     </div>
   <%- end %>
 </div>

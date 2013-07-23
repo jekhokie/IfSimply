@@ -3,19 +3,24 @@ class TopicsController < ApplicationController
   before_filter :get_discussion_board, :only => [ :new, :create ]
 
   def new
-    authorize! :update, @discussion_board
-
     @topic = @discussion_board.topics.new
+
+    authorize! :create, @topic
   end
 
   def create
-    authorize! :update, @discussion_board
-
     @topic = @discussion_board.topics.new params[:topic]
+
+    authorize! :create, @topic
 
     if @topic.save
       flash[:notice] = "Topic posted successfully"
-      redirect_to edit_discussion_board_path(@discussion_board)
+
+      if can?(:update, @discussion_board.club)
+        redirect_to edit_discussion_board_path(@discussion_board)
+      else
+        redirect_to discussion_board_path(@discussion_board)
+      end
     else
       render :new
     end

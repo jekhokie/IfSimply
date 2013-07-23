@@ -32,35 +32,70 @@ describe ClubsUsersController do
     end
 
     describe "for a signed-in user" do
-      before :each do
-        @request.env["devise.mapping"] = Devise.mappings[:users]
-        sign_in user
+      describe "coming from the sales page" do
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in user
 
-        get 'new', :id => club.id
+          get 'new', :id => club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "returns the club" do
+          assigns(:club).should == club
+        end
+
+        it "returns a new unsaved subscription" do
+          assigns(:subscription).should be_new_record
+        end
+
+        it "returns a subscription that includes the club" do
+          assigns(:subscription).club.should == club
+        end
+
+        it "returns a subscription that includes the user" do
+          assigns(:subscription).user.should == user
+        end
+
+        it "ensures that the subscription session variable is cleared" do
+          session[:subscription].should be_blank
+        end
       end
 
-      it "returns http success" do
-        response.should be_success
-      end
+      describe "coming from a pro link for an existing basic subscriber" do
+        let!(:basic_user)   { FactoryGirl.create :user }
+        let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => basic_user, :level => :basic }
 
-      it "returns the club" do
-        assigns(:club).should == club
-      end
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in basic_user
 
-      it "returns a new unsaved subscription" do
-        assigns(:subscription).should be_new_record
-      end
+          get 'new', :id => club.id
+        end
 
-      it "returns a subscription that includes the club" do
-        assigns(:subscription).club.should == club
-      end
+        it "returns http success" do
+          response.should be_success
+        end
 
-      it "returns a subscription that includes the user" do
-        assigns(:subscription).user.should == user
-      end
+        it "returns the club" do
+          assigns(:club).should == club
+        end
 
-      it "ensures that the subscription session variable is cleared" do
-        session[:subscription].should be_blank
+        it "returns an existing subscription" do
+          assigns(:subscription).should_not be_new_record
+        end
+
+        it "returns the user's subscription" do
+          assigns(:subscription).user.should == basic_user
+          assigns(:subscription).club.should == club
+        end
+
+        it "ensures that the subscription session variable is cleared" do
+          session[:subscription].should be_blank
+        end
       end
     end
   end

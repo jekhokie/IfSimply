@@ -415,6 +415,51 @@ describe Ability do
         end
       end
     end
+
+    context "create" do
+      let!(:club)          { FactoryGirl.create :club }
+      let!(:owner_ability) { Ability.new club.user }
+      let!(:ability)       { Ability.new FactoryGirl.create(:user) }
+
+      it "succeeds when the user owns the club" do
+        owner_ability.should be_able_to(:create, club.discussion_board.topics.new)
+      end
+
+      it "fails when the user does not own the club" do
+        ability.should_not be_able_to(:create, club.discussion_board.topics.new)
+      end
+
+      describe "for a subscribed user" do
+        describe "for a pro member" do
+          let!(:pro_user)         { FactoryGirl.create :user }
+          let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => :pro }
+          let!(:pro_ability)      { Ability.new pro_user }
+
+          it "succeeds" do
+            pro_ability.should be_able_to(:create, club.discussion_board.topics.new)
+          end
+        end
+
+        describe "for a basic member" do
+          let!(:basic_user)         { FactoryGirl.create :user }
+          let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => club, :level => :basic }
+          let!(:basic_ability)      { Ability.new basic_user }
+
+          it "fails" do
+            basic_ability.should_not be_able_to(:create, club.discussion_board.topics.new)
+          end
+        end
+      end
+
+      describe "for a non-subscribed user" do
+        let!(:random_user) { FactoryGirl.create :user }
+        let!(:ability)     { Ability.new random_user }
+
+        it "fails" do
+          ability.should_not be_able_to(:create, club.discussion_board.topics.new)
+        end
+      end
+    end
   end
 
   describe "Post" do

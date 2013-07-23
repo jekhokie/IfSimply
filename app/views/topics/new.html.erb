@@ -11,7 +11,7 @@
       <%= f.input :description, :required => true, :as => :text, :input_html => { :rows => "10" } %>
 
       <%= f.button :submit, "Create Topic", :class => "btn btn-primary create-topic-button" %>
-      <a href="<%= edit_discussion_board_path(@discussion_board) %>" class="btn btn-primary cancel-topic-create">Cancel</a>
+      <a href="<%= can?(:update, @discussion_board.club) ? edit_discussion_board_path(@discussion_board) : discussion_board_path(@discussion_board) %>" class="btn btn-primary cancel-topic-create">Cancel</a>
     <%- end %>
   </div>
 </div>

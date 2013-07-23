@@ -2,11 +2,17 @@ class ClubsUsersController < ApplicationController
   before_filter :get_club
 
   def new
-    @subscription      = ClubsUsers.new
-    @subscription.club = @club
+    if user_signed_in?
+      @subscription = ClubsUsers.first{ |subscription| subscription.user == current_user and subscription.club == @club }
+    end
+
+    if @subscription.nil?
+      @subscription      = ClubsUsers.new
+      @subscription.club = @club
+    end
 
     if user_signed_in?
-      @subscription.user = current_user
+      @subscription.user = current_user if @subscription.user.nil?
       session.delete(:subscription) unless session[:subscription].blank?
     else
       session[:subscription] = @subscription
