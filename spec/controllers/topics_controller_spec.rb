@@ -112,6 +112,10 @@ describe TopicsController do
     it "returns a new unsaved topic" do
       assigns(:topic).should be_new_record
     end
+
+    it "assigns the user to the unsaved topic" do
+      assigns(:topic).poster.should == user
+    end
   end
 
   describe "POST 'create'" do
