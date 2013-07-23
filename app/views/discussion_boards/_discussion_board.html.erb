@@ -13,8 +13,11 @@
     <div class="discussion-board-topic-listing span12">
       <%- if discussion_board.topics.blank? %>
         <h2>No Topics Yet
-          <%- if can? :update, discussion_board %>
-            - Go Ahead and <a href="<%= new_discussion_board_topic_path(discussion_board) %>" class="create-first-topic-link">Create the First!</a>
+          - Go Ahead and
+          <%- if can? :create, discussion_board.topics.build %>
+            <a href="<%= new_discussion_board_topic_path(discussion_board) %>" class="create-first-topic-link">Create the First!</a>
+          <%- else %>
+            <a href="<%= subscribe_to_club_path(discussion_board.club) %>" class="create-first-topic-link">Create the First!</a>
           <%- end %>
         </h2>
       <%- else %>
