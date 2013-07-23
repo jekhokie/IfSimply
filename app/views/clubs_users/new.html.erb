@@ -1,6 +1,12 @@
 <div class="club-subscription-information">
   <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
 
+  <%- unless @subscription.new_record? %>
+    <div class="upgrade-heading">
+      Upgrade to a Pro membership to get this and many other exclusive benefits
+    </div>
+  <%- end %>
+
   <div class="club-name">
     <div class="name"><%= @club.name.sub(/:$/, '') %>:</div>
     <div class="sub-heading"><%= @club.sub_heading %></div>
