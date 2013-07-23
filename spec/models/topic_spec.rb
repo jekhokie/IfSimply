@@ -20,11 +20,24 @@ describe Topic do
     end
   end
 
-  describe "user" do
-    let(:discussion_board) { FactoryGirl.create :discussion_board }
+  describe "poster" do
+    let!(:user)  { FactoryGirl.create :user }
+    let!(:topic) { FactoryGirl.create :topic, :user_id => user.id }
 
-    it "returns the corresponding topic's user" do
-      FactoryGirl.create(:topic, :discussion_board_id => discussion_board.id).user.should == discussion_board.user
+    describe "for a current user" do
+      it "returns the user" do
+        topic.poster.should == user
+      end
+    end
+
+    describe "for a user that no longer exists" do
+      before :each do
+        user.destroy
+      end
+
+      it "returns 'unknown'" do
+        topic.poster.should == 'unknown'
+      end
     end
   end
 
