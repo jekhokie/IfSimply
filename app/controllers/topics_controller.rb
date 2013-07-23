@@ -3,13 +3,14 @@ class TopicsController < ApplicationController
   before_filter :get_discussion_board, :only => [ :new, :create ]
 
   def new
-    @topic = @discussion_board.topics.new
+    @topic = @discussion_board.topics.new :user_id => current_user.id
 
     authorize! :create, @topic
   end
 
   def create
     @topic = @discussion_board.topics.new params[:topic]
+    @topic.user_id = current_user.id
 
     authorize! :create, @topic
 
