@@ -169,5 +169,50 @@ describe TopicsController do
         assigns(:topic).errors.should_not be_blank
       end
     end
+
+    describe "for the club owner" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+
+        post 'create', :discussion_board_id => discussion_board.id, :topic => { :subject => new_subject, :description => "Test description" }
+      end
+
+      it "returns http redirect" do
+        response.should be_redirect
+      end
+
+      it "redirects to the edit discussion_board path" do
+        response.should redirect_to(edit_discussion_board_path(discussion_board))
+      end
+
+      it "returns the discussion_board" do
+        assigns(:discussion_board).should == discussion_board
+      end
+    end
+
+    describe "for a pro subscriber" do
+      let!(:pro_user) { FactoryGirl.create :user }
+      let!(:subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => discussion_board.club, :level => :pro }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in pro_user
+
+        post 'create', :discussion_board_id => discussion_board.id, :topic => { :subject => new_subject, :description => "Test description" }
+      end
+
+      it "returns http redirect" do
+        response.should be_redirect
+      end
+
+      it "redirects to the discussion_board path" do
+        response.should redirect_to(discussion_board_path(discussion_board))
+      end
+
+      it "returns the discussion_board" do
+        assigns(:discussion_board).should == discussion_board
+      end
+    end
   end
 end

@@ -3,11 +3,13 @@
     <div class="topic-main-heading">
       <h2>Topics</h2>
 
-      <%- if can? :update, discussion_board %>
-        <div class="add-discussion-board-topic">
+      <div class="add-discussion-board-topic">
+        <%- if can? :create, discussion_board.topics.build %>
           <a href="<%= new_discussion_board_topic_path(discussion_board) %>" class="add-discussion-board-topic-link">Add Topic</a>
-        </div>
-      <%- end %>
+        <%- else %>
+          <a href="<%= subscribe_to_club_path(discussion_board.club) %>" class="add-discussion-board-topic-link">Add Topic</a>
+        <%- end %>
+      </div>
     </div>
 
     <div class="topic-sub-headings">
@@ -18,7 +20,7 @@
   </div>
 
   <ul class="topic-listing-entries">
-    <%- discussion_board.try(:topics).sort_by(&:updated_at).reverse.each_with_index do |topic, i| %>
+    <%- discussion_board.topics.select{ |topic| !topic.new_record? }.sort_by(&:updated_at).reverse.each_with_index do |topic, i| %>
       <li class="<%= "first-topic" if i == 0 %>">
         <div class="subject-started-by">
           <div class="subject">
