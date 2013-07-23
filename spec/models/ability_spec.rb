@@ -8,7 +8,7 @@ describe Ability do
   let(:ability) { Ability.new user }
 
   describe "Club" do
-    let(:owned_club)     { FactoryGirl.create :club, :user_id => user.id }
+    let(:owned_club)     { FactoryGirl.create :club, :user => user }
     let(:non_owned_club) { FactoryGirl.create :club }
 
     context "update" do
@@ -44,8 +44,8 @@ describe Ability do
   end
 
   describe "Course" do
-    let(:club)             { FactoryGirl.create :club, :user_id => user.id }
-    let(:owned_course)     { FactoryGirl.create :course, :club_id => club.id }
+    let(:club)             { FactoryGirl.create :club, :user => user }
+    let(:owned_course)     { FactoryGirl.create :course, :club => club }
     let(:non_owned_course) { FactoryGirl.create :course }
 
     context "create" do
@@ -122,9 +122,9 @@ describe Ability do
   end
 
   describe "Lesson" do
-    let(:club)             { FactoryGirl.create :club, :user_id => user.id }
-    let(:course)           { FactoryGirl.create :course, :club_id => club.id }
-    let(:owned_lesson)     { FactoryGirl.create :lesson, :course_id => course.id }
+    let(:club)             { FactoryGirl.create :club, :user => user }
+    let(:course)           { FactoryGirl.create :course, :club => club }
+    let(:owned_lesson)     { FactoryGirl.create :lesson, :course => course }
     let(:non_owned_lesson) { FactoryGirl.create :course }
 
     context "create" do
@@ -202,8 +202,8 @@ describe Ability do
  end
 
   describe "Blog" do
-    let(:club)           { FactoryGirl.create :club, :user_id => user.id }
-    let(:owned_blog)     { FactoryGirl.create :blog, :club_id => club.id }
+    let(:club)           { FactoryGirl.create :club, :user => user }
+    let(:owned_blog)     { FactoryGirl.create :blog, :club => club }
     let(:non_owned_blog) { FactoryGirl.create :blog }
 
     context "create" do
@@ -290,7 +290,7 @@ describe Ability do
   end
 
   describe "DiscussionBoard" do
-    let(:club)                       { FactoryGirl.create :club, :user_id => user.id }
+    let(:club)                       { FactoryGirl.create :club, :user => user }
     let(:owned_discussion_board)     { club.discussion_board }
     let(:non_owned_discussion_board) { FactoryGirl.create :discussion_board }
 
@@ -359,8 +359,8 @@ describe Ability do
   end
 
   describe "Topic" do
-    let(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
-    let(:owned_topic)      { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
+    let(:discussion_board) { FactoryGirl.create :discussion_board, :club => user.clubs.first }
+    let(:owned_topic)      { FactoryGirl.create :topic, :discussion_board => discussion_board, :user_id => user.id }
     let(:non_owned_topic)  { FactoryGirl.create :topic }
 
     context "update" do
@@ -463,9 +463,9 @@ describe Ability do
   end
 
   describe "Post" do
-    let!(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
-    let!(:topic)            { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
-    let!(:owned_topic)      { FactoryGirl.create :topic, :discussion_board_id => discussion_board.id }
+    let!(:discussion_board) { FactoryGirl.create :discussion_board, :club => user.clubs.first }
+    let!(:topic)            { FactoryGirl.create :topic, :discussion_board => discussion_board }
+    let!(:owned_topic)      { FactoryGirl.create :topic, :discussion_board => discussion_board }
     let!(:non_owned_topic)  { FactoryGirl.create :topic }
 
     context "create" do
@@ -511,7 +511,7 @@ describe Ability do
   end
 
   describe "SalesPage" do
-    let(:owned_sales_page)     { FactoryGirl.create :sales_page, :club_id => user.clubs.first.id }
+    let(:owned_sales_page)     { FactoryGirl.create :sales_page, :club => user.clubs.first }
     let(:non_owned_sales_page) { FactoryGirl.create :sales_page }
 
     context "read" do

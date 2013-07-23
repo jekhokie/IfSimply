@@ -1,5 +1,5 @@
 class Topic < ActiveRecord::Base
-  attr_accessible :description, :subject
+  attr_accessible :description, :subject, :user_id
 
   validates :subject,     :presence => { :message => "for topic can't be blank" }
   validates :description, :presence => { :message => "for topic can't be blank" }
@@ -8,8 +8,12 @@ class Topic < ActiveRecord::Base
 
   has_many :posts, :dependent => :destroy
 
-  def user
-    discussion_board.user
+  def poster
+    begin
+      User.try(:find, user_id)
+    rescue
+      'unknown'
+    end
   end
 
   def last_updated_time
