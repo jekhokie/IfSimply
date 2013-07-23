@@ -27,6 +27,10 @@ describe PostsController do
     it "returns a new unsaved post" do
       assigns(:post).should be_new_record
     end
+
+    it "assigns the user to the unsaved post" do
+      assigns(:post).poster.should == user
+    end
   end
 
   describe "POST 'create'" do
