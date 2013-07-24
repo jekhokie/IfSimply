@@ -204,8 +204,22 @@
             margin:        6px 0px 3px 0px;
           }
 
-          .poster-name {
-            font-size: 18px;
+          .poster-icon-name {
+            .poster-icon {
+              display: inline-block;
+
+              img {
+                max-width:  50px;
+                max-height: 50px;
+              }
+            }
+
+            .poster-name {
+              display:    inline-block;
+              font-size:  18px;
+              width:      125px;
+              text-align: right;
+            }
           }
 
           .number-posts,

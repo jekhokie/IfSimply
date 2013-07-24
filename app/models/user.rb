@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_many :subscriptions, :class_name => ClubsUsers
 
-  has_attached_file :icon, :styles      => { :medium => "256x256>", :thumb => "100x100>" },
+  has_attached_file :icon, :styles      => { :medium => "256x256>", :thumb => "100x100>", :tiny => "50x50>" },
                            :default_url => Settings.users[:default_icon]
 
   validates :name,        :presence => true, :uniqueness => true

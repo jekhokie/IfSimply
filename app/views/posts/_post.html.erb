@@ -5,12 +5,18 @@
 
   <div class="post-information-content">
     <div class="post-information">
-      <div class="poster-name">
-        <%- if post.poster == post.club.user %>
-          <span class="icon-star"> <%= post.poster.name %></i>
-        <%- else %>
-          <%= post.poster.name %>
-        <%- end %>
+      <div class="poster-icon-name">
+        <div class="poster-icon">
+          <%= image_tag "#{post.poster.icon.url(:tiny)}" %>
+        </div>
+
+        <div class="poster-name">
+          <%- if post.poster == post.club.user %>
+            <span class="icon-star"> <%= post.poster.name.split(' ').first %></i>
+          <%- else %>
+            <%= post.poster.name.split(' ').first %>
+          <%- end %>
+        </div>
       </div>
 
       <hr/>
