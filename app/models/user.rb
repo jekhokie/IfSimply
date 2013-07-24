@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates :name,        :presence => true, :uniqueness => true
   validates :email,       :presence => true, :uniqueness => true
-  validates :description, :presence => { :message => "for user can't be blank" }
+  validates :description, :presence => { :message => "for user can't be blank" }, :on => :update
 
   validates_attachment_content_type :icon, :content_type => [ 'image/jpeg', 'image/gif', 'image/png', 'image/tiff' ]
 

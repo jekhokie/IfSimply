@@ -17,8 +17,11 @@ describe User do
   end
 
   describe "description" do
-    it "should require a description" do
-      FactoryGirl.build(:user, :description => "").should_not be_valid
+    it "should require a description on update" do
+      (user = FactoryGirl.build(:user, :description => "")).should be_valid
+      user.save
+      assert_equal false, user.valid?
+      user.errors.should include(:description)
     end
   end
 
