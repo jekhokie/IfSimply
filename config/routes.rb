@@ -1,6 +1,16 @@
 Ifsimply::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations', :sessions => 'sessions' }
 
+  namespace :mercury do
+    resources :images
+  end
+
+  scope '/mercury' do
+    get ':type/:resource'        => "mercury#resource"
+    get 'snippets/:name/options' => "mercury#snippet_options"
+    get 'snippets/:name/preview' => "mercury#snippet_preview"
+  end
+
   root :to => 'home#index'
 
   scope '/' do
