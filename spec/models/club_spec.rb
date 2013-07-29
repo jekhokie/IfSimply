@@ -9,8 +9,6 @@ describe Club do
 
   it { should have_many(:topics).through(:discussion_board) }
 
-  it { should have_attached_file :logo }
-
   it { should have_many :subscriptions }
 
   it { should have_many(:lessons).through(:courses) }
@@ -89,11 +87,6 @@ describe Club do
     it "returns false when having a price of less than $10" do
       FactoryGirl.build(:club, :price_cents => "1").should_not be_valid
     end
-
-    # logo
-    it { should validate_attachment_content_type(:logo)
-           .allowing('image/jpeg', 'image/png', 'image/gif')
-           .rejecting('text/plain') }
 
     # user association
     it "returns false when missing a user_id" do
