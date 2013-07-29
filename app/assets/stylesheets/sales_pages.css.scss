@@ -75,11 +75,11 @@
 
         .club-price-currency {
           display:     inline;
-          font-size:   52px;
+          font-size:   32px;
           font-weight: bold;
 
           span {
-            line-height:    67px;
+            line-height:    55px;
             vertical-align: top;
           }
         }
@@ -88,13 +88,14 @@
           display:     inline-block;
           font-size:   52px;
           font-weight: bold;
+          height:      65px;
+          line-height: 58px;
+          overflow:    hidden;
+          text-align:  left;
+          max-width:   200px;
 
-          .club-price-edit {
-            display: inline-block;
-          }
-
-          input {
-            width: 50px;
+          textarea {
+            width: auto !important;
           }
         }
 
