@@ -26,7 +26,9 @@ Ifsimply::Application.routes.draw do
     end
   end
 
-  resources :clubs, :only => [ :show, :edit, :update ] do
+  # mercury editor
+  get '/editor/clubs/:id' => "clubs#edit", :as => :club_editor
+  resources :clubs, :only => [ :show, :update ] do
     member do
       # handle image updates
       match '/change_logo' => 'clubs#change_logo', :as => :change_logo_for
