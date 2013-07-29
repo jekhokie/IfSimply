@@ -1,26 +1,14 @@
 <%= render :partial => 'shared/welcome_navigation', :locals => { :club => club } %>
 
-<div class="club-avatar-name-description row-fluid">
-  <div class="club-avatar span4">
-    <%= image_tag "#{club.logo.url(:medium)}" %>
-
-    <%- if can? :update, club %>
-      <a href="<%= change_logo_for_club_path(club) %>" data-remote="true" class="btn btn-primary upload-logo-button">Change Image</a>
-    <%- end %>
+<div class="club-logo-name-description row-fluid">
+  <div class="club-logo span4">
+    <img id="club_logo" data-mercury="image" src="<%= club.logo %>">
   </div>
 
   <div class="club-name-description span8">
-    <div class="club-name">
-      <%= best_in_place_if can?(:update, club), club, :name, :type => :input, :html_attrs => { :rows => '1' } %>
-    </div>
-
-    <div class="club-sub-heading">
-      <%= best_in_place_if can?(:update, club), club, :sub_heading, :type => :input, :html_attrs => { :rows => '1' } %>
-    </div>
-
-    <div class="club-description">
-      <%= best_in_place_if can?(:update, club), club, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
-    </div>
+    <div id="club_name"        class="club-name"        data-mercury="simple"><%= club.name %></div>
+    <div id="club_sub_heading" class="club-sub-heading" data-mercury="simple"><%= club.sub_heading %></div>
+    <div id="club_description" class="club-description" data-mercury="simple"><%= club.description %></div>
   </div>
 </div>
 

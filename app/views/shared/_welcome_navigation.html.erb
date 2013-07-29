@@ -5,7 +5,7 @@
 
   <div class="user-navigation-container span7">
     <%- unless !user_signed_in? or (controller_name == 'sales_pages' and !can?(:update, club) or (controller_name == 'clubs_users' and action_name == 'new')) %>
-      <a href="<%= can?(:update, club) ? edit_club_path(club) : club_path(club) %>"
+      <a href="<%= can?(:update, club) ? club_editor_path(club) : club_path(club) %>"
          class="club-link <%= 'selected' if controller_name == 'clubs' %>">Club Home</a>
 
       <a href="<%= show_all_club_courses_path(club) %>"
