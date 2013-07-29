@@ -126,6 +126,10 @@ describe ClubsController do
         it "renders the access_violation template" do
           response.should render_template('home/access_violation')
         end
+
+        it "renders the application layout" do
+          response.should render_template(:layout => "layouts/application")
+        end
       end
 
       describe "for club belonging to user" do
@@ -139,6 +143,10 @@ describe ClubsController do
 
         it "returns the club" do
           assigns(:club).should_not be_nil
+        end
+
+        it "renders the mercury layout" do
+          response.should render_template(:layout => "layouts/mercury")
         end
       end
     end
@@ -155,7 +163,10 @@ describe ClubsController do
 
     describe "for valid attributes" do
       before :each do
-        put 'update', :id => club.id, :club => { :name => new_name }
+        put 'update', :id => club.id, :content => { :club_name        => { :value => new_name },
+                                                    :club_sub_heading => { :value => "abc" },
+                                                    :club_description => { :value => "123" },
+                                                    :club_logo        => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http success" do
@@ -175,7 +186,10 @@ describe ClubsController do
     describe "for invalid attributes" do
       before :each do
         @old_name = club.name
-        put 'update', :id => club.id, :club => { :name => "" }
+        put 'update', :id => club.id, :content => { :club_name        => { :value => "" },
+                                                    :club_sub_heading => { :value => "" },
+                                                    :club_description => { :value => "" },
+                                                    :club_logo        => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http unprocessable" do
@@ -189,102 +203,6 @@ describe ClubsController do
       it "does not update the attributes" do
         club.reload
         club.name.should == @old_name
-      end
-    end
-  end
-
-  describe "GET 'change_logo'" do
-    let(:club) { user.clubs.first }
-
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
-
-      put 'change_logo', :id => club.id, :format => :js
-    end
-
-    it "returns http success" do
-      response.should be_success
-    end
-
-    it "returns the club" do
-      assigns(:club).should == club
-    end
-  end
-
-  describe "PUT 'upload_logo'" do
-    let(:club)         { user.clubs.first }
-    let(:valid_logo)   { fixture_file_upload('/soccer_ball.jpg', 'image/jpeg') }
-    let(:invalid_logo) { fixture_file_upload('/soccer_ball.txt', 'text/plain') }
-
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
-    end
-
-    describe "for a valid image format" do
-      before :each do
-        put 'upload_logo', :id => club.id, :club => { :logo => valid_logo }, :format => :js
-      end
-
-      it "returns http success" do
-        response.should be_success
-      end
-
-      it "renders the upload_logo template" do
-        response.should render_template('clubs/upload_logo')
-      end
-
-      it "returns the club" do
-        assigns(:club).should == club
-      end
-
-      it "assigns the club logo" do
-        File.basename(assigns(:club).logo.to_s.sub(/\?.*/, '')).should == valid_logo.original_filename
-      end
-    end
-
-    describe "for an invalid image format" do
-      before :each do
-        put 'upload_logo', :id => club.id, :club => { :logo => invalid_logo }, :format => :js
-      end
-
-      it "returns http success" do
-        response.should be_success
-      end
-
-      it "renders change_logo" do
-        response.should render_template("clubs/change_logo")
-      end
-
-      it "returns the club" do
-        assigns(:club).should == club
-      end
-
-      it "does not assign the club logo" do
-        File.basename(assigns(:club).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
-      end
-    end
-
-    describe "for a non-specified logo value" do
-      before :each do
-        put 'upload_logo', :id => club.id, :format => :js
-      end
-
-      it "returns http success" do
-        response.should be_success
-      end
-
-      it "renders change_logo" do
-        response.should render_template("clubs/change_logo")
-      end
-
-      it "returns the course" do
-        assigns(:club).should == club
-      end
-
-      it "does not assign the course logo" do
-        File.basename(assigns(:club).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
       end
     end
   end
