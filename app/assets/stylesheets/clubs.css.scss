@@ -1,9 +1,9 @@
-.club-avatar-name-description {
+.club-logo-name-description {
   margin-top: 20px;
   max-height: 300px;
   min-height: 200px;
 
-  .club-avatar {
+  .club-logo {
     position:   relative;
     text-align: center;
 
@@ -39,7 +39,8 @@
       font-size:   48px;
       font-weight: bold;
       height:      45px;
-      line-height: 35px;
+      line-height: 45px;
+      overflow:    hidden;
       width:       100%;
 
       input {
@@ -49,12 +50,13 @@
     }
 
     .club-sub-heading {
-      font-size:   30px;
-      font-style:  italic;
-      font-weight: bold;
-      height:      50px;
-      line-height: 35px;
-      width:       100%;
+      font-size:     30px;
+      font-style:    italic;
+      font-weight:   bold;
+      height:        55px;
+      line-height:   55px;
+      overflow:      hidden;
+      width:         100%;
 
       input {
         max-width: 620px;
@@ -64,7 +66,9 @@
 
     .club-description {
       font-size:  18px;
+      height:     125px;
       max-height: 215px;
+      overflow:   hidden;
       width:      100%;
 
       textarea {
@@ -120,7 +124,7 @@
   }
 
   .club-course-listing {
-    height:  290px;
+    height:  320px;
     margin:  0px;
     padding: 15px auto;
 
