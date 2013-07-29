@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
     @violation = exception
     render :template => 'home/access_violation', :status => 403
   end
+
+  def respond_error_to_mercury(resource)
+    response.headers["X-Flash-Error"] = resource.errors.full_messages.join("\n")
+    render :text => "error", :status => 422
+  end
 end
