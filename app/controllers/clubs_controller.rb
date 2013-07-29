@@ -24,7 +24,7 @@ class ClubsController < ApplicationController
     if @club.save
       render :text => ""
     else
-      respond_error_to_mercury @club
+      respond_error_to_mercury [ @club ]
     end
   end
 
