@@ -11,8 +11,10 @@
 
   .sales-page-heading {
     font-size:   60px;
-    line-height: 60px;
-    margin:      25px auto;
+    line-height: 63px;
+    margin:      20px auto;
+    max-height:  70px;
+    overflow:    hidden;
 
     input {
       text-align: center;
@@ -22,8 +24,10 @@
 
   .sales-page-sub-heading {
     font-size:   36px;
-    line-height: 36px;
+    line-height: 40px;
     margin:      25px auto;
+    max-height:  85px;
+    overflow:    hidden;
 
     input {
       text-align: center;
@@ -54,25 +58,38 @@
 
       .sales-page-call-to-action {
         font-size:   46px;
-        line-height: 46px;
+        line-height: 50px;
         margin:      25px auto;
+        max-height:  105px;
+        overflow:    hidden;
 
         input {
           width: 100%;
         }
       }
 
-      .club-buy-cost {
+      .club-buy-price {
         line-height: 63px;
         margin-top:  15px;
         text-align:  center;
 
-        .club-cost {
+        .club-price-currency {
+          display:     inline;
+          font-size:   52px;
+          font-weight: bold;
+
+          span {
+            line-height:    67px;
+            vertical-align: top;
+          }
+        }
+
+        .club-price {
           display:     inline-block;
           font-size:   52px;
           font-weight: bold;
 
-          .club-cost-edit {
+          .club-price-edit {
             display: inline-block;
           }
 
@@ -112,8 +129,13 @@
         }
 
         .video-related {
-          display:    inline-block;
-          margin-top: 8px;
+          display:        inline-block;
+          font-size:      18px;
+          height:         40px;
+          margin-top:     8px;
+          overflow:       hidden;
+          vertical-align: bottom;
+          width:          690px;
         }
 
         .video-related:hover {
@@ -138,13 +160,21 @@
     }
 
     .benefits {
-      font-size:   32px;
+      font-size: 32px;
 
       ul li {
         line-height: 40px;
 
-        input {
-          width: 95%;
+        .benefit-container {
+          float:    right;
+          height:   40px;
+          overflow: hidden;
+          width:    100%;
+
+          input {
+            list-style-type: none;
+            width:           95%;
+          }
         }
       }
     }
