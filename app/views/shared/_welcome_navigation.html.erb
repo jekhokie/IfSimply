@@ -19,7 +19,7 @@
                                                    controller_name == 'topics' %>">Discussions</a>
 
       <%- if user_signed_in? and can?(:update, club) %>
-        <a href="<%= edit_sales_page_path(club.sales_page) %>"
+        <a href="<%= sales_page_editor_path(club) %>"
            class="sales-page-link <%= 'selected' if controller_name == 'sales_pages' %>">Sales Page</a>
       <%- end %>
     <%- end %>
