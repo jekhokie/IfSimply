@@ -26,8 +26,10 @@ Ifsimply::Application.routes.draw do
     end
   end
 
-  # mercury editor
-  get '/editor/clubs/:id' => "clubs#edit", :as => :club_editor
+  # mercury editor routes
+  get '/editor/clubs/:id'                 => "clubs#edit",       :as => :club_editor
+  get '/editor/clubs/:club_id/sales_page' => "sales_pages#edit", :as => :sales_page_editor
+
   resources :clubs, :only => [ :show, :update ] do
     member do
       # handle image updates
@@ -39,7 +41,8 @@ Ifsimply::Application.routes.draw do
       match '/add_member' => 'clubs_users#create', :as => 'add_member_to'
     end
 
-    resource  :sales_page, :only => [ :show ]
+    # mercury editor
+    resource  :sales_page, :only => [ :update, :show ]
 
     resources :courses, :only => [ :create ] do
       collection do
@@ -53,8 +56,6 @@ Ifsimply::Application.routes.draw do
       end
     end
   end
-
-  resources :sales_pages, :only => [ :edit, :update ]
 
   resources :courses, :only => [ :show, :edit, :update ] do
     member do
