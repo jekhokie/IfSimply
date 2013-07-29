@@ -1,25 +1,3 @@
-jQuery ->
-  # set up in-line editing
-  $(".best_in_place").each ->
-    # handle response for successful video definition
-    if $(this).hasClass("video-related")
-      $(this).best_in_place()
-        .bind "best_in_place:pre_update", ->
-          # strip out the src attribute if it exists
-          $(this).find("input").val stripEmbedSource($(this).find("input").val())
-        .bind "ajax:success", ->
-          # update the video container to point at the newly-specified URL
-          $(this).closest(".video-container").find("iframe").attr "src", $(this).html()
-    else
-      $(this).best_in_place()
-
-  # handle updating the new file for upload display
-  $("label.file-upload-label input").livequery ->
-    $(this).on "change", ->
-      fileName = $(this).val().replace(/^.*[\\\/]/, '')
-      fileText = "<span class='file-preview-text'>New File: </span>" + fileName
-      $(this).closest(".new-file-select").find(".selected-file-preview").html fileText
-
 # handle 401 responses (unauthorized) when AJAX requests
 $.ajaxSetup statusCode:
   401: ->
@@ -32,6 +10,30 @@ $(".video-embed-label i.icon-question-sign").livequery ->
     $(".modal .modal-body").html   "<img alt='video-embed-img' src='/assets/embed_helper.png'>"
     $(".modal .modal-footer").html "<a onclick=\"$('.modal').modal('hide')\" class='btn btn-info'>Close</a>"
     $(".modal").modal "show"
+
+# mercury update hooks
+jQuery(window).on "mercury:ready", ->
+  # Mercury.on "action", (event, actionType) ->
+  #   # save button clicked
+  #   if actionType.action == "save"
+
+  # page saved successfully
+  Mercury.on "saved", (event, element) ->
+    alert "Page saved successfully!"
+
+  Mercury.on "mode", (event, eventType) ->
+    # preview button clicked
+    if eventType.mode == "preview"
+      $(".hide-preview").toggleClass "hidden-element"
+
+  Mercury.on "region:blurred", (event, obj) ->
+    # handle updating video URLs
+    if obj.region.element.parent().hasClass "video-related"
+      unless obj.region.element.val() == window.videoSource
+        videoSource = stripEmbedSource(obj.region.element.val())
+        window.videoSource = videoSource
+        obj.region.element.val videoSource
+        obj.region.element.closest(".video-container").find("iframe").attr "src", videoSource
 
 # handle stripping out the src attribute of embed source for videos
 stripEmbedSource = (embedCode) ->
