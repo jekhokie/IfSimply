@@ -13,14 +13,9 @@ class User < ActiveRecord::Base
 
   has_many :subscriptions, :class_name => ClubsUsers
 
-  has_attached_file :icon, :styles      => { :medium => "256x256>", :thumb => "100x100>", :tiny => "50x50>" },
-                           :default_url => Settings.users[:default_icon]
-
   validates :name,        :presence => true, :uniqueness => true
   validates :email,       :presence => true, :uniqueness => true
   validates :description, :presence => { :message => "for user can't be blank" }, :on => :update
-
-  validates_attachment_content_type :icon, :content_type => [ 'image/jpeg', 'image/gif', 'image/png', 'image/tiff' ]
 
   def memberships
     Club.find subscriptions.map(&:club_id)
@@ -28,6 +23,7 @@ class User < ActiveRecord::Base
 
   def assign_defaults
     self.description = Settings.users[:default_description]
+    self.icon        = Settings.users[:default_icon]
   end
 
   private
