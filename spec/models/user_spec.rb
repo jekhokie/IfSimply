@@ -4,16 +4,8 @@ describe User do
   it { should have_many :clubs }
   it { should have_many :subscriptions }
 
-  it { should have_attached_file :icon }
-
   it "can be instantiated" do
     User.new.should be_an_instance_of(User)
-  end
-
-  describe "icon" do
-    it { should validate_attachment_content_type(:icon)
-           .allowing('image/jpeg', 'image/png', 'image/gif')
-           .rejecting('text/plain') }
   end
 
   describe "description" do
@@ -159,6 +151,10 @@ describe User do
 
     it "assigns the correct default description" do
       @user.description.should == Settings.users[:default_description]
+    end
+
+    it "assigns the correct default icon" do
+      @user.icon.should == Settings.users[:default_icon]
     end
   end
 end
