@@ -89,7 +89,7 @@
   <div class="club-discussion-board span6">
     <div class="discussion-board-listing-heading">
       <h2>
-        <a href="<%= can?(:update, club) ? edit_discussion_board_path(club.discussion_board) : discussion_board_path(club.discussion_board) %>" class="hover-heading">
+        <a href="<%= can?(:update, club) ? discussion_board_editor_path(club.discussion_board) : discussion_board_path(club.discussion_board) %>" class="hover-heading">
           Discussions <span class="discussion-board-count header-count">(<%= club.topics.count %>)</span>
         </a>
       </h2>
@@ -99,7 +99,7 @@
       <%- if club.discussion_board.topics.blank? %>
         <h2>No Topics Yet
           <%- if can? :update, club %>
-            - <a href="<%= edit_discussion_board_path(club.discussion_board) %>" class="create-first-topic-link">Create the First!</a>
+            - <a href="<%= discussion_board_editor_path(club.discussion_board) %>" class="create-first-topic-link">Create the First!</a>
           <%- end %>
         </h2>
       <%- else %>

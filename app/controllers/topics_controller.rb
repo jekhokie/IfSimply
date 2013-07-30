@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
       flash[:notice] = "Topic posted successfully"
 
       if can?(:update, @discussion_board.club)
-        redirect_to edit_discussion_board_path(@discussion_board)
+        redirect_to discussion_board_editor_path(@discussion_board)
       else
         redirect_to discussion_board_path(@discussion_board)
       end

@@ -140,7 +140,7 @@ describe TopicsController do
       end
 
       it "redirects to the discussion_board path" do
-        response.should redirect_to(edit_discussion_board_path(discussion_board))
+        response.should redirect_to(discussion_board_editor_path(discussion_board))
       end
 
       it "returns the discussion_board" do
@@ -187,7 +187,7 @@ describe TopicsController do
       end
 
       it "redirects to the edit discussion_board path" do
-        response.should redirect_to(edit_discussion_board_path(discussion_board))
+        response.should redirect_to(discussion_board_editor_path(discussion_board))
       end
 
       it "returns the discussion_board" do
