@@ -31,7 +31,7 @@
   default_sub_heading:    Sales Page Sub-Heading Here
 :users:
   default_description: A description about yourself here
-  default_icon:        iS_club_thumb.jpg
+  default_icon:        "/assets/iS_club_thumb.jpg"
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
   port:                 <SMTP_PORT>         # common: 587
