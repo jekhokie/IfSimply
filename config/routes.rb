@@ -27,8 +27,9 @@ Ifsimply::Application.routes.draw do
   end
 
   # mercury editor routes
-  get '/editor/clubs/:id'                 => "clubs#edit",       :as => :club_editor
-  get '/editor/clubs/:club_id/sales_page' => "sales_pages#edit", :as => :sales_page_editor
+  get '/editor/clubs/:id'                 => "clubs#edit",             :as => :club_editor
+  get '/editor/discussion_boards/:id'     => "discussion_boards#edit", :as => :discussion_board_editor
+  get '/editor/clubs/:club_id/sales_page' => "sales_pages#edit",       :as => :sales_page_editor
 
   resources :clubs, :only => [ :show, :update ] do
     member do
@@ -75,7 +76,7 @@ Ifsimply::Application.routes.draw do
     end
   end
 
-  resources :discussion_boards, :only => [ :show, :edit, :update ] do
+  resources :discussion_boards, :only => [ :show, :update ] do
     resources :topics, :only => [ :new, :create ]
   end
 
