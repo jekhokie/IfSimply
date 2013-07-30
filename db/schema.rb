@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728213731) do
+ActiveRecord::Schema.define(:version => 20130730014443) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -156,10 +156,7 @@ ActiveRecord::Schema.define(:version => 20130728213731) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.text     "description"
-    t.string   "icon_file_name"
-    t.string   "icon_content_type"
-    t.integer  "icon_file_size"
-    t.datetime "icon_updated_at"
+    t.string   "icon"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
