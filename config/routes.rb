@@ -33,17 +33,13 @@ Ifsimply::Application.routes.draw do
 
   resources :clubs, :only => [ :show, :update ] do
     member do
-      # handle image updates
-      match '/change_logo' => 'clubs#change_logo', :as => :change_logo_for
-      match '/upload_logo' => 'clubs#upload_logo', :as => :upload_logo_for
-
       # membership subscriptions
       match '/subscribe'  => 'clubs_users#new',    :as => 'subscribe_to'
       match '/add_member' => 'clubs_users#create', :as => 'add_member_to'
     end
 
     # mercury editor
-    resource  :sales_page, :only => [ :update, :show ]
+    resource  :sales_page, :only => [ :show, :update ]
 
     resources :courses, :only => [ :create ] do
       collection do
