@@ -1,13 +1,8 @@
 <div class="discussion-board-information">
   <%= render :partial => 'shared/welcome_navigation', :locals => { :club => discussion_board.club } %>
 
-  <h1 class="discussion-board-name">
-    <%= best_in_place_if can?(:update, discussion_board), discussion_board, :name, :type => :input, :html_attrs => { :rows => '1' } %>
-  </h1>
-
-  <p class="discussion-board-description">
-    <%= best_in_place_if can?(:update, discussion_board), discussion_board, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
-  </p>
+  <h1 id="discussion_board_name"        class="discussion-board-name"        data-mercury="simple"><%= discussion_board.name %></h1>
+  <p  id="discussion_board_description" class="discussion-board-description" data-mercury="simple"><%= discussion_board.description %></p>
 
   <div class="discussion-board-topics row-fluid">
     <div class="discussion-board-topic-listing span12">
