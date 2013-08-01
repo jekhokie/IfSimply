@@ -18,18 +18,13 @@ Ifsimply::Application.routes.draw do
     match '/access_violation'    => 'home#access_violation',    :as => :access_violation
   end
 
-  resources :users, :only => [ :edit, :update ] do
-    member do
-      # handle image updates
-      match '/change_icon' => 'users#change_icon', :as => :change_icon_for
-      match '/upload_icon' => 'users#upload_icon', :as => :upload_icon_for
-    end
-  end
-
   # mercury editor routes
+  get '/editor/users/:id'                 => "users#edit",             :as => :user_editor
   get '/editor/clubs/:id'                 => "clubs#edit",             :as => :club_editor
   get '/editor/discussion_boards/:id'     => "discussion_boards#edit", :as => :discussion_board_editor
   get '/editor/clubs/:club_id/sales_page' => "sales_pages#edit",       :as => :sales_page_editor
+
+  resources :users, :only => [ :show, :update ]
 
   resources :clubs, :only => [ :show, :update ] do
     member do
