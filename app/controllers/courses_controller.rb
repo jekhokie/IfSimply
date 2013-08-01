@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
     @course.assign_defaults
     @course.save
 
-    render :edit
+    redirect_to edit_course_path(@course)
   end
 
   def edit

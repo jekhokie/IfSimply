@@ -96,12 +96,8 @@ describe CoursesController do
       post 'create', :club_id => user.clubs.first.id
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
-
-    it "should render the edit view" do
-      response.should render_template("courses/edit")
+    it "redirects to the edit view" do
+      response.should redirect_to(edit_course_path(assigns(:course)))
     end
 
     it "returns the club" do
