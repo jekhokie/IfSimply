@@ -23,6 +23,7 @@ Ifsimply::Application.routes.draw do
   get '/editor/clubs/:id'                 => "clubs#edit",             :as => :club_editor
   get '/editor/discussion_boards/:id'     => "discussion_boards#edit", :as => :discussion_board_editor
   get '/editor/clubs/:club_id/sales_page' => "sales_pages#edit",       :as => :sales_page_editor
+  get '/editor/courses/:id'               => "courses#edit",           :as => :course_editor
 
   resources :users, :only => [ :show, :update ]
 
@@ -49,13 +50,7 @@ Ifsimply::Application.routes.draw do
     end
   end
 
-  resources :courses, :only => [ :show, :edit, :update ] do
-    member do
-      # handle image updates
-      match '/change_logo' => 'courses#change_logo', :as => :change_logo_for
-      match '/upload_logo' => 'courses#upload_logo', :as => :upload_logo_for
-    end
-
+  resources :courses, :only => [ :show, :update ] do
     resources :lessons, :only => [ :create, :update ]
   end
 
