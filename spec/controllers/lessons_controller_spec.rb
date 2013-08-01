@@ -18,7 +18,7 @@ describe LessonsController do
     end
 
     it "should redirect to the edit course path" do
-      response.should redirect_to(edit_course_path(course))
+      response.should redirect_to(course_editor_path(course))
     end
 
     it "returns the course" do
