@@ -10,7 +10,7 @@
 :courses:
   default_title:       Course Title Here
   default_description: Course description here
-  default_logo:        iS_club_thumb.jpg
+  default_logo:        "/assets/iS_club_thumb.jpg"
 :lessons:
   default_title:      Lesson Title Here
   default_background: Add a Lesson Description (Required). Click here to edit this text.
