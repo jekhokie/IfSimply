@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730014443) do
+ActiveRecord::Schema.define(:version => 20130801010047) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -57,12 +57,9 @@ ActiveRecord::Schema.define(:version => 20130730014443) do
     t.string   "title"
     t.string   "description"
     t.integer  "club_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "logo"
   end
 
   add_index "courses", ["club_id"], :name => "index_courses_on_club_id"
