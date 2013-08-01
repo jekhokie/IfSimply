@@ -544,8 +544,8 @@ describe Ability do
         own_ability.should be_able_to(:read, own_user)
       end
 
-      it "succeeds for a subscribed user" do
-        other_ability.should_not be_able_to(:read, own_user)
+      it "succeeds for a different user" do
+        other_ability.should be_able_to(:read, own_user)
       end
     end
 
