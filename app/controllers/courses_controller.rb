@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, :except => [ :show, :show_all ]
   before_filter :get_club,   :only => [ :create, :show_all ]
-  before_filter :get_course, :only => [ :show, :edit, :update, :change_logo, :upload_logo ]
+  before_filter :get_course, :only => [ :show, :edit, :update ]
 
   def show
     redirect_to club_sales_page_path(@course.club) unless user_signed_in? and can?(:read, @course)
@@ -15,37 +15,28 @@ class CoursesController < ApplicationController
     @course.assign_defaults
     @course.save
 
-    redirect_to edit_course_path(@course)
+    redirect_to course_editor_path(@course)
   end
 
   def edit
-    authorize! :edit, @course
-
+    authorize! :update, @course
     @club = @course.club
+
+    render :text => '', :layout => "mercury"
   end
 
   def update
     authorize! :update, @course
 
-    @course.update_attributes params[:course]
+    course_hash         = params[:content]
+    @course.title       = course_hash[:course_title][:value]
+    @course.description = course_hash[:course_description][:value]
+    @course.logo        = course_hash[:course_logo][:attributes][:src]
 
-    respond_with_bip @course
-  end
-
-  def change_logo
-    authorize! :update, @course
-  end
-
-  def upload_logo
-    authorize! :update, @course
-
-    # if no course logo was specified
-    if params[:course].blank?
-      render :change_logo, :formats => [ :js ]
-    elsif @course.update_attributes params[:course]
-      render
+    if @course.save
+      render :text => ""
     else
-      render :change_logo, :formats => [ :js ]
+      respond_error_to_mercury [ @course ]
     end
   end
 
