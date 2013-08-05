@@ -240,6 +240,56 @@ describe CoursesController do
         course.title.should == @old_title
       end
     end
+
+    describe "for included lessons" do
+      let(:lesson)           { FactoryGirl.create :lesson, :course => course }
+      let(:new_lesson_title) { "Test Title" }
+
+      describe "for a lesson with valid attributes" do
+        before :each do
+          put 'update', :id => course.id, :content => { :course_title       => { :value => "Test Title" },
+                                                        :course_description => { :value => "123" },
+                                                        :course_logo        => { :attributes => { :src => "abc" } },
+                                                        :"lesson_#{lesson.id}_title" => { :value => new_lesson_title } }
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "returns the course" do
+          assigns(:course).should_not be_nil
+        end
+
+        it "assigns the new attributes" do
+          lesson.reload
+          lesson.title.should == new_lesson_title
+        end
+      end
+
+      describe "for a lesson with invalid attributes" do
+        before :each do
+          @old_lesson_title = lesson.title
+          put 'update', :id => course.id, :content => { :course_title       => { :value => "" },
+                                                        :course_description => { :value => "123" },
+                                                        :course_logo        => { :attributes => { :src => "abc" } },
+                                                        :"lesson_#{lesson.id}_title" => { :value => "" } }
+        end
+
+        it "returns http unprocessable" do
+          response.response_code.should == 422
+        end
+
+        it "returns the course" do
+          assigns(:course).should_not be_nil
+        end
+
+        it "does not update the attributes" do
+          lesson.reload
+          lesson.title.should == @old_lesson_title
+        end
+      end
+    end
   end
 
   describe "GET 'show_all'" do
