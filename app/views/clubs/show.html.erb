@@ -65,13 +65,13 @@
         <div class="blog-most-recent">
           <%- @club.blogs.last.tap do |blog| %>
             <div class="blog-title-date">
-              <span class="blog-title"><%= link_to trim_length(blog.title, 65), (can?(:update, @club) ? edit_blog_path(blog) : blog_path(blog)) %></span>
+              <span class="blog-title"><%= link_to trim_length(blog.title, 65), (can?(:update, @club) ? blog_editor_path(blog) : blog_path(blog)) %></span>
               <span class="blog-date"><%= I18n.l blog.created_at, :format => :default %></span>
             </div>
 
             <div class="blog-info">
               <div class="blog-image">
-                <a class="blog-image-link" href="<%= can?(:update, @club) ? edit_blog_path(blog) : blog_path(blog) %>">
+                <a class="blog-image-link" href="<%= can?(:update, @club) ? blog_editor_path(blog) : blog_path(blog) %>">
                   <%= image_tag "#{blog.image.url(:thumb)}", :class => 'blog-image' %>
                 </a>
               </div>
