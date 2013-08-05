@@ -33,7 +33,7 @@ class Lesson < ActiveRecord::Base
 
   def free_is_valid
     unless free.to_s =~ /(true|false)/
-      errors.add(:base, "Free must be either true or false")
+      errors.add(:base, "Free for lesson must be either true or false")
     end
   end
 end
