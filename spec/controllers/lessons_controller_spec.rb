@@ -40,9 +40,8 @@ describe LessonsController do
   end
 
   describe "PUT 'update'" do
-    let(:course)    { FactoryGirl.create :course, :club_id => user.clubs.first.id }
-    let(:lesson)    { FactoryGirl.create :lesson, :course_id => course.id }
-    let(:new_title) { "Test Lesson" }
+    let(:course) { FactoryGirl.create :course, :club_id => user.clubs.first.id }
+    let(:lesson) { FactoryGirl.create :lesson, :course_id => course.id }
 
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:users]
@@ -51,7 +50,7 @@ describe LessonsController do
 
     describe "for valid attributes" do
       before :each do
-        put 'update', :course_id => course.id, :id => lesson.id, :lesson => { :title => new_title }
+        put 'update', :course_id => course.id, :id => lesson.id, :lesson => { :free => true }
       end
 
       it "returns http success" do
@@ -68,14 +67,14 @@ describe LessonsController do
 
       it "assigns the new attributes" do
         lesson.reload
-        lesson.title.should == new_title
+        lesson.free.should == true
       end
     end
 
     describe "for invalid attributes" do
       before :each do
-        @old_title = lesson.title
-        put 'update', :course_id => course.id, :id => lesson.id, :lesson => { :title => "" }
+        @old_free = lesson.free
+        put 'update', :course_id => course.id, :id => lesson.id, :lesson => { :free => "" }
       end
 
       it "returns http unprocessable" do
@@ -92,7 +91,7 @@ describe LessonsController do
 
       it "does not update the attributes" do
         lesson.reload
-        lesson.title.should == @old_title
+        lesson.free.should == @old_free
       end
     end
   end
