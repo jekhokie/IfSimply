@@ -28,6 +28,17 @@ describe Blog do
     it "returns false when no content is specified" do
       FactoryGirl.build(:blog, :content => "").should_not be_valid
     end
+
+    # free
+    describe "for free" do
+      it "returns false when no free is specified" do
+        FactoryGirl.build(:lesson, :free => "").should_not be_valid
+      end
+
+      it "returns true when free is a string of a boolean" do
+        FactoryGirl.build(:lesson, :free => true).should be_valid
+      end
+    end
   end
 
   describe "user" do
