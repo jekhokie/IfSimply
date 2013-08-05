@@ -5,11 +5,7 @@
 
   <div class="lesson">
     <div class="lesson-title">
-      <div class="lesson-title-text">
-        <%= best_in_place_if can?(:update, lesson), lesson, :title, :type       => :input,
-                                                                    :path       => course_lesson_path(lesson.course, lesson),
-                                                                    :html_attrs => { :rows => '1' } %>
-      </div>
+      <div id="lesson_<%= lesson.id %>_title" class="lesson-title-text" data-mercury="simple"><%= lesson.title %></div>
 
       <%- if can? :update, lesson %>
         <div class="free-select">
@@ -34,22 +30,19 @@
         <%- end %>
       </div>
 
-      <%- if can? :update, lesson %>
-        <div class="video-embed-source">
-          <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
+      <%- if is_editing? %>
+        <div class="update-embed-url hide-preview">
+          <%- if can? :update, lesson %>
+            <div class="video-embed-source">
+              <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
 
-          <%= best_in_place lesson, :video, :type       => :input,
-                                            :path       => course_lesson_path(lesson.course, lesson),
-                                            :classes    => 'video-related',
-                                            :html_attrs => { :rows => '1' } %>
+              <div id="lesson_<%= lesson.id %>_video" class="video-related" data-mercury="simple"><%= lesson.video %></div>
+            </div>
+          <%- end %>
         </div>
       <%- end %>
     </div>
 
-    <div class="lesson-background">
-      <%= best_in_place_if can?(:update, lesson), lesson, :background, :type       => :textarea,
-                                                                       :path       => course_lesson_path(lesson.course, lesson),
-                                                                       :html_attrs => { :rows => '10' } %>
-    </div>
+    <div id="lesson_<%= lesson.id %>_background" class="lesson-background" data-mercury="full"><%= raw lesson.background %></div>
   </div>
 <%- end %>
