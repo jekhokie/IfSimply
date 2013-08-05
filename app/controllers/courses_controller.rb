@@ -33,10 +33,32 @@ class CoursesController < ApplicationController
     @course.description = course_hash[:course_description][:value]
     @course.logo        = course_hash[:course_logo][:attributes][:src]
 
-    if @course.save
+    # update the corresponding lessons for the course
+    lesson_list = []
+    course_hash.each do |lesson_id, lesson_hash|
+      if lesson_id =~ /lesson_.*/
+        lesson = @course.lessons.find lesson_id.split("_")[1]
+
+        unless lesson.blank?
+          attribute = lesson_id.split("_")[2]
+          lesson.send "#{attribute}=", lesson_hash[:value]
+
+          lesson_list << lesson
+        end
+      end
+    end
+
+    # handle errors for the course and each lesson
+    error_resources = []
+    error_resources << @course unless @course.save
+    lesson_list.each do |lesson|
+      error_resources << lesson unless lesson.save
+    end
+
+    if error_resources.blank?
       render :text => ""
     else
-      respond_error_to_mercury [ @course ]
+      respond_error_to_mercury error_resources
     end
   end
 
