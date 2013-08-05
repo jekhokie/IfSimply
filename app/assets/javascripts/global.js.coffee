@@ -11,6 +11,11 @@ $(".video-embed-label i.icon-question-sign").livequery ->
     $(".modal .modal-footer").html "<a onclick=\"$('.modal').modal('hide')\" class='btn btn-info'>Close</a>"
     $(".modal").modal "show"
 
+jQuery ->
+  # set up in-line editing
+  $(".best_in_place").each ->
+    $(this).best_in_place()
+
 # mercury update hooks
 jQuery(window).on "mercury:ready", ->
   # Mercury.on "action", (event, actionType) ->
