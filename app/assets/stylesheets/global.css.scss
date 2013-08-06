@@ -1,6 +1,16 @@
+html,body {
+  overflow: scroll !important;
+}
+
 body .container {
   min-height: 550px;
   width:      973px;
+}
+
+.hidden-element {
+  display: none !important;
+  height:  0px  !important;
+  width:   0px  !important;
 }
 
 div {

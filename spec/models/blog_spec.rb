@@ -3,8 +3,6 @@ require 'spec_helper'
 describe Blog do
   it { should belong_to :club }
 
-  it { should have_attached_file :image }
-
   it "can be instantiated" do
     Blog.new.should be_an_instance_of(Blog)
   end
@@ -31,10 +29,16 @@ describe Blog do
       FactoryGirl.build(:blog, :content => "").should_not be_valid
     end
 
-    # image
-    it { should validate_attachment_content_type(:image)
-           .allowing('image/jpeg', 'image/png', 'image/gif')
-           .rejecting('text/plain') }
+    # free
+    describe "for free" do
+      it "returns false when no free is specified" do
+        FactoryGirl.build(:lesson, :free => "").should_not be_valid
+      end
+
+      it "returns true when free is a string of a boolean" do
+        FactoryGirl.build(:lesson, :free => true).should be_valid
+      end
+    end
   end
 
   describe "user" do
@@ -75,6 +79,10 @@ describe Blog do
 
     it "assigns the correct default free boolean" do
       @blog.free.should == Settings.blogs[:default_free]
+    end
+
+    it "assigns the correct default image" do
+      @blog.image.should == Settings.blogs[:default_image]
     end
   end
 end

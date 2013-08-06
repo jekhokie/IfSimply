@@ -7,6 +7,9 @@ SimpleCov.start 'rails' do
   add_filter "Rakefile"
   add_filter "/app/helpers/error_messages_form_builder.rb"
 
+  add_filter "app/models/mercury/image.rb"
+  add_filter "app/controllers/mercury/images_controller.rb"
+
   add_group "Models",      "app/models"
   add_group "Views",       "app/views"
   add_group "Controllers", "app/controllers"

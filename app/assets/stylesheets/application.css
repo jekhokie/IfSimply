@@ -9,5 +9,20 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require blogs
+ *= require bootstrap_and_overrides
+ *= require clubs
+ *= require clubs_users
+ *= require courses
+ *= require discussion_boards
+ *= require flash
+ *= require global
+ *= require home
+ *= require index
+ *= require mercury
+ *= require navigation
+ *= require posts
+ *= require sales_pages
+ *= require topics
+ *= require users
  */

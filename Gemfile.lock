@@ -13,6 +13,14 @@ GIT
       jquery-rails
       rails (>= 3.1)
 
+GIT
+  remote: git://github.com/jekhokie/mercury.git
+  revision: e1087f0e97b3d600d553177442cf6c9203906e54
+  specs:
+    mercury-rails (0.9.0)
+      coffee-rails (>= 3.2.2)
+      railties (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -241,6 +249,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   less-rails
+  mercury-rails!
   money-rails
   paperclip
   rails (= 3.2.8)

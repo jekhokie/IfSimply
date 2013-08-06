@@ -2,7 +2,7 @@
   default_name:           "Your Club Name Here:"
   default_sub_heading:    Club sub heading here
   default_description:    Your club description here
-  default_logo:           iS_club_thumb.jpg
+  default_logo:           "/assets/iS_club_thumb.jpg"
   default_price_cents:    1000
   min_price_cents:        1000
   name_max_length:        25
@@ -10,7 +10,7 @@
 :courses:
   default_title:       Course Title Here
   default_description: Course description here
-  default_logo:        iS_club_thumb.jpg
+  default_logo:        "/assets/iS_club_thumb.jpg"
 :lessons:
   default_title:      Lesson Title Here
   default_background: Add a Lesson Description (Required). Click here to edit this text.
@@ -31,7 +31,7 @@
   default_sub_heading:    Sales Page Sub-Heading Here
 :users:
   default_description: A description about yourself here
-  default_icon:        iS_club_thumb.jpg
+  default_icon:        "/assets/iS_club_thumb.jpg"
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
   port:                 <SMTP_PORT>         # common: 587

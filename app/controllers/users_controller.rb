@@ -1,8 +1,16 @@
 class UsersController < ApplicationController
+  def show
+    @user = User.find params[:id]
+
+    redirect_to new_user_session_path unless user_signed_in? and can?(:read, @user)
+  end
+
   def edit
     if user_signed_in?
-      @user = current_user
+      @user = User.find params[:id]
       authorize! :update, @user
+
+      render :text => '', :layout => "mercury"
     else
       redirect_to new_user_session_path
     end
@@ -10,38 +18,17 @@ class UsersController < ApplicationController
 
   def update
     if user_signed_in?
-      @user = current_user
+      @user = User.find params[:id]
       authorize! :update, @user
 
-      @user.update_attributes params[:user]
+      user_hash         = params[:content]
+      @user.description = user_hash[:user_description][:value]
+      @user.icon        = user_hash[:user_icon][:attributes][:src]
 
-      respond_with_bip @user
-    else
-      redirect_to new_user_session_path
-    end
-  end
-
-  def change_icon
-    if user_signed_in?
-      @user = current_user
-      authorize! :update, @user
-    else
-      redirect_to new_user_session_path
-    end
-  end
-
-  def upload_icon
-    if user_signed_in?
-      @user = current_user
-      authorize! :update, @user
-
-      # if no user icon was specified
-      if params[:user].blank?
-        render :change_icon, :formats => [ :js ]
-      elsif @user.update_attributes params[:user]
-        render
+      if @user.save
+        render :text => ""
       else
-        render :change_icon, :formats => [ :js ]
+        respond_error_to_mercury [ @user ]
       end
     else
       redirect_to new_user_session_path

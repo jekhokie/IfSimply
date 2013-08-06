@@ -1,1 +1,22 @@
-<%= render :partial => @blog %>
+<div class="blog-information">
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @blog.club } %>
+
+  <div class="blog-container row-fluid">
+    <div class="blog-image span3">
+      <img id="blog_image" data-mercury="image" src="<%= @blog.image %>">
+
+      <div class="free-select hide-preview">
+        (Free?
+        <%= best_in_place @blog, :free, :type       => :checkbox,
+                                        :path       => blog_path(@blog),
+                                        :html_attrs => { :rows => '1' } %>
+        )
+      </div>
+    </div>
+
+    <div class="blog-title-content span9">
+      <div id="blog_title"   class="blog-title"   data-mercury="simple"><%= @blog.title %></div>
+      <div id="blog_content" class="blog-content" data-mercury="full"><%= raw @blog.content %></div>
+    </div>
+  </div>
+</div>

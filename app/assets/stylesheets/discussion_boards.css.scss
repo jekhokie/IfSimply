@@ -1,11 +1,12 @@
 .discussion-board-information {
   .discussion-board-name {
     font-size:   45px;
-    line-height: 45px;
+    line-height: 47px;
     margin:      15px auto;
     max-height:  100px;
+    overflow:    hidden;
     text-align:  center;
-    width:       800px;
+    width:       100%;
 
     input {
       text-align: center;
@@ -15,9 +16,11 @@
 
   .discussion-board-description {
     font-size:   18px;
-    line-height: 18px;
-    margin:      25px auto;
-    width:       800px;
+    line-height: 20px;
+    margin:      20px auto;
+    max-height:  160px;
+    overflow:    hidden;
+    width:       100%;
 
     textarea {
       width: 100%;
@@ -25,7 +28,7 @@
   }
 
   .discussion-board-topics {
-    margin: 35px auto;
+    margin: 30px auto;
 
     .discussion-board-topic-listing {
       margin-left: 0px;

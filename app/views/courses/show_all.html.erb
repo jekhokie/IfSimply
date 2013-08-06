@@ -29,7 +29,7 @@
 
           <div class="course-title-description">
             <div class="course-title">
-              <%= link_to trim_length(course.title, 65), (can?(:update, course.club) ? edit_course_path(course) : course_path(course)) %>
+              <%= link_to trim_length(course.title, 65), (can?(:update, course) ? course_editor_path(course) : course_path(course)) %>
             </div>
 
             <div class="course-description">

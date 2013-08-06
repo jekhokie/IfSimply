@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, :except => [ :show, :show_all ]
   before_filter :get_club,   :only => [ :create, :show_all ]
-  before_filter :get_course, :only => [ :show, :edit, :update, :change_logo, :upload_logo ]
+  before_filter :get_course, :only => [ :show, :edit, :update ]
 
   def show
     redirect_to club_sales_page_path(@course.club) unless user_signed_in? and can?(:read, @course)
@@ -15,37 +15,50 @@ class CoursesController < ApplicationController
     @course.assign_defaults
     @course.save
 
-    render :edit
+    redirect_to course_editor_path(@course)
   end
 
   def edit
-    authorize! :edit, @course
-
+    authorize! :update, @course
     @club = @course.club
+
+    render :text => '', :layout => "mercury"
   end
 
   def update
     authorize! :update, @course
 
-    @course.update_attributes params[:course]
+    course_hash         = params[:content]
+    @course.title       = course_hash[:course_title][:value]
+    @course.description = course_hash[:course_description][:value]
+    @course.logo        = course_hash[:course_logo][:attributes][:src]
 
-    respond_with_bip @course
-  end
+    # update the corresponding lessons for the course
+    lesson_list = []
+    course_hash.each do |lesson_id, lesson_hash|
+      if lesson_id =~ /lesson_.*/
+        lesson = @course.lessons.find lesson_id.split("_")[1]
 
-  def change_logo
-    authorize! :update, @course
-  end
+        unless lesson.blank?
+          attribute = lesson_id.split("_")[2]
+          lesson.send "#{attribute}=", lesson_hash[:value]
 
-  def upload_logo
-    authorize! :update, @course
+          lesson_list << lesson
+        end
+      end
+    end
 
-    # if no course logo was specified
-    if params[:course].blank?
-      render :change_logo, :formats => [ :js ]
-    elsif @course.update_attributes params[:course]
-      render
+    # handle errors for the course and each lesson
+    error_resources = []
+    error_resources << @course unless @course.save
+    lesson_list.each do |lesson|
+      error_resources << lesson unless lesson.save
+    end
+
+    if error_resources.blank?
+      render :text => ""
     else
-      render :change_logo, :formats => [ :js ]
+      respond_error_to_mercury error_resources
     end
   end
 

@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
     @lesson.assign_defaults
     @lesson.save
 
-    redirect_to edit_course_path(@course)
+    redirect_to course_editor_path(@course)
   end
 
   def update

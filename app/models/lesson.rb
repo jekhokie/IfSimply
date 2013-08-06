@@ -3,6 +3,8 @@ class Lesson < ActiveRecord::Base
 
   validates :title,      :presence => { :message => "for lesson can't be blank" }
   validates :background, :presence => { :message => "for lesson can't be blank" }
+
+  validate  :free_is_valid
   validate  :url_exists
 
   belongs_to :course
@@ -26,6 +28,12 @@ class Lesson < ActiveRecord::Base
   def url_exists
     unless video.blank?
       errors.add(:base, "URL is not reachable or malformed - please check your video URL") unless VideoManipulator.validate_url(video)
+    end
+  end
+
+  def free_is_valid
+    unless free.to_s =~ /(true|false)/
+      errors.add(:base, "Free for lesson must be either true or false")
     end
   end
 end

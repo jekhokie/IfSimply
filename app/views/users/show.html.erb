@@ -1,21 +1,13 @@
 <div class="user-information">
   <div class="user-icon-name-description row-fluid">
     <div class="user-icon span3">
-      <%= image_tag "#{@user.icon.url(:medium)}" %>
-
-      <%- if can? :update, @user %>
-        <a href="<%= change_icon_for_user_path(@user) %>" data-remote="true" class="btn btn-primary upload-icon-button">Change Image</a>
-      <%- end %>
+      <img id="user_icon" data-mercury="image" src="<%= @user.icon %>">
     </div>
 
     <div class="user-name-description span9">
-      <div class="user-name">
-        <%= @user.name %>
-      </div>
+      <div class="user-name"><%= @user.name %></div>
 
-      <div class="user-description">
-        <%= best_in_place_if can?(:update, @user), @user, :description, :type => :textarea, :html_attrs => { :rows => '10' } %>
-      </div>
+      <div id="user_description" class="user-description" data-mercury="simple"><%= @user.description %></div>
     </div>
   </div>
 

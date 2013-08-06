@@ -534,6 +534,21 @@ describe Ability do
   end
 
   describe "User" do
+    context "read" do
+      let!(:own_user)      { FactoryGirl.create :user }
+      let!(:other_user)    { FactoryGirl.create :user }
+      let!(:own_ability)   { Ability.new own_user }
+      let!(:other_ability) { Ability.new other_user }
+
+      it "succeeds for the current user" do
+        own_ability.should be_able_to(:read, own_user)
+      end
+
+      it "succeeds for a different user" do
+        other_ability.should be_able_to(:read, own_user)
+      end
+    end
+
     context "update" do
       let!(:other_user) { FactoryGirl.create :user }
 

@@ -8,30 +8,23 @@ class ClubsController < ApplicationController
 
   def edit
     authorize! :update, @club
+
+    render :text => '', :layout => "mercury"
   end
 
   def update
     authorize! :update, @club
 
-    @club.update_attributes params[:club]
+    club_hash         = params[:content]
+    @club.name        = club_hash[:club_name][:value]
+    @club.sub_heading = club_hash[:club_sub_heading][:value]
+    @club.description = club_hash[:club_description][:value]
+    @club.logo        = club_hash[:club_logo][:attributes][:src]
 
-    respond_with_bip @club
-  end
-
-  def change_logo
-    authorize! :update, @club
-  end
-
-  def upload_logo
-    authorize! :update, @club
-
-    # if no club logo was specified
-    if params[:club].blank?
-      render :change_logo, :formats => [ :js ]
-    elsif @club.update_attributes params[:club]
-      render
+    if @club.save
+      render :text => ""
     else
-      render :change_logo, :formats => [ :js ]
+      respond_error_to_mercury [ @club ]
     end
   end
 

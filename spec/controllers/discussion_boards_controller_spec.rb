@@ -117,18 +117,25 @@ describe DiscussionBoardsController do
     it "returns the blog" do
       assigns(:discussion_board).should == discussion_board
     end
+
+    it "renders the mercury layout" do
+      response.should render_template(:layout => "layouts/mercury")
+    end
   end
 
   describe "PUT 'update'" do
     let(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
     let(:new_name)         { "Test Discussion Board" }
 
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+    end
+
     describe "for valid attributes" do
       before :each do
-        @request.env["devise.mapping"] = Devise.mappings[:users]
-        sign_in user
-
-        put 'update', :id => discussion_board.id, :discussion_board => { :name => new_name }
+        put 'update', :id => discussion_board.id, :content => { :discussion_board_name        => { :value => new_name },
+                                                                :discussion_board_description => { :value => "abc" } }
       end
 
       it "returns http success" do
@@ -143,15 +150,17 @@ describe DiscussionBoardsController do
         discussion_board.reload
         discussion_board.name.should == new_name
       end
+
+      it "renders blank text as a response" do
+        response.body.should == ""
+      end
     end
 
     describe "for invalid attributes" do
       before :each do
-        @request.env["devise.mapping"] = Devise.mappings[:users]
-        sign_in user
-
         @old_name = discussion_board.name
-        put 'update', :id => discussion_board.id, :discussion_board => { :name => "" }
+        put 'update', :id => discussion_board.id, :content => { :discussion_board_name        => { :value => "" },
+                                                                :discussion_board_description => { :value => "abc" } }
       end
 
       it "returns http unprocessable" do
@@ -165,6 +174,14 @@ describe DiscussionBoardsController do
       it "does not update the attributes" do
         discussion_board.reload
         discussion_board.name.should == @old_name
+      end
+
+      it "returns error about invalid attributes" do
+        response.headers["X-Flash-Error"].should == "Name for discussion board can't be blank"
+      end
+
+      it "renders error text as a response" do
+        response.body.should == "error"
       end
     end
   end

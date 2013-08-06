@@ -96,12 +96,8 @@ describe CoursesController do
       post 'create', :club_id => user.clubs.first.id
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
-
-    it "should render the edit view" do
-      response.should render_template("courses/edit")
+    it "redirects to the edit view" do
+      response.should redirect_to(course_editor_path(assigns(:course)))
     end
 
     it "returns the club" do
@@ -125,23 +121,71 @@ describe CoursesController do
   describe "GET 'edit'" do
     let(:course) { FactoryGirl.create :course, :club_id => user.clubs.first.id }
 
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
+    describe "for a non signed-in user" do
+      describe "for a course not belonging to user" do
+        it "redirects for user sign in" do
+          get 'edit', :id => FactoryGirl.create(:course).id
 
-      get 'edit', :club_id => course.club.id, :id => course.id
+          response.should be_redirect
+          response.should redirect_to new_user_session_path
+        end
+      end
+
+      describe "for a course belonging to user" do
+        it "redirects for user sign in" do
+          get 'edit', :id => course
+
+          response.should be_redirect
+          response.should redirect_to new_user_session_path
+        end
+      end
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
+    describe "for a signed in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
 
-    it "returns the club" do
-      assigns(:club).should == course.club
-    end
+      describe "for course not belonging to user" do
+        before :each do
+          get 'edit', :id => FactoryGirl.create(:course).id
+        end
 
-    it "returns the course" do
-      assigns(:course).should == course
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+
+        it "renders the access_violation template" do
+          response.should render_template('home/access_violation')
+        end
+
+        it "renders the application layout" do
+          response.should render_template(:layout => "layouts/application")
+        end
+      end
+
+      describe "for course belonging to user" do
+        before :each do
+          get 'edit', :id => course.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "returns the club" do
+          assigns(:club).should == course.club
+        end
+
+        it "returns the course" do
+          assigns(:course).should == course
+        end
+
+        it "renders the mercury layout" do
+          response.should render_template(:layout => "layouts/mercury")
+        end
+      end
     end
   end
 
@@ -156,7 +200,9 @@ describe CoursesController do
 
     describe "for valid attributes" do
       before :each do
-        put 'update', :id => course.id, :course => { :title => new_title }
+        put 'update', :id => course.id, :content => { :course_title       => { :value => new_title },
+                                                      :course_description => { :value => "123" },
+                                                      :course_logo        => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http success" do
@@ -176,7 +222,9 @@ describe CoursesController do
     describe "for invalid attributes" do
       before :each do
         @old_title = course.title
-        put 'update', :id => course.id, :course => { :title => "" }
+        put 'update', :id => course.id, :content => { :course_title       => { :value => "" },
+                                                      :course_description => { :value => "123" },
+                                                      :course_logo        => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http unprocessable" do
@@ -192,100 +240,54 @@ describe CoursesController do
         course.title.should == @old_title
       end
     end
-  end
 
-  describe "GET 'change_logo'" do
-    let(:course) { FactoryGirl.create :course, :club => user.clubs.first }
+    describe "for included lessons" do
+      let(:lesson)           { FactoryGirl.create :lesson, :course => course }
+      let(:new_lesson_title) { "Test Title" }
 
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
+      describe "for a lesson with valid attributes" do
+        before :each do
+          put 'update', :id => course.id, :content => { :course_title       => { :value => "Test Title" },
+                                                        :course_description => { :value => "123" },
+                                                        :course_logo        => { :attributes => { :src => "abc" } },
+                                                        :"lesson_#{lesson.id}_title" => { :value => new_lesson_title } }
+        end
 
-      put 'change_logo', :id => course.id, :format => :js
-    end
+        it "returns http success" do
+          response.should be_success
+        end
 
-    it "returns http success" do
-      response.should be_success
-    end
+        it "returns the course" do
+          assigns(:course).should_not be_nil
+        end
 
-    it "returns the course" do
-      assigns(:course).should == course
-    end
-  end
-
-  describe "PUT 'upload_logo'" do
-    let(:course)       { FactoryGirl.create :course, :club => user.clubs.first }
-    let(:valid_logo)   { fixture_file_upload('/soccer_ball.jpg', 'image/jpeg') }
-    let(:invalid_logo) { fixture_file_upload('/soccer_ball.txt', 'text/plain') }
-
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
-    end
-
-    describe "for a valid image format" do
-      before :each do
-        put 'upload_logo', :id => course.id, :course => { :logo => valid_logo }, :format => :js
+        it "assigns the new attributes" do
+          lesson.reload
+          lesson.title.should == new_lesson_title
+        end
       end
 
-      it "returns http success" do
-        response.should be_success
-      end
+      describe "for a lesson with invalid attributes" do
+        before :each do
+          @old_lesson_title = lesson.title
+          put 'update', :id => course.id, :content => { :course_title       => { :value => "" },
+                                                        :course_description => { :value => "123" },
+                                                        :course_logo        => { :attributes => { :src => "abc" } },
+                                                        :"lesson_#{lesson.id}_title" => { :value => "" } }
+        end
 
-      it "renders the upload_logo template" do
-        response.should render_template('courses/upload_logo')
-      end
+        it "returns http unprocessable" do
+          response.response_code.should == 422
+        end
 
-      it "returns the course" do
-        assigns(:course).should == course
-      end
+        it "returns the course" do
+          assigns(:course).should_not be_nil
+        end
 
-      it "assigns the course logo" do
-        File.basename(assigns(:course).logo.to_s.sub(/\?.*/, '')).should == valid_logo.original_filename
-      end
-    end
-
-    describe "for an invalid image format" do
-      before :each do
-        put 'upload_logo', :id => course.id, :course => { :logo => invalid_logo }, :format => :js
-      end
-
-      it "returns http success" do
-        response.should be_success
-      end
-
-      it "renders change_logo" do
-        response.should render_template("courses/change_logo")
-      end
-
-      it "returns the course" do
-        assigns(:course).should == course
-      end
-
-      it "does not assign the course logo" do
-        File.basename(assigns(:course).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
-      end
-    end
-
-    describe "for a non-specified logo value" do
-      before :each do
-        put 'upload_logo', :id => course.id, :format => :js
-      end
-
-      it "returns http success" do
-        response.should be_success
-      end
-
-      it "renders change_logo" do
-        response.should render_template("courses/change_logo")
-      end
-
-      it "returns the course" do
-        assigns(:course).should == course
-      end
-
-      it "does not assign the course logo" do
-        File.basename(assigns(:course).logo.to_s.sub(/\?.*/, '')).should_not == valid_logo.original_filename
+        it "does not update the attributes" do
+          lesson.reload
+          lesson.title.should == @old_lesson_title
+        end
       end
     end
   end
