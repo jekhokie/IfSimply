@@ -3,13 +3,10 @@ class Blog < ActiveRecord::Base
 
   default_scope order('created_at ASC')
 
-  has_attached_file :image, :styles     => { :medium => "215x185>", :thumb => "128x128" },
-                            :default_url => Settings.clubs[:default_logo]
-
   validates :title,   :presence => { :message => "for blog can't be blank" }
   validates :content, :presence => { :message => "for blog can't be blank" }
 
-  validates_attachment_content_type :image, :content_type => [ 'image/jpeg', 'image/gif', 'image/png', 'image/tiff' ]
+  validate  :free_is_valid
 
   belongs_to :club
 
@@ -25,5 +22,14 @@ class Blog < ActiveRecord::Base
     self.title   = Settings.blogs[:default_title]
     self.content = Settings.blogs[:default_content]
     self.free    = Settings.blogs[:default_free]
+    self.image   = Settings.blogs[:default_image]
+  end
+
+  private
+
+  def free_is_valid
+    unless free.to_s =~ /(true|false)/
+      errors.add(:base, "Free for blog must be either true or false")
+    end
   end
 end
