@@ -72,7 +72,7 @@
             <div class="blog-info">
               <div class="blog-image">
                 <a class="blog-image-link" href="<%= can?(:update, @club) ? blog_editor_path(blog) : blog_path(blog) %>">
-                  <%= image_tag "#{blog.image.url(:thumb)}", :class => 'blog-image' %>
+                  <%= image_tag "#{blog.image}", :class => 'blog-image' %>
                 </a>
               </div>
 
