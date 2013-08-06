@@ -8,7 +8,7 @@
       <div id="lesson_<%= lesson.id %>_title" class="lesson-title-text" data-mercury="simple"><%= lesson.title %></div>
 
       <%- if can? :update, lesson %>
-        <div class="free-select">
+        <div class="free-select hide-preview">
           (Free?
           <%= best_in_place lesson, :free, :type       => :checkbox,
                                            :path       => course_lesson_path(lesson.course, lesson),
