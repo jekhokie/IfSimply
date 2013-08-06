@@ -174,8 +174,8 @@ describe BlogsController do
       response.should be_success
     end
 
-    it "should render the edit view" do
-      response.should render_template("blogs/edit")
+    it "renders the mercury layout" do
+      response.should render_template(:layout => "layouts/mercury")
     end
 
     it "returns the club" do
@@ -194,50 +194,104 @@ describe BlogsController do
     it "assigns the default content" do
       assigns(:blog).content.should == Settings.blogs[:default_content]
     end
+
+    it "assigns the default image" do
+      assigns(:blog).image.should == Settings.blogs[:default_image]
+    end
   end
 
   describe "GET 'edit'" do
     let(:blog) { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
 
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
+    describe "for a non signed-in user" do
+      describe "for a blog not belonging to user" do
+        it "redirects for user sign in" do
+          get 'edit', :id => FactoryGirl.create(:blog).id
 
-      get 'edit', :id => blog.id
+          response.should be_redirect
+          response.should redirect_to new_user_session_path
+        end
+      end
+
+      describe "for a blog belonging to user" do
+        it "redirects for user sign in" do
+          get 'edit', :id => blog
+
+          response.should be_redirect
+          response.should redirect_to new_user_session_path
+        end
+      end
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
+    describe "for a signed in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
 
-    it "returns the club" do
-      assigns(:club).should == blog.club
-    end
+      describe "for blog not belonging to user" do
+        before :each do
+          get 'edit', :id => FactoryGirl.create(:blog).id
+        end
 
-    it "returns the blog" do
-      assigns(:blog).should == blog
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+
+        it "renders the access_violation template" do
+          response.should render_template('home/access_violation')
+        end
+
+        it "renders the application layout" do
+          response.should render_template(:layout => "layouts/application")
+        end
+      end
+
+      describe "for blog belonging to user" do
+        before :each do
+          get 'edit', :id => blog.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "returns the club" do
+          assigns(:club).should == blog.club
+        end
+
+        it "returns the blog" do
+          assigns(:blog).should == blog
+        end
+
+        it "renders the mercury layout" do
+          response.should render_template(:layout => "layouts/mercury")
+        end
+      end
     end
   end
 
   describe "PUT 'update'" do
+    let(:blog)      { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
+    let(:new_title) { "Test Blog" }
+
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:users]
       sign_in user
     end
 
-    let(:blog)      { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
-    let(:new_title) { "Test Blog" }
-
     describe "for valid attributes" do
       before :each do
-        put 'update', :id => blog.id, :blog => { :title => new_title }
+        put 'update', :id => blog.id, :content => { :blog_title   => { :value => new_title },
+                                                    :blog_content => { :value => "123" },
+                                                    :blog_image   => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http success" do
         response.should be_success
       end
 
-      it "returns the course" do
+      it "returns the blog" do
         assigns(:blog).should_not be_nil
       end
 
@@ -250,7 +304,9 @@ describe BlogsController do
     describe "for invalid attributes" do
       before :each do
         @old_title = blog.title
-        put 'update', :id => blog.id, :blog => { :title => "" }
+        put 'update', :id => blog.id, :content => { :blog_title   => { :value => "" },
+                                                    :blog_content => { :value => "123" },
+                                                    :blog_image   => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http unprocessable" do
@@ -266,100 +322,45 @@ describe BlogsController do
         blog.title.should == @old_title
       end
     end
-  end
 
-  describe "GET 'change_image'" do
-    let(:blog) { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
+    describe "for the free attribute" do
+      describe "for valid attributes" do
+        before :each do
+          put 'update', :id => blog.id, :blog => { :free => true }
+        end
 
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
+        it "returns http success" do
+          response.should be_success
+        end
 
-      put 'change_image', :id => blog.id, :format => :js
-    end
+        it "returns the blog" do
+          assigns(:blog).should == blog
+        end
 
-    it "returns http success" do
-      response.should be_success
-    end
-
-    it "returns the blog" do
-      assigns(:blog).should == blog
-    end
-  end
-
-  describe "PUT 'upload_image'" do
-    let(:blog)          { FactoryGirl.create :blog, :club_id => user.clubs.first.id }
-    let(:valid_image)   { fixture_file_upload('/soccer_ball.jpg', 'image/jpeg') }
-    let(:invalid_image) { fixture_file_upload('/soccer_ball.txt', 'text/plain') }
-
-    before :each do
-      @request.env["devise.mapping"] = Devise.mappings[:users]
-      sign_in user
-    end
-
-    describe "for a valid image format" do
-      before :each do
-        put 'upload_image', :id => blog.id, :blog => { :image => valid_image }, :format => :js
+        it "assigns the new attributes" do
+          blog.reload
+          blog.free.should == true
+        end
       end
 
-      it "returns http success" do
-        response.should be_success
-      end
+      describe "for invalid attributes" do
+        before :each do
+          @old_free = blog.free
+          put 'update', :id => blog.id, :blog => { :free => "" }
+        end
 
-      it "renders the upload_image template" do
-        response.should render_template('blogs/upload_image')
-      end
+        it "returns http unprocessable" do
+          response.response_code.should == 422
+        end
 
-      it "returns the blog" do
-        assigns(:blog).should == blog
-      end
+        it "returns the blog" do
+          assigns(:blog).should == blog
+        end
 
-      it "assigns the blog image" do
-        File.basename(assigns(:blog).image.to_s.sub(/\?.*/, '')).should == valid_image.original_filename
-      end
-    end
-
-    describe "for an invalid image format" do
-      before :each do
-        put 'upload_image', :id => blog.id, :blog => { :image => invalid_image }, :format => :js
-      end
-
-      it "returns http success" do
-        response.should be_success
-      end
-
-      it "renders change_image" do
-        response.should render_template("blogs/change_image")
-      end
-
-      it "returns the blog" do
-        assigns(:blog).should == blog
-      end
-
-      it "does not assign the blog image" do
-        File.basename(assigns(:blog).image.to_s.sub(/\?.*/, '')).should_not == valid_image.original_filename
-      end
-    end
-
-    describe "for a non-specified image value" do
-      before :each do
-        put 'upload_image', :id => blog.id, :format => :js
-      end
-
-      it "returns http success" do
-        response.should be_success
-      end
-
-      it "renders change_image" do
-        response.should render_template("blogs/change_image")
-      end
-
-      it "returns the blog" do
-        assigns(:blog).should == blog
-      end
-
-      it "does not assign the blog image" do
-        File.basename(assigns(:blog).image.to_s.sub(/\?.*/, '')).should_not == valid_image.original_filename
+        it "does not update the attributes" do
+          blog.reload
+          blog.free.should == @old_free
+        end
       end
     end
   end
