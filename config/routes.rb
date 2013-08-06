@@ -19,11 +19,12 @@ Ifsimply::Application.routes.draw do
   end
 
   # mercury editor routes
-  get '/editor/users/:id'                 => "users#edit",             :as => :user_editor
+  get '/editor/blogs/:id'                 => "blogs#edit",             :as => :blog_editor
   get '/editor/clubs/:id'                 => "clubs#edit",             :as => :club_editor
-  get '/editor/discussion_boards/:id'     => "discussion_boards#edit", :as => :discussion_board_editor
   get '/editor/clubs/:club_id/sales_page' => "sales_pages#edit",       :as => :sales_page_editor
   get '/editor/courses/:id'               => "courses#edit",           :as => :course_editor
+  get '/editor/discussion_boards/:id'     => "discussion_boards#edit", :as => :discussion_board_editor
+  get '/editor/users/:id'                 => "users#edit",             :as => :user_editor
 
   resources :users, :only => [ :show, :update ]
 
@@ -54,13 +55,7 @@ Ifsimply::Application.routes.draw do
     resources :lessons, :only => [ :create, :update ]
   end
 
-  resources :blogs, :only => [ :show, :edit, :update ] do
-    member do
-      # handle image updates
-      match '/change_image' => 'blogs#change_image', :as => :change_image_for
-      match '/upload_image' => 'blogs#upload_image', :as => :upload_image_for
-    end
-  end
+  resources :blogs, :only => [ :show, :update ]
 
   resources :discussion_boards, :only => [ :show, :update ] do
     resources :topics, :only => [ :new, :create ]
