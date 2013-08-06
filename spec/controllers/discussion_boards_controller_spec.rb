@@ -127,11 +127,13 @@ describe DiscussionBoardsController do
     let(:discussion_board) { FactoryGirl.create :discussion_board, :club_id => user.clubs.first.id }
     let(:new_name)         { "Test Discussion Board" }
 
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+    end
+
     describe "for valid attributes" do
       before :each do
-        @request.env["devise.mapping"] = Devise.mappings[:users]
-        sign_in user
-
         put 'update', :id => discussion_board.id, :content => { :discussion_board_name        => { :value => new_name },
                                                                 :discussion_board_description => { :value => "abc" } }
       end
@@ -156,9 +158,6 @@ describe DiscussionBoardsController do
 
     describe "for invalid attributes" do
       before :each do
-        @request.env["devise.mapping"] = Devise.mappings[:users]
-        sign_in user
-
         @old_name = discussion_board.name
         put 'update', :id => discussion_board.id, :content => { :discussion_board_name        => { :value => "" },
                                                                 :discussion_board_description => { :value => "abc" } }

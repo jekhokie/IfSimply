@@ -133,7 +133,7 @@ describe CoursesController do
 
       describe "for a course belonging to user" do
         it "redirects for user sign in" do
-          get 'edit', :id => FactoryGirl.create(:course, :club => user.clubs.first)
+          get 'edit', :id => course
 
           response.should be_redirect
           response.should redirect_to new_user_session_path
