@@ -21,11 +21,6 @@ describe User do
     it "should require a name" do
       FactoryGirl.build(:user, :name => "").should_not be_valid
     end
-
-    it "should reject duplicate names" do
-      user = FactoryGirl.create :user
-      FactoryGirl.build(:user, :name => user.name).should_not be_valid
-    end
   end
 
   describe "email addresses" do

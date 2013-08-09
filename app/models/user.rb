@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_many :subscriptions, :class_name => ClubsUsers
 
-  validates :name,        :presence => true, :uniqueness => true
+  validates :name,        :presence => true
   validates :email,       :presence => true, :uniqueness => true
   validates :description, :presence => { :message => "for user can't be blank" }, :on => :update
 
