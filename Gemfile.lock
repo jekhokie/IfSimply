@@ -88,7 +88,13 @@ GEM
       cucumber (>= 1.2.0)
       nokogiri (>= 1.5.0)
       rails (~> 3.0)
+    daemons (1.1.9)
     database_cleaner (1.0.1)
+    delayed_job (4.0.0)
+      activesupport (>= 3.0, < 4.1)
+    delayed_job_active_record (4.0.0)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
     devise (3.0.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -241,7 +247,10 @@ DEPENDENCIES
   capybara-webkit
   coffee-rails (~> 3.2.1)
   cucumber-rails
+  daemons
   database_cleaner
+  delayed_job
+  delayed_job_active_record
   devise
   factory_girl_rails
   faker
