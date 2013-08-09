@@ -43,7 +43,7 @@
             </div>
 
             <div class="blog-content">
-              <%= trim_length blog.content, 400 %>
+              <%= trim_length raw(blog.content), 400 %>
             </div>
           </div>
         </div>

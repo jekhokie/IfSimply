@@ -131,6 +131,7 @@
 
       .blog-title-created-content {
         display:        inline-block;
+        height:         128px;
         vertical-align: top;
         width:          700px;
 
@@ -153,6 +154,8 @@
         }
 
         .blog-content {
+          height:   90px;
+          overflow: hidden;
         }
       }
     }
