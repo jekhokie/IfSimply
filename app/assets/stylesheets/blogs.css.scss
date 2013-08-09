@@ -58,8 +58,13 @@
 
     .blog-title-content {
       .blog-title {
-        margin-top: 0px;
-        text-align: center;
+        font-size:   30px;
+        font-weight: bold;
+        line-height: 33px;
+        margin-top:  0px;
+        max-height:  100px;
+        overflow:    hidden;
+        text-align:  center;
 
         input {
           text-align: center;
