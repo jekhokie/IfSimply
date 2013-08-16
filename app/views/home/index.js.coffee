@@ -1,1 +1,1 @@
-window.location.replace "<%= root_path %>"
+window.location.replace "<%= user_editor_path(current_user) %>"
