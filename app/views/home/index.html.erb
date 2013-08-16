@@ -11,10 +11,9 @@
             <span class="btn-text">My Club</span>
           </a>
         <%- else %>
-          Not yet a member?
-          <a type="button" class="btn btn-primary learn-more-button" href="<%= new_user_registration_path %>">
-            <span class="btn-text">Sign Up Now!</span>
-          </a>
+          <span>Not yet a member?</span> <%= link_to "Sign Up Now!", new_user_registration_path,
+                                                                     :remote => true,
+                                                                     :class => "btn btn-primary learn-more-button" %>
         <%- end %>
       </div>
     </div>
