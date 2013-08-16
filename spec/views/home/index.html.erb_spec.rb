@@ -14,7 +14,7 @@ describe "home/learn_more.html.erb" do
 
       it "displays a sign-up header button" do
         within ".sign-up-club" do
-          page.should have_selector("span", :text => "Sign Up Now!")
+          page.should have_selector("a", :text => "Sign Up Now!")
         end
       end
 
