@@ -14,7 +14,11 @@
   <div class="user-clubs-listing">
     <div class="owned-clubs row-fluid">
       <div class="clubs-label span3">
-        User's Club:
+        <%- if user_signed_in? and @user == current_user %>
+          Your Club:
+        <%- else %>
+          User's Club:
+        <%- end %>
       </div>
 
       <div class="clubs-listing span9">
@@ -26,7 +30,7 @@
 
     <div class="subscribed-clubs row-fluid">
       <div class="clubs-label span3">
-        Subscriptions:
+        Memberships:
       </div>
 
       <div class="clubs-listing span9">
@@ -35,7 +39,7 @@
         <%- else %>
           <%- @user.subscriptions.each_with_index do |subscription, i| %>
             <div class="subscription-name <%= "first" if i == 0 %>">
-              <%= link_to "#{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
+              <%= link_to "#{"(#{subscription.level.titleize})" if (user_signed_in? and @user == current_user)} #{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
             </div>
           <%- end %>
         <%- end %>
