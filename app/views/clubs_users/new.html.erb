@@ -1,7 +1,9 @@
 <div class="club-subscription-information">
   <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
 
-  <%- unless @subscription.new_record? %>
+  <%- if can?(:read, @club)          and
+         ! @subscription.new_record? and
+         @subscription.level == 'basic' %>
     <div class="upgrade-heading">
       Upgrade to a Pro membership to get this and many other exclusive benefits
     </div>
@@ -50,7 +52,9 @@
       <tr class="subscription-type">
         <td class="meta">Subscribe</td>
         <td class="basic-number">
-          <%- if user_signed_in? and can?(:read, @club) %>
+          <%- if user_signed_in?    and
+                 can?(:read, @club) and
+                 current_user.subscriptions.find_by_club_id(@club.id).try(:level) == 'basic' %>
             <%= submit_tag "Subscribed", :class => 'btn btn-primary btn-large', :disabled => 'disabled' %>
           <%- else %>
             <%= form_tag add_member_to_club_path(@club) do %>
@@ -60,9 +64,15 @@
           <%- end %>
         </td>
         <td class="pro-number">
-          <%= form_tag add_member_to_club_path(@club) do %>
-            <%= hidden_field_tag :level, 'pro' %>
-            <%= submit_tag "Pro", :class => 'btn btn-primary btn-large' %>
+          <%- if user_signed_in?    and
+                 can?(:read, @club) and
+                 current_user.subscriptions.find_by_club_id(@club.id).try(:level) == 'pro' %>
+            <%= submit_tag "Subscribed", :class => 'btn btn-primary btn-large', :disabled => 'disabled' %>
+          <%- else %>
+            <%= form_tag add_member_to_club_path(@club) do %>
+              <%= hidden_field_tag :level, 'pro' %>
+              <%= submit_tag "Pro", :class => 'btn btn-primary btn-large' %>
+            <%- end %>
           <%- end %>
         </td>
       </tr>
