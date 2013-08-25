@@ -151,5 +151,19 @@ describe User do
     it "assigns the correct default icon" do
       @user.icon.should == Settings.users[:default_icon]
     end
+
+    it "correctly creates the user as unverified for payments" do
+      @user.verified?.should == false
+    end
+  end
+
+  describe "verified?" do
+    it "returns true when the User's account is verified" do
+      FactoryGirl.build(:user, :verified => true).verified?.should == true
+    end
+
+    it "returns false when the User's account is not verified" do
+      FactoryGirl.build(:user, :verified => false).verified?.should == false
+    end
   end
 end
