@@ -11,7 +11,7 @@ gem 'google-webfonts', :git => 'git://github.com/jekhokie/Google-Webfonts-Helper
 gem 'jquery-rails'
 gem 'mercury-rails', :git => 'git://github.com/jekhokie/mercury.git'
 gem 'money-rails'
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.14'
 gem 'rails_config'
 gem 'remotipart'
 gem 'redcarpet'
@@ -34,6 +34,10 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'faker'
   gem 'simplecov', :require => false
+end
+
+group :development do
+  gem 'debugger'
 end
 
 group :test, :development do
