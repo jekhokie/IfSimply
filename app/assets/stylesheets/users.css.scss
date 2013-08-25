@@ -80,3 +80,24 @@
     }
   }
 }
+
+.paypal-confirm-modal {
+  width:  450px;
+
+  .modal-body {
+    text-align: center;
+
+    input {
+      margin: 15px auto;
+    }
+
+    input[type='text'] {
+      vertical-align: top;
+      width:          260px;
+    }
+
+    input[type='submit'] {
+      height: 30px;
+    }
+  }
+}

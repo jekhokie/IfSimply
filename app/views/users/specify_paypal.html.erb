@@ -1,0 +1,12 @@
+<h4>Please Verify your PayPal Email Address:</h4>
+
+<%= form_tag "#", :remote => true, :html => { :class => 'paypal-email form-horizontal' } do |f| %>
+  <div class="errors">
+    <%= flash[:error] unless flash[:error].blank? %>
+  </div>
+
+  <%= text_field_tag :paypal_email %>
+  <%= submit_tag "Confirm", :class => "btn btn-primary" %>
+
+  <%= render :partial => "shared/powered_by" %>
+<%- end %>
