@@ -190,4 +190,45 @@ describe UsersController do
       end
     end
   end
+
+  describe "GET 'specify_paypal'" do
+    describe "for a signed-in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "viewing their own account" do
+        before :each do
+          get 'specify_paypal', :format => :js, :id => user.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+      end
+
+      describe "viewing a different user's account" do
+        let!(:other_user) { FactoryGirl.create :user }
+
+        before :each do
+          get 'specify_paypal', :format => :js, :id => other_user.id
+        end
+
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      before :each do
+        get 'specify_paypal', :format => :js, :id => user.id
+      end
+
+      it "renders the sign in view" do
+        response.should render_template("devise/sessions/new")
+      end
+    end
+  end
 end
