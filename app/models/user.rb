@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
   def assign_defaults
     self.description = Settings.users[:default_description]
     self.icon        = Settings.users[:default_icon]
+    self.verified    = false
+  end
+
+  def verified?
+    verified
   end
 
   private
