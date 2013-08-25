@@ -26,7 +26,11 @@ Ifsimply::Application.routes.draw do
   get '/editor/discussion_boards/:id'     => "discussion_boards#edit", :as => :discussion_board_editor
   get '/editor/users/:id'                 => "users#edit",             :as => :user_editor
 
-  resources :users, :only => [ :show, :update ]
+  resources :users, :only => [ :show, :update ] do
+    member do
+      get 'specify_paypal', :as => :specify_paypal_info_for
+    end
+  end
 
   resources :clubs, :only => [ :show, :update ] do
     member do
