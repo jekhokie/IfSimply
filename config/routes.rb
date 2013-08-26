@@ -34,6 +34,7 @@ Ifsimply::Application.routes.draw do
 
       # handle un-linking a verified PayPal account
       get 'pre_unlink_paypal', :as => :pre_unlink_paypal_info_for
+      put 'unlink_paypal',     :as => :unlink_paypal_info_for
     end
   end
 
