@@ -1,0 +1,18 @@
+<div class="paypal-unlink">
+  <h4>Are you sure?</h4>
+
+  <p>
+    Un-linking a verified PayPal email account will close off the Premium parts of your
+    Club, resulting in Members being locked out of Premium content and monthly payments
+    being halted.
+  </p>
+
+  <%= form_tag "#", :method => :put,
+                    :remote => true,
+                    :class => 'paypal-unlink-confirm form-horizontal' do |f| %>
+    <%= submit_tag "Confirm", :class => "btn btn-warning confirm-unlink" %>
+    <a href='' onclick="$('.modal').modal('hide')" class="btn btn-success cancel-unlink">Cancel</a>
+  <%- end %>
+
+  <%= render :partial => "shared/powered_by" %>
+</div>
