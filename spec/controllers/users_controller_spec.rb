@@ -263,6 +263,7 @@ describe UsersController do
           it "assigns the new attributes" do
             verified_user.reload
             verified_user.payment_email.should == payment_email
+            verified_user.verified.should      == true
           end
         end
 
