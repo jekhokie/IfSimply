@@ -1,12 +1,27 @@
 <h4>Please Verify your PayPal Email Address:</h4>
 
-<%= form_tag "#", :remote => true, :html => { :class => 'paypal-email form-horizontal' } do |f| %>
-  <div class="errors">
+<%= form_tag verify_paypal_info_for_user_path(@user), :method => :put,
+                                                      :remote => true,
+                                                      :html => { :class => 'paypal-email form-horizontal' } do |f| %>
+  <div class="paypal-email-errors">
     <%= flash[:error] unless flash[:error].blank? %>
   </div>
 
-  <%= text_field_tag :paypal_email %>
+  <%= text_field_tag :payment_email %>
   <%= submit_tag "Confirm", :class => "btn btn-primary" %>
+
+  <div class="paypal-note">
+    <div class="paypal-note-heading">
+      Note:
+    </div>
+
+    <div class="paypal-note-content">
+      The PayPal account you are verifying must be owned by you and
+      must also be a 'verified' PayPal account. For more information
+      about how to 'verify' your account within PayPal, please visit
+      the official PayPal site.
+    </div>
+  </div>
 
   <%= render :partial => "shared/powered_by" %>
 <%- end %>

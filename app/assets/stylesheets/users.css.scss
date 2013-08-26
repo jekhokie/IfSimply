@@ -98,6 +98,35 @@
 
     input[type='submit'] {
       height: 30px;
+      width:  100px;
+    }
+
+    .paypal-email-errors {
+      color:       red;
+      font-size:   15px;
+      font-weight: bold;
+    }
+
+    .paypal-note {
+      margin-top: 15px;
+      width:      100%;
+
+      .paypal-note-heading,
+      .paypal-note-content {
+        display:   inline-block;
+        font-size: 12px;
+      }
+
+      .paypal-note-heading {
+        font-weight:    bold;
+        vertical-align: top;
+        width:          60px;
+      }
+
+      .paypal-note-content {
+        text-align: left;
+        width:      300px;
+      }
     }
   }
 }
