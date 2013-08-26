@@ -87,45 +87,54 @@
   .modal-body {
     text-align: center;
 
-    input {
-      margin: 15px auto;
-    }
+    .paypal-verification {
+      border-radius:         10px;
+      -moz-border-radius:    10px;
+      -webkit-border-radius: 10px;
 
-    input[type='text'] {
-      vertical-align: top;
-      width:          260px;
-    }
+      border:  5px solid #0077CB;
 
-    input[type='submit'] {
-      height: 30px;
-      width:  100px;
-    }
-
-    .paypal-email-errors {
-      color:       red;
-      font-size:   15px;
-      font-weight: bold;
-    }
-
-    .paypal-note {
-      margin-top: 15px;
-      width:      100%;
-
-      .paypal-note-heading,
-      .paypal-note-content {
-        display:   inline-block;
-        font-size: 12px;
+      input {
+        margin: 15px auto;
       }
 
-      .paypal-note-heading {
-        font-weight:    bold;
+      input[type='text'] {
+        text-align:     center;
         vertical-align: top;
-        width:          60px;
+        width:          260px;
       }
 
-      .paypal-note-content {
-        text-align: left;
-        width:      300px;
+      input[type='submit'] {
+        height: 30px;
+        width:  100px;
+      }
+
+      .paypal-email-errors {
+        color:       red;
+        font-size:   15px;
+        font-weight: bold;
+      }
+
+      .paypal-note {
+        margin-top: 15px;
+        width:      100%;
+
+        .paypal-note-heading,
+        .paypal-note-content {
+          display:   inline-block;
+          font-size: 12px;
+        }
+
+        .paypal-note-heading {
+          font-weight:    bold;
+          vertical-align: top;
+          width:          60px;
+        }
+
+        .paypal-note-content {
+          text-align: left;
+          width:      300px;
+        }
       }
     }
   }

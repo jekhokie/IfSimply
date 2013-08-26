@@ -15,8 +15,10 @@ $(".video-embed-label i.icon-question-sign").livequery ->
 $(".verified-nav-status").livequery ->
   $(this).click ->
     $(".modal .modal-header").html "Verified Account"
+    $(".modal .modal-header").show()
     $(".modal .modal-body").html   "Verified means that your account has been linked to a valid, verified PayPal account, and members are able to subscribe to/you are able to receive funds from Pro subscriptions. To check or update your verification status, click the 'Account' link in the navigation bar."
-    $(".modal .modal-footer").html "<a onclick=\"$('.modal').modal('hide')\" class='btn btn-info'>Close</a>"
+    $(".modal .modal-footer").html "<a onclick=\"$('.modal').modal('hide')\" class='btn btn-primary'>Close</a>"
+    $(".modal .modal-footer").show()
     $(".modal").modal "show"
 
 jQuery ->

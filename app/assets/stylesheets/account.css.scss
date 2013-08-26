@@ -1,0 +1,28 @@
+.devise-form {
+  .paypal-status {
+    .paypal-heading {
+      font-size:   24px;
+      font-weight: bold;
+      margin:      20px auto;
+
+      .verified-nav-status {
+        margin-top:     1px;
+        vertical-align: top;
+      }
+
+      .verified-nav-status:hover {
+        cursor: pointer;
+      }
+    }
+
+    .paypal-link {
+      .verification-text {
+        margin: 20px auto;
+
+        span.paypal-email {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
