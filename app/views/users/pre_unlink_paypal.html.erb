@@ -7,7 +7,7 @@
     being halted.
   </p>
 
-  <%= form_tag "#", :method => :put,
+  <%= form_tag unlink_paypal_info_for_user_path(@user), :method => :put,
                     :remote => true,
                     :class => 'paypal-unlink-confirm form-horizontal' do |f| %>
     <%= submit_tag "Confirm", :class => "btn btn-warning confirm-unlink" %>
