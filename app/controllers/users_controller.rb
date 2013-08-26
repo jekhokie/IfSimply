@@ -68,4 +68,13 @@ class UsersController < ApplicationController
 
     flash.discard
   end
+
+  def pre_unlink_paypal
+    if user_signed_in?
+      @user = User.find params[:id]
+      authorize! :update, @user
+    else
+      render :template => "devise/sessions/new"
+    end
+  end
 end
