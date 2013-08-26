@@ -49,13 +49,13 @@ describe Lesson do
     let(:course) { FactoryGirl.create :course }
 
     it "returns the corresponding courses' club" do
-      FactoryGirl.create(:lesson, :course_id => course.id).club.should == course.club
+      FactoryGirl.create(:lesson, :course => course).club.should == course.club
     end
   end
 
   describe "user" do
     let(:club)   { FactoryGirl.create :club }
-    let(:course) { FactoryGirl.create :course, :club_id => club }
+    let(:course) { FactoryGirl.create :course, :club => club }
 
     it "returns the corresponding course's user" do
       FactoryGirl.create(:lesson, :course_id => course.id).user.should == course.user
