@@ -53,6 +53,14 @@ header {
           color: white;
         }
       }
+
+      .verified-status-tag {
+        display: inline;
+
+        span.verified-nav-status:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 }

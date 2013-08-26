@@ -1,0 +1,19 @@
+<div class="paypal-heading">
+  PayPal
+  <%= render :partial => "shared/verified_status_tag" %>
+</div>
+
+<div class="paypal-link">
+  <%- if current_user.verified? -%>
+    <div class="verification-text">
+      Paypal account on file: <span class="paypal-email"><%= current_user.payment_email %></span>
+    </div>
+    <%= link_to "Update",  specify_paypal_info_for_user_path(current_user),    :remote => true, :class => "btn btn-primary" %>
+    <%= link_to "Un-Link", pre_unlink_paypal_info_for_user_path(current_user), :remote => true, :class => "btn btn-warning" %>
+  <%- else -%>
+    <div class="verification-text">
+      <%= link_to "Verify and Link", specify_paypal_info_for_user_path(current_user), :remote => true %>
+      your PayPal account to start charging members for premium content.
+    </div>
+  <%- end -%>
+</div>

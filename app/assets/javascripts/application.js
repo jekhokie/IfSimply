@@ -19,3 +19,4 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require global
+//= require paypal

@@ -80,3 +80,86 @@
     }
   }
 }
+
+.paypal-confirm-modal {
+  width:  450px;
+
+  .modal-body {
+    text-align: center;
+
+    .paypal-verification,
+    .paypal-unlink {
+      border-radius:         10px;
+      -moz-border-radius:    10px;
+      -webkit-border-radius: 10px;
+
+      border: 5px solid #0077CB;
+    }
+
+    .paypal-verification {
+      input {
+        margin: 15px auto;
+      }
+
+      input[type='text'] {
+        text-align:     center;
+        vertical-align: top;
+        width:          260px;
+      }
+
+      input[type='submit'] {
+        height: 30px;
+        width:  100px;
+      }
+
+      .paypal-email-errors {
+        color:       red;
+        font-size:   15px;
+        font-weight: bold;
+      }
+
+      .paypal-note {
+        margin-top: 15px;
+        width:      100%;
+
+        .paypal-note-heading,
+        .paypal-note-content {
+          display:   inline-block;
+          font-size: 12px;
+        }
+
+        .paypal-note-heading {
+          font-weight:    bold;
+          vertical-align: top;
+          width:          60px;
+        }
+
+        .paypal-note-content {
+          text-align: left;
+          width:      300px;
+        }
+      }
+    }
+
+    .paypal-unlink {
+      padding-left: 15px;
+      text-align:   left;
+
+      form {
+        margin-bottom: 30px;
+        text-align:    center;
+
+        .confirm-unlink,
+        .cancel-unlink {
+          padding-left:  0px;
+          padding-right: 0px;
+          width:         100px;
+        }
+
+        .cancel-unlink {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

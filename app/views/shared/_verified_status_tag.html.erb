@@ -1,0 +1,5 @@
+<%- if current_user.verified? %>
+  <span class="verified-nav-status label label-success"><i class="icon-ok-sign"></i> VERIFIED</span>
+<%- else %>
+  <span class="verified-nav-status label label-important"><i class="icon-warning-sign"></i> UNVERIFIED</span>
+<%- end %>

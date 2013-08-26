@@ -23,8 +23,9 @@ public/system/*
 public/uploads/*
 private/*
 
-# Ignore any sample files
+# Ignore any non-sample configuration files
 config/settings.yml
+config/paypal.yml
 
 # Ignore email debugging
 lib/development_mail_interceptor.rb
