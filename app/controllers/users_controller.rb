@@ -54,8 +54,9 @@ class UsersController < ApplicationController
         render :specify_paypal
       else
         if PaypalProcessor.is_verified?(payment_email)
-          @user.payment_email = payment_email
-          @user.save
+          current_user.payment_email = payment_email
+          current_user.verified      = true
+          current_user.save
         else
           flash[:error] = "Email not verified - please visit PayPal to verify"
           render :specify_paypal
