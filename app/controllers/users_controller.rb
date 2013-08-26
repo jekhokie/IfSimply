@@ -43,4 +43,28 @@ class UsersController < ApplicationController
       render :template => "devise/sessions/new"
     end
   end
+
+  def verify_paypal
+    if user_signed_in?
+      @user = User.find params[:id]
+      authorize! :update, @user
+
+      if (payment_email = params[:payment_email]).blank?
+        flash[:error] = "You must specify a valid email address"
+        render :specify_paypal
+      else
+        if PaypalProcessor.is_verified?(payment_email)
+          @user.payment_email = payment_email
+          @user.save
+        else
+          flash[:error] = "Email not verified - please visit PayPal to verify"
+          render :specify_paypal
+        end
+      end
+    else
+      render :template => "devise/sessions/new"
+    end
+
+    flash.discard
+  end
 end
