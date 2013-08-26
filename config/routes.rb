@@ -29,6 +29,7 @@ Ifsimply::Application.routes.draw do
   resources :users, :only => [ :show, :update ] do
     member do
       get 'specify_paypal', :as => :specify_paypal_info_for
+      put 'verify_paypal',  :as => :verify_paypal_info_for
     end
   end
 
