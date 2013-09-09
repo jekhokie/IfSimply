@@ -12,11 +12,14 @@ gem 'jquery-rails'
 gem 'mercury-rails', :git => 'git://github.com/jekhokie/mercury.git'
 gem 'money-rails'
 gem 'rails', '3.2.14'
-gem 'paypal-sdk-adaptiveaccounts'
 gem 'rails_config'
 gem 'remotipart'
 gem 'redcarpet'
 gem 'sqlite3'
+
+# paypal capabilities
+gem 'paypal-sdk-adaptiveaccounts'
+gem 'paypal-sdk-adaptivepayments'
 
 # handling of uploads
 gem 'paperclip'

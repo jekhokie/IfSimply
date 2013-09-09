@@ -159,6 +159,8 @@ GEM
       mime-types
     paypal-sdk-adaptiveaccounts (1.102.0)
       paypal-sdk-core (~> 0.2.3)
+    paypal-sdk-adaptivepayments (1.105.0)
+      paypal-sdk-core (~> 0.2.3)
     paypal-sdk-core (0.2.5)
       multi_json (~> 1.0)
       xml-simple
@@ -278,6 +280,7 @@ DEPENDENCIES
   money-rails
   paperclip
   paypal-sdk-adaptiveaccounts
+  paypal-sdk-adaptivepayments
   rails (= 3.2.14)
   rails_config
   redcarpet
