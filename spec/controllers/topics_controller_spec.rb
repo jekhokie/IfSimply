@@ -197,7 +197,7 @@ describe TopicsController do
 
     describe "for a pro subscriber" do
       let!(:pro_user) { FactoryGirl.create :user }
-      let!(:subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => discussion_board.club, :level => :pro }
+      let!(:subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => discussion_board.club, :level => :pro, :pro_active => true }
 
       before :each do
         @request.env["devise.mapping"] = Devise.mappings[:users]

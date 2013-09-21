@@ -26,7 +26,8 @@ class ClubsUsersController < ApplicationController
       existing_membership = @club.subscriptions.find_by_user_id(current_user.id)
       requested_level     = params[:level].blank? ? "" : params[:level].to_sym
 
-      if existing_membership and existing_membership.level.to_s == requested_level.to_s
+      if existing_membership and existing_membership.level.to_s == requested_level.to_s and
+         (existing_membership.level == 'basic' or existing_membership.pro_active == true)
         redirect_to club_path(@club)
       else
         @subscription       = ClubsUsers.new
@@ -49,6 +50,9 @@ class ClubsUsersController < ApplicationController
             render :new
           else
             @subscription.preapproval_key = preapproval_hash[:preapproval_key]
+            @subscription.pro_active      = false
+            @subscription.save
+
             redirect_to preapproval_hash[:preapproval_url]
           end
         else

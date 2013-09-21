@@ -78,7 +78,7 @@ describe BlogsController do
 
       describe "for a pro subscriber" do
         let!(:subscribed_user) { FactoryGirl.create :user }
-        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club, :level => :pro }
+        let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => club, :level => :pro, :pro_active => true }
 
         describe "for a free blog" do
           let!(:free_blog) { FactoryGirl.create :blog, :club => club, :free => true }
