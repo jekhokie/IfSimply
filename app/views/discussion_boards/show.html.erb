@@ -12,7 +12,7 @@
           <%- if can? :create, @discussion_board.topics.build %>
             <a href="<%= new_discussion_board_topic_path(@discussion_board) %>" class="create-first-topic-link">Create the First!</a>
           <%- else %>
-            <a href="<%= subscribe_to_club_path(@discussion_board.club) %>" class="create-first-topic-link">Create the First!</a>
+            <a href="<%= subscribe_to_club_path(@discussion_board.club) %>" data-remote="true" class="create-first-topic-link">Create the First!</a>
           <%- end %>
         </h2>
       <%- else %>

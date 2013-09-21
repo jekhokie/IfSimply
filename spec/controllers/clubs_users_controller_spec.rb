@@ -7,7 +7,7 @@ describe ClubsUsersController do
   describe "GET 'new'" do
     describe "for a non signed-in user" do
       before :each do
-        get 'new', :id => club.id
+        get 'new', :id => club.id, :format => 'js'
       end
 
       it "redirects to a new user registration path" do
