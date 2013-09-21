@@ -19,13 +19,12 @@ module PaypalProcessor
     end
   end
 
-  def self.request_preapproval_url(monthly_amount, cancel_url, return_url, ipn_url, member_name, club_name)
-    return "" if monthly_amount.blank?
-    return "" if cancel_url.blank?
-    return "" if return_url.blank?
-    return "" if ipn_url.blank?
-    return "" if member_name.blank?
-    return "" if club_name.blank?
+  def self.request_preapproval_url(monthly_amount, cancel_url, return_url, member_name, club_name)
+    return {} if monthly_amount.blank?
+    return {} if cancel_url.blank?
+    return {} if return_url.blank?
+    return {} if member_name.blank?
+    return {} if club_name.blank?
 
     @api = PayPal::SDK::AdaptivePayments::API.new
 
@@ -45,7 +44,6 @@ module PaypalProcessor
       :paymentPeriod                => "MONTHLY",
       :returnUrl                    => return_url,
       :requireInstantFundingSource  => true,
-      :ipnNotificationUrl           => ipn_url,
       :startingDate                 => DateTime.now,
       :feesPayer                    => "PRIMARYRECEIVER",
       :displayMaxTotalAmount        => true })
@@ -55,9 +53,9 @@ module PaypalProcessor
 
     # Access Response
     if @preapproval_response.success?
-      @api.preapproval_url(@preapproval_response) # Url to complete payment
+      { :preapproval_key => @preapproval_response.preapproval_key, :preapproval_url => @api.preapproval_url(@preapproval_response) }
     else
-      ""
+      { }
     end
   end
 end
