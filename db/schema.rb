@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921155849) do
+ActiveRecord::Schema.define(:version => 20130921163127) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -41,11 +41,12 @@ ActiveRecord::Schema.define(:version => 20130921155849) do
 
   create_table "clubs_users", :force => true do |t|
     t.string   "level"
-    t.integer  "user_id",         :null => false
-    t.integer  "club_id",         :null => false
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "user_id",                            :null => false
+    t.integer  "club_id",                            :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "preapproval_key"
+    t.boolean  "pro_active",      :default => false
   end
 
   add_index "clubs_users", ["club_id"], :name => "index_clubs_users_on_club_id"

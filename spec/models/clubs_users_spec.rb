@@ -9,4 +9,8 @@ describe ClubsUsers do
   it "can be instantiated" do
     ClubsUsers.new.should be_an_instance_of(ClubsUsers)
   end
+
+  it "assigns pro_active as false on initial create" do
+    ClubsUsers.new.pro_active.should == false
+  end
 end
