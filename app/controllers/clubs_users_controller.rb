@@ -23,20 +23,41 @@ class ClubsUsersController < ApplicationController
 
   def create
     if user_signed_in?
-      if @club.members.include? current_user
+      existing_membership = @club.subscriptions.find_by_user_id(current_user.id)
+      requested_level     = params[:level].blank? ? "" : params[:level].to_sym
+
+      if existing_membership and existing_membership.level.to_s == requested_level.to_s
         redirect_to club_path(@club)
       else
         @subscription       = ClubsUsers.new
         @subscription.club  = @club
         @subscription.user  = current_user
-        @subscription.level = params[:level].blank? ? "" : params[:level].to_sym
+        @subscription.level = requested_level
 
-        if @subscription.save
-          redirect_to club_path(@club)
+        if params[:level].to_sym == :pro
+          # generate the root URL
+          prefix = "#{Settings.general['protocol']}://#{Settings.general['host']}:#{Settings.general['port']}"
+
+          preapproval_hash = PaypalProcessor.request_preapproval(@club.price.dollars,
+                                                                 "#{prefix}#{subscribe_to_club_path(@club)}",
+                                                                 "#{prefix}/adaptive_payments/preapproval?club_id=#{@club.id}",
+                                                                 current_user.name,
+                                                                 @club.name)
+
+          if preapproval_hash.blank?
+            flash[:error] = "Unexpected behavior from PayPal - Please check back later"
+            render :new
+          else
+            @subscription.preapproval_key = preapproval_hash[:preapproval_key]
+            redirect_to preapproval_hash[:preapproval_url]
+          end
         else
-          flash[:error] = "Invalid membership level specified"
-
-          render :new
+          if @subscription.save
+            redirect_to club_path(@club)
+          else
+            flash[:error] = "Invalid membership level specified"
+            render :new
+          end
         end
       end
     else
