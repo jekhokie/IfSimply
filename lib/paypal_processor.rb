@@ -19,7 +19,7 @@ module PaypalProcessor
     end
   end
 
-  def self.request_preapproval_url(monthly_amount, cancel_url, return_url, member_name, club_name)
+  def self.request_preapproval(monthly_amount, cancel_url, return_url, member_name, club_name)
     return {} if monthly_amount.blank?
     return {} if cancel_url.blank?
     return {} if return_url.blank?
