@@ -1,43 +1,6 @@
-== ifsimply
+= ifsimply
 
-=== Dependencies
-
-==== ImageMagick
-
-OSX:
-
-```
-brew install ImageMagick
-export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
-ln -s /usr/local/include/ImageMagick/wand /usr/local/include/wand
-ln -s /usr/local/include/ImageMagick/magick /usr/local/include/magick
-```
-
-CentOS:
-
-```
-yum install ImageMagick ImageMagick-devel
-```
-
-==== FFMPEG
-
-Good sample video downloads for testing: http://www.clipcanvas.com/a/video-clip-downloads/
-
-OSX:
-
-```
-brew install ffmpeg
-```
-- Download the preset files from http://www.mediasoftpro.com/aspnet-x264-presets.html,
-  and put them into /usr/local/share/ffmpeg/
-
-CentOS:
-```
-rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
-yum install ffmpeg ffmpeg-devel
-```
-
-=== Background Mailers
+== Background Mailers
 
 - Ensure that you enter the correct settings into the following file:
 config/initializers/setup_mail.rb
@@ -48,20 +11,68 @@ RAILS_ENV=development script/delayed_job start
 RAILS_ENV=development script/delayed_job stop
 ```
 
-=== Apache Web / Passenger
+== Settings
+
+- Copy and update the settings file:
+
+```
+cp config/settings.yml.sample config/settings.yml
+vim config/settings.yml   # update all values to reflect current machine/VM
+```
+
+- Copy and update the database settings file:
+
+```
+cp config/database.yml.sample config/database.yml
+vim config/database.yml   # update all values for database being used
+```
+
+== Whenever (crontab scheduling)
+
+- Create the crontab entries for the billing process
+
+```
+whenever --write-crontab -s 'environment=production'
+crontab -l  # double-check the crontab entries
+```
+
+== Database and Migrations
+
+- Create the database, create the schema, and populate with seed data
+
+```
+rake db:create  RAILS_ENV=production
+rake db:migrate RAILS_ENV=production
+rake db:seed    RAILS_ENV=production
+```
+
+== Asset Pipeline
+
+- Precompile all assets
+
+```
+rake assets:precompile RAILS_ENV=production
+```
+
+== Apache Web / Passenger
 
 - Install Apache Web and Passenger:
 
 ```
-yum install httpd
+sudo yum install httpd
 gem install passenger
 passenger-install-apache2-module  # PAY ATTENTION TO END OF THIS - COPY 3 REQUIRED LINES
 ```
 
 - Add required lines from the step above into /etc/httpd/conf/httpd.conf
 
+```
+sudo vim /etc/httpd/conf/httpd.conf
+```
+
 - Add the following to the /etc/httpd/conf/httpd.conf:
 
+```
 <VirtualHost *:3999>
   ServerName www.example.com
   DocumentRoot /opt/ifsimply/public
@@ -75,8 +86,10 @@ passenger-install-apache2-module  # PAY ATTENTION TO END OF THIS - COPY 3 REQUIR
     Allow from all
   </Directory>
 </VirtualHost>
+```
 
-=== Stripe
+- Start the Apache service
 
-- Currently, the Stripe account linked to is under justin.karimi@me.com under the application
-  name 'If Simply'.
+```
+sudo service httpd start
+```
