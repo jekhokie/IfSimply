@@ -3,6 +3,6 @@ FactoryGirl.define do
     user
     club
 
-    level { :basic }
+    level { 'basic' }
   end
 end

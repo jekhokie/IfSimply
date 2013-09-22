@@ -24,18 +24,24 @@ class ClubsUsersController < ApplicationController
   def create
     if user_signed_in?
       existing_membership = @club.subscriptions.find_by_user_id(current_user.id)
-      requested_level     = params[:level].blank? ? "" : params[:level].to_sym
+      requested_level     = params[:level].blank? ? "" : params[:level].to_s
 
-      if existing_membership and existing_membership.level.to_s == requested_level.to_s and
+      if existing_membership                           and
+         existing_membership.level  == requested_level and
          (existing_membership.level == 'basic' or existing_membership.pro_active == true)
         redirect_to club_path(@club)
       else
-        @subscription       = ClubsUsers.new
-        @subscription.club  = @club
-        @subscription.user  = current_user
+        if existing_membership
+          @subscription = existing_membership
+        else
+          @subscription       = ClubsUsers.new
+          @subscription.club  = @club
+          @subscription.user  = current_user
+        end
+
         @subscription.level = requested_level
 
-        if params[:level].to_sym == :pro
+        if requested_level == 'pro'
           # generate the root URL
           prefix = "#{Settings.general['protocol']}://#{Settings.general['host']}:#{Settings.general['port']}"
 

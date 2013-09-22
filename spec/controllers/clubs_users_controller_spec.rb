@@ -67,7 +67,7 @@ describe ClubsUsersController do
 
       describe "coming from a pro link for an existing basic subscriber" do
         let!(:basic_user)   { FactoryGirl.create :user }
-        let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => basic_user, :level => :basic }
+        let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => basic_user, :level => 'basic' }
 
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]
@@ -151,7 +151,7 @@ describe ClubsUsersController do
 
       describe "for an existing subscription" do
         let!(:subscribing_user)      { FactoryGirl.create :user }
-        let!(:existing_subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :club => club, :level => :basic }
+        let!(:existing_subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :club => club, :level => 'basic' }
 
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]
