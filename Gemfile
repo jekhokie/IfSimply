@@ -17,6 +17,9 @@ gem 'remotipart'
 gem 'redcarpet'
 gem 'sqlite3'
 
+# scheduling for billing, etc.
+gem 'whenever'
+
 # paypal capabilities
 gem 'paypal-sdk-adaptiveaccounts'
 gem 'paypal-sdk-adaptivepayments'
