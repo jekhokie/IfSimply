@@ -26,7 +26,7 @@ describe "clubs_users/new.html.erb" do
 
     describe "for a basic-subscribed user" do
       let!(:basic_user)         { FactoryGirl.create :user }
-      let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => club, :level => :basic }
+      let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => club, :level => 'basic' }
 
       before :each do
         basic_user.confirm!
@@ -56,7 +56,7 @@ describe "clubs_users/new.html.erb" do
 
     describe "for a pro-subscribed user" do
       let!(:pro_user)         { FactoryGirl.create :user }
-      let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => :pro }
+      let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
 
       before :each do
         pro_user.confirm!

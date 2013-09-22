@@ -18,6 +18,11 @@ Ifsimply::Application.routes.draw do
     match '/access_violation'    => 'home#access_violation',    :as => :access_violation
   end
 
+  # paypal-related routing
+  scope '/adaptive_payments' do
+    match '/preapproval' => 'paypal_transactions#preapproval', :as => :paypal_preapproval
+  end
+
   # mercury editor routes
   get '/editor/blogs/:id'                 => "blogs#edit",             :as => :blog_editor
   get '/editor/clubs/:id'                 => "clubs#edit",             :as => :club_editor

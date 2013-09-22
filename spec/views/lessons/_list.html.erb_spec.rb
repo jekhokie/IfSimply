@@ -30,7 +30,7 @@ describe "lessons/_list.html.erb" do
     describe "for a basic subscriber" do
       let!(:course)          { FactoryGirl.create :course }
       let!(:subscribed_user) { FactoryGirl.create :user }
-      let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => :basic }
+      let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => 'basic' }
 
       before :each do
         subscribed_user.confirm!
@@ -81,7 +81,7 @@ describe "lessons/_list.html.erb" do
     describe "for a pro subscriber" do
       let!(:course)          { FactoryGirl.create :course }
       let!(:subscribed_user) { FactoryGirl.create :user }
-      let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => :pro }
+      let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => 'pro', :pro_active => true }
 
       before :each do
         subscribed_user.confirm!

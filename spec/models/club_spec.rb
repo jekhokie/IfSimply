@@ -143,8 +143,23 @@ describe Club do
     let!(:subscriber)   { FactoryGirl.create :user }
     let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => subscriber }
 
-    it "should report the list of subscribers" do
+    it "reports the list of members" do
       club.members.should include(subscriber)
+    end
+
+    describe "for pro members" do
+      let!(:active_pro_subscriber)    { FactoryGirl.create :user }
+      let!(:expired_pro_subscriber)   { FactoryGirl.create :user }
+      let!(:active_pro_subscription)  { FactoryGirl.create :subscription, :club => club, :user => active_pro_subscriber,  :level => 'pro', :pro_active => true }
+      let!(:expired_pro_subscription) { FactoryGirl.create :subscription, :club => club, :user => expired_pro_subscriber, :level => 'pro', :pro_active => false }
+
+      it "includes pro members who have an active pro subscription" do
+        club.members.should include(active_pro_subscriber)
+      end
+
+      it "does not include pro members whose pro subscription has expired" do
+        club.members.should_not include(expired_pro_subscriber)
+      end
     end
   end
 end

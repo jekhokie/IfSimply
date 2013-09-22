@@ -3,6 +3,6 @@ FactoryGirl.define do
     user
     club
 
-    level { [ :basic, :pro ][rand(2)] }
+    level { 'basic' }
   end
 end

@@ -7,7 +7,7 @@ describe ClubsUsersController do
   describe "GET 'new'" do
     describe "for a non signed-in user" do
       before :each do
-        get 'new', :id => club.id
+        get 'new', :id => club.id, :format => 'js'
       end
 
       it "redirects to a new user registration path" do
@@ -67,7 +67,7 @@ describe ClubsUsersController do
 
       describe "coming from a pro link for an existing basic subscriber" do
         let!(:basic_user)   { FactoryGirl.create :user }
-        let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => basic_user, :level => :basic }
+        let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => basic_user, :level => 'basic' }
 
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]
@@ -151,13 +151,13 @@ describe ClubsUsersController do
 
       describe "for an existing subscription" do
         let!(:subscribing_user)      { FactoryGirl.create :user }
-        let!(:existing_subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :club => club }
+        let!(:existing_subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :club => club, :level => 'basic' }
 
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]
           sign_in subscribing_user
 
-          post 'create', :id => club.id
+          post 'create', :id => club.id, :level => 'basic'
         end
 
         it "redirects to the club show view" do
@@ -168,15 +168,202 @@ describe ClubsUsersController do
           assigns(:club).should == club
         end
 
-        it "adds the user as a free subscriber to the club" do
-          club.reload
-          club.members.should include(subscribing_user)
+        it "does not create an additional membership" do
+          subscribing_user.memberships.count.should == 1
         end
       end
 
       describe "for a non signed-in user" do
         before :each do
-          post 'create', :id => club.id
+          post 'create', :id => club.id, :level => 'basic'
+        end
+
+        it "redirects to the sales page" do
+          response.should redirect_to(club_sales_page_path(club))
+        end
+
+        it "returns the club" do
+          assigns(:club).should == club
+        end
+
+        it "returns the sales_page" do
+          assigns(:sales_page).should == club.sales_page
+        end
+      end
+    end
+
+    describe "for a pro membership subscription" do
+      let!(:subscribing_user) { FactoryGirl.create :user }
+      let!(:preapproval_hash) { { :preapproval_key => "PA-5W790039F30657208", :preapproval_url => "http://sandbox.paypal.com" } }
+      let!(:preapproval_uuid) { "ofwihgoHOIHO(y3tg9YQ(T#Y(YT9" }
+
+      describe "for a new subscription" do
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in subscribing_user
+
+          SecureRandom.should_receive(:uuid).and_return preapproval_uuid
+          PaypalProcessor.should_receive(:request_preapproval).and_return preapproval_hash
+
+          post 'create', :id => club.id, :level => 'pro'
+        end
+
+        it "returns a redirect" do
+          response.should be_redirect
+        end
+
+        it "returns the club" do
+          assigns(:club).should == club
+        end
+
+        it "returns the subscription" do
+          assigns(:subscription).should_not be_blank
+        end
+
+        it "assigns the preapproval_key for the subscription" do
+          assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
+        end
+
+        it "assigns the pro_active attribute as false" do
+          assigns(:subscription).pro_active.should == false
+        end
+
+        it "assigns the preapproval_uuid" do
+          assigns(:subscription).preapproval_uuid.should == preapproval_uuid
+        end
+
+        it "does not add the subscriber as a pro member of the club" do
+          club.reload
+          club.members.select{ |member| member.level == 'pro' }.should_not include(subscribing_user)
+        end
+      end
+
+      describe "for an existing subscription" do
+        describe "of basic level" do
+          let!(:subscribing_user)      { FactoryGirl.create :user }
+          let!(:existing_subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :club => club, :level => 'basic' }
+
+          before :each do
+            @request.env["devise.mapping"] = Devise.mappings[:users]
+            sign_in subscribing_user
+
+            PaypalProcessor.should_not_receive(:request_preapproval)
+
+            post 'create', :id => club.id, :level => 'basic'
+          end
+
+          it "redirects to the club show view" do
+            response.should be_redirect
+          end
+
+          it "returns the club" do
+            assigns(:club).should == club
+          end
+
+          it "does not create an additional membership" do
+            subscribing_user.memberships.count.should == 1
+          end
+        end
+
+        describe "of pro level" do
+          describe "that is expired" do
+            let!(:preapproval_hash) { { :preapproval_key => "PA-5W790039F30657208", :preapproval_url => "http://sandbox.paypal.com" } }
+            let!(:pro_user)         { FactoryGirl.create :user }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+
+            before :each do
+              @request.env["devise.mapping"] = Devise.mappings[:users]
+              sign_in pro_user
+
+              PaypalProcessor.should_receive(:request_preapproval).and_return preapproval_hash
+
+              post 'create', :id => club.id, :level => 'pro'
+            end
+
+            it "returns a redirect" do
+              response.should be_redirect
+            end
+
+            it "returns the club" do
+              assigns(:club).should == club
+            end
+
+            it "returns the subscription" do
+              assigns(:subscription).should_not be_blank
+            end
+
+            it "assigns the preapproval_key for the subscription" do
+              assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
+            end
+
+            it "assigns the pro_active attribute as false" do
+              assigns(:subscription).pro_active.should == false
+            end
+
+            it "does not add the subscriber as a pro member of the club" do
+              club.reload
+              club.members.select{ |member| member.level == 'pro' }.should_not include(pro_user)
+            end
+
+            it "does not create an additional membership" do
+              pro_user.memberships.count.should == 1
+            end
+          end
+
+          describe "that is active" do
+            let!(:pro_user)         { FactoryGirl.create :user }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+
+            before :each do
+              @request.env["devise.mapping"] = Devise.mappings[:users]
+              sign_in pro_user
+
+              PaypalProcessor.should_not_receive(:request_preapproval)
+
+              post 'create', :id => club.id, :level => 'pro'
+            end
+
+            it "redirects to the club show view" do
+              response.should be_redirect
+            end
+
+            it "returns the club" do
+              assigns(:club).should == club
+            end
+
+            it "does not create an additional membership" do
+              pro_user.memberships.count.should == 1
+            end
+          end
+        end
+      end
+
+      describe "for a blank url returned from the paypal request" do
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in subscribing_user
+
+          PaypalProcessor.should_receive(:request_preapproval).and_return {}
+
+          post 'create', :id => club.id, :level => 'pro'
+        end
+
+        it "renders new" do
+          response.should render_template("clubs_users/new")
+        end
+
+        it "returns an error flash" do
+          flash[:error].should_not be_blank
+        end
+
+        it "returns the club" do
+          assigns(:club).should == club
+        end
+      end
+
+      describe "for a non signed-in user" do
+        before :each do
+          post 'create', :id => club.id, :level => 'pro'
         end
 
         it "redirects to the sales page" do

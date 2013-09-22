@@ -7,7 +7,7 @@
         <%- if can? :create, discussion_board.topics.build %>
           <a href="<%= new_discussion_board_topic_path(discussion_board) %>" class="add-discussion-board-topic-link">Add Topic</a>
         <%- else %>
-          <a href="<%= subscribe_to_club_path(discussion_board.club) %>" class="add-discussion-board-topic-link">Add Topic</a>
+          <a href="<%= subscribe_to_club_path(discussion_board.club) %>" data-remote="true" class="add-discussion-board-topic-link">Add Topic</a>
         <%- end %>
       </div>
     </div>

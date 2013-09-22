@@ -1,0 +1,24 @@
+<div class="header-container-left logo">
+  <a class="brand" href="/">
+    <span class="logo-if">i</span>
+    <span class="logo-simply">S</span>
+  </a>
+</div>
+
+<div class="header-container-right">
+  <%- if content_for :navigation %>
+    <%= yield :navigation %>
+  <%- end %>
+
+  <%- if user_signed_in? -%>
+    <div class="verified-status-tag">
+      <%= render :partial => "shared/verified_status_tag" %>
+    </div>
+    <span><%= link_to 'My Club', club_editor_path(current_user.clubs.first) %></span>
+    <span><%= link_to 'My Profile', user_editor_path(current_user) %></span>
+    <span><%= link_to 'Account', edit_user_registration_path %></span>
+    <span><%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %></span>
+  <%- else %>
+    <span><%= link_to 'Login', new_user_session_path, :remote => true %></span>
+  <%- end -%>
+</div>
