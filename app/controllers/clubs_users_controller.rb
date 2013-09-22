@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class ClubsUsersController < ApplicationController
   before_filter :get_club
 
@@ -45,9 +47,10 @@ class ClubsUsersController < ApplicationController
           # generate the root URL
           prefix = "#{Settings.general['protocol']}://#{Settings.general['host']}:#{Settings.general['port']}"
 
+          @subscription.preapproval_uuid = SecureRandom.uuid
           preapproval_hash = PaypalProcessor.request_preapproval(@club.price.dollars,
                                                                  "#{prefix}#{subscribe_to_club_path(@club)}",
-                                                                 "#{prefix}/adaptive_payments/preapproval?club_id=#{@club.id}",
+                                                                 "#{prefix}/adaptive_payments/preapproval?club_id=#{@club.id}&xuuid=#{@subscription.preapproval_uuid}",
                                                                  current_user.name,
                                                                  @club.name)
 
