@@ -43,10 +43,15 @@
         <td class="basic-number">Read Only</td>
         <td class="pro-number">Read/Participate</td>
       </tr>
+      <tr class="trial-period">
+        <td class="meta">Trial Period</td>
+        <td class="basic-number">N/A</td>
+        <td class="pro-number"><%= Settings.paypal[:free_days] %> days free</td>
+      </tr>
       <tr class="cost">
         <td class="meta">Cost</td>
         <td class="basic-number">Free</td>
-        <td class="pro-number"><%= currency_symbol %><%= humanized_money club.price %></td>
+        <td class="pro-number"><%= currency_symbol %><%= humanized_money club.price %> / month</td>
       </tr>
 
       <tr class="subscription-type">
