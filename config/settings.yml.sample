@@ -1,3 +1,9 @@
+:general:
+  default_application_name: IfSimply
+  default_partner_name:     Simple Media Technology
+  protocol:                 http
+  host:                     localhost
+  port:                     3000
 :clubs:
   default_name:           "Your Club Name Here:"
   default_sub_heading:    Club sub heading here
