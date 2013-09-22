@@ -5,4 +5,6 @@ class ClubsUsers < ActiveRecord::Base
   belongs_to :user
 
   validates_inclusion_of :level, :in => [ "basic", "pro" ]
+
+  scope :paying, -> { where(:level => "pro", :pro_active => true) }
 end
