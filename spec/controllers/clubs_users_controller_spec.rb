@@ -167,6 +167,10 @@ describe ClubsUsersController do
         it "returns the club" do
           assigns(:club).should == club
         end
+
+        it "does not create an additional membership" do
+          subscribing_user.memberships.count.should == 1
+        end
       end
 
       describe "for a non signed-in user" do
