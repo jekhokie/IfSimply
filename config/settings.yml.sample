@@ -40,3 +40,5 @@
   password:             <ACCOUNT_PASSWORD>
   authentication:       <AUTH_TYPE>         # common: 'plain'
   enable_starttls_auto: <BOOLEAN_ENABLE>    # common: 'true'
+:paypal:
+  free_days: 14

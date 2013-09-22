@@ -44,7 +44,7 @@ module PaypalProcessor
       :paymentPeriod                => "MONTHLY",
       :returnUrl                    => return_url,
       :requireInstantFundingSource  => true,
-      :startingDate                 => DateTime.now,
+      :startingDate                 => DateTime.now + Settings.paypal[:free_days],
       :feesPayer                    => "PRIMARYRECEIVER",
       :displayMaxTotalAmount        => true })
 
