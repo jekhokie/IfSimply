@@ -4,10 +4,15 @@ describe "lessons/_list.html.erb" do
   include Warden::Test::Helpers
   Warden.test_mode!
 
-  let!(:video_src) { "http://www.google.com/" }
+  let!(:video_src) { "http://www.ifsimply.com/" }
   let!(:user)      { FactoryGirl.create :user }
   let!(:club)      { user.clubs.first }
   let!(:course)    { FactoryGirl.create :course, :club => club }
+
+  before :each do
+    FakeWeb.clean_registry
+    FakeWeb.register_uri(:head, video_src, :body => "", :status => [ "200", "OK" ])
+  end
 
   describe "course lessons list" do
     describe "for a club owner" do

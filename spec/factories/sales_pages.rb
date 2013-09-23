@@ -8,6 +8,6 @@ FactoryGirl.define do
     call_to_action { Faker::Lorem.words(rand(3) + 1).join " " }
     heading        { Faker::Lorem.words(rand(3) + 3).join " " }
     sub_heading    { Faker::Lorem.words(rand(5) + 3).join " " }
-    video          { "http://www.google.com/" }
+    video          { "http://www.ifsimply.com/" }
   end
 end
