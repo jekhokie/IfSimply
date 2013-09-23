@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921182913) do
+ActiveRecord::Schema.define(:version => 20130923105854) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(:version => 20130921182913) do
 
   create_table "clubs_users", :force => true do |t|
     t.string   "level"
-    t.integer  "user_id",                             :null => false
-    t.integer  "club_id",                             :null => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.integer  "user_id",                                  :null => false
+    t.integer  "club_id",                                  :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "preapproval_key"
-    t.boolean  "pro_active",       :default => false
+    t.string   "pro_status",       :default => "INACTIVE"
     t.string   "preapproval_uuid"
   end
 
