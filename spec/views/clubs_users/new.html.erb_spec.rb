@@ -56,7 +56,7 @@ describe "clubs_users/new.html.erb" do
 
     describe "for a pro-subscribed user" do
       let!(:pro_user)         { FactoryGirl.create :user }
-      let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+      let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
 
       before :each do
         pro_user.confirm!

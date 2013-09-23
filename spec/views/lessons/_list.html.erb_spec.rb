@@ -81,7 +81,7 @@ describe "lessons/_list.html.erb" do
     describe "for a pro subscriber" do
       let!(:course)          { FactoryGirl.create :course }
       let!(:subscribed_user) { FactoryGirl.create :user }
-      let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => 'pro', :pro_active => true }
+      let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => 'pro', :pro_status => "ACTIVE" }
 
       before :each do
         subscribed_user.confirm!
