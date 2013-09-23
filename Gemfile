@@ -53,6 +53,7 @@ group :test, :development do
   gem 'database_cleaner', '<= 1.0.1'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'fakeweb'
   gem 'launchy'
   gem 'rspec'
   gem 'rspec-rails'
