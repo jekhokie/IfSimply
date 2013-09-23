@@ -58,6 +58,9 @@ describe SalesPagesController do
     let!(:new_heading) { "Test Heading" }
 
     before :each do
+      FakeWeb.clean_registry
+      FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+
       @request.env["devise.mapping"] = Devise.mappings[:users]
       sign_in user
     end
@@ -68,7 +71,7 @@ describe SalesPagesController do
                                                                     :sales_page_sub_heading    => { :value => "abc" },
                                                                     :sales_page_call_to_action => { :value => "123" },
                                                                     :club_price                => { :value => "10.00" },
-                                                                    :sales_page_video_url      => { :value => "http://www.google.com/" },
+                                                                    :sales_page_video_url      => { :value => "http://www.ifsimply.com/" },
                                                                     :sales_page_benefit1       => { :value => "abc" },
                                                                     :sales_page_benefit2       => { :value => "abc" },
                                                                     :sales_page_benefit3       => { :value => "abc" } }
@@ -103,7 +106,7 @@ describe SalesPagesController do
                                                                     :sales_page_sub_heading    => { :value => "abc" },
                                                                     :sales_page_call_to_action => { :value => "123" },
                                                                     :club_price                => { :value => "10.00" },
-                                                                    :sales_page_video_url      => { :value => "http://www.google.com/" },
+                                                                    :sales_page_video_url      => { :value => "http://www.ifsimply.com/" },
                                                                     :sales_page_benefit1       => { :value => "abc" },
                                                                     :sales_page_benefit2       => { :value => "abc" },
                                                                     :sales_page_benefit3       => { :value => "abc" } }
@@ -142,7 +145,7 @@ describe SalesPagesController do
                                                                     :sales_page_sub_heading    => { :value => "abc" },
                                                                     :sales_page_call_to_action => { :value => "123" },
                                                                     :club_price                => { :value => "1" },
-                                                                    :sales_page_video_url      => { :value => "http://www.google.com/" },
+                                                                    :sales_page_video_url      => { :value => "http://www.ifsimply.com/" },
                                                                     :sales_page_benefit1       => { :value => "abc" },
                                                                     :sales_page_benefit2       => { :value => "abc" },
                                                                     :sales_page_benefit3       => { :value => "abc" } }

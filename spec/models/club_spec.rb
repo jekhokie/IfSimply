@@ -150,8 +150,8 @@ describe Club do
     describe "for pro members" do
       let!(:active_pro_subscriber)    { FactoryGirl.create :user }
       let!(:expired_pro_subscriber)   { FactoryGirl.create :user }
-      let!(:active_pro_subscription)  { FactoryGirl.create :subscription, :club => club, :user => active_pro_subscriber,  :level => 'pro', :pro_active => true }
-      let!(:expired_pro_subscription) { FactoryGirl.create :subscription, :club => club, :user => expired_pro_subscriber, :level => 'pro', :pro_active => false }
+      let!(:active_pro_subscription)  { FactoryGirl.create :subscription, :club => club, :user => active_pro_subscriber,  :level => 'pro', :pro_status => "ACTIVE" }
+      let!(:expired_pro_subscription) { FactoryGirl.create :subscription, :club => club, :user => expired_pro_subscriber, :level => 'pro', :pro_status => "INACTIVE" }
 
       it "includes pro members who have an active pro subscription" do
         club.members.should include(active_pro_subscriber)

@@ -6,7 +6,7 @@ describe PaypalTransactionsController do
 
   describe "GET 'preapproval'" do
     let!(:preapproval_uuid) { "soighaoishOIEGFHOHG(#YT)(YT#()#" }
-    let!(:subscription)     { FactoryGirl.create :subscription, :club => club, :user => user, :level => 'pro', :pro_active => true, :preapproval_uuid => preapproval_uuid }
+    let!(:subscription)     { FactoryGirl.create :subscription, :club => club, :user => user, :level => 'pro', :pro_status => "ACTIVE", :preapproval_uuid => preapproval_uuid }
 
     describe "for a non signed-in user" do
       before :each do
@@ -101,7 +101,7 @@ describe PaypalTransactionsController do
         end
 
         it "activates the pro membership" do
-          subscription.pro_active.should == true
+          subscription.pro_status.should == "ACTIVE"
         end
 
         it "redirects to the club path" do

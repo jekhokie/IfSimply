@@ -8,6 +8,11 @@ describe Lesson do
   end
 
   describe "valid?" do
+    before :each do
+      FakeWeb.clean_registry
+      FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+    end
+
     # title
     it "returns false when no title is specified" do
       FactoryGirl.build(:lesson, :title => "").should_not be_valid
@@ -25,7 +30,7 @@ describe Lesson do
       end
 
       it "returns true when the URL is reachable" do
-        FactoryGirl.build(:lesson, :video => "http://www.google.com/").should be_valid
+        FactoryGirl.build(:lesson, :video => "http://www.ifsimply.com/").should be_valid
       end
 
       it "returns true when URL is blank/not specified" do
