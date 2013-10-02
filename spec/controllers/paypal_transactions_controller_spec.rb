@@ -101,11 +101,17 @@ describe PaypalTransactionsController do
         end
 
         it "activates the pro membership" do
+          subscription.reload
           subscription.pro_status.should == "ACTIVE"
         end
 
         it "redirects to the club path" do
           response.should redirect_to(club_path(club))
+        end
+
+        it "assigns the anniversary_at as date/time plus trial period" do
+          subscription.reload
+          subscription.anniversary_date.should == Date.today + Settings.paypal[:free_days].days
         end
       end
     end
