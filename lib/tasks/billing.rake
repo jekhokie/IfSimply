@@ -6,21 +6,21 @@ namespace :billing do
 
       # need to double-check that the subscription is still valid for billing
       # since the last query since it may have changed in the time lapse
-      if subscription.level == 'pro' and subscription.pro_active == true
-        if (preapproval_key = subscription.preapproval_key).blank?
-        else
-        end
+      if subscription.level == 'pro' and subscription.pro_status == "ACTIVE"
+        preapproval_key = subscription.preapproval_key
 
-        # TODO: - if there is a preapproval key:
-        # TODO:   - if the date is within range for billing:
-        # TODO:     - if billing the user succeeds:
-        # TODO:       - create billing entry in billings table
-        # TODO:     - if billing the user fails:
-        # TODO:       - set the pro_status to 'failed_payment'
-        # TODO:   - if the date is not within range for billing:
-        # TODO:     - ignore/pass over (next)
-        # TODO: - if there is no preapproval key:
-        # TODO:   - set the pro_active to false
+        if preapproval_key.nil? or preapproval_key.empty?
+          subscription.pro_status = "FAILED_PREAPPROVAL"
+          subscription.save
+        else
+          # if the date is within range for billing:
+          #   if billing the user succeeds:
+          #     - create billing entry in the billings table
+          #   else:
+          #     - set the pro_status to "FAILED_PAYMENT"
+          # else:
+          #   - ignore/pass over
+        end
       end
     end
   end
