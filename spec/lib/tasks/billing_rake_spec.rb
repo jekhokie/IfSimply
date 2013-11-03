@@ -20,11 +20,11 @@ describe "billing" do
 
     describe "for active pro subscriptions" do
       describe "with a preapproval key" do
-        let!(:pro_active_subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE" }
+        let(:pro_active_subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.today }
 
         it "bills the users" do
           ClubsUsers.should_receive(:find).with(pro_active_subscription.id).and_return pro_active_subscription
-          pro_active_subscription.should_receive(:preapproval_key)
+          PaypalProcessor.should_receive(:bill_user).and_return({ :success => true })
           @rake[@task_name].invoke
         end
       end
@@ -37,6 +37,37 @@ describe "billing" do
 
           pro_active_subscription.reload
           pro_active_subscription.pro_status.should == "FAILED_PREAPPROVAL"
+        end
+      end
+
+      describe "when the subscribers' anniversary date is the last day of a month that has less days and the current date is the last day" do
+        let(:billable_subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.new(2013, 01, 31) }
+
+        it "attempts to bill the user" do
+          Date.should_receive(:today).and_return Date.new(2013, 02, 28)
+          ClubsUsers.should_receive(:find).with(billable_subscription.id).and_return billable_subscription
+          PaypalProcessor.should_receive(:bill_user).and_return({ :success => true, :pay_key => "AP-1398fg02h83t028" })
+          @rake[@task_name].invoke
+        end
+      end
+
+      describe "when the current day is a day that lines up with the subscribers' anniversary" do
+        let(:billable_subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.today }
+
+        it "attempts to bill the user" do
+          ClubsUsers.should_receive(:find).with(billable_subscription.id).and_return billable_subscription
+          PaypalProcessor.should_receive(:bill_user).and_return({ :success => true, :pay_key => "AP-1398fg02h83t028" })
+          @rake[@task_name].invoke
+        end
+      end
+
+      describe "for a day that does not line up with the subscribers' anniversary" do
+        let(:non_billable_subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.today - 1.day }
+
+        it "does not attempt to bill the user" do
+          ClubsUsers.should_receive(:find).with(non_billable_subscription.id).and_return non_billable_subscription
+          PaypalProcessor.should_not_receive(:bill_user)
+          @rake[@task_name].invoke
         end
       end
     end

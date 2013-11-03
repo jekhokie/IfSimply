@@ -44,7 +44,7 @@ module PaypalProcessor
       :paymentPeriod                => "MONTHLY",
       :returnUrl                    => return_url,
       :requireInstantFundingSource  => true,
-      :startingDate                 => DateTime.now + Settings.paypal[:free_days],
+      :startingDate                 => DateTime.now + Settings.paypal[:free_days].days,
       :feesPayer                    => "PRIMARYRECEIVER",
       :displayMaxTotalAmount        => true })
 
@@ -94,7 +94,6 @@ module PaypalProcessor
       :reverseAllParallelPaymentsOnError => true,
       :preapprovalKey => preapproval_key
     })
-
 
     # Make API call & get response
     @pay_response = @api.pay(@payment)

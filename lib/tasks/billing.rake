@@ -13,13 +13,34 @@ namespace :billing do
           subscription.pro_status = "FAILED_PREAPPROVAL"
           subscription.save
         else
-          # if the date is within range for billing:
-          #   if billing the user succeeds:
-          #     - create billing entry in the billings table
-          #   else:
-          #     - set the pro_status to "FAILED_PAYMENT"
-          # else:
-          #   - ignore/pass over
+          today_date       = Date.today
+          anniversary_date = subscription.anniversary_date
+          days_in_month    = Time.days_in_month(today_date.month, today_date.year)
+
+          # bill the user:
+          # IF
+          # - we hit an anniversary day
+          # OR
+          # - today is the last day of the month and the anniversary day is greater than today's day (30 days vs 28 days, etc.)
+          if today_date.day == anniversary_date.day or
+             (today_date == today_date.end_of_month and today_date.end_of_month.day < anniversary_date.day)
+
+            # determine shares for each user
+            club_cost = subscription.club.price.to_f
+            club_owner_amount = ("%.2f" % (club_cost * Settings.paypal[:club_owner_share])).to_f
+            ifsimply_amount   = ("%.2f" % (club_cost * Settings.paypal[:ifsimply_share])).to_f
+
+            # bill the user, and check for success
+            pay_response = PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, subscription.club.user.payment_email, preapproval_key)
+
+            if pay_response[:success] == true
+              # create the billing entry in the transactions table with the pay_response[:pay_key] value, subscriber_id, and club_id
+            else
+              # set the pro_status to FAILED_PAYMENT for the subscription
+              # email the user that they have a failed payment and access to subscription.club.name is restricted
+              # create the billing entry in the transactions table with subscriber_id, club_id and pay_response[:error] value
+            end
+          end
         end
       end
     end

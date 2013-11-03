@@ -47,4 +47,7 @@
   authentication:       <AUTH_TYPE>         # common: 'plain'
   enable_starttls_auto: <BOOLEAN_ENABLE>    # common: 'true'
 :paypal:
-  free_days: 14
+  free_days:        14
+  account_email:    <PAYPAL_EMAIL> # PayPal account email
+  club_owner_share: 0.6
+  ifsimply_share:   0.4
