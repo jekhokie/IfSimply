@@ -101,9 +101,9 @@ module PaypalProcessor
 
     # Access Response
     if @pay_response.success?
-      { :success => true, :error => "" }
+      { :success => true, :pay_key => @pay_response.payKey, :error => "" }
     else
-      { :success => false, :error => @pay_response.error.first.message }
+      { :success => false, :pay_key => "", :error => @pay_response.error.first.message }
     end
   end
 end
