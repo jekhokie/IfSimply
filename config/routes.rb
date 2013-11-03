@@ -1,5 +1,5 @@
 Ifsimply::Application.routes.draw do
-  devise_for :users, :controllers => { :registrations => 'registrations', :sessions => 'sessions' }
+  devise_for :users, :controllers => { :registrations => 'registrations', :sessions => 'sessions', :confirmations => 'confirmations' }
 
   namespace :mercury do
     resources :images
