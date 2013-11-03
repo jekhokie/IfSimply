@@ -59,8 +59,9 @@ module PaypalProcessor
     end
   end
 
-  def self.bill_user(amount, payment_email, preapproval_key)
-    return {} if amount.blank?
+  def self.bill_user(primary_amount, ifsimply_amount, payment_email, preapproval_key)
+    return {} if primary_amount.blank?
+    return {} if ifsimply_amount.blank?
     return {} if payment_email.blank?
     return {} if preapproval_key.blank?
 
@@ -72,19 +73,19 @@ module PaypalProcessor
       :feesPayer          => "PRIMARYRECEIVER",
       :cancelUrl          => "http://www.ifsimply.com/",
       :returnUrl          => "http://www.ifsimply.com/",
-      :ipnNotificationUrl => "http://www.ifsimply.com/adaptive_payments/payment_notify",
+      :ipnNotificationUrl => "http://www.ifsimply.com/",
       :receiverList => {
         :receiver => [
           {
             :primary => true,
             :email   => payment_email,
-            :amount  => amount,
+            :amount  => primary_amount,
             :paymentType => "DIGITALGOODS"
           },
           {
             :primary => false,
             :email   => Settings.paypal[:account_email],
-            :amount  => 4.0,
+            :amount  => ifsimply_amount,
             :paymentType => "DIGITALGOODS"
           }
         ]

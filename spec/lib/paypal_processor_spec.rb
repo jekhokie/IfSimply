@@ -153,22 +153,27 @@ describe "PaypalProcessor lib" do
   end
 
   describe ".bill_user(amount, payment_email, preapproval_key)" do
-    let!(:club)            { FactoryGirl.create :club }
-    let!(:member)          { FactoryGirl.create :user }
-    let!(:amount)          { 10.0 }
-    let!(:payment_email)   { Faker::Internet.email }
-    let!(:preapproval_key) { Faker::Lorem.words(2).join "," }
+    let!(:club)              { FactoryGirl.create :club }
+    let!(:member)            { FactoryGirl.create :user }
+    let!(:club_owner_amount) { 6.0 }
+    let!(:ifsimply_amount)   { 4.0 }
+    let!(:payment_email)     { Faker::Internet.email }
+    let!(:preapproval_key)   { Faker::Lorem.words(2).join "," }
 
-    it "returns a blank hash for a blank amount" do
-      PaypalProcessor.bill_user("", payment_email, preapproval_key).should == {}
+    it "returns a blank hash for a blank club_owner_amount" do
+      PaypalProcessor.bill_user("", ifsimply_amount, payment_email, preapproval_key).should == {}
+    end
+
+    it "returns a blank hash for a blank ifsimply_amount" do
+      PaypalProcessor.bill_user(club_owner_amount, "", payment_email, preapproval_key).should == {}
     end
 
     it "returns a blank hash for a blank payment_email" do
-      PaypalProcessor.bill_user(amount, "", preapproval_key).should == {}
+      PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, "", preapproval_key).should == {}
     end
 
     it "returns a blank hash for a blank preapproval_key" do
-      PaypalProcessor.bill_user(amount, payment_email, "").should == {}
+      PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payment_email, "").should == {}
     end
 
 
@@ -201,7 +206,7 @@ describe "PaypalProcessor lib" do
 
       api.should_receive(:pay).with(pay_request).and_return pay_error_response
 
-      PaypalProcessor.bill_user(amount, payment_email, preapproval_key).should == { :success => false, :error => error_message }
+      PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payment_email, preapproval_key).should == { :success => false, :error => error_message }
     end
 
     it "returns a hash with a blank error value for a valid request" do
@@ -223,7 +228,7 @@ describe "PaypalProcessor lib" do
 
       api.should_receive(:pay).with(pay_request).and_return pay_success_response
 
-      PaypalProcessor.bill_user(amount, payment_email, preapproval_key).should == { :success => true, :error => "" }
+      PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payment_email, preapproval_key).should == { :success => true, :error => "" }
     end
   end
 end
