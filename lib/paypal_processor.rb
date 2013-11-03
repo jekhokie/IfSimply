@@ -58,4 +58,51 @@ module PaypalProcessor
       { }
     end
   end
+
+  def self.bill_user(amount, payment_email, preapproval_key)
+    return {} if amount.blank?
+    return {} if payment_email.blank?
+    return {} if preapproval_key.blank?
+
+    @api = PayPal::SDK::AdaptivePayments::API.new
+
+    @payment = @api.build_pay({
+      :actionType         => "PAY",
+      :currencyCode       => "USD",
+      :feesPayer          => "PRIMARYRECEIVER",
+      :cancelUrl          => "http://www.ifsimply.com/",
+      :returnUrl          => "http://www.ifsimply.com/",
+      :ipnNotificationUrl => "http://www.ifsimply.com/adaptive_payments/payment_notify",
+      :receiverList => {
+        :receiver => [
+          {
+            :primary => true,
+            :email   => payment_email,
+            :amount  => amount,
+            :paymentType => "DIGITALGOODS"
+          },
+          {
+            :primary => false,
+            :email   => Settings.paypal[:account_email],
+            :amount  => 4.0,
+            :paymentType => "DIGITALGOODS"
+          }
+        ]
+      },
+      :requestEnvelope => { :errorLanguage => "en_US" },
+      :reverseAllParallelPaymentsOnError => true,
+      :preapprovalKey => preapproval_key
+    })
+
+
+    # Make API call & get response
+    @pay_response = @api.pay(@payment)
+
+    # Access Response
+    if @pay_response.success?
+      { :success => true, :error => "" }
+    else
+      { :success => false, :error => @pay_response.error.first.message }
+    end
+  end
 end
