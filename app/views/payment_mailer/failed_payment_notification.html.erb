@@ -1,0 +1,21 @@
+<div style="text-shadow: 2px 2px 2px #333; font-family: 'Trebuchet MS'; font-size: 4em; font-weight: bold; margin-bottom: 20px;">
+  <span style="color: #FDA600;">If</span>
+  <span style="color: #008BC5; margin-left: -26px;">Simply</span>
+</div>
+
+<div style="border: 1px solid black; border-radius: 3px; padding: 12px;">
+  <h1>Hi <%= @name -%>!</h1>
+
+  <p>
+    We received an error from PayPal when attempting to bill you for your Pro subscription to:
+    <br/><br/>
+    "<span style="font-weight: bold;"><%= @club_name %></span>"
+    <br/><br/>
+    Specifically, PayPal reported the following:
+    <br/><br/>
+    <span style="font-weight: bold;"><%= @error %></span>
+    <br/><br/>
+    Please log in to your IfSimply account and resolve the issue under "My Profile" so we can continue
+    to provide you with great content!
+  </p>
+</div>
