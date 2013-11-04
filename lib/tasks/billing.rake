@@ -52,7 +52,10 @@ namespace :billing do
                 subscription.error      = pay_response[:error]
                 subscription.save
 
-                # TODO: email the user that they have a failed payment and access to subscription.club.name is restricted
+                PaymentMailer.delay.failed_payment_notification(subscription.user.email,
+                                                                subscription.user.name,
+                                                                "#{subscription.club.name} #{subscription.club.sub_heading}",
+                                                                pay_response[:error])
               end
             end
           end
