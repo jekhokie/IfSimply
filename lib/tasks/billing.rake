@@ -24,21 +24,36 @@ namespace :billing do
           # - today is the last day of the month and the anniversary day is greater than today's day (30 days vs 28 days, etc.)
           if today_date.day == anniversary_date.day or
              (today_date == today_date.end_of_month and today_date.end_of_month.day < anniversary_date.day)
+            last_payment = Payment.where(:payer_email => subscription.user.email).sort_by(&:created_at).last.try(:created_at)
 
-            # determine shares for each user
-            club_cost = subscription.club.price.to_f
-            club_owner_amount = ("%.2f" % (club_cost * Settings.paypal[:club_owner_share])).to_f
-            ifsimply_amount   = ("%.2f" % (club_cost * Settings.paypal[:ifsimply_share])).to_f
+            # make sure a user is not double-billed in the same month
+            if last_payment.nil? or last_payment.month != today_date.month
+              # determine shares for each user and information about each
+              club_cost         = subscription.club.price.to_f
+              club_owner_amount = ("%.2f" % (club_cost * Settings.paypal[:club_owner_share])).to_f
+              ifsimply_amount   = ("%.2f" % (club_cost * Settings.paypal[:ifsimply_share])).to_f
+              payee_email       = subscription.club.user.payment_email
 
-            # bill the user, and check for success
-            pay_response = PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, subscription.club.user.payment_email, preapproval_key)
+              # bill the user, and check for success
+              pay_response = PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payee_email, preapproval_key)
 
-            if pay_response[:success] == true
-              # create the billing entry in the transactions table with the pay_response[:pay_key] value, subscriber_id, and club_id
-            else
-              # set the pro_status to FAILED_PAYMENT for the subscription
-              # email the user that they have a failed payment and access to subscription.club.name is restricted
-              # create the billing entry in the transactions table with subscriber_id, club_id and pay_response[:error] value
+              if pay_response[:success] == true
+                payment = Payment.create :payer_email  => "#{subscription.user.email}",
+                                         :payee_email  => "#{payee_email}",
+                                         :pay_key      => "#{pay_response[:pay_key]}",
+                                         :total_amount => "#{club_cost}",
+                                         :payee_share  => "#{club_owner_amount}",
+                                         :house_share  => "#{ifsimply_amount}"
+
+                subscription.error = nil
+                subscription.save
+              else
+                subscription.pro_status = "FAILED_PAYMENT"
+                subscription.error      = pay_response[:error]
+                subscription.save
+
+                # TODO: email the user that they have a failed payment and access to subscription.club.name is restricted
+              end
             end
           end
         end
