@@ -224,8 +224,8 @@ describe ClubsUsersController do
           assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
         end
 
-        it "assigns the pro_active attribute as false" do
-          assigns(:subscription).pro_active.should == false
+        it "assigns the pro_status attribute as 'INACTIVE'" do
+          assigns(:subscription).pro_status.should == "INACTIVE"
         end
 
         it "assigns the preapproval_uuid" do
@@ -269,7 +269,7 @@ describe ClubsUsersController do
           describe "that is expired" do
             let!(:preapproval_hash) { { :preapproval_key => "PA-5W790039F30657208", :preapproval_url => "http://sandbox.paypal.com" } }
             let!(:pro_user)         { FactoryGirl.create :user }
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
 
             before :each do
               @request.env["devise.mapping"] = Devise.mappings[:users]
@@ -296,8 +296,8 @@ describe ClubsUsersController do
               assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
             end
 
-            it "assigns the pro_active attribute as false" do
-              assigns(:subscription).pro_active.should == false
+            it "assigns the pro_status attribute as 'INACTIVE'" do
+              assigns(:subscription).pro_status.should == 'INACTIVE'
             end
 
             it "does not add the subscriber as a pro member of the club" do
@@ -312,7 +312,7 @@ describe ClubsUsersController do
 
           describe "that is active" do
             let!(:pro_user)         { FactoryGirl.create :user }
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
 
             before :each do
               @request.env["devise.mapping"] = Devise.mappings[:users]

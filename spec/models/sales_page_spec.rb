@@ -34,7 +34,10 @@ describe SalesPage do
       end
 
       it "returns true when the URL is reachable" do
-        FactoryGirl.build(:sales_page, :video => "http://www.google.com/").should be_valid
+        FakeWeb.clean_registry
+        FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+
+        FactoryGirl.build(:sales_page, :video => "http://www.ifsimply.com/").should be_valid
       end
 
       it "returns true when URL is blank/not specified" do
@@ -60,6 +63,11 @@ describe SalesPage do
 
   describe "user" do
     let(:club) { FactoryGirl.create :club }
+
+    before :each do
+      FakeWeb.clean_registry
+      FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+    end
 
     it "returns the corresponding sales_page's user" do
       FactoryGirl.create(:sales_page, :club_id => club.id).user.should == club.user

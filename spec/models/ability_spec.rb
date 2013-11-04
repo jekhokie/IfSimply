@@ -93,7 +93,7 @@ describe Ability do
           let!(:pro_user) { FactoryGirl.create :user }
 
           describe "with an active subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds" do
@@ -102,7 +102,7 @@ describe Ability do
           end
 
           describe "with an inactive subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "fails" do
@@ -176,7 +176,7 @@ describe Ability do
           let!(:pro_user) { FactoryGirl.create :user }
 
           describe "with an active subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds for a free lesson" do
@@ -189,7 +189,7 @@ describe Ability do
           end
 
           describe "with an inactive subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "fails for a free lesson" do
@@ -280,7 +280,7 @@ describe Ability do
           let!(:pro_user) { FactoryGirl.create :user }
 
           describe "with an active subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds for a free blog" do
@@ -293,7 +293,7 @@ describe Ability do
           end
 
           describe "with an inactive subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "fails for a free blog" do
@@ -373,7 +373,7 @@ describe Ability do
           let!(:pro_user) { FactoryGirl.create :user }
 
           describe "with an active subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds" do
@@ -382,7 +382,7 @@ describe Ability do
           end
 
           describe "with an inactive subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "fails" do
@@ -445,7 +445,7 @@ describe Ability do
           let!(:pro_user) { FactoryGirl.create :user }
 
           describe "with an active subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds" do
@@ -454,7 +454,7 @@ describe Ability do
           end
 
           describe "with an inactive subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "fails" do
@@ -502,7 +502,7 @@ describe Ability do
           let!(:pro_user) { FactoryGirl.create :user }
 
           describe "with an active subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds" do
@@ -511,7 +511,7 @@ describe Ability do
           end
 
           describe "with an inactive subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds" do
@@ -562,7 +562,7 @@ describe Ability do
           let!(:pro_user) { FactoryGirl.create :user }
 
           describe "with an active subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => topic.club, :level => 'pro', :pro_active => true }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => topic.club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "succeeds" do
@@ -571,7 +571,7 @@ describe Ability do
           end
 
           describe "with an inactive subscription" do
-            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => topic.club, :level => 'pro', :pro_active => false }
+            let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => topic.club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
             it "fails" do

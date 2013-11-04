@@ -151,4 +151,95 @@ describe "PaypalProcessor lib" do
       preapproval_hash[:preapproval_url].should == "https://www.sandbox.paypal.com/webscr?cmd=_ap-preapproval&preapprovalkey=#{preapproval_key}"
     end
   end
+
+  describe ".bill_user(amount, payment_email, preapproval_key)" do
+    let!(:club)              { FactoryGirl.create :club }
+    let!(:member)            { FactoryGirl.create :user }
+    let!(:club_owner_amount) { 6.0 }
+    let!(:ifsimply_amount)   { 4.0 }
+    let!(:payment_email)     { Faker::Internet.email }
+    let!(:preapproval_key)   { Faker::Lorem.words(2).join "," }
+
+    it "returns a blank hash for a blank club_owner_amount" do
+      PaypalProcessor.bill_user("", ifsimply_amount, payment_email, preapproval_key).should == {}
+    end
+
+    it "returns a blank hash for a blank ifsimply_amount" do
+      PaypalProcessor.bill_user(club_owner_amount, "", payment_email, preapproval_key).should == {}
+    end
+
+    it "returns a blank hash for a blank payment_email" do
+      PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, "", preapproval_key).should == {}
+    end
+
+    it "returns a blank hash for a blank preapproval_key" do
+      PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payment_email, "").should == {}
+    end
+
+
+    it "returns a hash with false success and an error message for an invalid response from PayPal" do
+      preapproval_key = "PA-5W790039F30657208"
+      error_message   = "Blah error failed message"
+
+      api = PayPal::SDK::AdaptivePayments::API.new
+      PayPal::SDK::AdaptivePayments::API.should_receive(:new).and_return api
+
+      pay_request = PayPal::SDK::AdaptivePayments::DataTypes::PayRequest.new
+      api.should_receive(:build_pay).and_return pay_request
+
+      pay_error_response = PayPal::SDK::AdaptivePayments::DataTypes::PayResponse.new :responseEnvelope => {
+                                                                                       :timestamp     => "2013-09-09T16:48:41-07:00",
+                                                                                       :ack           => "Failure",
+                                                                                       :correlationId => "6f5a43f329a85",
+                                                                                       :build         => "6941298"
+                                                                                     },
+                                                                                     :error => [
+                                                                                       {
+                                                                                         :errorId   => 580022,
+                                                                                         :domain    => "PLATFORM",
+                                                                                         :subdomain => "Application",
+                                                                                         :severity  => "Error",
+                                                                                         :category  => "Application",
+                                                                                         :message   => error_message
+                                                                                       }
+                                                                                     ]
+
+      api.should_receive(:pay).with(pay_request).and_return pay_error_response
+
+      PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payment_email, preapproval_key).should == { :success => false, :pay_key => "", :error => error_message }
+    end
+
+    describe "for a valid request" do
+      let(:pay_key) { "AP-7L748474VE7451234" }
+
+      before :each do
+        preapproval_key = "PA-5W790039F30657208"
+
+        api = PayPal::SDK::AdaptivePayments::API.new
+        PayPal::SDK::AdaptivePayments::API.should_receive(:new).and_return api
+
+        pay_request = PayPal::SDK::AdaptivePayments::DataTypes::PayRequest.new
+        api.should_receive(:build_pay).and_return pay_request
+
+        pay_success_response = PayPal::SDK::AdaptivePayments::DataTypes::PayResponse.new :responseEnvelope => {
+                                                                                           :timestamp     => "2013-09-09T16:48:41-07:00",
+                                                                                           :ack           => "Success",
+                                                                                           :correlationId => "6f5a43f329a85",
+                                                                                           :build         => "6941298"
+                                                                                         },
+                                                                                         :payKey => pay_key,
+                                                                                         :error => [ ]
+
+        api.should_receive(:pay).with(pay_request).and_return pay_success_response
+      end
+
+      it "returns a hash with a blank error value for a valid request" do
+        PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payment_email, preapproval_key).should == { :success => true, :pay_key => pay_key, :error => "" }
+      end
+
+      it "returns a hash with a pay_key value" do
+        PaypalProcessor.bill_user(club_owner_amount, ifsimply_amount, payment_email, preapproval_key).should == { :success => true, :pay_key => pay_key, :error => "" }
+      end
+    end
+  end
 end

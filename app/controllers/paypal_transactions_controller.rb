@@ -17,7 +17,8 @@ class PaypalTransactionsController < ApplicationController
 
       redirect_to club_sales_page_path(@club)
     else
-      subscription.pro_active = true
+      subscription.pro_status       = "ACTIVE"
+      subscription.anniversary_date = Date.today + Settings.paypal[:free_days].days
       subscription.save
 
       redirect_to @club

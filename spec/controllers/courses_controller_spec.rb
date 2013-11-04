@@ -245,6 +245,11 @@ describe CoursesController do
       let(:lesson)           { FactoryGirl.create :lesson, :course => course }
       let(:new_lesson_title) { "Test Title" }
 
+      before :each do
+        FakeWeb.clean_registry
+        FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+      end
+
       describe "for a lesson with valid attributes" do
         before :each do
           put 'update', :id => course.id, :content => { :course_title       => { :value => "Test Title" },

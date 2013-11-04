@@ -44,7 +44,7 @@ module PaypalProcessor
       :paymentPeriod                => "MONTHLY",
       :returnUrl                    => return_url,
       :requireInstantFundingSource  => true,
-      :startingDate                 => DateTime.now + Settings.paypal[:free_days],
+      :startingDate                 => DateTime.now + Settings.paypal[:free_days].days,
       :feesPayer                    => "PRIMARYRECEIVER",
       :displayMaxTotalAmount        => true })
 
@@ -56,6 +56,53 @@ module PaypalProcessor
       { :preapproval_key => @preapproval_response.preapproval_key, :preapproval_url => @api.preapproval_url(@preapproval_response) }
     else
       { }
+    end
+  end
+
+  def self.bill_user(primary_amount, ifsimply_amount, payment_email, preapproval_key)
+    return {} if primary_amount.blank?
+    return {} if ifsimply_amount.blank?
+    return {} if payment_email.blank?
+    return {} if preapproval_key.blank?
+
+    @api = PayPal::SDK::AdaptivePayments::API.new
+
+    @payment = @api.build_pay({
+      :actionType         => "PAY",
+      :currencyCode       => "USD",
+      :feesPayer          => "SECONDARYONLY",
+      :cancelUrl          => "http://www.ifsimply.com/",
+      :returnUrl          => "http://www.ifsimply.com/",
+      :ipnNotificationUrl => "http://www.ifsimply.com/",
+      :receiverList => {
+        :receiver => [
+          {
+            :primary     => true,
+            :email       => payment_email,
+            :amount      => primary_amount,
+            :paymentType => "DIGITALGOODS"
+          },
+          {
+            :primary     => false,
+            :email       => Settings.paypal[:account_email],
+            :amount      => ifsimply_amount,
+            :paymentType => "DIGITALGOODS"
+          }
+        ]
+      },
+      :requestEnvelope => { :errorLanguage => "en_US" },
+      :reverseAllParallelPaymentsOnError => true,
+      :preapprovalKey => preapproval_key
+    })
+
+    # Make API call & get response
+    @pay_response = @api.pay(@payment)
+
+    # Access Response
+    if @pay_response.success?
+      { :success => true, :pay_key => @pay_response.payKey, :error => "" }
+    else
+      { :success => false, :pay_key => "", :error => @pay_response.error.first.message }
     end
   end
 end

@@ -11,7 +11,10 @@ describe "VideoManipulator lib" do
     end
 
     it "returns true for a valid reachable URL" do
-      VideoManipulator.validate_url("http://www.google.com/").should == true
+      FakeWeb.clean_registry
+      FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+
+      VideoManipulator.validate_url("http://www.ifsimply.com/").should == true
     end
   end
 end

@@ -17,6 +17,9 @@ gem 'remotipart'
 gem 'redcarpet'
 gem 'sqlite3'
 
+# scheduling for billing, etc.
+gem 'whenever'
+
 # paypal capabilities
 gem 'paypal-sdk-adaptiveaccounts'
 gem 'paypal-sdk-adaptivepayments'
@@ -50,6 +53,7 @@ group :test, :development do
   gem 'database_cleaner', '<= 1.0.1'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'fakeweb'
   gem 'launchy'
   gem 'rspec'
   gem 'rspec-rails'

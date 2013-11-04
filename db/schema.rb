@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921182913) do
+ActiveRecord::Schema.define(:version => 20131104020502) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -41,13 +41,15 @@ ActiveRecord::Schema.define(:version => 20130921182913) do
 
   create_table "clubs_users", :force => true do |t|
     t.string   "level"
-    t.integer  "user_id",                             :null => false
-    t.integer  "club_id",                             :null => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.integer  "user_id",                                  :null => false
+    t.integer  "club_id",                                  :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "preapproval_key"
-    t.boolean  "pro_active",       :default => false
+    t.string   "pro_status",       :default => "INACTIVE"
     t.string   "preapproval_uuid"
+    t.date     "anniversary_date"
+    t.string   "error"
   end
 
   add_index "clubs_users", ["club_id"], :name => "index_clubs_users_on_club_id"
@@ -110,6 +112,23 @@ ActiveRecord::Schema.define(:version => 20130921182913) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  create_table "payments", :force => true do |t|
+    t.string   "payer_email"
+    t.string   "payee_email"
+    t.string   "pay_key"
+    t.integer  "total_amount_cents",    :default => 0,     :null => false
+    t.string   "total_amount_currency", :default => "USD", :null => false
+    t.integer  "payee_share_cents",     :default => 0,     :null => false
+    t.string   "payee_share_currency",  :default => "USD", :null => false
+    t.integer  "house_share_cents",     :default => 0,     :null => false
+    t.string   "house_share_currency",  :default => "USD", :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "payments", ["payee_email"], :name => "index_payments_on_payee_email"
+  add_index "payments", ["payer_email"], :name => "index_payments_on_payer_email"
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"

@@ -40,7 +40,7 @@ class Ability
 
     can :read, Blog do |blog|
       membership = user.subscriptions.find_by_club_id blog.club.id
-      blog.club.user == user or (!membership.blank? and ((membership.level.to_s == "basic" and blog.free) or (membership.level.to_s == "pro" and membership.pro_active == true)))
+      blog.club.user == user or (!membership.blank? and ((membership.level.to_s == "basic" and blog.free) or (membership.level.to_s == "pro" and membership.pro_status == "ACTIVE")))
     end
 
     can :read, Course do |course|
@@ -49,7 +49,7 @@ class Ability
 
     can :read, Lesson do |lesson|
       membership = user.subscriptions.find_by_club_id lesson.club.id
-      lesson.club.user == user or (!membership.blank? and ((membership.level.to_s == "basic" and lesson.free) or (membership.level.to_s == "pro" and membership.pro_active == true)))
+      lesson.club.user == user or (!membership.blank? and ((membership.level.to_s == "basic" and lesson.free) or (membership.level.to_s == "pro" and membership.pro_status == "ACTIVE")))
     end
 
     can :read, DiscussionBoard do |discussion_board|
@@ -62,12 +62,12 @@ class Ability
 
     can :create, Topic do |topic|
       membership = user.subscriptions.find_by_club_id topic.club.id
-      topic.club.user == user or (!membership.blank? and (membership.level.to_s == "pro" and membership.pro_active == true))
+      topic.club.user == user or (!membership.blank? and (membership.level.to_s == "pro" and membership.pro_status == "ACTIVE"))
     end
 
     can :create, Post do |post|
       membership = user.subscriptions.find_by_club_id post.club.id
-      post.club.user == user or (!membership.blank? and (membership.level.to_s == "pro" and membership.pro_active == true))
+      post.club.user == user or (!membership.blank? and (membership.level.to_s == "pro" and membership.pro_status == "ACTIVE"))
     end
 
     # global defaults

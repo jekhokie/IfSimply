@@ -30,7 +30,7 @@ class Club < ActiveRecord::Base
   has_many :lessons, :through => :courses
 
   def members
-    User.find subscriptions.select{ |subscription| subscription.level == "basic" or subscription.pro_active == true }.map(&:user_id)
+    User.find subscriptions.select{ |subscription| subscription.level == "basic" or subscription.pro_status == "ACTIVE" }.map(&:user_id)
   end
 
   def assign_defaults
