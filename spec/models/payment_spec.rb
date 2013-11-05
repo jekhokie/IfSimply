@@ -23,13 +23,13 @@ describe Payment do
     end
 
     # payee_share
-    it "returns false when no payee_share is specified" do
-      FactoryGirl.build(:payment, :payee_share => "").should_not be_valid
+    it "returns false when no payee_share_cents is specified" do
+      FactoryGirl.build(:payment, :payee_share_cents => "").should_not be_valid
     end
 
     # house_share
-    it "returns false when no house_share is specified" do
-      FactoryGirl.build(:payment, :house_share => "").should_not be_valid
+    it "returns false when no house_share_cents is specified" do
+      FactoryGirl.build(:payment, :house_share_cents => "").should_not be_valid
     end
   end
 end

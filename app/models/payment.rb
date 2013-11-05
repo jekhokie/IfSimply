@@ -9,6 +9,6 @@ class Payment < ActiveRecord::Base
   validates :payee_email,        :presence => true
   validates :pay_key,            :presence => true
   validates :total_amount_cents, :presence => true
-  validates :payee_share,        :presence => true
-  validates :house_share,        :presence => true
+  validates :payee_share_cents,  :presence => true
+  validates :house_share_cents,  :presence => true
 end
