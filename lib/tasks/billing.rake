@@ -16,16 +16,18 @@ namespace :billing do
           today_date       = Date.today
           anniversary_date = subscription.anniversary_date
           days_in_month    = Time.days_in_month(today_date.month, today_date.year)
+          last_payment     = Payment.where(:payer_email => subscription.user.email).sort_by(&:created_at).last.try(:created_at)
 
           # bill the user:
           # IF
           # - we hit an anniversary day
           # OR
           # - today is the last day of the month and the anniversary day is greater than today's day (30 days vs 28 days, etc.)
-          if today_date.day == anniversary_date.day or
-             (today_date == today_date.end_of_month and today_date.end_of_month.day < anniversary_date.day)
-            last_payment = Payment.where(:payer_email => subscription.user.email).sort_by(&:created_at).last.try(:created_at)
-
+          # OR
+          # - today is greater than the anniversary day and there is no payment for this month
+          if today_date.day  == anniversary_date.day    or
+             (today_date     == today_date.end_of_month and today_date.end_of_month.day <  anniversary_date.day) or
+             (today_date.day >  anniversary_date.day    and (!last_payment or last_payment.month != today_date.month))
             # make sure a user is not double-billed in the same month
             if last_payment.nil? or last_payment.month != today_date.month
               # determine shares for each user and information about each

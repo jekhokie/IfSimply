@@ -62,12 +62,24 @@ describe "billing" do
       end
 
       describe "for a day that does not line up with the subscribers' anniversary" do
-        let(:non_billable_subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.today - 1.day }
+        let!(:subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.today - 1.day }
 
-        it "does not attempt to bill the user" do
-          ClubsUsers.should_receive(:find).with(non_billable_subscription.id).and_return non_billable_subscription
-          PaypalProcessor.should_not_receive(:bill_user)
-          @rake[@task_name].invoke
+        describe "when there is an existing payment for that month" do
+          let!(:payment) { FactoryGirl.create :payment, :payer_email => subscription.user.email }
+
+          it "does not attempt to bill the user" do
+            ClubsUsers.should_receive(:find).with(subscription.id).and_return subscription
+            PaypalProcessor.should_not_receive(:bill_user)
+            @rake[@task_name].invoke
+          end
+        end
+
+        describe "when there is no existing payment for that month" do
+          it "bills the user" do
+            ClubsUsers.should_receive(:find).with(subscription.id).and_return subscription
+            PaypalProcessor.should_receive(:bill_user).and_return({ :success => true, :pay_key => "AP-1398fg02h83t028" })
+            @rake[@task_name].invoke
+          end
         end
       end
     end
