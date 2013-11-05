@@ -57,7 +57,7 @@
       <tr class="subscription-type">
         <td class="meta">Subscribe</td>
         <td class="basic-number">
-          <%- if user_signed_in?    and
+          <%- if user_signed_in?   and
                  can?(:read, club) and
                  current_user.subscriptions.find_by_club_id(club.id).try(:level) == 'basic' %>
             <%= submit_tag "Subscribed", :class => 'btn btn-primary btn-large', :disabled => 'disabled' %>
@@ -69,7 +69,7 @@
           <%- end %>
         </td>
         <td class="pro-number">
-          <%- if user_signed_in?    and
+          <%- if user_signed_in?   and
                  can?(:read, club) and
                  current_user.subscriptions.find_by_club_id(club.id).try(:level) == 'pro' %>
             <%= submit_tag "Subscribed", :class => 'btn btn-primary btn-large', :disabled => 'disabled' %>

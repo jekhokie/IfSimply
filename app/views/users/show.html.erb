@@ -38,9 +38,23 @@
           None
         <%- else %>
           <%- @user.subscriptions.each_with_index do |subscription, i| %>
-            <div class="subscription-name <%= "first" if i == 0 %>">
-              <%= link_to "#{"(#{subscription.level.titleize})" if (user_signed_in? and @user == current_user)} #{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
-            </div>
+            <%- unless subscription.level == 'pro' and subscription.pro_status == 'INACTIVE' %>
+              <div class="subscription-name <%= "first" if i == 0 %>">
+                <%= link_to raw("<i class='icon icon-remove'></i>"),
+                            clubs_user_path(subscription),
+                            :confirm => "Are you sure you wish to unsubscribe from: '#{subscription.club.name} #{subscription.club.sub_heading}'?",
+                            :method => :delete %>
+
+                <%- if subscription.pro_status != 'ACTIVE' %>
+                  <%= form_tag add_member_to_club_path(subscription.club) do %>
+                    <%= hidden_field_tag :level, 'pro' %>
+                    <%= submit_tag "RESOLVE", :class => 'resolve-subscription-submit' %>
+                  <%- end %>
+                <%- end %>
+
+                <%= link_to "#{"(#{subscription.level.titleize})" if (user_signed_in? and @user == current_user)} #{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
+              </div>
+            <%- end %>
           <%- end %>
         <%- end %>
       </div>
