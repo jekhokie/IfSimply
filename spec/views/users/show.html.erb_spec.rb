@@ -8,7 +8,7 @@ describe "users/show.html.erb" do
   let!(:club_1)             { FactoryGirl.create :club }
   let!(:club_2)             { FactoryGirl.create :club }
   let!(:basic_subscription) { FactoryGirl.create :subscription, :user => user, :club => club_1, :level => 'basic' }
-  let!(:pro_subscription)   { FactoryGirl.create :subscription, :user => user, :club => club_2, :level => 'pro'   }
+  let!(:pro_subscription)   { FactoryGirl.create :subscription, :user => user, :club => club_2, :level => 'pro', :pro_status => 'ACTIVE' }
 
   describe "GET 'show'" do
     describe "for the current user" do

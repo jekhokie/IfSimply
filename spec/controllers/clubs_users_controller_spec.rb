@@ -224,8 +224,8 @@ describe ClubsUsersController do
           assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
         end
 
-        it "assigns the pro_status attribute as 'INACTIVE'" do
-          assigns(:subscription).pro_status.should == "INACTIVE"
+        it "assigns the pro_status attribute as 'FAILED_PREAPPROVAL'" do
+          assigns(:subscription).pro_status.should == "FAILED_PREAPPROVAL"
         end
 
         it "assigns the preapproval_uuid" do
@@ -296,8 +296,8 @@ describe ClubsUsersController do
               assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
             end
 
-            it "assigns the pro_status attribute as 'INACTIVE'" do
-              assigns(:subscription).pro_status.should == 'INACTIVE'
+            it "assigns the pro_status attribute as 'FAILED_PREAPPROVAL'" do
+              assigns(:subscription).pro_status.should == 'FAILED_PREAPPROVAL'
             end
 
             it "does not add the subscriber as a pro member of the club" do
