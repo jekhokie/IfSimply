@@ -19,7 +19,7 @@ module PaypalProcessor
     end
   end
 
-  def self.request_preapproval(monthly_amount, cancel_url, return_url, member_name, club_name)
+  def self.request_preapproval(monthly_amount, cancel_url, return_url, member_name, club_name, start_date)
     return {} if monthly_amount.blank?
     return {} if cancel_url.blank?
     return {} if return_url.blank?
@@ -44,7 +44,7 @@ module PaypalProcessor
       :paymentPeriod                => "MONTHLY",
       :returnUrl                    => return_url,
       :requireInstantFundingSource  => true,
-      :startingDate                 => DateTime.now + Settings.paypal[:free_days].days,
+      :startingDate                 => start_date,
       :feesPayer                    => "PRIMARYRECEIVER",
       :displayMaxTotalAmount        => true })
 

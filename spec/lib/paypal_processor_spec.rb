@@ -69,23 +69,27 @@ describe "PaypalProcessor lib" do
     let!(:return_url) { Faker::Lorem.words(2).join " " }
 
     it "returns a blank hash for a blank monthly_amount" do
-      PaypalProcessor.request_preapproval("", cancel_url, return_url, member.name, club.name).should == {}
+      PaypalProcessor.request_preapproval("", cancel_url, return_url, member.name, club.name, Date.today).should == {}
     end
 
     it "returns a blank hash for a blank cancel_url" do
-      PaypalProcessor.request_preapproval(club.price, "", return_url, member.name, club.name).should == {}
+      PaypalProcessor.request_preapproval(club.price, "", return_url, member.name, club.name, Date.today).should == {}
     end
 
     it "returns a blank hash for a blank return_url" do
-      PaypalProcessor.request_preapproval(club.price, cancel_url, "", member.name, club.name).should == {}
+      PaypalProcessor.request_preapproval(club.price, cancel_url, "", member.name, club.name, Date.today).should == {}
     end
 
     it "returns a blank hash for a blank member_name" do
-      PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, "", club.name).should == {}
+      PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, "", club.name, Date.today).should == {}
     end
 
     it "returns a blank hash for a blank club_name" do
-      PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, member.name, "").should == {}
+      PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, member.name, "", Date.today).should == {}
+    end
+
+    it "returns a blank hash for a blank start_date" do
+      PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, member.name, club.name, "").should == {}
     end
 
     it "returns a blank hash for an invalid response from PayPal" do
@@ -120,11 +124,12 @@ describe "PaypalProcessor lib" do
 
       api.should_receive(:preapproval).with(preapproval_request).and_return preapproval_error_response
 
-      PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, member.name, club.name).should == {}
+      PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, member.name, club.name, Date.today).should == {}
     end
 
     it "returns a hash with a preapproval_key and preapproval_url for a valid request" do
       preapproval_key = "PA-5W790039F30657208"
+      start_date      = Date.today
 
       api = PayPal::SDK::AdaptivePayments::API.new
       PayPal::SDK::AdaptivePayments::API.should_receive(:new).and_return api
@@ -136,7 +141,7 @@ describe "PaypalProcessor lib" do
                                                                                              :paymentPeriod                => "MONTHLY",
                                                                                              :returnUrl                    => return_url,
                                                                                              :requireInstantFundingSource  => true,
-                                                                                             :startingDate                 => DateTime.now,
+                                                                                             :startingDate                 => start_date,
                                                                                              :feesPayer                    => "PRIMARYRECEIVER",
                                                                                              :displayMaxTotalAmount        => true
       api.should_receive(:build_preapproval).and_return preapproval_request
@@ -145,7 +150,7 @@ describe "PaypalProcessor lib" do
                                                                                                :preapprovalKey => preapproval_key
       api.should_receive(:preapproval).with(preapproval_request).and_return preapproval_response
 
-      preapproval_hash = PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, member.name, club.name)
+      preapproval_hash = PaypalProcessor.request_preapproval(club.price, cancel_url, return_url, member.name, club.name, start_date)
 
       preapproval_hash[:preapproval_key].should == preapproval_key
       preapproval_hash[:preapproval_url].should == "https://www.sandbox.paypal.com/webscr?cmd=_ap-preapproval&preapprovalkey=#{preapproval_key}"

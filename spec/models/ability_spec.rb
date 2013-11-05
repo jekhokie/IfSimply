@@ -43,6 +43,21 @@ describe Ability do
     end
   end
 
+  describe "ClubsUsers" do
+    let(:owned_subscription)     { FactoryGirl.create :subscription, :user => user }
+    let(:non_owned_subscription) { FactoryGirl.create :subscription }
+
+    context "destroy" do
+      it "succeeds when the user owns the subscription" do
+        ability.should be_able_to(:destroy, owned_subscription)
+      end
+
+      it "fails when the user does not own the subscription" do
+        ability.should_not be_able_to(:destroy, non_owned_subscription)
+      end
+    end
+  end
+
   describe "Course" do
     let(:club)             { FactoryGirl.create :club, :user => user }
     let(:owned_course)     { FactoryGirl.create :course, :club => club }

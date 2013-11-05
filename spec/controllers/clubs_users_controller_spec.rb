@@ -224,8 +224,8 @@ describe ClubsUsersController do
           assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
         end
 
-        it "assigns the pro_status attribute as 'INACTIVE'" do
-          assigns(:subscription).pro_status.should == "INACTIVE"
+        it "assigns the pro_status attribute as 'FAILED_PREAPPROVAL'" do
+          assigns(:subscription).pro_status.should == "FAILED_PREAPPROVAL"
         end
 
         it "assigns the preapproval_uuid" do
@@ -296,8 +296,8 @@ describe ClubsUsersController do
               assigns(:subscription).preapproval_key.should == preapproval_hash[:preapproval_key]
             end
 
-            it "assigns the pro_status attribute as 'INACTIVE'" do
-              assigns(:subscription).pro_status.should == 'INACTIVE'
+            it "assigns the pro_status attribute as 'FAILED_PREAPPROVAL'" do
+              assigns(:subscription).pro_status.should == 'FAILED_PREAPPROVAL'
             end
 
             it "does not add the subscriber as a pro member of the club" do
@@ -377,6 +377,59 @@ describe ClubsUsersController do
         it "returns the sales_page" do
           assigns(:sales_page).should == club.sales_page
         end
+      end
+    end
+  end
+
+  describe "DELETE 'destroy'" do
+    let!(:subscribing_user) { FactoryGirl.create :user }
+
+    describe "for a basic membership subscription" do
+      let!(:subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :level => 'basic' }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in subscribing_user
+
+        ClubsUsers.any_instance.should_receive(:destroy)
+
+        delete 'destroy', :id => subscription.id
+      end
+
+      it "redirects to the users show view" do
+        response.should redirect_to(user_path(subscribing_user))
+      end
+    end
+
+    describe "for a pro membership subscription" do
+      let!(:subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :level => 'pro', :pro_status => 'ACTIVE' }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in subscribing_user
+
+        delete 'destroy', :id => subscription.id
+      end
+
+      it "redirects to the users show view" do
+        response.should redirect_to(user_path(subscribing_user))
+      end
+
+      it "re-assigns the pro_status to INACTIVE" do
+        subscription.reload
+        subscription.pro_status.should == "INACTIVE"
+      end
+    end
+
+    describe "for a non signed-in user" do
+      let!(:subscription) { FactoryGirl.create :subscription }
+
+      before :each do
+        delete 'destroy', :id => subscription.id
+      end
+
+      it "returns 403 unauthorized forbidden code" do
+        response.response_code.should == 403
       end
     end
   end

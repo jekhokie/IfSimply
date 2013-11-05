@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class ClubsUsersController < ApplicationController
-  before_filter :get_club
+  before_filter :get_club, :except => [ :destroy ]
 
   def new
     if user_signed_in?
@@ -47,19 +47,26 @@ class ClubsUsersController < ApplicationController
           # generate the root URL
           prefix = "#{Settings.general['protocol']}://#{Settings.general['host']}:#{Settings.general['port']}"
 
+          # determine if we need a trial period or not
+          start_date = DateTime.now + Settings.paypal[:free_days].days
+          if existing_membership and existing_membership.anniversary_date and existing_membership.anniversary_date < Date.today
+            start_date = DateTime.now
+          end
+
           @subscription.preapproval_uuid = SecureRandom.uuid
           preapproval_hash = PaypalProcessor.request_preapproval(@club.price.dollars,
                                                                  "#{prefix}#{subscribe_to_club_path(@club)}",
                                                                  "#{prefix}/adaptive_payments/preapproval?club_id=#{@club.id}&xuuid=#{@subscription.preapproval_uuid}",
                                                                  current_user.name,
-                                                                 @club.name)
+                                                                 @club.name,
+                                                                 start_date)
 
           if preapproval_hash.blank?
             flash[:error] = "Unexpected behavior from PayPal - Please check back later"
             render :new
           else
             @subscription.preapproval_key = preapproval_hash[:preapproval_key]
-            @subscription.pro_status      = "INACTIVE"
+            @subscription.pro_status      = "FAILED_PREAPPROVAL"
             @subscription.save
 
             redirect_to preapproval_hash[:preapproval_url]
@@ -77,6 +84,21 @@ class ClubsUsersController < ApplicationController
       @sales_page = @club.sales_page
       redirect_to club_sales_page_path(@club)
     end
+  end
+
+  def destroy
+    subscription = ClubsUsers.find params[:id]
+
+    authorize! :destroy, subscription
+
+    if subscription.level == "pro"
+      subscription.pro_status = "INACTIVE"
+      subscription.save
+    else
+      subscription.destroy
+    end
+
+    redirect_to user_path(current_user)
   end
 
   private

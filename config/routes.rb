@@ -66,6 +66,8 @@ Ifsimply::Application.routes.draw do
     end
   end
 
+  resources :clubs_users, :only => [ :destroy ]
+
   resources :courses, :only => [ :show, :update ] do
     resources :lessons, :only => [ :create, :update ]
   end
