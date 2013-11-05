@@ -380,4 +380,57 @@ describe ClubsUsersController do
       end
     end
   end
+
+  describe "DELETE 'destroy'" do
+    let!(:subscribing_user) { FactoryGirl.create :user }
+
+    describe "for a basic membership subscription" do
+      let!(:subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :level => 'basic' }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in subscribing_user
+
+        ClubsUsers.any_instance.should_receive(:destroy)
+
+        delete 'destroy', :id => subscription.id
+      end
+
+      it "redirects to the users show view" do
+        response.should redirect_to(user_path(subscribing_user))
+      end
+    end
+
+    describe "for a pro membership subscription" do
+      let!(:subscription) { FactoryGirl.create :subscription, :user => subscribing_user, :level => 'pro', :pro_status => 'ACTIVE' }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in subscribing_user
+
+        delete 'destroy', :id => subscription.id
+      end
+
+      it "redirects to the users show view" do
+        response.should redirect_to(user_path(subscribing_user))
+      end
+
+      it "re-assigns the pro_status to INACTIVE" do
+        subscription.reload
+        subscription.pro_status.should == "INACTIVE"
+      end
+    end
+
+    describe "for a non signed-in user" do
+      let!(:subscription) { FactoryGirl.create :subscription }
+
+      before :each do
+        delete 'destroy', :id => subscription.id
+      end
+
+      it "returns 403 unauthorized forbidden code" do
+        response.response_code.should == 403
+      end
+    end
+  end
 end
