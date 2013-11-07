@@ -172,6 +172,10 @@
             margin:   0px auto;
             overflow: hidden;
             width:    275px;
+
+            img {
+              max-height: 185px;
+            }
           }
         }
 
