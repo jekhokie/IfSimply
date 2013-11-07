@@ -15,7 +15,7 @@ class BlogsController < ApplicationController
     @blog.assign_defaults
     @blog.save
 
-    render :text => '', :layout => "mercury"
+    redirect_to blog_editor_path(@blog)
   end
 
   def edit

@@ -51,7 +51,7 @@ Ifsimply::Application.routes.draw do
     end
 
     # mercury editor
-    resource  :sales_page, :only => [ :show, :update ]
+    resource :sales_page, :only => [ :show, :update ]
 
     resources :courses, :only => [ :create ] do
       collection do
