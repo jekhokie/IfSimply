@@ -1,42 +1,43 @@
 :general:
-  default_application_name: IfSimply
-  default_partner_name:     Simple Media Technology
+  default_application_name: "IfSimply"
+  default_partner_name:     "Simple Media Technology"
   protocol:                 http
   host:                     localhost
   port:                     3000
 :clubs:
-  default_name:           "Your Club Name Here:"
-  default_sub_heading:    Club sub heading here
-  default_description:    Your club description here
-  default_logo:           "/assets/default_club_logo.jpg"
-  default_price_cents:    1000
+  default_name:           "Your Club Name Here (i.e. Marketing Rockstars)"
+  default_sub_heading:    "Subheading Here (i.e. 'How to be #1 in Digital Media')"
+  default_description:    "Tell Your Members what your club is about here. Make it upbeat and enticing, but keep it brief."
+  default_logo:           "/assets/default_club_logo.png"
+  default_price_cents:    1997
   min_price_cents:        1000
-  name_max_length:        25
-  sub_heading_max_length: 45
+  name_max_length:        50
+  sub_heading_max_length: 55
 :courses:
-  default_title:       Course Title Here
-  default_description: Course description here
-  default_logo:        "/assets/iS_club_thumb.jpg"
+  default_title:       "Your Course Name Here (Keep it Catchy)"
+  default_description: "Provide a quick course description here. It should be brief yet enticing. To change the course photo, drag and drop a new one from your desktop."
+  default_logo:        "/assets/default_course_logo.png"
 :lessons:
-  default_title:      Lesson Title Here
-  default_background: Add a Lesson Description (Required). Click here to edit this text.
+  default_title:      "Your Lesson Name Here (Keep it Focused)"
+  default_background: "Place a description and background information on the lesson here. Show notes as well."
   default_free:       false
 :blogs:
-  default_title:   Blog Title Here
-  default_content: Blog content here
+  default_title:   "Your Blog Post Title Here"
+  default_content: "Blog content here. To change your blog photo or insert photos into your blog, drag and drop a new one from your desktop."
   default_free:    false
+  default_image:   "/assets/iS_club_thumb.jpg"
 :discussion_boards:
-  default_name:        Discussion Board Name Here
-  default_description: Discussion board description here
+  default_name:        "Your Discussion Board Name"
+  default_description: "Add a description of your discussion board and any rules or expectations."
 :sales_pages:
-  default_benefit1:       First benefit here
-  default_benefit2:       Second benefit here
-  default_benefit3:       Third benefit here
-  default_call_to_action: Call to Action
-  default_heading:        Sales Pages Heading Here
-  default_sub_heading:    Sales Page Sub-Heading Here
+  default_benefit1:       "Place the major thing they will learn here"
+  default_benefit2:       "Place the second important benefit here"
+  default_benefit3:       "Put the final outcome here (how will they have changed once they complete this)"
+  default_call_to_action: "Join Now"
+  default_heading:        "Powerful Heading Here (i.e. Unlock the Power of Pinterest)"
+  default_sub_heading:    "Subheading Here (i.e. Pin Your Way to 10,000 New Customers)"
 :users:
-  default_description: A description about yourself here
+  default_description: "Tell the IfSimply community about yourself. We want to know your hopes and dreams. Click here to change it. To change your photo, drag and drop a new one from your desktop"
   default_icon:        "/assets/iS_club_thumb.jpg"
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
