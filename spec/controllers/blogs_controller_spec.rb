@@ -170,19 +170,15 @@ describe BlogsController do
       post 'create', :club_id => user.clubs.first.id
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
-
-    it "renders the mercury layout" do
-      response.should render_template(:layout => "layouts/mercury")
+    it "redirects to the edit view" do
+      response.should redirect_to(blog_editor_path(assigns(:blog)))
     end
 
     it "returns the club" do
       assigns(:club).should_not be_nil
     end
 
-    it "returns the course belonging to the club" do
+    it "returns the blog belonging to the club" do
       assigns(:blog).should_not be_nil
       assigns(:blog).club.should == assigns(:club)
     end
