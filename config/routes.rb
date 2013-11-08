@@ -18,6 +18,7 @@ Ifsimply::Application.routes.draw do
     match '/access_violation'     => 'home#access_violation',     :as => :access_violation
     match '/terms_and_conditions' => 'home#terms_and_conditions', :as => :terms_and_conditions
     match '/privacy_policy'       => 'home#privacy_policy',       :as => :privacy_policy
+    match '/dmca_policy'          => 'home#dmca_policy',          :as => :dmca_policy
   end
 
   # paypal-related routing

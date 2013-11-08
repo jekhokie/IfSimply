@@ -44,4 +44,11 @@ describe HomeController do
       response.should be_success
     end
   end
+
+  describe "GET 'dmca_policy'" do
+    it "is successful" do
+      get 'dmca_policy'
+      response.should be_success
+    end
+  end
 end

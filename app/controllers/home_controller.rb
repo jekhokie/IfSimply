@@ -14,4 +14,7 @@ class HomeController < ApplicationController
 
   def privacy_policy
   end
+
+  def dmca_policy
+  end
 end
