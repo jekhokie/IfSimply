@@ -9,6 +9,12 @@ class HomeController < ApplicationController
     @violation = params[:exception]
   end
 
-  def terms_of_service
+  def terms_and_conditions
+  end
+
+  def privacy_policy
+  end
+
+  def dmca_policy
   end
 end

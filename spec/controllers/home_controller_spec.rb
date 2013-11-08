@@ -30,4 +30,25 @@ describe HomeController do
       assigns(:violation).should == exception_message
     end
   end
+
+  describe "GET 'terms_and_conditions'" do
+    it "is successful" do
+      get 'terms_and_conditions'
+      response.should be_success
+    end
+  end
+
+  describe "GET 'privacy_policy'" do
+    it "is successful" do
+      get 'privacy_policy'
+      response.should be_success
+    end
+  end
+
+  describe "GET 'dmca_policy'" do
+    it "is successful" do
+      get 'dmca_policy'
+      response.should be_success
+    end
+  end
 end

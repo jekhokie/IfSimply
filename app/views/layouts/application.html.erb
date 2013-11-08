@@ -35,7 +35,7 @@
     <%- end %>
 
     <footer>
-      <%= yield :footer if content_for? :footer %>
+      <%= render :partial => "shared/footer" %>
     </footer>
   </body>
 </html>
