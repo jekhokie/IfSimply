@@ -1,5 +1,27 @@
 .devise-form {
+  form#edit_user {
+    .input {
+      margin: 8px 0px;
+
+      label {
+        font-size: 16px;
+      }
+
+      span.hint {
+        margin-left: 8px;
+      }
+    }
+
+    input.btn {
+      margin-top: 4px;
+      width:      100px;
+    }
+  }
+
   .paypal-status {
+    font-size:  16px;
+    margin-top: 30px;
+
     .paypal-heading {
       font-size:   24px;
       font-weight: bold;
@@ -23,6 +45,14 @@
           font-weight: bold;
         }
       }
+    }
+  }
+
+  p.cancel-account {
+    font-size: 16px;
+
+    a {
+      margin-left: 6px;
     }
   }
 }
