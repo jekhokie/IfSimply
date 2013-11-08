@@ -31,8 +31,9 @@
   }
 
   .devise-sub-heading {
-    margin-top: 8px;
-    text-align: center;
+    margin-bottom: 4px;
+    margin-top:    4px;
+    text-align:    center;
   }
 
   .devise-errors {
@@ -80,14 +81,11 @@
 
   .signup-elements {
     margin-left: 50px;
-    margin-top:  10px;
 
     .name-fields,
     .email-fields,
     .password-fields,
     .password-confirmation-fields {
-      margin-top: 6px;
-
       label {
         font-size:   16px;
         font-weight: 200;

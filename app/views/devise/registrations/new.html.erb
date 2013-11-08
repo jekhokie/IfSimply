@@ -26,6 +26,10 @@
         <%= f.input :password_confirmation, :required => true, :placeholder => "Password Confirmation" %>
       </div>
 
+      <div class="terms-agreement">
+        <%= check_box_tag :policy_agree, :true %> I agree to the <%= link_to "Terms of Service", terms_of_service_path, :target => "_blank" %>
+      </div>
+
       <div class="signup"><%= f.submit "Sign Up", :class => "btn btn-warning" %></div>
     </div>
   <% end %>
