@@ -1,43 +1,51 @@
 <div class="footer-container">
-  <div class="footer-left">
-    <div class="footer-left-logo">
-      <span class="footer-logo"></span>
+  <div class="footer-top">
+    <div class="footer-left">
+      <div class="footer-left-logo">
+        <span class="footer-logo"></span>
+      </div>
+
+      <div class="footer-left-links">
+        <ul class="left-links">
+          <li><%= link_to "Terms and Conditions", terms_and_conditions_path %></li>
+          <li><%= link_to "Privacy Policy",       privacy_policy_path %></li>
+          <li><%= link_to "DMCA Policy",          dmca_policy_path %></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="footer-left-links">
-      <ul class="left-links">
-        <li><%= link_to "Terms and Conditions", terms_and_conditions_path %></li>
-        <li><%= link_to "Privacy Policy",       privacy_policy_path %></li>
-        <li><%= link_to "DMCA Policy",          dmca_policy_path %></li>
+    <div class="footer-right">
+      <ul class="social-share-links">
+        <li>
+          <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=<%= Settings.social_media[:facebook_share_link] %>&p[title]=<%= Settings.social_media[:facebook_share_title] %>&p[summary]=<%= Settings.social_media[:facebook_share_content] %>" target="_blank">
+            <%= image_tag "facebook.png", :alt => "Share on Facebook" %>
+          </a>
+        </li>
+
+        <li>
+          <a href="http://twitter.com/home?status=<%= Settings.social_media[:twitter_share_text] %>" target="_blank">
+            <%= image_tag "twitter.png", :alt => "Share on Twitter" %>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://plus.google.com/share?url=<%= Settings.social_media[:google_plus_share_link] %>" target="_blank">
+            <%= image_tag "google-plus.png", :alt => "Share on Google+" %>
+          </a>
+        </li>
+
+        <li>
+          <a href="http://www.linkedin.com/shareArticle?mini=true&url=<%= Settings.social_media[:linkedin_share_url] %>&title=<%= Settings.social_media[:linkedin_share_title] %>&summary=<%= Settings.social_media[:linkedin_share_summary] %>&source=<%= Settings.social_media[:linkedin_share_source] %>" target="_blank">
+            <%= image_tag "linkedin.png", :alt => "Share on LinkedIn" %>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 
-  <div class="footer-right">
-    <ul class="social-share-links">
-      <li>
-        <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=<%= Settings.social_media[:facebook_share_link] %>&p[title]=<%= Settings.social_media[:facebook_share_title] %>&p[summary]=<%= Settings.social_media[:facebook_share_content] %>" target="_blank">
-          <%= image_tag "facebook.png", :alt => "Share on Facebook" %>
-        </a>
-      </li>
-
-      <li>
-        <a href="http://twitter.com/home?status=<%= Settings.social_media[:twitter_share_text] %>" target="_blank">
-          <%= image_tag "twitter.png", :alt => "Share on Twitter" %>
-        </a>
-      </li>
-
-      <li>
-        <a href="https://plus.google.com/share?url=<%= Settings.social_media[:google_plus_share_link] %>" target="_blank">
-          <%= image_tag "google-plus.png", :alt => "Share on Google+" %>
-        </a>
-      </li>
-
-      <li>
-        <a href="http://www.linkedin.com/shareArticle?mini=true&url=<%= Settings.social_media[:linkedin_share_url] %>&title=<%= Settings.social_media[:linkedin_share_title] %>&summary=<%= Settings.social_media[:linkedin_share_summary] %>&source=<%= Settings.social_media[:linkedin_share_source] %>" target="_blank">
-          <%= image_tag "linkedin.png", :alt => "Share on LinkedIn" %>
-        </a>
-      </li>
-    </ul>
+  <div class="footer-bottom">
+    <div class="copyright">
+      &copy; 2012-2013 by Simple Media Technology, LLC. All Rights Reserved.
+    </div>
   </div>
 </div>

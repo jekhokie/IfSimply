@@ -77,68 +77,78 @@ footer {
     margin: 0px auto;
     width:  972px;
 
-    .footer-left {
-      display: inline-block;
-      height:  100%;
-      width:   600px;
+    .footer-top {
+      height: 120px;
 
-      .footer-left-logo {
+      .footer-left {
         display: inline-block;
-        float:   left;
         height:  100%;
+        width:   600px;
 
-        span.footer-logo {
-          opacity:         0.7;
-          -webkit-opacity: 0.7;
-          -moz-opacity:    0.7;
+        .footer-left-logo {
+          display: inline-block;
+          float:   left;
+          height:  100%;
 
-          background: url(logo_200w_121h.png) no-repeat 0 0;
-          display:    inline-table;
-          height:     121px;
-          margin:     0px auto;
-          margin-top: 16px;
-          width:      200px;
+          span.footer-logo {
+            opacity:         0.7;
+            -webkit-opacity: 0.7;
+            -moz-opacity:    0.7;
+
+            background: url(logo_200w_121h.png) no-repeat 0 0;
+            display:    inline-table;
+            height:     121px;
+            margin:     0px auto;
+            margin-top: 15px;
+            width:      200px;
+          }
+        }
+
+        .footer-left-links {
+          display:     inline-block;
+          float:       left;
+          margin-left: 25px;
+
+          ul.left-links {
+            list-style-type: none;
+            margin-top:      30px;
+
+            li {
+              height: 25px;
+
+              a {
+                color: #999;
+              }
+            }
+          }
         }
       }
 
-      .footer-left-links {
-        display:     inline-block;
-        float:       left;
-        margin-left: 25px;
+      .footer-right {
+        float:  right;
+        height: 100%;
 
-        ul.left-links {
+        ul {
           list-style-type: none;
-          margin-top:      40px;
+          margin-top:      50px;
 
           li {
-            height: 25px;
+            display:     inline-block;
+            margin-left: 12px;
 
-            a {
-              color: #999;
+            img {
+              height: 30px;
+              width:  30px;
             }
           }
         }
       }
     }
 
-    .footer-right {
-      float:  right;
-      height: 100%;
-
-      ul {
-        list-style-type: none;
-        margin-top:      60px;
-
-        li {
-          display:     inline-block;
-          margin-left: 12px;
-
-          img {
-            height: 30px;
-            width:  30px;
-          }
-        }
-      }
+    .footer-bottom {
+      height:     20px;
+      text-align: center;
+      width:      100%;
     }
   }
 }
