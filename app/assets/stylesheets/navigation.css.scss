@@ -67,7 +67,63 @@ header {
 
 footer {
   background-color: #3c4348;
+  color:            #999;
   height:           150px;
   margin-top:       75px;
   width:            100%;
+
+  .footer-container {
+    height: 147px;
+    margin: 0px auto;
+    width:  972px;
+
+    .footer-left {
+      display: inline-block;
+      height:  100%;
+      width:   600px;
+
+      .footer-left-logo {
+        display: inline-block;
+        float:   left;
+        height:  100%;
+
+        span.footer-logo {
+          opacity:         0.7;
+          -webkit-opacity: 0.7;
+          -moz-opacity:    0.7;
+
+          background: url(logo_200w_121h.png) no-repeat 0 0;
+          display:    inline-table;
+          height:     121px;
+          margin:     0px auto;
+          margin-top: 16px;
+          width:      200px;
+        }
+      }
+
+      .footer-left-links {
+        display:     inline-block;
+        float:       left;
+        margin-left: 25px;
+
+        ul.left-links {
+          list-style-type: none;
+          margin-top:      40px;
+
+          li {
+            height: 25px;
+
+            a {
+              color: #999;
+            }
+          }
+        }
+      }
+    }
+
+    .footer-right {
+      float:  left;
+      height: 100%;
+    }
+  }
 }
