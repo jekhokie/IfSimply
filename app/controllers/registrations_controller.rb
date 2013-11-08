@@ -5,9 +5,15 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new params[:user]
 
-    if @user.valid?
-      super
+    if params[:policy_agree] and params[:policy_agree] == 'true'
+      if @user.valid?
+        super
+      end
+    else
+      flash[:alert] = "You must agree to the Terms of Service"
     end
+
+    flash.discard
   end
 
   protected

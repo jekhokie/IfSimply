@@ -8,4 +8,7 @@ class HomeController < ApplicationController
   def access_violation
     @violation = params[:exception]
   end
+
+  def terms_of_service
+  end
 end
