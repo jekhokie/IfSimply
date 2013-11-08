@@ -9,6 +9,6 @@ class HomeController < ApplicationController
     @violation = params[:exception]
   end
 
-  def terms_of_service
+  def terms_and_conditions
   end
 end

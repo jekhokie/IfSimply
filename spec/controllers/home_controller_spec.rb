@@ -30,4 +30,11 @@ describe HomeController do
       assigns(:violation).should == exception_message
     end
   end
+
+  describe "GET 'terms_and_conditions'" do
+    it "is successful" do
+      get 'terms_and_conditions'
+      response.should be_success
+    end
+  end
 end
