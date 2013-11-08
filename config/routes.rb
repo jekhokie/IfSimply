@@ -16,6 +16,7 @@ Ifsimply::Application.routes.draw do
   scope '/' do
     match '/registration_notify' => 'home#registration_notify', :as => :registration_notify
     match '/access_violation'    => 'home#access_violation',    :as => :access_violation
+    match '/terms_of_service'    => 'home#terms_of_service',    :as => :terms_of_service
   end
 
   # paypal-related routing
