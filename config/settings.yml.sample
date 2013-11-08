@@ -53,3 +53,13 @@
   account_email:    <PAYPAL_EMAIL> # PayPal account email
   club_owner_share: 0.6
   ifsimply_share:   0.4
+:social_media:
+  :google_plus_share_link: "http://www.ifsimply.com/"
+  :facebook_share_link:    "http://www.ifsimply.com/"
+  :facebook_share_title:   "IfSimply - Stop Wishing, Start Learning"
+  :facebook_share_content: "Check out IfSimply (http://www.ifsimply.com/) - the better way to market!"
+  :twitter_share_text:     "Check%20out%20IfSimply%20(http://www.ifsimply.com/)"
+  :linkedin_share_url:     "http://www.ifsimply.com/"
+  :linkedin_share_title:   "IfSimply - Stop Wishing, Start Learning"
+  :linkedin_share_summary: "Check out IfSimply (http://www.ifsimply.com/) - the better way to market!"
+  :linkedin_share_source:  "http://www.ifsimply.com/"
