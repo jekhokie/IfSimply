@@ -74,7 +74,8 @@ describe SalesPagesController do
                                                                     :sales_page_video_url      => { :value => "http://www.ifsimply.com/" },
                                                                     :sales_page_benefit1       => { :value => "abc" },
                                                                     :sales_page_benefit2       => { :value => "abc" },
-                                                                    :sales_page_benefit3       => { :value => "abc" } }
+                                                                    :sales_page_benefit3       => { :value => "abc" },
+                                                                    :sales_page_details        => { :value => "test" } }
       end
 
       it "returns http success" do
