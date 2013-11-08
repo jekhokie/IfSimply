@@ -37,4 +37,11 @@ describe HomeController do
       response.should be_success
     end
   end
+
+  describe "GET 'privacy_policy'" do
+    it "is successful" do
+      get 'privacy_policy'
+      response.should be_success
+    end
+  end
 end

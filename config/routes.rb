@@ -17,6 +17,7 @@ Ifsimply::Application.routes.draw do
     match '/registration_notify'  => 'home#registration_notify',  :as => :registration_notify
     match '/access_violation'     => 'home#access_violation',     :as => :access_violation
     match '/terms_and_conditions' => 'home#terms_and_conditions', :as => :terms_and_conditions
+    match '/privacy_policy'       => 'home#privacy_policy',       :as => :privacy_policy
   end
 
   # paypal-related routing
