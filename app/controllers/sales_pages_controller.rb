@@ -26,6 +26,7 @@ class SalesPagesController < ApplicationController
     @sales_page.benefit1       = sales_page_hash[:sales_page_benefit1][:value]
     @sales_page.benefit2       = sales_page_hash[:sales_page_benefit2][:value]
     @sales_page.benefit3       = sales_page_hash[:sales_page_benefit3][:value]
+    @sales_page.details        = sales_page_hash[:sales_page_details][:value]
 
     @club.price = sales_page_hash[:club_price][:value]
 

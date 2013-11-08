@@ -59,6 +59,11 @@ describe SalesPage do
     it "returns false when no benefit3 is specified" do
       FactoryGirl.build(:sales_page, :benefit3 => "").should_not be_valid
     end
+
+    # details
+    it "returns false when no details is specified" do
+      FactoryGirl.build(:sales_page, :details => "").should_not be_valid
+    end
   end
 
   describe "user" do
@@ -106,6 +111,10 @@ describe SalesPage do
 
     it "assigns the correct default benefit3" do
       @sales_page.benefit3.should == Settings.sales_pages[:default_benefit3]
+    end
+
+    it "assigns the correct default details" do
+      @sales_page.details.should == Settings.sales_pages[:default_details]
     end
   end
 end

@@ -33,6 +33,7 @@
   default_benefit1:       "Place the major thing they will learn here"
   default_benefit2:       "Place the second important benefit here"
   default_benefit3:       "Put the final outcome here (how will they have changed once they complete this)"
+  default_details:        "Put any supporting details about the club here. If there are specific items you want to highlight, testimonials from members, or videos, place them here."
   default_call_to_action: "Join Now"
   default_heading:        "Powerful Heading Here (i.e. Unlock the Power of Pinterest)"
   default_sub_heading:    "Subheading Here (i.e. Pin Your Way to 10,000 New Customers)"
