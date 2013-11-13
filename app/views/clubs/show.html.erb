@@ -44,7 +44,7 @@
   <div class="club-articles span6">
     <div class="article-listing-heading">
       <h2>
-        <a href="<%= show_all_club_articles_path(@club) %>" class="hover-heading">Article <span class="articles-count header-count">(<%= @club.articles.count %>)</span></a>
+        <a href="<%= show_all_club_articles_path(@club) %>" class="hover-heading">Articles <span class="articles-count header-count">(<%= @club.articles.count %>)</span></a>
       </h2>
 
       <%- if can? :update, @club %>
