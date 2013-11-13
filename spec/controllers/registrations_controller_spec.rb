@@ -15,18 +15,18 @@ describe RegistrationsController do
     end
 
     it "updates the users count" do
-      lambda{ post('create', :user => { :name                  => "Test",
-                                        :email                 => "test@test.com",
-                                        :password              => "someb0gusp4ss",
-                                        :password_confirmation => "someb0gusp4ss" }) }.should change(User, :count).by(+1)
+      lambda{ post('create', :policy_agree => "true", :user => { :name                  => "Test",
+                                                                 :email                 => "test@test.com",
+                                                                 :password              => "someb0gusp4ss",
+                                                                 :password_confirmation => "someb0gusp4ss" }) }.should change(User, :count).by(+1)
     end
 
     describe "for valid attributes" do
       before :each do
-        post 'create', :user => { :name                  => "Test",
-                                  :email                 => "test@test.com",
-                                  :password              => "someb0gusp4ss",
-                                  :password_confirmation => "someb0gusp4ss" }
+        post 'create', :policy_agree => "true", :user => { :name                  => "Test",
+                                                           :email                 => "test@test.com",
+                                                           :password              => "someb0gusp4ss",
+                                                           :password_confirmation => "someb0gusp4ss" }
       end
 
       it "returns http redirect" do
@@ -45,10 +45,10 @@ describe RegistrationsController do
     describe "for invalid attributes" do
       describe "when a parameter is blank" do
         before :each do
-          post 'create', :format => :js,  :user => { :name                  => "",
-                                                     :email                 => "test@test.com",
-                                                     :password              => "someb0gusp4ss",
-                                                     :password_confirmation => "somes" }
+          post 'create', :format => :js, :policy_agree => "true", :user => { :name                  => "",
+                                                                             :email                 => "test@test.com",
+                                                                             :password              => "someb0gusp4ss",
+                                                                             :password_confirmation => "somes" }
         end
 
         it "returns http success" do
@@ -70,10 +70,10 @@ describe RegistrationsController do
 
       describe "when the passwords do not match" do
         before :each do
-          post 'create', :format => :js,  :user => { :name                  => "Test",
-                                                     :email                 => "test@test.com",
-                                                     :password              => "someb0gusp4ss",
-                                                     :password_confirmation => "somes" }
+          post 'create', :format => :js, :policy_agree => "true", :user => { :name                  => "Test",
+                                                                             :email                 => "test@test.com",
+                                                                             :password              => "someb0gusp4ss",
+                                                                             :password_confirmation => "somes" }
         end
 
         it "returns http success" do
@@ -97,10 +97,10 @@ describe RegistrationsController do
         let!(:existing_user) { FactoryGirl.create :user, :email => "test@test.com" }
 
         before :each do
-          post 'create', :format => :js,  :user => { :name                  => "Test",
-                                                     :email                 => "test@test.com",
-                                                     :password              => "someb0gusp4ss",
-                                                     :password_confirmation => "someb0gusp4ss" }
+          post 'create', :format => :js, :policy_agree => "true", :user => { :name                  => "Test",
+                                                                             :email                 => "test@test.com",
+                                                                             :password              => "someb0gusp4ss",
+                                                                             :password_confirmation => "someb0gusp4ss" }
         end
 
         it "returns http success" do
@@ -117,6 +117,31 @@ describe RegistrationsController do
 
         it "returns a user with an error" do
           assigns(:user).errors.should include(:email)
+        end
+      end
+
+      describe "when the user does not agree to the terms and conditions" do
+        before :each do
+          post 'create', :format => :js, :user => { :name                  => "Test",
+                                                    :email                 => "test@test.com",
+                                                    :password              => "someb0gusp4ss",
+                                                    :password_confirmation => "someb0gusp4ss" }
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "returns the user" do
+          assigns(:user).should_not be_nil
+        end
+
+        it "returns an unsaved user" do
+          assigns(:user).should be_new_record
+        end
+
+        it "returns a flash alert" do
+          flash[:alert].should_not be_blank
         end
       end
     end
