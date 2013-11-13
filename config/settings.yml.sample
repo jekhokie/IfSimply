@@ -21,9 +21,9 @@
   default_title:      "Your Lesson Name Here (Keep it Focused)"
   default_background: "Place a description and background information on the lesson here. Show notes as well."
   default_free:       false
-:blogs:
-  default_title:   "Your Blog Post Title Here"
-  default_content: "Blog content here. To change your blog photo or insert photos into your blog, drag and drop a new one from your desktop."
+:articles:
+  default_title:   "Your Article Post Title Here"
+  default_content: "Article content here. To change your article photo or insert photos into your article, drag and drop a new one from your desktop."
   default_free:    false
   default_image:   "/assets/iS_club_thumb.jpg"
 :discussion_boards:
