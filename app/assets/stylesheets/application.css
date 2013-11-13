@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require account
- *= require blogs
+ *= require articles
  *= require bootstrap_and_overrides
  *= require clubs
  *= require clubs_users

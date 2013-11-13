@@ -206,14 +206,14 @@
   }
 }
 
-.club-blogs-discussions {
+.club-articles-discussions {
   height: 325px;
 
-  .club-blogs,
+  .club-articles,
   .club-discussion-board {
     height: 100%;
 
-    .blog-listing-heading,
+    .article-listing-heading,
     .discussion-board-listing-heading {
       -webkit-border-radius: 4px;
       -moz-border-radius:    4px;
@@ -233,7 +233,7 @@
         position:    relative;
         top:         2px;
 
-        span.blogs-count,
+        span.articles-count,
         span.discussion-board-count {
           font-size:   22px;
           position:    absolute;
@@ -241,20 +241,20 @@
         }
       }
 
-      .add-club-blog {
+      .add-club-article {
         display:  inline;
         position: absolute;
         right:    15px;
         top:      13px;
 
-        .add-club-blog-link {
+        .add-club-article-link {
           color:          #FFF;
           padding-bottom: 3px;
         }
       }
     }
 
-    .club-blog-listing,
+    .club-article-listing,
     .club-discussion-board-listing {
       height:      265px;
       margin:      0px;
@@ -266,7 +266,7 @@
         font-size:   24px;
         font-weight: normal;
 
-        .create-first-blog-link,
+        .create-first-article-link,
         .create-first-topic-link {
           color:       #333;
           font-style:  italic;
@@ -309,16 +309,16 @@
       }
     }
 
-    .blog-most-recent {
+    .article-most-recent {
       height:  270px;
       padding: 8px 0px;
 
-      .blog-title-date {
+      .article-title-date {
         max-height:    80px;
         margin-bottom: 12px;
         overflow:      hidden;
 
-        .blog-title {
+        .article-title {
           display:     block;
           font-size:   26px;
           font-weight: bold;
@@ -331,22 +331,22 @@
           }
         }
 
-        .blog-date {
+        .article-date {
           display:    block;
           font-style: italic;
         }
       }
 
-      .blog-info {
+      .article-info {
         height:        185px;
         margin-bottom: 4px;
 
-        .blog-image {
+        .article-image {
           display:   inline-table;
           max-width: 128px;
         }
 
-        .blog-content {
+        .article-content {
           display:        inline-block;
           max-height:     162px;
           margin-left:    8px;
