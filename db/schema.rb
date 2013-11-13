@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107234804) do
+ActiveRecord::Schema.define(:version => 20131113170013) do
 
-  create_table "blogs", :force => true do |t|
+  create_table "articles", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "club_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20131107234804) do
     t.string   "image"
   end
 
-  add_index "blogs", ["club_id"], :name => "index_blogs_on_club_id"
+  add_index "articles", ["club_id"], :name => "index_blogs_on_club_id"
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
