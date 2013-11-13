@@ -33,10 +33,10 @@
         <td class="basic-number"><%= club.lessons.blank? ? 0 : club.lessons.where(:free => true).count %></td>
         <td class="pro-number"><%= club.lessons.blank? ? 0 : club.lessons.count %></td>
       </tr>
-      <tr class="blog-posts">
-        <td class="meta">Blog Posts</td>
-        <td class="basic-number"><%= club.blogs.blank? ? 0 : club.blogs.where(:free => true).count %></td>
-        <td class="pro-number"><%= club.blogs.blank? ? 0 : club.blogs.count %></td>
+      <tr class="article-posts">
+        <td class="meta">Article Posts</td>
+        <td class="basic-number"><%= club.articles.blank? ? 0 : club.articles.where(:free => true).count %></td>
+        <td class="pro-number"><%= club.articles.blank? ? 0 : club.articles.count %></td>
       </tr>
       <tr class="discussions">
         <td class="meta">Discussion Board</td>
