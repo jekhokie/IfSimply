@@ -18,9 +18,9 @@ class Club < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :courses, :dependent => :destroy
-  has_many :blogs,   :dependent => :destroy
-  has_many :topics,  :through   => :discussion_board
+  has_many :courses,  :dependent => :destroy
+  has_many :articles, :dependent => :destroy
+  has_many :topics,   :through   => :discussion_board
 
   has_many :subscriptions, :class_name => ClubsUsers
 
