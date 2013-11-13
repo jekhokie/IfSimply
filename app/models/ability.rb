@@ -18,8 +18,8 @@ class Ability
       lesson.user == user
     end
 
-    can [ :create, :edit, :update ], Blog do |blog|
-      blog.user == user
+    can [ :create, :edit, :update ], Article do |article|
+      article.user == user
     end
 
     can [ :edit, :update ], DiscussionBoard do |discussion_board|
@@ -42,9 +42,9 @@ class Ability
       club.user == user or club.members.include?(user)
     end
 
-    can :read, Blog do |blog|
-      membership = user.subscriptions.find_by_club_id blog.club.id
-      blog.club.user == user or (!membership.blank? and ((membership.level.to_s == "basic" and blog.free) or (membership.level.to_s == "pro" and membership.pro_status == "ACTIVE")))
+    can :read, Article do |article|
+      membership = user.subscriptions.find_by_club_id article.club.id
+      article.club.user == user or (!membership.blank? and ((membership.level.to_s == "basic" and article.free) or (membership.level.to_s == "pro" and membership.pro_status == "ACTIVE")))
     end
 
     can :read, Course do |course|
