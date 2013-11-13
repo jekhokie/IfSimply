@@ -1,0 +1,22 @@
+<div class="article-information">
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @article.club } %>
+
+  <div class="article-container row-fluid">
+    <div class="article-image span3">
+      <img id="article_image" data-mercury="image" src="<%= @article.image %>">
+
+      <div class="free-select hide-preview">
+        (Free?
+        <%= best_in_place @article, :free, :type       => :checkbox,
+                                           :path       => article_path(@article),
+                                           :html_attrs => { :rows => '1' } %>
+        )
+      </div>
+    </div>
+
+    <div class="article-title-content span9">
+      <div id="article_title"   class="article-title"   data-mercury="simple"><%= @article.title %></div>
+      <div id="article_content" class="article-content" data-mercury="full"><%= raw @article.content %></div>
+    </div>
+  </div>
+</div>

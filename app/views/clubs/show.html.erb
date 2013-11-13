@@ -40,44 +40,44 @@
   </div>
 </div>
 
-<div class="club-blogs-discussions row-fluid">
-  <div class="club-blogs span6">
-    <div class="blog-listing-heading">
+<div class="club-articles-discussions row-fluid">
+  <div class="club-articles span6">
+    <div class="article-listing-heading">
       <h2>
-        <a href="<%= show_all_club_blogs_path(@club) %>" class="hover-heading">Blog <span class="blogs-count header-count">(<%= @club.blogs.count %>)</span></a>
+        <a href="<%= show_all_club_articles_path(@club) %>" class="hover-heading">Articles <span class="articles-count header-count">(<%= @club.articles.count %>)</span></a>
       </h2>
 
       <%- if can? :update, @club %>
-        <div class="add-club-blog">
-          <a href="<%= club_blogs_path(@club) %>" data-method="post" class="add-club-blog-link">Add Post</a>
+        <div class="add-club-article">
+          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-club-article-link">Add Post</a>
         </div>
       <%- end %>
     </div>
 
-    <div class="club-blog-listing">
-      <%- if @club.blogs.blank? %>
-        <h2>No Blog Posts Yet
+    <div class="club-article-listing">
+      <%- if @club.articles.blank? %>
+        <h2>No Article Posts Yet
           <%- if can? :update, @club %>
-            - <a href="<%= club_blogs_path(@club) %>" data-method="post" class="create-first-blog-link">Create your First!</a>
+            - <a href="<%= club_articles_path(@club) %>" data-method="post" class="create-first-article-link">Create your First!</a>
           <%- end %>
         </h2>
       <%- else %>
-        <div class="blog-most-recent">
-          <%- @club.blogs.last.tap do |blog| %>
-            <div class="blog-title-date">
-              <span class="blog-title"><%= link_to trim_length(blog.title, 65), (can?(:update, @club) ? blog_editor_path(blog) : blog_path(blog)) %></span>
-              <span class="blog-date"><%= I18n.l blog.created_at, :format => :default %></span>
+        <div class="article-most-recent">
+          <%- @club.articles.last.tap do |article| %>
+            <div class="article-title-date">
+              <span class="article-title"><%= link_to trim_length(article.title, 65), (can?(:update, @club) ? article_editor_path(article) : article_path(article)) %></span>
+              <span class="article-date"><%= I18n.l article.created_at, :format => :default %></span>
             </div>
 
-            <div class="blog-info">
-              <div class="blog-image">
-                <a class="blog-image-link" href="<%= can?(:update, @club) ? blog_editor_path(blog) : blog_path(blog) %>">
-                  <%= image_tag "#{blog.image}", :class => 'blog-image' %>
+            <div class="article-info">
+              <div class="article-image">
+                <a class="article-image-link" href="<%= can?(:update, @club) ? article_editor_path(article) : article_path(article) %>">
+                  <%= image_tag "#{article.image}", :class => 'article-image' %>
                 </a>
               </div>
 
-              <div class="blog-content">
-                <%= raw(trim_length blog.content, 275) %>
+              <div class="article-content">
+                <%= raw(trim_length article.content, 275) %>
               </div>
             </div>
           <%- end %>

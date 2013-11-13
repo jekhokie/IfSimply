@@ -244,38 +244,38 @@ describe Ability do
     end
  end
 
-  describe "Blog" do
-    let(:club)           { FactoryGirl.create :club, :user => user }
-    let(:owned_blog)     { FactoryGirl.create :blog, :club => club }
-    let(:non_owned_blog) { FactoryGirl.create :blog }
+  describe "Article" do
+    let(:club)              { FactoryGirl.create :club, :user => user }
+    let(:owned_article)     { FactoryGirl.create :article, :club => club }
+    let(:non_owned_article) { FactoryGirl.create :article }
 
     context "create" do
       it "succeeds when the user owns the corresponding club" do
-        ability.should be_able_to(:create, owned_blog)
+        ability.should be_able_to(:create, owned_article)
       end
 
       it "fails when the user does not own the corresponding club" do
-        ability.should_not be_able_to(:create, non_owned_blog)
+        ability.should_not be_able_to(:create, non_owned_article)
       end
     end
 
     context "edit" do
       it "succeeds when the user owns the corresponding club" do
-        ability.should be_able_to(:edit, owned_blog)
+        ability.should be_able_to(:edit, owned_article)
       end
 
       it "fails when the user does not own the corresponding club" do
-        ability.should_not be_able_to(:edit, non_owned_blog)
+        ability.should_not be_able_to(:edit, non_owned_article)
       end
     end
 
     context "update" do
       it "succeeds when the user owns the club" do
-        ability.should be_able_to(:update, owned_blog)
+        ability.should be_able_to(:update, owned_article)
       end
 
       it "fails when the user does not own the club" do
-        ability.should_not be_able_to(:update, non_owned_blog)
+        ability.should_not be_able_to(:update, non_owned_article)
       end
     end
 
@@ -283,12 +283,12 @@ describe Ability do
       let(:club) { FactoryGirl.create :club }
 
       describe "for a subscribed user" do
-        let!(:free_blog)     { FactoryGirl.create :blog, :club => club, :free => 'true' }
-        let!(:paid_blog)     { FactoryGirl.create :blog, :club => club, :free => 'false' }
+        let!(:free_article)  { FactoryGirl.create :article, :club => club, :free => 'true' }
+        let!(:paid_article)  { FactoryGirl.create :article, :club => club, :free => 'false' }
         let!(:owner_ability) { Ability.new club.user }
 
         it "succeeds for the club owner" do
-          owner_ability.should be_able_to(:read, paid_blog)
+          owner_ability.should be_able_to(:read, paid_article)
         end
 
         describe "for a pro member" do
@@ -298,12 +298,12 @@ describe Ability do
             let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
-            it "succeeds for a free blog" do
-              pro_ability.should be_able_to(:read, free_blog)
+            it "succeeds for a free article" do
+              pro_ability.should be_able_to(:read, free_article)
             end
 
-            it "succeeds for a paid blog" do
-              pro_ability.should be_able_to(:read, paid_blog)
+            it "succeeds for a paid article" do
+              pro_ability.should be_able_to(:read, paid_article)
             end
           end
 
@@ -311,12 +311,12 @@ describe Ability do
             let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "INACTIVE" }
             let!(:pro_ability)      { Ability.new pro_user }
 
-            it "fails for a free blog" do
-              pro_ability.should_not be_able_to(:read, free_blog)
+            it "fails for a free article" do
+              pro_ability.should_not be_able_to(:read, free_article)
             end
 
-            it "fails for a paid blog" do
-              pro_ability.should_not be_able_to(:read, paid_blog)
+            it "fails for a paid article" do
+              pro_ability.should_not be_able_to(:read, paid_article)
             end
           end
         end
@@ -326,23 +326,23 @@ describe Ability do
           let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => club, :level => 'basic' }
           let!(:basic_ability)      { Ability.new basic_user }
 
-          it "succeeds for a free blog" do
-            basic_ability.should be_able_to(:read, free_blog)
+          it "succeeds for a free article" do
+            basic_ability.should be_able_to(:read, free_article)
           end
 
-          it "fails for a paid blog" do
-            basic_ability.should_not be_able_to(:read, paid_blog)
+          it "fails for a paid article" do
+            basic_ability.should_not be_able_to(:read, paid_article)
           end
         end
       end
 
       describe "for a non-subscribed user" do
-        let!(:blog)    { FactoryGirl.create :blog }
+        let!(:article) { FactoryGirl.create :article }
         let!(:user)    { FactoryGirl.create :user }
         let!(:ability) { Ability.new user }
 
         it "fails" do
-          ability.should_not be_able_to(:read, blog)
+          ability.should_not be_able_to(:read, article)
         end
       end
     end

@@ -114,7 +114,7 @@ describe DiscussionBoardsController do
       assigns(:club).should == discussion_board.club
     end
 
-    it "returns the blog" do
+    it "returns the discussion_board" do
       assigns(:discussion_board).should == discussion_board
     end
 

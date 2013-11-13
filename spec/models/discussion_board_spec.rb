@@ -23,7 +23,7 @@ describe DiscussionBoard do
   describe "user" do
     let(:club) { FactoryGirl.create :club }
 
-    it "returns the corresponding blog's user" do
+    it "returns the corresponding discussion_board's user" do
       FactoryGirl.create(:discussion_board, :club_id => club.id).user.should == club.user
     end
   end

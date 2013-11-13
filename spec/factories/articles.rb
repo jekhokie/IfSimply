@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :blog do
+  factory :article do
     club
 
     title   { Faker::Lorem.words(rand(10) + 5).join " " }

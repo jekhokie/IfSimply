@@ -1,0 +1,63 @@
+<div class="article-information">
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
+
+  <div class="article-controls">
+    <%- if can? :update, @club %>
+      <div class="add-article-post">
+        <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-article-post-link">Add Post</a>
+      </div>
+    <%- end %>
+  </div>
+
+  <div class="article-posts row-fluid">
+    <%- if @articles.blank? %>
+      <h2>No Articles Yet
+        <%- if can? :update, @club %>
+          - <a href="<%= club_articles_path(@club) %>" data-method="post" class="create-first-article-link">Create your First!</a>
+        <%- end %>
+      </h2>
+    <%- else %>
+      <%- @articles.reverse.each_with_index do |article, i| %>
+        <%- unless i == 0 %>
+          <hr/>
+        <%- end %>
+
+        <div class="article-post">
+          <div class="article-logo">
+            <a class="article-image-link" href="<%= can?(:update, @club) ? article_editor_path(article) : article_path(article) %>">
+              <%= image_tag "#{article.image}", :class => 'article-image' %>
+            </a>
+          </div>
+
+          <div class="article-title-created-content">
+            <div class="article-title">
+              <%- if article.pro? %>
+                <span class="article-is-pro">Pro</span>
+              <%- end %>
+
+              <%= link_to trim_length(article.title, 65), (can?(:update, @club) ? article_editor_path(article) : article_path(article)) %>
+            </div>
+
+            <div class="article-created">
+              <%= I18n.l article.created_at %>
+            </div>
+
+            <div class="article-content">
+              <%= trim_length raw(article.content), 400 %>
+            </div>
+          </div>
+        </div>
+      <%- end %>
+    <%- end %>
+  </div>
+
+  <%- unless @articles.blank? %>
+    <div class="article-controls">
+      <%- if can? :update, @club %>
+        <div class="add-article-post">
+          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-article-post-link">Add Post</a>
+        </div>
+      <%- end %>
+    </div>
+  <%- end %>
+</div>
