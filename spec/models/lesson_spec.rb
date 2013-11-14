@@ -6,7 +6,7 @@ describe Lesson do
   # file_attachment via PaperClip
   it { should have_attached_file(:file_attachment) }
   it { should validate_attachment_content_type(:file_attachment).
-                allowing('audio/mp4', 'audio/mpeg', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                allowing('audio/mp3', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                          'application/vnd.openxmlformats-officedocument.spreadsheetml.template', 'application/vnd.openxmlformats-officedocument.presentationml.template',
                          'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                          'application/vnd.openxmlformats-officedocument.presentationml.slide', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
