@@ -11,6 +11,10 @@ class Course < ActiveRecord::Base
 
   has_many :lessons, :dependent => :destroy
 
+  validates :title,       :presence => { :message => "for course can't be blank" }
+  validates :description, :presence => { :message => "for course can't be blank" }
+  validates :club_id,     :presence => true
+
   def user
     club.user
   end
