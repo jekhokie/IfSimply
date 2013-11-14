@@ -6,7 +6,11 @@ class SalesPagesController < ApplicationController
     @club       = Club.find params[:club_id]
     @sales_page = @club.sales_page
 
-    authorize! :read, @sales_page
+    unless can?(:read, @sales_page)
+      flash[:error] = "Club Owner is not verified - please let them know they need to verify their account!"
+
+      redirect_to root_path
+    end
   end
 
   def edit

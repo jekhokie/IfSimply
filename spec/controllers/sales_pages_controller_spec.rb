@@ -2,23 +2,52 @@ require 'spec_helper'
 
 describe SalesPagesController do
   describe "GET 'show'" do
-    let!(:club)       { FactoryGirl.create :club }
-    let!(:sales_page) { club.sales_page }
+    describe "for a Club owner with a verified PayPal account" do
+      let!(:user)       { FactoryGirl.create :user, :verified => true }
+      let!(:club)       { FactoryGirl.create :club, :user => user }
+      let!(:sales_page) { club.sales_page }
 
-    before :each do
-      get 'show', :club_id => sales_page.club.id
+      before :each do
+        get 'show', :club_id => sales_page.club.id
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "returns the club" do
+        assigns(:club).should == sales_page.club
+      end
+
+      it "returns the sales_page" do
+        assigns(:sales_page).should == sales_page
+      end
     end
 
-    it "returns http success" do
-      response.should be_success
-    end
+    describe "for a Club owner with an unverified PayPal account" do
+      let!(:user)       { FactoryGirl.create :user, :verified => false }
+      let!(:club)       { FactoryGirl.create :club, :user => user }
+      let!(:sales_page) { club.sales_page }
 
-    it "returns the club" do
-      assigns(:club).should == sales_page.club
-    end
+      before :each do
+        get 'show', :club_id => sales_page.club.id
+      end
 
-    it "returns the sales_page" do
-      assigns(:sales_page).should == sales_page
+      it "redirects to the root path" do
+        response.should redirect_to(root_path)
+      end
+
+      it "returns the club" do
+        assigns(:club).should == sales_page.club
+      end
+
+      it "returns the sales_page" do
+        assigns(:sales_page).should == sales_page
+      end
+
+      it "returns a flash error" do
+        flash[:error].should_not be_blank
+      end
     end
   end
 
