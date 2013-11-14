@@ -111,16 +111,13 @@
   .modal-body {
     text-align: center;
 
-    .paypal-verification,
-    .paypal-unlink {
+    .paypal-verification {
       border-radius:         10px;
       -moz-border-radius:    10px;
       -webkit-border-radius: 10px;
 
       border: 5px solid #0077CB;
-    }
 
-    .paypal-verification {
       input {
         margin: 15px auto;
       }
@@ -161,27 +158,6 @@
         .paypal-note-content {
           text-align: left;
           width:      300px;
-        }
-      }
-    }
-
-    .paypal-unlink {
-      padding-left: 15px;
-      text-align:   left;
-
-      form {
-        margin-bottom: 30px;
-        text-align:    center;
-
-        .confirm-unlink,
-        .cancel-unlink {
-          padding-left:  0px;
-          padding-right: 0px;
-          width:         100px;
-        }
-
-        .cancel-unlink {
-          margin-left: 20px;
         }
       }
     }

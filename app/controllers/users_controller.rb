@@ -68,33 +68,4 @@ class UsersController < ApplicationController
 
     flash.discard
   end
-
-  def pre_unlink_paypal
-    if user_signed_in?
-      @user = User.find params[:id]
-      authorize! :update, @user
-    else
-      render :template => "devise/sessions/new"
-    end
-  end
-
-  def unlink_paypal
-    if user_signed_in?
-      @user = User.find params[:id]
-      authorize! :update, @user
-
-      current_user.payment_email = ""
-      current_user.verified      = false
-
-      # TODO: Process all member accounts to ensure no memberships are "live" at this point
-      #       to prevent inaccurate billing/access to Premium content.
-
-      unless current_user.save
-        flash[:error] = "Could not unlink account - please notify the site administrator"
-        render :pre_unlink_paypal
-      end
-    else
-      render :template => "devise/sessions/new"
-    end
-  end
 end
