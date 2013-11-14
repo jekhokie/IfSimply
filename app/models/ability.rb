@@ -75,6 +75,8 @@ class Ability
     end
 
     # global defaults
-    can [ :read ], SalesPage
+    can [ :read ], SalesPage do |sales_page|
+      sales_page.club.user.verified?
+    end
   end
 end

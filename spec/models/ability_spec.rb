@@ -624,8 +624,28 @@ describe Ability do
     context "read" do
       let(:ability) { Ability.new FactoryGirl.create(:user) }
 
-      it "succeeds for any user" do
-        ability.should be_able_to(:read, non_owned_sales_page)
+      describe "for a validated Club owner account" do
+        before :each do
+          user = non_owned_sales_page.club.user
+          user.verified = true
+          user.save
+        end
+
+        it "succeeds" do
+          ability.should be_able_to(:read, non_owned_sales_page)
+        end
+      end
+
+      describe "for a non-validated Club owner account" do
+        before :each do
+          user = non_owned_sales_page.club.user
+          user.verified = false
+          user.save
+        end
+
+        it "succeeds" do
+          ability.should_not be_able_to(:read, non_owned_sales_page)
+        end
       end
     end
 
