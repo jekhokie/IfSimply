@@ -17,6 +17,9 @@ gem 'remotipart'
 gem 'redcarpet'
 gem 'sqlite3'
 
+# ordering courses
+gem 'acts_as_list'
+
 # scheduling for billing, etc.
 gem 'whenever'
 
