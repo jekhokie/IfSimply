@@ -9,6 +9,7 @@ gem 'devise'
 gem 'devise-async'
 gem 'google-webfonts', :git => 'git://github.com/jekhokie/Google-Webfonts-Helper.git'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'mercury-rails', :git => 'git://github.com/jekhokie/mercury.git'
 gem 'money-rails'
 gem 'rails', '3.2.14'
@@ -16,6 +17,9 @@ gem 'rails_config'
 gem 'remotipart'
 gem 'redcarpet'
 gem 'sqlite3'
+
+# ordering courses
+gem 'acts_as_list'
 
 # scheduling for billing, etc.
 gem 'whenever'

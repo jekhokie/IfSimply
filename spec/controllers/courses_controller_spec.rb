@@ -383,4 +383,118 @@ describe CoursesController do
       end
     end
   end
+
+  describe "POST 'sort'" do
+    describe "for a signed in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "for a club owner" do
+        let!(:club)    { user.clubs.first }
+        let!(:course1) { FactoryGirl.create :course, :club_id => club.id, :position => 1 }
+        let!(:course2) { FactoryGirl.create :course, :club_id => club.id, :position => 2 }
+        let!(:course3) { FactoryGirl.create :course, :club_id => club.id, :position => 3 }
+
+        describe "for valid attributes" do
+          before :each do
+            post 'sort', :format => :js, :club_id => club.id, :courses => [ 'course_2', 'course_3', 'course_1' ]
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "returns the club" do
+            assigns(:club).should == club
+          end
+
+          it "re-assigns the ordering requested" do
+            course1.reload
+            course2.reload
+            course3.reload
+
+            course1.position.should == 3
+            course2.position.should == 1
+            course3.position.should == 2
+          end
+        end
+
+        describe "for invalid attributes" do
+          before :each do
+            post 'sort', :format => :js, :club_id => club.id, :blah => [ 'course_2', 'course_3', 'course_1' ]
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "does not assign any new positions" do
+            course1.reload
+            course2.reload
+            course3.reload
+
+            course1.position.should == 1
+            course2.position.should == 2
+            course3.position.should == 3
+          end
+        end
+      end
+
+      describe "for a non-club owner" do
+        let!(:club)    { FactoryGirl.create :club }
+        let!(:course1) { FactoryGirl.create :course, :club_id => user.clubs.first.id, :position => 1 }
+        let!(:course2) { FactoryGirl.create :course, :club_id => user.clubs.first.id, :position => 2 }
+        let!(:course3) { FactoryGirl.create :course, :club_id => user.clubs.first.id, :position => 3 }
+
+        describe "for valid attributes" do
+          before :each do
+            post 'sort', :format => :js, :club_id => club.id, :courses => [ 'course_2', 'course_3', 'course_1' ]
+          end
+
+          it "returns 403 unauthorized forbidden code" do
+            response.response_code.should == 403
+          end
+
+          it "does not change the courses positioning" do
+            course1.reload
+            course2.reload
+            course3.reload
+
+            course1.position.should == 1
+            course2.position.should == 2
+            course3.position.should == 3
+          end
+        end
+      end
+    end
+
+    describe "for a non-signed in user" do
+      let!(:club)    { FactoryGirl.create :club }
+      let!(:course1) { FactoryGirl.create :course, :club_id => club.id, :position => 1 }
+      let!(:course2) { FactoryGirl.create :course, :club_id => club.id, :position => 2 }
+      let!(:course3) { FactoryGirl.create :course, :club_id => club.id, :position => 3 }
+
+      describe "for valid attributes" do
+        before :each do
+          post 'sort', :format => :js, :club_id => club.id, :courses => [ 'course_2', 'course_3', 'course_1' ]
+        end
+
+        it "returns 401 unauthorized code" do
+          response.response_code.should == 401
+        end
+
+        it "does not change the courses positioning" do
+          course1.reload
+          course2.reload
+          course3.reload
+
+          course1.position.should == 1
+          course2.position.should == 2
+          course3.position.should == 3
+        end
+      end
+    end
+  end
 end

@@ -18,7 +18,7 @@ class Club < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :courses,  :dependent => :destroy
+  has_many :courses,  :dependent => :destroy, :order => "position"
   has_many :articles, :dependent => :destroy
   has_many :topics,   :through   => :discussion_board
 
