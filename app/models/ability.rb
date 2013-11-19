@@ -76,7 +76,7 @@ class Ability
 
     # global defaults
     can [ :read ], SalesPage do |sales_page|
-      sales_page.club.user.verified?
+      sales_page.club.user == user or sales_page.club.user.verified?
     end
   end
 end
