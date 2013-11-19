@@ -17,27 +17,35 @@
         <%- end %>
       </h2>
     <%- else %>
-      <%- @courses.each_with_index do |course, i| %>
-        <%- if i > 0 %>
-          <hr />
+      <div id="courses-list" data-club="<%= @club.id %>">
+        <%- if can? :update, @club %>
+          <div class="spacer">
+            <div class="top-three-label"><i class="icon-question-sign"></i> Featured</div>
+          </div>
+          <div class="top-three-capture"></div>
         <%- end %>
+        <%- @courses.each do |course| %>
+          <div id="course_<%= course.id %>" class="club-course">
+            <%- if can? :update, @club %>
+              <div class="course-handle"><i class="icon-resize-vertical"></i></div>
+            <%- end %>
 
-        <div class="club-course">
-          <div class="course-logo">
-            <%= image_tag "#{course.logo}" %>
-          </div>
-
-          <div class="course-title-description">
-            <div class="course-title">
-              <%= link_to trim_length(course.title, 65), (can?(:update, course) ? course_editor_path(course) : course_path(course)) %>
+            <div class="course-logo">
+              <%= image_tag "#{course.logo}" %>
             </div>
 
-            <div class="course-description">
-              <%= trim_length course.description, 400 %>
+            <div class="course-title-description">
+              <div class="course-title">
+                <%= link_to trim_length(course.title, 65), (can?(:update, course) ? course_editor_path(course) : course_path(course)) %>
+              </div>
+
+              <div class="course-description">
+                <%= trim_length course.description, 400 %>
+              </div>
             </div>
           </div>
-        </div>
-      <%- end %>
+        <%- end %>
+      </div>
     <%- end %>
   </div>
 

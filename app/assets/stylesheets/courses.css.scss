@@ -262,44 +262,98 @@
   .club-courses-list {
     width: 100%;
 
-    hr {
-      background-color: #AAA;
-      height:           2px;
-      width:            60%;
-    }
+    #courses-list {
+      min-height: 380px;
 
-    .club-course {
-      height: 128px;
-      margin: 12px auto;
+      .spacer {
+        font-size:   22px;
+        font-weight: bold;
+        height:      25px;
 
-      .course-logo {
-        display: inline-block;
-        width:   200px;
-
-        img {
-          display:    block;
-          margin:     0px auto;
-          max-height: 128px;
-          max-width:  200px;
+        .top-three-label {
+          font-style:  italic;
+          margin-left: 73px;
+          padding-top: 5px;
+          width:       125px;
         }
       }
 
-      .course-title-description {
-        display:        inline-block;
-        margin-left:    12px;
-        vertical-align: top;
-        width:          700px;
+      .top-three-capture {
+        border-top-left-radius:            12px;
+        -webkit-border-top-left-radius:    12px;
+        -moz-border-top-left-radius:       12px;
+        border-bottom-left-radius:         12px;
+        -webkit-border-bottom-left-radius: 12px;
+        -moz-border-bottom-left-radius:    12px;
 
-        .course-title {
-          font-size:     18px;
-          margin-bottom: 12px;
+        background: -prefix-linear-gradient(left, rgba(253, 166, 0, 0.6), rgba(255,255,255, 0));
+        background: linear-gradient(to right, rgba(253, 166, 0, 0.6), rgba(255,255,255, 0));
+        height:     455px;
+        margin-top: -28px;
+        position:   absolute;
+        width:      800px;
+        z-index:    -10;
+      }
 
-          a {
-            color: black;
+      .club-course {
+        height: 128px;
+        margin: 12px auto;
+        width:  880px;
+
+        .course-handle {
+          border-radius:         24px;
+          -webkit-border-radius: 24px;
+          -moz-border-radius:    24px;
+
+          background-color: #008BC5;
+          border:           2px solid black;
+          display:          inline-block;
+          height:           20px;
+          margin-left:      -12px;
+          margin-top:       48px;
+          position:         absolute;
+          width:            22px;
+          z-index:          100;
+
+          i {
+            cursor:       move;
+            display:      inline-block;
+            font-weight:  bold;
+            height:       19px;
+            text-align:   center;
+            width:        24px;
           }
         }
 
-        .course-description {
+        .course-logo {
+          display: inline-block;
+          width:   175px;
+
+          img {
+            display:    block;
+            margin:     0px auto;
+            max-height: 128px;
+            max-width:  200px;
+          }
+        }
+
+        .course-title-description {
+          display:        inline-block;
+          margin-left:    12px;
+          vertical-align: top;
+          width:          685px;
+
+          .course-title {
+            font-size:     18px;
+            margin-bottom: 12px;
+
+            a {
+              color: black;
+            }
+          }
+
+          .course-description {
+          }
         }
       }
     }
