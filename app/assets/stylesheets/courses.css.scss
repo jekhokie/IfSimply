@@ -275,6 +275,10 @@
           margin-left: 73px;
           padding-top: 5px;
           width:       125px;
+
+          i {
+            cursor: pointer;
+          }
         }
       }
 
@@ -351,11 +355,18 @@
               color: black;
             }
           }
-
-          .course-description {
-          }
         }
       }
     }
+  }
+}
+
+.featured-modal {
+  .featured-explanation {
+    margin-bottom: 12px;
+  }
+
+  img {
+    width: 100%;
   }
 }
