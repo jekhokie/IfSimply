@@ -274,6 +274,7 @@
           font-style:  italic;
           margin-left: 73px;
           padding-top: 5px;
+          text-shadow: 1px 1px #FFF;
           width:       125px;
 
           i {
@@ -289,6 +290,10 @@
         border-bottom-left-radius:         12px;
         -webkit-border-bottom-left-radius: 12px;
         -moz-border-bottom-left-radius:    12px;
+
+        box-shadow:         -6px 0px 4px -1px #888;
+        -webkit-box-shadow: -6px 0px 4px -1px #888;
+        -moz-box-shadow:    -6px 0px 4px -1px #888;
 
         background: -prefix-linear-gradient(left, rgba(253, 166, 0, 0.6), rgba(255,255,255, 0));
         background: linear-gradient(to right, rgba(253, 166, 0, 0.6), rgba(255,255,255, 0));
