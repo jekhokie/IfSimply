@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, :except => [ :show, :show_all ]
-  before_filter :get_club,   :only => [ :create, :show_all ]
+  before_filter :get_club,   :only => [ :create, :show_all, :sort ]
   before_filter :get_course, :only => [ :show, :edit, :update ]
 
   def show
@@ -66,6 +66,23 @@ class CoursesController < ApplicationController
     redirect_to club_sales_page_path(@club) unless user_signed_in? and can?(:read, @club)
 
     @courses = @club.courses
+  end
+
+  def sort
+    authorize! :update, @club
+
+    courses = @club.courses
+
+    unless (course_list = params["courses"]).nil?
+      course_list.map!{ |course| course.sub("course_", "") }
+
+      courses.each do |course|
+        course.position = course_list.index(course.id.to_s) + 1
+        course.save
+      end
+    end
+
+    render :nothing => true
   end
 
   private
