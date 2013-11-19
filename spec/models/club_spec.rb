@@ -105,6 +105,17 @@ describe Club do
     end
   end
 
+  describe "courses ordering" do
+    let(:club)    { FactoryGirl.create :club }
+    let(:course3) { FactoryGirl.create :course, :club_id => club.id, :position => 3 }
+    let(:course1) { FactoryGirl.create :course, :club_id => club.id, :position => 1 }
+    let(:course2) { FactoryGirl.create :course, :club_id => club.id, :position => 2 }
+
+    it "should order courses by position" do
+      club.courses.should == [ course1, course2, course3 ]
+    end
+  end
+
   describe "articles" do
     before :each do
       @club = FactoryGirl.create :club
