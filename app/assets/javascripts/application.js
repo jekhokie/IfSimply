@@ -14,9 +14,13 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require jquery.livequery.min
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
+//= require jquery.ui.sortable
 //= require best_in_place.purr
 //= require best_in_place
 //= require twitter/bootstrap
 //= require bootstrap
 //= require global
+//= require courses
 //= require paypal
