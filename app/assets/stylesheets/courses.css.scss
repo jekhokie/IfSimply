@@ -263,19 +263,22 @@
     width: 100%;
 
     #courses-list {
+      margin-top: 12px;
       min-height: 440px;
 
       .spacer {
-        font-size:   22px;
-        font-weight: bold;
-        height:      25px;
+        font-size:     22px;
+        height:        25px;
+        margin-top:    -12px;
+        margin-bottom: 9px;
+        text-align:    center;
 
         .top-three-label {
-          font-style:  italic;
-          margin-left: 73px;
-          padding-top: 5px;
-          text-shadow: 1px 1px #FFF;
-          width:       125px;
+          border-bottom: 2px solid #0066CC;
+          color:         #0066CC;
+          display:       inline-block;
+          font-size:     27px;
+          line-height:   29px;
 
           i {
             cursor: pointer;
@@ -284,30 +287,24 @@
       }
 
       .top-three-capture {
-        border-top-left-radius:            12px;
-        -webkit-border-top-left-radius:    12px;
-        -moz-border-top-left-radius:       12px;
-        border-bottom-left-radius:         12px;
-        -webkit-border-bottom-left-radius: 12px;
-        -moz-border-bottom-left-radius:    12px;
+        border-radius:         22px;
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
 
-        box-shadow:         -6px 0px 4px -1px #888;
-        -webkit-box-shadow: -6px 0px 4px -1px #888;
-        -moz-box-shadow:    -6px 0px 4px -1px #888;
-
-        background: -prefix-linear-gradient(left, rgba(253, 166, 0, 0.6), rgba(255,255,255, 0));
-        background: linear-gradient(to right, rgba(253, 166, 0, 0.6), rgba(255,255,255, 0));
-        height:     455px;
-        margin-top: -28px;
-        position:   absolute;
-        width:      800px;
-        z-index:    -10;
+        background-color: #FFFFCC;
+        border:           3px solid #FFB73C;
+        height:           520px;
+        margin-top:       -40px;
+        position:         absolute;
+        width:            967px;
+        z-index:          -10;
       }
 
       .club-course {
-        height: 128px;
-        margin: 12px auto;
-        width:  880px;
+        height:     140px;
+        margin:     12px auto;
+        margin-top: 22px;
+        width:      880px;
 
         .course-handle {
           border-radius:         24px;
