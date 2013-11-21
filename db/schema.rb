@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118231942) do
+ActiveRecord::Schema.define(:version => 20131121233356) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -167,6 +167,19 @@ ActiveRecord::Schema.define(:version => 20131118231942) do
 
   add_index "topics", ["discussion_board_id"], :name => "index_topics_on_discussion_board_id"
   add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
+
+  create_table "upsell_pages", :force => true do |t|
+    t.string   "heading"
+    t.string   "sub_heading"
+    t.string   "basic_articles_desc"
+    t.string   "exclusive_articles_desc"
+    t.string   "basic_courses_desc"
+    t.string   "in_depth_courses_desc"
+    t.string   "discussion_forums_desc"
+    t.integer  "club_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "",    :null => false
