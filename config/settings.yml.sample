@@ -37,6 +37,14 @@
   default_call_to_action: "Join Now"
   default_heading:        "Powerful Heading Here (i.e. Unlock the Power of Pinterest)"
   default_sub_heading:    "Subheading Here (i.e. Pin Your Way to 10,000 New Customers)"
+:upsell_pages:
+  default_heading:                 "Want to get WAY more out of this club?"
+  default_sub_heading:             "Sign up for a Pro Membership!"
+  default_basic_articles_desc:     "How-to articles that will keep you up to date and on the cutting edge."
+  default_exclusive_articles_desc: "These are premium in-depth articles and tutorials that only Pro Members can access."
+  default_basic_courses_desc:      "Our courses will guide you with video, give you actionable lessons, and come with downloadable reference materials."
+  default_in_depth_courses_desc:   "Our premium courses dig deep to teach you what matters. This is content you definitely won't get anywhere else."
+  default_discussion_forums_desc:  "Community is a crucial part of the growth process. Connect with folks just like you to learn, share, and grow."
 :users:
   default_description: "Tell the IfSimply community about yourself. We want to know your hopes and dreams. Click here to change it. To change your photo, drag and drop a new one from your desktop"
   default_icon:        "/assets/iS_club_thumb.jpg"
