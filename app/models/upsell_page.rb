@@ -20,4 +20,8 @@ class UpsellPage < ActiveRecord::Base
     self.in_depth_courses_desc   = Settings.upsell_pages[:default_in_depth_courses_desc]
     self.discussion_forums_desc  = Settings.upsell_pages[:default_discussion_forums_desc]
   end
+
+  def user
+    club.user
+  end
 end
