@@ -82,5 +82,9 @@ class Ability
     can [ :read ], SalesPage do |sales_page|
       sales_page.club.user == user or sales_page.club.user.verified?
     end
+
+    can [ :read ], UpsellPage do |upsell_page|
+      upsell_page.club.user == user or upsell_page.club.user.verified?
+    end
   end
 end
