@@ -9,6 +9,34 @@ describe UpsellPage do
 
   describe "initialize" do
     let!(:upsell_page) { FactoryGirl.create(:user).clubs.first.upsell_page }
+
+    it "assigns the default heading" do
+      upsell_page.heading.should == Settings.upsell_pages[:default_heading]
+    end
+
+    it "assigns the default sub_heading" do
+      upsell_page.sub_heading.should == Settings.upsell_pages[:default_sub_heading]
+    end
+
+    it "assigns the default basic_articles_desc" do
+      upsell_page.basic_articles_desc.should == Settings.upsell_pages[:default_basic_articles_desc]
+    end
+
+    it "assigns the default exclusive_articles_desc" do
+      upsell_page.exclusive_articles_desc.should == Settings.upsell_pages[:default_exclusive_articles_desc]
+    end
+
+    it "assigns the default basic_courses_desc" do
+      upsell_page.basic_courses_desc.should == Settings.upsell_pages[:default_basic_courses_desc]
+    end
+
+    it "assigns the default in_depth_courses_desc" do
+      upsell_page.in_depth_courses_desc.should == Settings.upsell_pages[:default_in_depth_courses_desc]
+    end
+
+    it "assigns the default discussion_forums_desc" do
+      upsell_page.discussion_forums_desc.should == Settings.upsell_pages[:default_discussion_forums_desc]
+    end
   end
 
   describe "valid?" do
