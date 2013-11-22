@@ -34,6 +34,10 @@ class Ability
       sales_page.user == user
     end
 
+    can [ :update ], UpsellPage do |upsell_page|
+      upsell_page.user == user
+    end
+
     can :read,   User
     can :update, User, :id => user.id
 

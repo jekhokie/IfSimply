@@ -660,6 +660,21 @@ describe Ability do
     end
   end
 
+  describe "UpsellPage" do
+    let(:owned_upsell_page)     { FactoryGirl.create :upsell_page, :club => user.clubs.first }
+    let(:non_owned_upsell_page) { FactoryGirl.create :upsell_page }
+
+    context "update" do
+      it "succeeds when the user owns the upsell_page" do
+        ability.should be_able_to(:update, owned_upsell_page)
+      end
+
+      it "fails when the user does not own the upsell_page" do
+        ability.should_not be_able_to(:update, non_owned_upsell_page)
+      end
+    end
+  end
+
   describe "User" do
     context "read" do
       let!(:own_user)      { FactoryGirl.create :user }
