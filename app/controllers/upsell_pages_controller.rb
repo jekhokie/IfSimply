@@ -16,6 +16,27 @@ class UpsellPagesController < ApplicationController
     render :text => '', :layout => "mercury"
   end
 
+  def update
+    authorize! :update, @upsell_page
+
+    upsell_page_hash                     = params[:content]
+    @upsell_page.heading                 = upsell_page_hash[:upsell_page_heading][:value]
+    @upsell_page.sub_heading             = upsell_page_hash[:upsell_page_sub_heading][:value]
+    @upsell_page.basic_articles_desc     = upsell_page_hash[:upsell_page_basic_articles_desc][:value]
+    @upsell_page.exclusive_articles_desc = upsell_page_hash[:upsell_page_exclusive_articles_desc][:value]
+    @upsell_page.basic_courses_desc      = upsell_page_hash[:upsell_page_basic_courses_desc][:value]
+    @upsell_page.in_depth_courses_desc   = upsell_page_hash[:upsell_page_in_depth_courses_desc][:value]
+    @upsell_page.discussion_forums_desc  = upsell_page_hash[:upsell_page_discussion_forums_desc][:value]
+
+    @club.price = upsell_page_hash[:club_price][:value]
+
+    if @upsell_page.save and @club.save
+      render :text => ""
+    else
+      respond_error_to_mercury [ @upsell_page, @club ]
+    end
+  end
+
   private
 
   def get_club_and_upsell_page
