@@ -37,12 +37,14 @@ class CoursesController < ApplicationController
     lesson_list = []
     course_hash.each do |lesson_id, lesson_hash|
       if lesson_id =~ /lesson_.*/
-        lesson = @course.lessons.find lesson_id.split("_")[1]
+        lesson = lesson_list.first{ |lesson| lesson.id == lesson_id.split("_")[1] }
+        lesson = @course.lessons.find lesson_id.split("_")[1] if lesson.blank?
 
         unless lesson.blank?
           attribute = lesson_id.split("_")[2]
           lesson.send "#{attribute}=", lesson_hash[:value]
 
+          lesson_list.delete lesson if lesson_list.include?(lesson)
           lesson_list << lesson
         end
       end
