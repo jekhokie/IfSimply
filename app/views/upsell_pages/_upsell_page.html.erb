@@ -21,16 +21,33 @@
         </th>
         <th class="pro-number pro-number-heading">
           <div class="member-label">PRO MEMBER</div>
-          <div class="cost-label">
+            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
+                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
+            <div class="cost-label">
+            <%- else %>
+            <div class="cost-label" style="margin-top: 11px; margin-bottom: 10px;">
+            <%- end %>
             <div class="club-price-currency"><%= currency_symbol -%></div>
             <div id="club_price" class="club-price" data-mercury="simple"><%= club.price %></div>
             <div class="club-price-frequency">/ mo</div>
           </div>
-          <div class="free-trial-label">free <%= Settings.paypal[:free_days] %> day trial!</div>
+          <div class="free-trial-label">
+            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
+                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
+              free <%= Settings.paypal[:free_days] %> day trial!
+            <%- end %>
+          </div>
           <div class="subscribe-button-container heading-pro-subscribe">
-            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                 :level       => 'pro',
-                                                                                 :button_text => 'FREE TRIAL' } %>
+            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
+                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                   :level       => 'pro',
+                                                                                   :button_text => 'FREE TRIAL' } %>
+            <%- else %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                   :level       => 'pro',
+                                                                                   :button_text => 'PRO' } %>
+            <%- end %>
           </div>
         </th>
       </tr>
@@ -107,9 +124,16 @@
         </th>
         <td class="pro-number pro-number-footer">
           <div class="subscribe-button-container">
-            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                 :level       => 'pro',
-                                                                                 :button_text => 'FREE TRIAL' } %>
+            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
+                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                   :level       => 'pro',
+                                                                                   :button_text => 'FREE TRIAL' } %>
+            <%- else %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                   :level       => 'pro',
+                                                                                   :button_text => 'PRO' } %>
+            <%- end %>
           </div>
         </th>
       </tr>
