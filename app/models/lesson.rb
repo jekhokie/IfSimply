@@ -2,7 +2,7 @@ class Lesson < ActiveRecord::Base
   attr_accessible :background, :free, :title, :video, :file_attachment
 
   belongs_to :course
-  has_attached_file :file_attachment, :url         => "/system/:attachment/:attachment_id/:id/:hash/:style.:extension",
+  has_attached_file :file_attachment, :url         => "/system/:attachment/:attachment_id/:id/:hash/:filename",
                                       :hash_secret => "soighow3th2t8hgo2ih#JT(T#y09yt09#)(TY#)(TY)#(G()GVh03gh)(QY(@)YRT()G#H#()g"
 
   validates_attachment :file_attachment,
