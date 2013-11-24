@@ -1,0 +1,118 @@
+<div class="club-subscription-information">
+  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => club } %>
+
+  <h1 id="upsell_page_heading"     class="upsell-page-heading"     data-mercury="simple"><%= club.upsell_page.heading %></h1>
+  <h3 id="upsell_page_sub_heading" class="upsell-page-sub-heading" data-mercury="simple"><%= club.upsell_page.sub_heading %></h3>
+
+  <div class="pro-member-info">Pro Members get access to all the basic content plus even more exclusive benefits!</div>
+
+  <table class="club-subscription-information row-fluid">
+    <thead>
+      <tr>
+        <th class="meta meta-heading"></th>
+        <th class="basic-number basic-number-heading">
+          <div class="member-label">BASIC MEMBER</div>
+          <div class="cost-label">FREE!</div>
+          <div class="subscribe-button-container heading-basic-subscribe">
+            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                 :level       => 'basic',
+                                                                                 :button_text => 'BASIC ONLY' } %>
+          </div>
+        </th>
+        <th class="pro-number pro-number-heading">
+          <div class="member-label">PRO MEMBER</div>
+          <div class="cost-label">
+            <div class="club-price-currency"><%= currency_symbol -%></div>
+            <div id="club_price" class="club-price" data-mercury="simple"><%= club.price %></div>
+            <div class="club-price-frequency">/ mo</div>
+          </div>
+          <div class="free-trial-label">free <%= Settings.paypal[:free_days] %> day trial!</div>
+          <div class="subscribe-button-container heading-pro-subscribe">
+            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                 :level       => 'pro',
+                                                                                 :button_text => 'FREE TRIAL' } %>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="basic-articles">
+        <td class="meta">
+          <span class="basic-articles-icon meta-icon">
+            <%= image_tag "paperclip.png", :alt => "paperclip" %>
+          </span>
+          <span class="meta-label">Basic Articles</span>
+          <div id="upsell_page_basic_articles_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.basic_articles_desc %></div>
+        </td>
+        <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+        <td class="pro-number"></td>
+      </tr>
+      <tr class="exclusive-articles">
+        <td class="meta">
+          <span class="exclusive-articles-icon meta-icon">
+            <%= image_tag "notebook.png", :alt => "notebook" %>
+          </span>
+          <span class="meta-label">Exclusive Articles</span>
+          <div id="upsell_page_exclusive_articles_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.exclusive_articles_desc %></div>
+        </td>
+        <td class="basic-number"></td>
+        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+      </tr>
+      <tr class="basic-courses">
+        <td class="meta">
+          <span class="basic-courses-icon meta-icon">
+            <%= image_tag "presentation.png", :alt => "presentation" %>
+          </span>
+          <span class="meta-label">Basic Courses</span>
+          <div id="upsell_page_basic_courses_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.basic_courses_desc %></div>
+        </td>
+        <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+        <td class="pro-number"></td>
+      </tr>
+      <tr class="in-depth-courses">
+        <td class="meta">
+          <span class="in-depth-courses-icon meta-icon">
+            <%= image_tag "star.png", :alt => "star" %>
+          </span>
+          <span class="meta-label">In-depth Courses</span>
+          <div id="upsell_page_in_depth_courses_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.in_depth_courses_desc %></div>
+        </td>
+        <td class="basic-number"></td>
+        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+      </tr>
+      <tr class="discussion-forums">
+        <td class="meta last">
+          <span class="discussion-forums-icon meta-icon">
+            <%= image_tag "discussion.png", :alt => "discussion" %>
+          </span>
+          <span class="meta-label">Discussion Forums</span>
+          <div id="upsell_page_discussion_forums_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.discussion_forums_desc %></div>
+        </td>
+        <td class="basic-number last">
+          <div class="discussion-read-only">Read Only</div>
+          <div class="discussion-no-add-topics">(can't add topics)</div>
+        </td>
+        <td class="pro-number last"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="meta meta-footer"></th>
+        <td class="basic-number basic-number-footer">
+          <div class="subscribe-button-container">
+            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                 :level       => 'basic',
+                                                                                 :button_text => 'BASIC ONLY' } %>
+          </div>
+        </th>
+        <td class="pro-number pro-number-footer">
+          <div class="subscribe-button-container">
+            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
+                                                                                 :level       => 'pro',
+                                                                                 :button_text => 'FREE TRIAL' } %>
+          </div>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
