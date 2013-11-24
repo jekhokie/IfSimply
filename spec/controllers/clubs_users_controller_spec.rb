@@ -32,6 +32,30 @@ describe ClubsUsersController do
     end
 
     describe "for a signed-in user" do
+      describe "for the club owner" do
+        let!(:club_user) { FactoryGirl.create :user }
+        let!(:user_club) { club_user.clubs.first }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in club_user
+
+          get 'new', :id => user_club.id
+        end
+
+        it "redirects to the upsell_page editor view" do
+          response.should redirect_to(upsell_page_editor_path(user_club))
+        end
+
+        it "returns the club" do
+          assigns(:club).should == user_club
+        end
+
+        it "returns no subscription" do
+          assigns(:subscription).should be_blank
+        end
+      end
+
       describe "coming from the sales page" do
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]

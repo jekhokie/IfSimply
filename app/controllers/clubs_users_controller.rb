@@ -4,18 +4,22 @@ class ClubsUsersController < ApplicationController
   before_filter :get_club, :except => [ :destroy ]
 
   def new
-    if user_signed_in?
+    if user_signed_in? and current_user != @club.user
       @subscription = ClubsUsers.first{ |subscription| subscription.user == current_user and subscription.club == @club }
     end
 
-    if @subscription.nil?
+    if @subscription.nil? and !(user_signed_in? and current_user == @club.user)
       @subscription      = ClubsUsers.new
       @subscription.club = @club
     end
 
     if user_signed_in?
-      @subscription.user = current_user if @subscription.user.nil?
-      session.delete(:subscription) unless session[:subscription].blank?
+      if current_user == @club.user
+        redirect_to upsell_page_editor_path(@club)
+      else
+        @subscription.user = current_user if @subscription.user.nil?
+        session.delete(:subscription) unless session[:subscription].blank?
+      end
     else
       session[:subscription] = @subscription
 
