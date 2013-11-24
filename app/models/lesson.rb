@@ -6,7 +6,7 @@ class Lesson < ActiveRecord::Base
                                       :hash_secret => "soighow3th2t8hgo2ih#JT(T#y09yt09#)(TY#)(TY)#(G()GVh03gh)(QY(@)YRT()G#H#()g"
 
   validates_attachment :file_attachment,
-    :content_type => { :content_type => /^(audio\/(mpeg|mp3))|(video\/x-ms-wav)|(application\/(vnd.openxmlformats-officedocument.spreadsheetml.sheet|vnd.openxmlformats-officedocument.spreadsheetml.template|vnd.openxmlformats-officedocument.presentationml.template|vnd.ms-powerpoint|vnd.openxmlformats-officedocument.presentationml.slideshow|vnd.openxmlformats-officedocument.presentationml.presentation|vnd.openxmlformats-officedocument.presentationml.slide|vnd.openxmlformats-officedocument.wordprocessingml.document|vnd.openxmlformats-officedocument.wordprocessingml.template|vnd.ms-excel.addin.macroEnabled.12|vnd.ms-excel.sheet.binary.macroEnabled.12|vnd.ms-excel|msword|pdf|octet-stream))|(text\/(plain|rtf|richtext))$/ },
+    :content_type => { :content_type => /^(audio\/(mpeg|mp3))|(video\/(x-ms-wav|x-ms-wmv))|(application\/(vnd.openxmlformats-officedocument.spreadsheetml.sheet|vnd.openxmlformats-officedocument.spreadsheetml.template|vnd.openxmlformats-officedocument.presentationml.template|vnd.ms-powerpoint|vnd.openxmlformats-officedocument.presentationml.slideshow|vnd.openxmlformats-officedocument.presentationml.presentation|vnd.openxmlformats-officedocument.presentationml.slide|vnd.openxmlformats-officedocument.wordprocessingml.document|vnd.openxmlformats-officedocument.wordprocessingml.template|vnd.ms-excel.addin.macroEnabled.12|vnd.ms-excel.sheet.binary.macroEnabled.12|vnd.ms-excel|msword|pdf|octet-stream))|(text\/(plain|rtf|richtext))$/ },
     :size         => { :in => 0..10000.kilobytes },
     :hash_secret  => "somesecret"
 
