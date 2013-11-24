@@ -105,6 +105,35 @@ describe LessonsController do
       sign_in user
     end
 
+    describe "for a non-accepted MIME type" do
+      before :each do
+        @file = fixture_file_upload('/test.txt', 'text/bogus')
+
+        put 'update_file_attachment', :format => :js, :course_id => course.id, :lesson_id => lesson.id, :lesson => { :file_attachment => @file }
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "returns the course" do
+        assigns(:course).should == course
+      end
+
+      it "returns the lesson" do
+        assigns(:lesson).should == lesson
+      end
+
+      it "assigns the new attributes" do
+        lesson.reload
+        lesson.file_attachment.should be_blank
+      end
+
+      it "assigns a flash error" do
+        flash[:error].should_not be_blank
+      end
+    end
+
     describe "for a normal text document" do
       before :each do
         @file = fixture_file_upload('/test.txt', 'text/plain')
