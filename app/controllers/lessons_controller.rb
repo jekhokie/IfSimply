@@ -23,6 +23,19 @@ class LessonsController < ApplicationController
     respond_with_bip @lesson
   end
 
+  def update_file_attachment
+    @lesson = @course.lessons.find params[:lesson_id]
+
+    authorize! :update, @lesson
+
+    unless @lesson.update_attributes params[:lesson]
+      flash[:error] = "File attachment '#{@lesson.file_attachment.original_filename}' content type unsupported."
+      @lesson.reload
+    end
+
+    flash.discard
+  end
+
   private
 
   def get_course

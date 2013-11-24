@@ -43,6 +43,50 @@
       <%- end %>
     </div>
 
+    <div class="lesson-file-attachment lesson-file-attachment-<%= lesson.id %>">
+      <div class="update-file-attachment">
+        <div class="file-attachment-path">
+          <span class="file-attachment-label">Materials:</span>
+          <div class="file-attachment-errors hide-preview"></div>
+
+          <%- if can?(:update, lesson) %>
+            <%= form_for lesson, :url    => course_lesson_update_file_attachment_path(lesson.course, lesson),
+                                 :remote => true,
+                                 :html   => { :multipart => true,
+                                              :onchange  => "$(this).find('input[type=\"submit\"]').click()" } do |f| %>
+              <%= image_tag "paperclip.png", :alt => "multimedia-add" %>
+              <div class="lesson-filename">
+                <%- if lesson.file_attachment_content_type.blank? %>
+                  Name of Materials
+                <%- else %>
+                  <%= render :partial => "lessons/file_link", :locals => { :material => lesson.file_attachment } %>
+                <%- end %>
+              </div>
+
+              <%= f.submit "Submit", :class => "hide-preview" %>
+              <%= f.file_field :file_attachment, :class => "hide-preview" %>
+
+              <a class="btn btn-primary upload-button hide-preview" onclick="$(this).closest('form').find('input[type=\'file\']').click();">Upload File</a>
+            <% end %>
+          <%- else %>
+            <%= image_tag "paperclip.png", :alt => "multimedia-add" %>
+            <div class="lesson-<%= lesson.id %>-filename lesson-filename">
+              <%- if lesson.file_attachment_content_type.blank? %>
+                No Supplemental Materials
+              <%- else %>
+                <%- if can?(:read, lesson) %>
+                  <%= render :partial => "lessons/file_link", :locals => { :material => lesson.file_attachment } %>
+                <%- else %>
+                  <%= link_to lesson.file_attachment.original_filename, subscribe_to_club_path(lesson.club) %>
+                <%- end %>
+              <%- end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-background-label">Notes:</div>
     <div id="lesson_<%= lesson.id %>_background" class="lesson-background" data-mercury="full"><%= raw lesson.background %></div>
   </div>
 <%- end %>

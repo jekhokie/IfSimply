@@ -77,7 +77,9 @@ Ifsimply::Application.routes.draw do
       post 'sort'
     end
 
-    resources :lessons, :only => [ :create, :update ]
+    resources :lessons, :only => [ :create, :update ] do
+      put 'update_file_attachment'
+    end
   end
 
   resources :articles, :only => [ :show, :update ]

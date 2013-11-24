@@ -157,7 +157,7 @@
 
           .lesson-video {
             display:    inline-block;
-            margin:     25px auto;
+            margin:     25px auto 0px auto;
             text-align: center;
             width:      100%;
 
@@ -191,6 +191,94 @@
                 width:      600px;
               }
             }
+          }
+
+          .lesson-file-attachment {
+            display:       inline-block;
+            font-size:     20px;
+            margin-bottom: 10px;
+            width:         100%;
+
+            .file-attachment-container {
+              margin-top: 12px;
+            }
+
+            .file-attachment-path {
+              font-size: 20px;
+              margin:    15px auto;
+
+              .file-attachment-label {
+                border-bottom: 1px solid black;
+                display:       inline-block;
+                font-weight:   bold;
+                margin-bottom: 12px;
+
+                i {
+                  font-weight: bold;
+                }
+              }
+
+              .file-attachment-errors {
+                color:         red;
+                font-size:     16px;
+                font-style:    italic;
+                font-weight:   bold;
+                margin-bottom: 6px;
+              }
+
+              .lesson-filename {
+                color:      gray;
+                display:    inline-block;
+                font-size:  16px;
+                font-style: italic;
+
+                a {
+                  color: gray;
+                }
+              }
+
+              input[type='file'] {
+                opacity:         0;
+                -moz-opacity:    0;
+                -webkit-opacity: 0;
+
+                display: none;
+                height:  0px;
+                width:   0px;
+                z-index: 100;
+              }
+
+              a.upload-button {
+                background-color: #008BC5;
+                background-image: -ms-linear-gradient(top, #008BC5, #0088cc);
+                background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#008BC5), to(#0088cc));
+                background-image: -webkit-linear-gradient(top, #008BC5, #0088cc);
+                background-image: -moz-linear-gradient(top, #008BC5, #0088cc);
+                background-image: -o-linear-gradient(top, #008BC5, #0088cc);
+
+                display:     inline-block;
+                margin-left: 12px;
+                width:       80px;
+              }
+
+              img[alt='multimedia-add'] {
+                max-height:     25px;
+                max-width:      25px;
+                vertical-align: middle;
+              }
+
+              input[type='submit'] {
+                display: none;
+              }
+            }
+          }
+
+          .lesson-background-label {
+            border-bottom: 1px solid black;
+            display:       inline-block;
+            font-size:     20px;
+            font-weight:   bold;
+            margin-bottom: 12px;
           }
 
           .lesson-background {
