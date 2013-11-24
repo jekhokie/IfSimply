@@ -161,8 +161,28 @@
             text-align: center;
             width:      100%;
 
-            iframe {
-              border: 1px solid black;
+            .video-iframe {
+              border-radius:         0 0 50% 50% / 0 0 25px 25px;
+              -webkit-border-radius: 0 0 50% 50% / 0 0 25px 25px;
+              -moz-border-radius:    0 0 50% 50% / 0 0 25px 25px;
+
+              background-color: #151515;
+              height:           405px;
+              margin:           0px auto;
+              padding-top:      10px;
+              width:            735px;
+
+              .click-for-pro-link {
+                img {
+                  height: 370px;
+                }
+              }
+
+              iframe {
+                border: 1px solid black;
+                height: 375px;
+                width:  710px;
+              }
             }
 
             .video-embed-source {
@@ -178,8 +198,8 @@
               }
 
               .video-related {
-                display:    block;
                 margin-top: 8px;
+                min-height: 25px;
               }
 
               .video-related:hover {
@@ -204,8 +224,9 @@
             }
 
             .file-attachment-path {
-              font-size: 20px;
-              margin:    15px auto;
+              font-size:  20px;
+              margin:     15px auto;
+              margin-top: 20px;
 
               .file-attachment-label {
                 border-bottom: 1px solid black;
