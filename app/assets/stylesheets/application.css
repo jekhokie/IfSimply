@@ -13,7 +13,6 @@
  *= require articles
  *= require bootstrap_and_overrides
  *= require clubs
- *= require clubs_users
  *= require courses
  *= require devise
  *= require discussion_boards
@@ -26,5 +25,6 @@
  *= require posts
  *= require sales_pages
  *= require topics
+ *= require upsell_pages
  *= require users
  */

@@ -1,7 +1,7 @@
 class Club < ActiveRecord::Base
   attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price
 
-  after_create :create_discussion_board, :create_sales_page
+  after_create :create_discussion_board, :create_sales_page, :create_upsell_page
 
   monetize :price_cents
 
@@ -26,6 +26,7 @@ class Club < ActiveRecord::Base
 
   has_one :discussion_board, :dependent => :destroy
   has_one :sales_page,       :dependent => :destroy
+  has_one :upsell_page,      :dependent => :destroy
 
   has_many :lessons, :through => :courses
 
@@ -55,6 +56,13 @@ class Club < ActiveRecord::Base
     sales_page.club = self
     sales_page.assign_defaults
     sales_page.save :validate => false
+  end
+
+  def create_upsell_page
+    upsell_page = UpsellPage.new
+    upsell_page.club = self
+    upsell_page.assign_defaults
+    upsell_page.save :validate => false
   end
 
   def name_length

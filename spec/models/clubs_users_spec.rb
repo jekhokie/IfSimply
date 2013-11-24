@@ -42,4 +42,22 @@ describe ClubsUsers do
       ClubsUsers.paying.should_not include(pro_inactive_subscription)
     end
   end
+
+  describe "pro within_trial_period?" do
+    let!(:pro_inside_trial_period)  { FactoryGirl.create :subscription, :level => 'pro', :anniversary_date => Date.today + 2.days }
+    let!(:pro_on_anniversary_date)  { FactoryGirl.create :subscription, :level => 'pro', :anniversary_date => Date.today }
+    let!(:pro_outside_trial_period) { FactoryGirl.create :subscription, :level => 'pro', :anniversary_date => Date.today - 2.days }
+
+    it "returns true for a subscription still within the trial period" do
+      pro_inside_trial_period.within_trial_period?.should == true
+    end
+
+    it "returns false for a subscription on the anniversary date" do
+      pro_on_anniversary_date.within_trial_period?.should == false
+    end
+
+    it "returns false for a subscription outside the trial period" do
+      pro_outside_trial_period.within_trial_period?.should == false
+    end
+  end
 end

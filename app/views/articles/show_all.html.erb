@@ -35,7 +35,13 @@
                 <span class="article-is-pro">Pro</span>
               <%- end %>
 
-              <%= link_to trim_length(article.title, 65), (can?(:update, @club) ? article_editor_path(article) : article_path(article)) %>
+              <%- if can?(:update, @club) %>
+                <%= link_to trim_length(article.title, 65), article_editor_path(article) %>
+              <%- elsif can?(:read, article) %>
+                <%= link_to trim_length(article.title, 65), article_path(article) %>
+              <%- else %>
+                <%= link_to trim_length(article.title, 65), subscribe_to_club_path(@club) %>
+              <%- end %>
             </div>
 
             <div class="article-created">

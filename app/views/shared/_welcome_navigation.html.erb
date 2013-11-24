@@ -22,6 +22,11 @@
         <a href="<%= sales_page_editor_path(club) %>"
            class="sales-page-link <%= 'selected' if controller_name == 'sales_pages' %>">Sales Page</a>
       <%- end %>
+
+      <%- if user_signed_in? and can?(:update, club) %>
+        <a href="<%= upsell_page_editor_path(club) %>"
+           class="upsell-page-link <%= 'selected' if controller_name == 'upsell_pages' %>">Upsell Page</a>
+      <%- end %>
     <%- end %>
   </div>
 </div>

@@ -7,7 +7,7 @@ describe ClubsUsersController do
   describe "GET 'new'" do
     describe "for a non signed-in user" do
       before :each do
-        get 'new', :id => club.id, :format => 'js'
+        get 'new', :id => club.id
       end
 
       it "redirects to a new user registration path" do
@@ -32,6 +32,30 @@ describe ClubsUsersController do
     end
 
     describe "for a signed-in user" do
+      describe "for the club owner" do
+        let!(:club_user) { FactoryGirl.create :user }
+        let!(:user_club) { club_user.clubs.first }
+
+        before :each do
+          @request.env["devise.mapping"] = Devise.mappings[:users]
+          sign_in club_user
+
+          get 'new', :id => user_club.id
+        end
+
+        it "redirects to the upsell_page editor view" do
+          response.should redirect_to(upsell_page_editor_path(user_club))
+        end
+
+        it "returns the club" do
+          assigns(:club).should == user_club
+        end
+
+        it "returns no subscription" do
+          assigns(:subscription).should be_blank
+        end
+      end
+
       describe "coming from the sales page" do
         before :each do
           @request.env["devise.mapping"] = Devise.mappings[:users]
@@ -117,6 +141,35 @@ describe ClubsUsersController do
 
       it "renders 'new'" do
         response.should render_template("clubs_users/new")
+      end
+    end
+
+    describe "for a subscript to the User's own club" do
+      let!(:subscribing_user) { FactoryGirl.create :user }
+      let!(:user_club)        { subscribing_user.clubs.first }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in subscribing_user
+
+        post 'create', :id => user_club.id, :level => 'basic'
+      end
+
+      it "redirects to the club editor view" do
+        response.should redirect_to(club_editor_path(user_club))
+      end
+
+      it "returns the club" do
+        assigns(:club).should == user_club
+      end
+
+      it "returns no subscription" do
+        assigns(:subscription).should be_blank
+      end
+
+      it "does not add the user as a free subscriber to the club" do
+        user_club.reload
+        user_club.members.should_not include(subscribing_user)
       end
     end
 

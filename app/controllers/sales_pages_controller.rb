@@ -1,11 +1,8 @@
 class SalesPagesController < ApplicationController
   before_filter :authenticate_user!, :except => [ :show ]
-  before_filter :get_club_and_sales_page, :only => [ :edit, :update ]
+  before_filter :get_club_and_sales_page
 
   def show
-    @club       = Club.find params[:club_id]
-    @sales_page = @club.sales_page
-
     unless can?(:read, @sales_page)
       flash[:error] = "Club Owner is not verified - please let them know they need to verify their account!"
 

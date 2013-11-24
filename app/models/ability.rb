@@ -34,6 +34,10 @@ class Ability
       sales_page.user == user
     end
 
+    can [ :update ], UpsellPage do |upsell_page|
+      upsell_page.user == user
+    end
+
     can :read,   User
     can :update, User, :id => user.id
 
@@ -77,6 +81,10 @@ class Ability
     # global defaults
     can [ :read ], SalesPage do |sales_page|
       sales_page.club.user == user or sales_page.club.user.verified?
+    end
+
+    can [ :read ], UpsellPage do |upsell_page|
+      upsell_page.club.user == user or upsell_page.club.user.verified?
     end
   end
 end

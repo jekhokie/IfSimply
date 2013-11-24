@@ -1,0 +1,22 @@
+<%= form_tag (user_signed_in? and current_user != club.user) ? add_member_to_club_path(club) : '' do %>
+  <%- if user_signed_in? and current_user == club.user %>
+    <a type="button"
+       class="btn btn-large btn-warning subscribe-button"
+       onclick="javascript: void(0);">
+      <span class="btn-text"><%= button_text %></span>
+    </a>
+  <%- elsif user_signed_in? and current_user.subscriptions.find_by_club_id(club.id).try(:level) == level %>
+    <a type="button"
+       class="btn btn-large btn-warning subscribe-button"
+       disabled="disabled">
+      <span class="btn-text">SUBSCRIBED</span>
+    </a>
+  <%- else %>
+    <%= hidden_field_tag :level, level %>
+    <a type="button"
+       class="btn btn-large btn-warning subscribe-button"
+       onclick="javascript: $(this).closest('form').submit();">
+       <span class="btn-text"><%= button_text %></span>
+    </a>
+  <%- end %>
+<%- end %>

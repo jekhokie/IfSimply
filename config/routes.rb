@@ -27,12 +27,13 @@ Ifsimply::Application.routes.draw do
   end
 
   # mercury editor routes
-  get '/editor/articles/:id'              => "articles#edit",          :as => :article_editor
-  get '/editor/clubs/:id'                 => "clubs#edit",             :as => :club_editor
-  get '/editor/clubs/:club_id/sales_page' => "sales_pages#edit",       :as => :sales_page_editor
-  get '/editor/courses/:id'               => "courses#edit",           :as => :course_editor
-  get '/editor/discussion_boards/:id'     => "discussion_boards#edit", :as => :discussion_board_editor
-  get '/editor/users/:id'                 => "users#edit",             :as => :user_editor
+  get '/editor/articles/:id'               => "articles#edit",          :as => :article_editor
+  get '/editor/clubs/:id'                  => "clubs#edit",             :as => :club_editor
+  get '/editor/clubs/:club_id/sales_page'  => "sales_pages#edit",       :as => :sales_page_editor
+  get '/editor/clubs/:club_id/upsell_page' => "upsell_pages#edit",      :as => :upsell_page_editor
+  get '/editor/courses/:id'                => "courses#edit",           :as => :course_editor
+  get '/editor/discussion_boards/:id'      => "discussion_boards#edit", :as => :discussion_board_editor
+  get '/editor/users/:id'                  => "users#edit",             :as => :user_editor
 
   resources :users, :only => [ :show, :update ] do
     member do
@@ -53,7 +54,8 @@ Ifsimply::Application.routes.draw do
     end
 
     # mercury editor
-    resource :sales_page, :only => [ :show, :update ]
+    resource :sales_page,  :only => [ :show, :update ]
+    resource :upsell_page, :only => [ :show, :update ]
 
     resources :courses, :only => [ :create ] do
       collection do

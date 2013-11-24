@@ -660,6 +660,49 @@ describe Ability do
     end
   end
 
+  describe "UpsellPage" do
+    let(:owned_upsell_page)     { FactoryGirl.create :upsell_page, :club => user.clubs.first }
+    let(:non_owned_upsell_page) { FactoryGirl.create :upsell_page }
+
+    context "read" do
+      let(:ability) { Ability.new FactoryGirl.create(:user) }
+
+      describe "for a validated Club owner account" do
+        before :each do
+          user = non_owned_upsell_page.club.user
+          user.verified = true
+          user.save
+        end
+
+        it "succeeds" do
+          ability.should be_able_to(:read, non_owned_upsell_page)
+        end
+      end
+
+      describe "for a non-validated Club owner account" do
+        before :each do
+          user = non_owned_upsell_page.club.user
+          user.verified = false
+          user.save
+        end
+
+        it "succeeds" do
+          ability.should_not be_able_to(:read, non_owned_upsell_page)
+        end
+      end
+    end
+
+    context "update" do
+      it "succeeds when the user owns the upsell_page" do
+        ability.should be_able_to(:update, owned_upsell_page)
+      end
+
+      it "fails when the user does not own the upsell_page" do
+        ability.should_not be_able_to(:update, non_owned_upsell_page)
+      end
+    end
+  end
+
   describe "User" do
     context "read" do
       let!(:own_user)      { FactoryGirl.create :user }
