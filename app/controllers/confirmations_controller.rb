@@ -12,4 +12,10 @@ class ConfirmationsController < Devise::ConfirmationsController
 
     super
   end
+
+  protected
+
+  def after_confirmation_path_for(resource_name, resource)
+    user_editor_path(resource)
+  end
 end
