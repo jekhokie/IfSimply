@@ -113,6 +113,16 @@
   .article-posts {
     width: 100%;
 
+    .no-articles-text {
+      font-weight: normal;
+
+      .create-first-article-link {
+        color:       #333;
+        font-style:  italic;
+        font-weight: bold;
+      }
+    }
+
     hr {
       background-color: #AAA;
       height:           2px;

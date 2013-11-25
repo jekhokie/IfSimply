@@ -371,6 +371,16 @@
   .club-courses-list {
     width: 100%;
 
+    .no-courses-text {
+      font-weight: normal;
+
+      .create-first-course-link {
+        color:       #333;
+        font-style:  italic;
+        font-weight: bold;
+      }
+    }
+
     #courses-list {
       margin-top: 12px;
       min-height: 440px;
@@ -436,7 +446,7 @@
             font-weight:  bold;
             height:       19px;
             text-align:   center;
-            width:        24px;
+            width:        23px;
           }
         }
 
