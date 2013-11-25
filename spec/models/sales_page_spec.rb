@@ -27,6 +27,11 @@ describe SalesPage do
       FactoryGirl.build(:sales_page, :call_to_action => "").should_not be_valid
     end
 
+    # call_details
+    it "returns false when no call_details is specified" do
+      FactoryGirl.build(:sales_page, :call_details => "").should_not be_valid
+    end
+
     # video
     describe "for video" do
       it "returns false when the URL is malformed" do
@@ -99,6 +104,10 @@ describe SalesPage do
 
     it "assigns the correct default call_to_action" do
       @sales_page.call_to_action.should == Settings.sales_pages[:default_call_to_action]
+    end
+
+    it "assigns the correct default call_details" do
+      @sales_page.call_details.should == Settings.sales_pages[:default_call_details]
     end
 
     it "assigns the correct default benefit1" do

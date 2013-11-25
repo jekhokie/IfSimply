@@ -1,180 +1,195 @@
+.welcome-navigation {
+  margin: 0px auto;
+  width:  973px;
+}
+
 .sales-page-information {
   margin:     0px auto;
   text-align: center;
-  width:      100%;
-
-  hr.gradient {
-    height: 2px;
-    margin: 25px auto;
-    width:  90%;
-  }
 
   .sales-page-heading {
-    font-size:   50px;
-    line-height: 63px;
+    color:       #FF9900;
+    font-size:   43px;
+    line-height: 48px;
     margin:      20px auto;
     max-height:  140px;
     overflow:    hidden;
-
-    input {
-      text-align: center;
-      width:      100%;
-    }
+    width:       973px;
   }
 
-  .sales-page-sub-heading {
-    font-size:   36px;
-    line-height: 40px;
-    margin:      25px auto;
-    max-height:  85px;
-    overflow:    hidden;
+  .color-band {
+    background-color: #0077CB;
+    padding-top:      9px;
+    width:            100%;
 
-    input {
-      text-align: center;
-      width:      100%;
-    }
-  }
+    .sales-page-sub-heading {
+      color:          #FFF;
+      font-size:      30px;
+      font-weight:    200;
+      letter-spacing: 3px;
+      line-height:    35px;
+      margin:         17px auto;
+      margin-top:     0px;
+      max-height:     85px;
+      overflow:       hidden;
+      width:          973px;
 
-  .capture-content {
-    display: inline-block;
-    height:  280px;
-    margin:  0px auto;
-    width:   100%;
-
-    .capture-resource {
-      display:        inline-block;
-      height:         240px;
-      vertical-align: middle;
-
-      iframe {
-        border: 1px solid black;
+      textarea {
+        letter-spacing: 3px;
       }
     }
 
-    .capture-block {
-      display:        inline-block;
-      vertical-align: middle;
-      width:          445px;
+    .capture-content {
+      display:    inline-block;
+      min-height: 290px;
+      margin:     0px auto;
+      width:      973px;
 
-      .sales-page-call-to-action {
-        font-size:   46px;
-        line-height: 50px;
-        margin:      25px auto;
-        max-height:  105px;
-        overflow:    hidden;
+      .capture-resource {
+        display:        inline-block;
+        height:         260px;
+        vertical-align: middle;
 
-        input {
-          width: 100%;
-        }
-      }
+        .video-iframe {
+          background-color: #FFF;
+          padding:          4px;
 
-      .club-buy-price {
-        line-height: 63px;
-        margin-top:  15px;
-        text-align:  center;
-
-        .club-price-currency {
-          display:     inline;
-          font-size:   32px;
-          font-weight: bold;
-
-          span {
-            line-height:    55px;
-            vertical-align: top;
+          iframe {
+            border:         1px solid black;
+            height:         250px;
+            vertical-align: middle;
           }
         }
+      }
 
-        .club-price {
-          display:     inline-block;
-          font-size:   52px;
-          font-weight: bold;
-          height:      65px;
-          line-height: 58px;
-          overflow:    hidden;
-          text-align:  left;
-          max-width:   200px;
+      .capture-block {
+        border-radius:         12px;
+        -webkit-border-radius: 12px;
+        -moz-border-radius:    12px;
+
+        background-color: #CCCCFF;
+        display:          inline-block;
+        min-height:       250px;
+        margin-left:      50px;
+        padding:          8px 20px 8px 20px;
+        vertical-align:   middle;
+        width:            290px;
+
+        .sales-page-call-to-action {
+          font-family:   "Londrina Solid";
+          font-size:     26px;
+          line-height:   30px;
+          margin:        0px auto;
+          margin-bottom: 6px;
+          max-height:    105px;
+          overflow:      hidden;
+        }
+
+        .sales-page-call-details {
+          font-size:  18px;
+          min-height: 180px;
+          text-align: left;
 
           textarea {
-            width: auto !important;
+            text-align: left;
           }
         }
 
         .club-buy {
           display:        inline-block;
-          margin-top:     3px;
-          margin-left:    15px;
           vertical-align: top;
-        }
-      }
-    }
 
-    .update-embed-url {
-      clear:      both;
-      display:    block;
-      text-align: left;
-      width:      100%;
-
-      .video-embed-source {
-        font-size:   22px;
-        line-height: 38px;
-        margin:      10px auto;
-
-        .video-embed-label {
-          display:      inline-block;
-          margin-left:  12px;
-          margin-right: 16px;
-
-          i {
-            font-weight: bold;
+          .subscribe-button {
+            color:          #000;
+            font-family:    "Londrina Solid";
+            font-size:      22px;
+            height:         25px;
+            letter-spacing: 2px;
+            padding-top:    8px;
+            width:          255px;
           }
         }
+      }
 
-        .video-related {
-          display:        inline-block;
-          font-size:      18px;
-          height:         40px;
-          margin-top:     8px;
-          overflow:       hidden;
-          vertical-align: bottom;
-          width:          690px;
-        }
+      .update-embed-url {
+        display:    block;
+        margin:     0px auto;
+        text-align: left;
+        width:      973px;
 
-        .video-related:hover {
-          cursor: pointer;
-        }
+        .video-embed-source {
+          font-size:   20px;
+          line-height: 20px;
+          margin:      10px auto;
 
-        input {
-          width: 400px;
+          .video-embed-label {
+            display:      inline-block;
+            margin-left:  12px;
+            margin-right: 16px;
+
+            i {
+              font-weight: bold;
+            }
+          }
+
+          .video-related {
+            display:        inline-block;
+            height:         25px;
+            overflow:       hidden;
+            vertical-align: middle;
+            width:          690px;
+          }
+
+          .video-related:hover {
+            cursor: pointer;
+          }
+
+          input {
+            width: 400px;
+          }
         }
       }
     }
   }
 
   .benefits-container {
-    margin:        25px auto;
-    margin-bottom: 50px;
-    text-align:    left;
-    width:         95%;
+    color:          #333333;
+    letter-spacing: 1px;
+    margin:         25px auto;
+    margin-bottom:  50px;
+    margin-top:     15px;
+    text-align:     left;
+    width:          973px;
 
     .sales-page-learn {
       font-size: 26px;
     }
 
     .benefits {
-      font-size: 32px;
+      font-size:   22px;
+      margin-left: 40px;
 
-      ul li {
-        line-height: 40px;
+      .benefit {
+        height:      55px;
+        line-height: 25px;
+        width:       100%;
+
+        .benefit-bullet {
+          display:        inline-block;
+          vertical-align: top;
+
+          img {
+            max-height: 70px;
+          }
+        }
 
         .benefit-container {
-          float:    right;
-          height:   40px;
-          overflow: hidden;
-          width:    100%;
+          display:    inline-block;
+          margin-top: 15px;
+          width:      845px;
 
-          input {
-            list-style-type: none;
-            width:           95%;
+          textarea {
+            letter-spacing: 1px;
           }
         }
       }
@@ -182,7 +197,12 @@
   }
 
   .sales-page-details {
-    font-size:   28px;
-    line-height: 35px;
+    color:          #333333;
+    font-size:      20px;
+    letter-spacing: 1px;
+    line-height:    25px;
+    margin:         0px auto;
+    text-align:     left;
+    width:          973px;
   }
 }

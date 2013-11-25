@@ -11,7 +11,7 @@
 
   <div class="article-posts row-fluid">
     <%- if @articles.blank? %>
-      <h2>No Articles Yet
+      <h2 class="no-articles-text">No Articles Yet
         <%- if can? :update, @club %>
           - <a href="<%= club_articles_path(@club) %>" data-method="post" class="create-first-article-link">Create your First!</a>
         <%- end %>

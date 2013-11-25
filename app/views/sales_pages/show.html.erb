@@ -1,67 +1,66 @@
-<div class="sales-page-information">
-  <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @sales_page.club } %>
+<%= content_for :outside_container do %>
+  <div class="sales-page-information">
+    <%= render :partial => 'shared/welcome_navigation', :locals => { :club => @sales_page.club } %>
 
-  <h1 id="sales_page_heading"     class="sales-page-heading"     data-mercury="simple"><%= @sales_page.heading %></h1>
-  <h3 id="sales_page_sub_heading" class="sales-page-sub-heading" data-mercury="simple"><%= @sales_page.sub_heading %></h3>
+    <h1 id="sales_page_heading" class="sales-page-heading" data-mercury="simple"><%= @sales_page.heading %></h1>
 
-  <hr class="gradient" />
+    <div class="color-band">
+      <h3 id="sales_page_sub_heading" class="sales-page-sub-heading" data-mercury="simple"><%= @sales_page.sub_heading %></h3>
 
-  <div class="capture-content video-container">
-    <div class="capture-resource">
-      <div class="video-iframe">
-        <%= render :partial => 'shared/video_iframe', :locals => { :video_url => @sales_page.video } %>
+      <div class="capture-content video-container">
+        <div class="capture-resource">
+          <div class="video-iframe">
+            <%= render :partial => 'shared/video_iframe', :locals => { :video_url => @sales_page.video } %>
+          </div>
+        </div>
+
+        <div class="capture-block">
+          <div id="sales_page_call_to_action" class="sales-page-call-to-action" data-mercury="simple"><%= @sales_page.call_to_action %></div>
+
+          <div id="sales_page_call_details" class="sales-page-call-details" data-mercury="full"><%= raw @sales_page.call_details %></div>
+
+          <div class="club-buy">
+            <%- if user_signed_in? and current_user.clubs.first == @club %>
+              <div class="btn btn-warning subscribe-button">Join Now. For Free</div>
+            <%- else %>
+              <%= button_to "Join Now. For Free", subscribe_to_club_path(@club), :method => 'get', :class => 'btn btn-warning subscribe-button' -%>
+            <%- end %>
+          </div>
+        </div>
+
+        <%- if is_editing? %>
+          <div class="update-embed-url hide-preview">
+            <%- if can? :update, @sales_page %>
+              <div class="video-embed-source">
+                <div class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></div>
+
+                <div id="sales_page_video_url" class="video-related" data-mercury="simple"><%= @sales_page.video %></div>
+              </div>
+            <%- end %>
+          </div>
+        <%- end %>
       </div>
     </div>
 
-    <div class="capture-block">
-      <div id="sales_page_call_to_action" class="sales-page-call-to-action" data-mercury="simple"><%= @sales_page.call_to_action %></div>
+    <div class="benefits-container">
+      <h3 class="sales-page-learn">As an exclusive member you will get:</h3>
 
-      <div class="club-buy-price">
-        <div class="club-price-currency"><%= currency_symbol -%></div>
-        <div id="club_price" class="club-price" data-mercury="simple"><%= @club.price %></div>
-
-        <div class="club-buy">
-          <%- if user_signed_in? and current_user.clubs.first == @club %>
-            <div class="btn btn-primary btn-large">Subscribe</div>
-          <%- else %>
-            <%= button_to "Subscribe", subscribe_to_club_path(@club), :method => 'get', :class => 'btn btn-primary btn-large' -%>
-          <%- end %>
+      <div class="benefits">
+        <div class="benefit">
+          <div class="benefit-bullet"><%= image_tag "checkmark.png", :alt => "checkmark" %></div>
+          <div id="sales_page_benefit1" class="benefit-container" data-mercury="simple"><%= @sales_page.benefit1 %></div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-bullet"><%= image_tag "checkmark.png", :alt => "checkmark" %></div>
+          <div id="sales_page_benefit2" class="benefit-container" data-mercury="simple"><%= @sales_page.benefit2 %></div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-bullet"><%= image_tag "checkmark.png", :alt => "checkmark" %></div>
+          <div id="sales_page_benefit3" class="benefit-container" data-mercury="simple"><%= @sales_page.benefit3 %></div>
         </div>
       </div>
     </div>
 
-    <%- if is_editing? %>
-      <div class="update-embed-url hide-preview">
-        <%- if can? :update, @sales_page %>
-          <div class="video-embed-source">
-            <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
-
-            <div id="sales_page_video_url" class="video-related" data-mercury="simple"><%= @sales_page.video %></div>
-          </div>
-        <%- end %>
-      </div>
-    <%- end %>
+    <div id="sales_page_details" class="sales-page-details" data-mercury="full"><%= raw @sales_page.details %></div>
   </div>
-
-  <hr class="gradient" />
-
-  <div class="benefits-container">
-    <h3 class="sales-page-learn">What you will learn in this training...</h3>
-
-    <div class="benefits">
-      <ul>
-        <li class="benefit benefit1">
-          <div id="sales_page_benefit1" class="benefit-container" data-mercury="simple"><%= @sales_page.benefit1 %></div>
-        </li>
-        <li class="benefit benefit2">
-          <div id="sales_page_benefit2" class="benefit-container" data-mercury="simple"><%= @sales_page.benefit2 %></div>
-        </li>
-        <li class="benefit benefit3">
-          <div id="sales_page_benefit3" class="benefit-container" data-mercury="simple"><%= @sales_page.benefit3 %></div>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div id="sales_page_details" class="sales-page-details" data-mercury="full"><%= @sales_page.details %></div>
-</div>
+<% end %>

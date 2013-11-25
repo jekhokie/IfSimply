@@ -99,7 +99,7 @@ describe SalesPagesController do
         put 'update', :club_id => sales_page.club.id, :content => { :sales_page_heading        => { :value => new_heading },
                                                                     :sales_page_sub_heading    => { :value => "abc" },
                                                                     :sales_page_call_to_action => { :value => "123" },
-                                                                    :club_price                => { :value => "10.00" },
+                                                                    :sales_page_call_details   => { :value => "sgh" },
                                                                     :sales_page_video_url      => { :value => "http://www.ifsimply.com/" },
                                                                     :sales_page_benefit1       => { :value => "abc" },
                                                                     :sales_page_benefit2       => { :value => "abc" },
@@ -129,13 +129,13 @@ describe SalesPagesController do
       end
     end
 
-    describe "for invalid sales_page attributes" do
+    describe "for invalid attributes" do
       before :each do
         @old_heading = sales_page.heading
         put 'update', :club_id => sales_page.club.id, :content => { :sales_page_heading        => { :value => "" },
                                                                     :sales_page_sub_heading    => { :value => "abc" },
                                                                     :sales_page_call_to_action => { :value => "123" },
-                                                                    :club_price                => { :value => "10.00" },
+                                                                    :sales_page_call_details   => { :value => "sgh" },
                                                                     :sales_page_video_url      => { :value => "http://www.ifsimply.com/" },
                                                                     :sales_page_benefit1       => { :value => "abc" },
                                                                     :sales_page_benefit2       => { :value => "abc" },
@@ -162,46 +162,6 @@ describe SalesPagesController do
 
       it "returns error about invalid sales_page attributes" do
         response.headers["X-Flash-Error"].should == "Heading for sales page can't be blank"
-      end
-
-      it "renders error text as a response" do
-        response.body.should == "error"
-      end
-    end
-
-    describe "for invalid club attributes" do
-      before :each do
-        @old_price = sales_page.club.price
-        put 'update', :club_id => sales_page.club.id, :content => { :sales_page_heading        => { :value => "abc" },
-                                                                    :sales_page_sub_heading    => { :value => "abc" },
-                                                                    :sales_page_call_to_action => { :value => "123" },
-                                                                    :club_price                => { :value => "1" },
-                                                                    :sales_page_video_url      => { :value => "http://www.ifsimply.com/" },
-                                                                    :sales_page_benefit1       => { :value => "abc" },
-                                                                    :sales_page_benefit2       => { :value => "abc" },
-                                                                    :sales_page_benefit3       => { :value => "abc" },
-                                                                    :sales_page_details        => { :value => "test" } }
-      end
-
-      it "returns http unprocessable" do
-        response.response_code.should == 422
-      end
-
-      it "returns the club" do
-        assigns(:club).should_not be_nil
-      end
-
-      it "returns the sales_page" do
-        assigns(:sales_page).should == sales_page
-      end
-
-      it "does not update the attributes" do
-        sales_page.reload
-        sales_page.club.price.should == @old_price
-      end
-
-      it "returns error about invalid sales_page attributes" do
-        response.headers["X-Flash-Error"].should == "Price cents must be at least $10"
       end
 
       it "renders error text as a response" do
