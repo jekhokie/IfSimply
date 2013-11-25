@@ -98,15 +98,23 @@
         .club-buy {
           display:        inline-block;
           vertical-align: top;
+          width:          280px;
 
-          .subscribe-button {
+          .subscribe-button,
+          .subscribe-button-edit {
             color:          #000;
             font-family:    "Londrina Solid";
             font-size:      22px;
             height:         25px;
             letter-spacing: 2px;
             padding-top:    8px;
-            width:          255px;
+            width:          258px;
+          }
+
+          .subscribe-button {
+            height:      39px;
+            padding-top: 2px;
+            width:       280px;
           }
         }
       }

@@ -21,7 +21,7 @@
 
           <div class="club-buy">
             <%- if user_signed_in? and current_user.clubs.first == @club %>
-              <div class="btn btn-warning subscribe-button">Join Now. For Free</div>
+              <div class="btn btn-warning subscribe-button-edit">Join Now. For Free</div>
             <%- else %>
               <%= button_to "Join Now. For Free", subscribe_to_club_path(@club), :method => 'get', :class => 'btn btn-warning subscribe-button' -%>
             <%- end %>
