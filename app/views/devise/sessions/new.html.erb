@@ -3,6 +3,7 @@
   <div class="devise-sub-heading">You look great and we are so happy to see you again</div>
 
   <%= form_for(resource, :as     => resource_name,
+                         :class  => "sign-in-form",
                          :url    => session_path(resource_name),
                          :remote => true) do |f| %>
     <div class="devise-errors">
@@ -25,7 +26,7 @@
           <%= f.check_box :remember_me %> <%= f.label :remember_me %>
         </div>
 
-        <div class="signin"><%= f.submit "Sign in", :class => "btn btn-warning" %></div>
+        <div class="signin"><%= f.submit "Sign in", :class => "btn btn-warning sign-in-submit-button" %></div>
       </div>
     </div>
   <% end %>

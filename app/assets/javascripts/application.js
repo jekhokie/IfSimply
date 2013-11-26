@@ -23,4 +23,5 @@
 //= require bootstrap
 //= require global
 //= require courses
+//= require devise
 //= require paypal
