@@ -61,8 +61,8 @@
           <span class="meta-label">Basic Articles</span>
           <div id="upsell_page_basic_articles_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.basic_articles_desc %></div>
         </td>
-        <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
-        <td class="pro-number"></td>
+        <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
+        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
       </tr>
       <tr class="exclusive-articles">
         <td class="meta">
@@ -72,8 +72,8 @@
           <span class="meta-label">Exclusive Articles</span>
           <div id="upsell_page_exclusive_articles_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.exclusive_articles_desc %></div>
         </td>
-        <td class="basic-number"></td>
-        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+        <td class="basic-number"><%= image_tag "unavailable.png", :alt => "x-no", :class => "unavailable-icon" %></td>
+        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
       </tr>
       <tr class="basic-courses">
         <td class="meta">
@@ -83,8 +83,8 @@
           <span class="meta-label">Basic Courses</span>
           <div id="upsell_page_basic_courses_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.basic_courses_desc %></div>
         </td>
-        <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
-        <td class="pro-number"></td>
+        <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
+        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
       </tr>
       <tr class="in-depth-courses">
         <td class="meta">
@@ -94,8 +94,8 @@
           <span class="meta-label">In-depth Courses</span>
           <div id="upsell_page_in_depth_courses_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.in_depth_courses_desc %></div>
         </td>
-        <td class="basic-number"></td>
-        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+        <td class="basic-number"><%= image_tag "unavailable.png", :alt => "x-no", :class => "unavailable-icon" %></td>
+        <td class="pro-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
       </tr>
       <tr class="discussion-forums">
         <td class="meta last">
@@ -109,7 +109,7 @@
           <div class="discussion-read-only">Read Only</div>
           <div class="discussion-no-add-topics">(can't add topics)</div>
         </td>
-        <td class="pro-number last"><%= image_tag "checkmark.png", :alt => "checkmark-yes" %></td>
+        <td class="pro-number last"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
       </tr>
     </tbody>
     <tfoot>

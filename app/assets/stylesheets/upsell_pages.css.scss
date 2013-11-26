@@ -191,6 +191,10 @@
           max-height: 90px;
         }
 
+        img.unavailable-icon {
+          height: 55px;
+        }
+
         .discussion-read-only {
           color:          #333;
           font-size:      22px;
@@ -215,6 +219,10 @@
 
         img {
           max-height: 90px;
+        }
+
+        img.unavailable-icon {
+          height: 55px;
         }
       }
 
