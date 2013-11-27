@@ -206,4 +206,51 @@ describe ClubsController do
       end
     end
   end
+
+  describe "GET 'specify_price'" do
+    let!(:club) { user.clubs.first }
+
+    describe "for a signed-in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "who owns the club" do
+        before :each do
+          get 'specify_price', :format => :js, :id => club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "assigns the club" do
+          assigns(:club).should == club
+        end
+      end
+
+      describe "who does not own the club" do
+        let!(:other_user) { FactoryGirl.create :user }
+
+        before :each do
+          get 'specify_price', :format => :js, :id => other_user.clubs.first.id
+        end
+
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      before :each do
+        get 'specify_price', :format => :js, :id => club.id
+      end
+
+      it "renders the sign in view" do
+        response.should render_template("devise/sessions/new")
+      end
+    end
+  end
 end

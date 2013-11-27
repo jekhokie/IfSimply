@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_filter :authenticate_user!, :except => [ :show ]
+  before_filter :authenticate_user!, :except => [ :show, :specify_price ]
   before_filter :get_club
 
   def show
@@ -25,6 +25,14 @@ class ClubsController < ApplicationController
       render :text => ""
     else
       respond_error_to_mercury [ @club ]
+    end
+  end
+
+  def specify_price
+    if user_signed_in?
+      authorize! :update, @club
+    else
+      render :template => "devise/sessions/new"
     end
   end
 
