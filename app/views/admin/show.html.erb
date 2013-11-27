@@ -6,7 +6,7 @@
   </div>
 
   <div class="admin-text">
-    Hey there club owner! You are looking good! The admin area can only be seen by you. This is where we stash all the info you need to manage your club. If you have any questions or need help first visit our HELP section and then email support@IfSimply.com.
+    Hey there club owner! You are looking good! The admin area can only be seen by you. This is where we stash all the info you need to manage your club. If you have any questions or need help email <a href="mailto:support@IfSimply.com">support@IfSimply.com</a>.
   </div>
 
   <div class="club-admin-status-settings row-fluid">
@@ -26,6 +26,16 @@
       </div>
 
       <div class="club-admin-settings-text">
+        <div class="club-price-container">
+          <div class="club-price-heading">Club Monthly Price:</div>
+          <div class="club-price-currency"><%= currency_symbol -%></div>
+          <div id="club_price" class="club-price" data-mercury="simple"><%= @club.price %></div>
+        </div>
+
+        <div class="club-price-supplemental">
+          <div class="note-supplemental">Note:</div>
+          <div class="note-supplemental-text">You keep <%= "%i" % (Settings.paypal[:club_owner_share] * 100) %>% of all revenue, please price your club appropriately (min <%= number_to_currency(Settings.clubs[:min_price_cents] / 100, :precision => 0) %>)</div>
+        </div>
       </div>
     </div>
   </div>

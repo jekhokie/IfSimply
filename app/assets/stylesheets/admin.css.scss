@@ -24,9 +24,13 @@
   }
 
   .admin-text {
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     margin-top:     22px;
     margin-bottom:  25px;
+
+    a {
+      font-weight:    bold;
+    }
   }
 
   .club-admin-status-settings {
@@ -62,7 +66,8 @@
       }
 
       .club-admin-status-text {
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
+        padding:        0px 15px;
 
         .club-live-indicator {
           font-size:     24px;
@@ -103,6 +108,57 @@
           span.account-link {
             font-weight:     bold;
             text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .club-admin-settings {
+      .club-admin-settings-text {
+        letter-spacing: 1px;
+        padding:        0px 15px;
+
+        .club-price-container {
+          font-size:     24px;
+          height:        30px;
+          margin-bottom: 12px;
+          margin-top:    20px;
+          text-align:    center;
+
+          .club-price-heading,
+          .club-price-currency,
+          .club-price {
+            display: inline-block;
+          }
+
+          .club-price-heading {
+            font-weight:  bold;
+            margin-right: 10px;
+          }
+
+          .club-price-currency,
+          .club-price {
+            color: #FD9A06;
+          }
+
+          .club-price {
+            margin-left: -6px;
+          }
+        }
+
+        .club-price-supplemental {
+          letter-spacing: 1px;
+
+          .note-supplemental {
+            color:          #FD9A06;
+            display:        inline-block;
+            vertical-align: top;
+          }
+
+          .note-supplemental-text {
+            display:     inline-block;
+            margin-left: 6px;
+            width:       390px;
           }
         }
       }
