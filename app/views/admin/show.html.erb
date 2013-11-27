@@ -1,0 +1,32 @@
+<%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
+
+<div class="admin-information">
+  <div class="admin-heading">
+    <h2>Club Admin</h2>
+  </div>
+
+  <div class="admin-text">
+    Hey there club owner! You are looking good! The admin area can only be seen by you. This is where we stash all the info you need to manage your club. If you have any questions or need help first visit our HELP section and then email support@IfSimply.com.
+  </div>
+
+  <div class="club-admin-status-settings row-fluid">
+    <div class="club-admin-status span6">
+      <div class="club-admin-status-heading">
+        <h2>Club Status</h2>
+      </div>
+
+      <div class="club-admin-status-text">
+        <%= render :partial => 'admin/club_live_status' %>
+      </div>
+    </div>
+
+    <div class="club-admin-settings span6">
+      <div class="club-admin-settings-heading">
+        <h2>Club Settings</h2>
+      </div>
+
+      <div class="club-admin-settings-text">
+      </div>
+    </div>
+  </div>
+</div>

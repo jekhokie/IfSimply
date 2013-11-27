@@ -1,0 +1,111 @@
+.admin-information {
+  margin-top: 22px;
+
+  .admin-heading {
+    -webkit-border-radius: 4px;
+    -moz-border-radius:    4px;
+    border-radius:         4px;
+
+    background-color: #333;
+    color:            #FFF;
+    height:           45px;
+    margin-bottom:    12px;
+    padding-left:     12px;
+    position:         relative;
+    text-align:       center;
+
+    h2 {
+      display:     inline;
+      font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 200;
+      position:    relative;
+      top:         2px;
+    }
+  }
+
+  .admin-text {
+    letter-spacing: 0.5px;
+    margin-top:     22px;
+    margin-bottom:  25px;
+  }
+
+  .club-admin-status-settings {
+    height: 325px;
+
+    .club-admin-status,
+    .club-admin-settings {
+      height: 100%;
+
+      .club-admin-status-heading,
+      .club-admin-settings-heading {
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
+        border-radius:         22px;
+
+        background-color: #333;
+        color:            #FFF;
+        height:           45px;
+        margin-bottom:    12px;
+        padding-left:     12px;
+        position:         relative;
+        text-align:       center;
+
+        h2 {
+          display:        inline;
+          font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size:      24px;
+          font-weight:    100;
+          letter-spacing: 1px;
+          position:       relative;
+          top:            2px;
+        }
+      }
+
+      .club-admin-status-text {
+        letter-spacing: 0.5px;
+
+        .club-live-indicator {
+          font-size:     24px;
+          height:        30px;
+          margin-bottom: 12px;
+          margin-top:    20px;
+          text-align:    center;
+
+          .club-live-highlight {
+            color:       green;
+            font-weight: bold;
+          }
+
+          .club-non-live-highlight {
+            color:       red;
+            font-weight: bold;
+          }
+        }
+
+        .club-live-details {
+          margin-bottom: 15px;
+        }
+
+        .club-live-details.club-live {
+          color: green;
+        }
+
+        .club-live-details.club-non-live {
+          color: red;
+
+          .verify-link {
+            font-weight:     bold;
+            text-decoration: underline;
+          }
+        }
+
+        .club-live-supplemental {
+          span.account-link {
+            font-weight:     bold;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
