@@ -1,0 +1,5 @@
+<div class="club-price-heading">Club Monthly Price:</div>
+<div class="club-price-currency"><%= currency_symbol -%></div>
+<div class="club-price">
+  <%= link_to club.price, specify_price_for_club_path(club), :remote => true %>
+</div>

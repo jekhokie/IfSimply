@@ -1,5 +1,5 @@
 <div class="club-price-specify">
-  <h4>Please Specify a Club Price:</h4>
+  <h4>Please Specify a New Club Price:</h4>
 
   <%= form_tag update_price_for_club_path(club), :method => :put,
                                                  :remote => true,
@@ -23,11 +23,11 @@
 
     <div class="club-price-note">
       <div class="club-price-heading">
-        Note:
+        WARNING:
       </div>
 
       <div class="club-price-content">
-        As a reminder, <%= "%i" % (Settings.paypal[:club_owner_share] * 100) %>% of all revenue is yours to keep. Please price your club appropriately, keeping in mind that there is a minimum monthly price of <%= number_to_currency(Settings.clubs[:min_price_cents] / 100, :precision => 0) %>.
+        <span class="club-price-warning">Changing your club price AFTER your club has gone live will force/require all of your current subscribers to re-authorize preapproval payments through PayPal before they are able to re-gain access to your premium content.</span>
       </div>
     </div>
   <%- end %>
