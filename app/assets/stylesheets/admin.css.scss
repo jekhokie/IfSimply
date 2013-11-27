@@ -34,7 +34,7 @@
   }
 
   .club-admin-status-settings {
-    height: 325px;
+    height: 250px;
 
     .club-admin-status,
     .club-admin-settings {
@@ -96,7 +96,8 @@
         }
 
         .club-live-details.club-non-live {
-          color: red;
+          font-weight: bold;
+          color:       red;
 
           .verify-link {
             font-weight:     bold;
@@ -169,6 +170,62 @@
               font-weight:     bold;
               text-decoration: underline;
             }
+          }
+        }
+      }
+    }
+  }
+
+  .club-promote {
+    height: 325px;
+
+    .club-promote {
+      height:      100%;
+      margin-left: 0px;
+
+      .club-promote-heading {
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
+        border-radius:         22px;
+
+        background-color: #333;
+        color:            #FFF;
+        height:           45px;
+        margin-bottom:    12px;
+        padding-left:     12px;
+        position:         relative;
+        text-align:       center;
+
+        h2 {
+          display:        inline;
+          font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size:      24px;
+          font-weight:    100;
+          letter-spacing: 1px;
+          position:       relative;
+          top:            2px;
+        }
+      }
+
+      .club-promote-text {
+        letter-spacing: 1px;
+        margin-top:     20px;
+        padding:        0px 15px;
+
+        .club-promote-link {
+          font-weight:     bold;
+          margin-top:      5px;
+          text-align:      center;
+          text-decoration: underline;
+        }
+
+        .club-promote-invalid {
+          color:       red;
+          font-weight: bold;
+
+          a {
+            font-weight:     bold;
+            text-decoration: underline;
           }
         }
       }

@@ -12,7 +12,7 @@
   <div class="club-admin-status-settings row-fluid">
     <div class="club-admin-status span6">
       <div class="club-admin-status-heading">
-        <h2>Club Status</h2>
+        <h2>Status</h2>
       </div>
 
       <div class="club-admin-status-text">
@@ -22,7 +22,7 @@
 
     <div class="club-admin-settings span6">
       <div class="club-admin-settings-heading">
-        <h2>Club Settings</h2>
+        <h2>Settings</h2>
       </div>
 
       <div class="club-admin-settings-text">
@@ -34,6 +34,18 @@
           <div class="note-supplemental">Note:</div>
           <div class="note-supplemental-text">You keep <%= "%i" % (Settings.paypal[:club_owner_share] * 100) %>% of all revenue, please <%= link_to "price", specify_price_for_club_path(@club), :remote => true %> your club appropriately (min <%= number_to_currency(Settings.clubs[:min_price_cents] / 100, :precision => 0) %>).</div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="club-promote row-fluid">
+    <div class="club-promote span6">
+      <div class="club-promote-heading">
+        <h2>Promotion</h2>
+      </div>
+
+      <div class="club-promote-text">
+        <%= render :partial => 'admin/club_promote', :locals => { :club => @club } %>
       </div>
     </div>
   </div>
