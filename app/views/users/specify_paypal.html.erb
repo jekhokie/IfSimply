@@ -8,6 +8,10 @@
       <%= flash[:error] unless flash[:error].blank? %>
     </div>
 
+    <%- if @admin_page and @admin_page == true %>
+      <%= hidden_field_tag :admin_page, true %>
+    <%- end %>
+
     <%= text_field_tag :payment_email %>
     <%= submit_tag "Confirm", :class => "btn btn-primary submit-payment-email" %>
 

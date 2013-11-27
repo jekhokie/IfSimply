@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_filter :authenticate_user!, :except => [ :show ]
+  before_filter :authenticate_user!, :except => [ :show, :specify_price, :update_price ]
   before_filter :get_club
 
   def show
@@ -26,6 +26,36 @@ class ClubsController < ApplicationController
     else
       respond_error_to_mercury [ @club ]
     end
+  end
+
+  def specify_price
+    if user_signed_in?
+      authorize! :update, @club
+    else
+      render :template => "devise/sessions/new"
+    end
+  end
+
+  def update_price
+    if user_signed_in?
+      authorize! :update, @club
+
+      if (club_price = params[:club_price]).blank?
+        flash[:error] = "You must specify a valid club price"
+        render :specify_price
+      else
+        @club.price = club_price
+
+        unless @club.save
+          flash[:error] = @club.errors.full_messages.first
+          render :specify_price
+        end
+      end
+    else
+      render :template => "devise/sessions/new"
+    end
+
+    flash.discard
   end
 
   private

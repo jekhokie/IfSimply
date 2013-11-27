@@ -125,6 +125,8 @@ div {
   padding:       12px 0px;
 
   .welcome-container {
+    width: 360px;
+
     .welcome-text {
       display:     inline-block;
       font-size:   25px;
@@ -135,8 +137,10 @@ div {
   }
 
   .user-navigation-container {
-    height:     100%;
-    text-align: right;
+    height:      100%;
+    margin-left: 3px;
+    text-align:  right;
+    width:       590px;
 
     a {
       color:           #000;
@@ -144,7 +148,7 @@ div {
       font-weight:     bold;
       height:          35px;
       line-height:     35px;
-      margin-left:     12px;
+      margin-left:     8px;
       text-align:      center;
       text-decoration: none;
       vertical-align:  middle;
@@ -158,24 +162,70 @@ div {
       color: #FDA600;
     }
 
-    a.club-link {
-      width: 80px;
+    .non-admin-links,
+    .admin-links {
+      margin-top:  -10px;
+      padding-top: 12px;
     }
 
-    a.courses-link {
-      width: 60px;
+    .non-admin-links {
+      display: inline-block;
+      height:  40px;
+
+      a.club-link {
+        width: 80px;
+      }
+
+      a.courses-link {
+        width: 60px;
+      }
+
+      a.article-posts-link {
+        width: 55px;
+      }
+
+      a.discussions-link {
+        margin-right: 4px;
+        width:        85px;
+      }
     }
 
-    a.article-posts-link {
-      width: 55px;
-    }
+    .admin-links {
+      border-radius:         10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius:    10px;
 
-    a.discussions-link {
-      width: 85px;
-    }
+      background-color: #FFFFCC;
+      border:           2px solid #FED554;
+      display:          inline-block;
+      height:           27px;
+      padding-right:    4px;
+      position:         relative;
 
-    a.sales-page-link {
-      width: 90px;
+      .admin-heading {
+        color:        #008BC5;
+        font-weight:  bold;
+        margin-top:   -22px;
+        padding-left: 8px;
+        position:     relative;
+        text-align:   center;
+        top:          9px;
+      }
+
+      .admin-links-container {
+        a.sales-page-link {
+          margin-left: 4px;
+          width:       80px;
+        }
+
+        a.upsell-page-link {
+          width: 85px;
+        }
+
+        a.admin-page-link {
+          width: 50px;
+        }
+      }
     }
   }
 }

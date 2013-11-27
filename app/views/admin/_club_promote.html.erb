@@ -1,0 +1,8 @@
+<%- if current_user.verified? %>
+  Copy and paste this link wherever you want to promote your club!
+  <div class="club-promote-link"><%= link_to "#{request.protocol}#{request.host_with_port}#{club_path(club)}", "#{request.protocol}#{request.host_with_port}#{club_path(club)}" %></div>
+<%- else %>
+  <div class="club-promote-invalid">
+    A club promotion link will not be valid until you <%= link_to "VERIFY", specify_paypal_info_for_user_path(current_user, :admin_page => true), :remote => true %> your PayPal account, as indicated under 'Status' on this page.
+  </div>
+<% end %>

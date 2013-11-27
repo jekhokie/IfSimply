@@ -1,0 +1,25 @@
+<%- if current_user.verified? %>
+  <div class="club-live-indicator">
+    Your Club is <span class="club-live-highlight">Live!</span>
+  </div>
+
+  <div class="club-live-details club-live">
+    Your club is now accessible by members. New Basic or Pro members can sign up using the link shown in the "Promote Your Club" area of this page.
+  </div>
+
+  <div class="club-live-supplemental">
+    To change your PayPal-linked email or IfSimply Password, visit the <span class="account-link"><%= link_to "Account", edit_user_registration_path %></span> page.
+  </div>
+<%- else %>
+  <div class="club-live-indicator">
+    Your Club is <span class="club-non-live-highlight">Not</span> Live
+  </div>
+
+  <div class="club-live-details club-non-live">
+    You must link your PayPal account and then your club will be active. Click <span class="verify-link"><%= link_to "here", specify_paypal_info_for_user_path(current_user, :admin_page => true), :remote => true %></span> to link your PayPal account.
+  </div>
+
+  <div class="club-live-supplemental">
+    Go to the <span class="account-link"><%= link_to "Account", edit_user_registration_path %></span> page to link your PayPal email and start letting members join your club.
+  </div>
+<%- end %>

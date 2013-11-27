@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     if user_signed_in?
       @user = User.find params[:id]
       authorize! :update, @user
+
+      if params[:admin_page] and params[:admin_page].to_s == 'true'
+        @admin_page = true
+      end
     else
       render :template => "devise/sessions/new"
     end
@@ -57,6 +61,10 @@ class UsersController < ApplicationController
           current_user.payment_email = payment_email
           current_user.verified      = true
           current_user.save
+
+          if params[:admin_page] and params[:admin_page].to_s == 'true'
+            render :template => 'admin/update_paypal'
+          end
         else
           flash[:error] = "Email not verified - please visit PayPal to verify"
           render :specify_paypal

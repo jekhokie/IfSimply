@@ -206,6 +206,28 @@ describe UsersController do
         it "returns http success" do
           response.should be_success
         end
+
+        it "assigns the user" do
+          assigns(:user).should == user
+        end
+      end
+
+      describe "viewing from the admin page" do
+        before :each do
+          get 'specify_paypal', :admin_page => true, :format => :js, :id => user.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "assigns the user" do
+          assigns(:user).should == user
+        end
+
+        it "assigns admin_page" do
+          assigns(:admin_page).should == true
+        end
       end
 
       describe "viewing a different user's account" do
@@ -254,6 +276,34 @@ describe UsersController do
 
           it "returns http success" do
             response.should be_success
+          end
+
+          it "returns the user" do
+            assigns(:user).should_not be_nil
+          end
+
+          it "assigns the new attributes" do
+            verified_user.reload
+            verified_user.payment_email.should == payment_email
+            verified_user.verified.should      == true
+          end
+        end
+
+        describe "for valid attributes from the admin page" do
+          before :each do
+            PaypalProcessor.should_receive(:is_verified?).with(payment_email).and_return true
+
+            sign_in verified_user
+
+            put 'verify_paypal', :admin_page => true, :format => :js, :id => verified_user.id, :payment_email => payment_email
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "renders the admin/update_paypal template" do
+            response.should render_template("admin/update_paypal")
           end
 
           it "returns the user" do

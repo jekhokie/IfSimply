@@ -1,0 +1,327 @@
+.admin-information {
+  margin-top: 22px;
+
+  .admin-heading {
+    -webkit-border-radius: 4px;
+    -moz-border-radius:    4px;
+    border-radius:         4px;
+
+    background-color: #333;
+    color:            #FFF;
+    height:           45px;
+    margin-bottom:    12px;
+    padding-left:     12px;
+    position:         relative;
+    text-align:       center;
+
+    h2 {
+      display:     inline;
+      font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 200;
+      position:    relative;
+      top:         2px;
+    }
+  }
+
+  .admin-text {
+    letter-spacing: 1px;
+    margin-top:     22px;
+    margin-bottom:  25px;
+
+    a {
+      font-weight:    bold;
+    }
+  }
+
+  .club-admin-status-settings {
+    height: 250px;
+
+    .club-admin-status,
+    .club-admin-settings {
+      height: 100%;
+
+      .club-admin-status-heading,
+      .club-admin-settings-heading {
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
+        border-radius:         22px;
+
+        background-color: #333;
+        color:            #FFF;
+        height:           45px;
+        margin-bottom:    12px;
+        padding-left:     12px;
+        position:         relative;
+        text-align:       center;
+
+        h2 {
+          display:        inline;
+          font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size:      24px;
+          font-weight:    100;
+          letter-spacing: 1px;
+          position:       relative;
+          top:            2px;
+        }
+      }
+
+      .club-admin-status-text {
+        letter-spacing: 1px;
+        padding:        0px 15px;
+
+        .club-live-indicator {
+          font-size:     24px;
+          height:        30px;
+          margin-bottom: 12px;
+          margin-top:    20px;
+          text-align:    center;
+
+          .club-live-highlight {
+            color:       green;
+            font-weight: bold;
+          }
+
+          .club-non-live-highlight {
+            color:       red;
+            font-weight: bold;
+          }
+        }
+
+        .club-live-details {
+          margin-bottom: 15px;
+        }
+
+        .club-live-details.club-live {
+          color: green;
+        }
+
+        .club-live-details.club-non-live {
+          font-weight: bold;
+          color:       red;
+
+          .verify-link {
+            font-weight:     bold;
+            text-decoration: underline;
+          }
+        }
+
+        .club-live-supplemental {
+          span.account-link {
+            font-weight:     bold;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .club-admin-settings {
+      .club-admin-settings-text {
+        letter-spacing: 1px;
+        padding:        0px 15px;
+
+        .club-price-container {
+          font-size:     24px;
+          height:        30px;
+          margin-bottom: 12px;
+          margin-top:    20px;
+          text-align:    center;
+
+          .club-price-heading,
+          .club-price-currency,
+          .club-price {
+            display: inline-block;
+          }
+
+          .club-price-heading {
+            font-weight:  bold;
+            margin-right: 10px;
+          }
+
+          .club-price-currency,
+          .club-price {
+            color: #FD9A06;
+          }
+
+          .club-price {
+            margin-left: -6px;
+
+            a {
+              color:           #FD9A06;
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .club-price-supplemental {
+          letter-spacing: 1px;
+
+          .note-supplemental {
+            color:          #FD9A06;
+            display:        inline-block;
+            vertical-align: top;
+          }
+
+          .note-supplemental-text {
+            display:     inline-block;
+            margin-left: 6px;
+            width:       390px;
+
+            a {
+              font-weight:     bold;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .club-promote {
+    height: 325px;
+
+    .club-promote {
+      height:      100%;
+      margin-left: 0px;
+
+      .club-promote-heading {
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
+        border-radius:         22px;
+
+        background-color: #333;
+        color:            #FFF;
+        height:           45px;
+        margin-bottom:    12px;
+        padding-left:     12px;
+        position:         relative;
+        text-align:       center;
+
+        h2 {
+          display:        inline;
+          font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size:      24px;
+          font-weight:    100;
+          letter-spacing: 1px;
+          position:       relative;
+          top:            2px;
+        }
+      }
+
+      .club-promote-text {
+        letter-spacing: 1px;
+        margin-top:     20px;
+        padding:        0px 15px;
+
+        .club-promote-link {
+          font-weight:     bold;
+          margin-top:      5px;
+          text-align:      center;
+          text-decoration: underline;
+        }
+
+        .club-promote-invalid {
+          color:       red;
+          font-weight: bold;
+
+          a {
+            font-weight:     bold;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+.club-price-specify-modal {
+  width:  450px !important;
+
+  .modal-body {
+    text-align: center;
+
+    .club-price-specify {
+      border-radius:         10px;
+      -moz-border-radius:    10px;
+      -webkit-border-radius: 10px;
+
+      border: 5px solid #0077CB;
+
+      .club-price-current {
+        font-style: italic;
+
+        .club-price-heading,
+        .club-price-currency,
+        .club-price {
+          display: inline-block;
+        }
+
+        .club-price-currency {
+          color:       #FD9A06;
+          font-weight: bold;
+        }
+
+        .club-price {
+          color:       #FD9A06;
+          font-weight: bold;
+          margin-left: -3px;
+        }
+      }
+
+      .club-price-errors {
+        margin-top: 6px;
+      }
+
+      .club-price-input-currency {
+        display:        inline-block;
+        font-size:      20px;
+        vertical-align: middle;
+      }
+
+      input {
+        margin: 15px auto;
+      }
+
+      input[type='text'] {
+        text-align:     center;
+        vertical-align: top;
+        width:          100px;
+      }
+
+      input[type='submit'] {
+        height: 30px;
+        width:  100px;
+      }
+
+      .club-price-errors {
+        color:       red;
+        font-size:   15px;
+        font-weight: bold;
+      }
+
+      .club-price-note {
+        width: 100%;
+
+        .club-price-heading,
+        .club-price-content {
+          display:   inline-block;
+          font-size: 12px;
+        }
+
+        .club-price-heading {
+          color:          red;
+          font-weight:    bold;
+          vertical-align: top;
+          width:          65px;
+        }
+
+        .club-price-content {
+          color:         red;
+          font-weight:   bold;
+          margin-bottom: 12px;
+          text-align:    left;
+          width:         295px;
+        }
+      }
+    }
+  }
+}
