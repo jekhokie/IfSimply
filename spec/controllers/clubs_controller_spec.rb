@@ -253,4 +253,82 @@ describe ClubsController do
       end
     end
   end
+
+  describe "PUT 'update_price'" do
+    let!(:club) { user.clubs.first }
+
+    describe "for a signed-in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "attempting to update their own club price" do
+        describe "for valid attributes" do
+          let(:club_price) { "12.00" }
+
+          before :each do
+            put 'update_price', :format => :js, :id => club.id, :club_price => club_price
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "returns the club" do
+            assigns(:club).should == club
+          end
+
+          it "assigns the new attributes" do
+            club.reload
+            club.price.should == club_price
+          end
+        end
+
+        describe "for invalid attributes" do
+          let(:club_price) { "1" }
+
+          before :each do
+            @original_club_price = club.price
+            put 'update_price', :format => :js, :id => club.id, :club_price => club_price
+          end
+
+          it "returns the club" do
+            assigns(:club).should == club
+          end
+
+          it "does not update the attributes" do
+            club.reload
+            club.price.should == @original_club_price
+          end
+
+          it "returns an error" do
+            flash[:error].should_not be_blank
+          end
+        end
+      end
+
+      describe "attempting to update another user's club" do
+        let!(:other_user) { FactoryGirl.create :user }
+
+        before :each do
+          put 'update_price', :format => :js, :id => other_user.clubs.first.id, :club_price => "22.00"
+        end
+
+        it "returns http forbidden" do
+          response.response_code.should == 403
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      before :each do
+        put 'update_price', :format => :js, :id => user.id, :club_price => "22.00"
+      end
+
+      it "renders the sign in view" do
+        response.should render_template("devise/sessions/new")
+      end
+    end
+  end
 end
