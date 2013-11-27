@@ -48,6 +48,7 @@ class ClubsController < ApplicationController
 
         unless @club.save
           flash[:error] = @club.errors.full_messages.first
+          @club.reload
           render :specify_price
         end
       end
