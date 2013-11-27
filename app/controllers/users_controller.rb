@@ -63,6 +63,7 @@ class UsersController < ApplicationController
           current_user.save
 
           if params[:admin_page] and params[:admin_page].to_s == 'true'
+            @club = @user.clubs.first
             render :template => 'admin/update_paypal'
           end
         else
