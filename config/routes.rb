@@ -49,10 +49,11 @@ Ifsimply::Application.routes.draw do
   resources :clubs, :only => [ :show, :update ] do
     member do
       # membership subscriptions
-      match '/subscribe'     => 'clubs_users#new',       :as => 'subscribe_to'
-      match '/add_member'    => 'clubs_users#create',    :as => 'add_member_to'
-      match '/admin'         => 'admin#show',            :as => 'admin_page_for'
-      match '/specify_price' => 'clubs#specify_price',   :as => 'specify_price_for'
+      match '/subscribe'     => 'clubs_users#new',     :as => 'subscribe_to'
+      match '/add_member'    => 'clubs_users#create',  :as => 'add_member_to'
+      match '/admin'         => 'admin#show',          :as => 'admin_page_for'
+      match '/specify_price' => 'clubs#specify_price', :as => 'specify_price_for'
+      match '/update_price'  => 'clubs#update_price',  :as => 'update_price_for'
     end
 
     # mercury editor
