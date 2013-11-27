@@ -61,6 +61,10 @@ class UsersController < ApplicationController
           current_user.payment_email = payment_email
           current_user.verified      = true
           current_user.save
+
+          if params[:admin_page] and params[:admin_page].to_s == 'true'
+            render :template => 'admin/update_paypal'
+          end
         else
           flash[:error] = "Email not verified - please visit PayPal to verify"
           render :specify_paypal
