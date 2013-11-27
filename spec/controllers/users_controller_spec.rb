@@ -206,6 +206,28 @@ describe UsersController do
         it "returns http success" do
           response.should be_success
         end
+
+        it "assigns the user" do
+          assigns(:user).should == user
+        end
+      end
+
+      describe "viewing from the admin page" do
+        before :each do
+          get 'specify_paypal', :admin_page => true, :format => :js, :id => user.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "assigns the user" do
+          assigns(:user).should == user
+        end
+
+        it "assigns admin_page" do
+          assigns(:admin_page).should == true
+        end
       end
 
       describe "viewing a different user's account" do
