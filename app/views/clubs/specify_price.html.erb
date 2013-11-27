@@ -1,0 +1,36 @@
+<div class="club-price-specify">
+  <h4>Please Specify a Club Price:</h4>
+
+  <%= form_tag update_price_for_club_path(club), :method => :put,
+                                                 :remote => true,
+                                                 :class => 'club-price form-horizontal' do |f| %>
+
+    <div class="club-price-current">
+      (
+      <div class="club-price-heading">Your current club price:</div>
+      <div class="club-price-currency"><%= currency_symbol -%></div>
+      <div class="club-price"><%= @club.price %></div>
+      )
+    </div>
+
+    <div class="club-price-errors">
+      <%= flash[:error] unless flash[:error].blank? %>
+    </div>
+
+    <div class="club-price-input-currency"><%= currency_symbol -%></div>
+    <%= text_field_tag :club_price %>
+    <%= submit_tag "Update", :class => "btn btn-primary submit-club-price" %>
+
+    <div class="club-price-note">
+      <div class="club-price-heading">
+        Note:
+      </div>
+
+      <div class="club-price-content">
+        As a reminder, <%= "%i" % (Settings.paypal[:club_owner_share] * 100) %>% of all revenue is yours to keep. Please price your club appropriately, keeping in mind that there is a minimum monthly price of <%= number_to_currency(Settings.clubs[:min_price_cents] / 100, :precision => 0) %>.
+      </div>
+    </div>
+  <%- end %>
+
+  <%= render :partial => "shared/powered_by" %>
+</div>

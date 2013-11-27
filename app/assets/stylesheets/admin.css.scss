@@ -143,6 +143,11 @@
 
           .club-price {
             margin-left: -6px;
+
+            a {
+              color:           #FD9A06;
+              text-decoration: underline;
+            }
           }
         }
 
@@ -159,7 +164,99 @@
             display:     inline-block;
             margin-left: 6px;
             width:       390px;
+
+            a {
+              font-weight:     bold;
+              text-decoration: underline;
+            }
           }
+        }
+      }
+    }
+  }
+}
+
+.club-price-specify-modal {
+  width:  450px !important;
+
+  .modal-body {
+    text-align: center;
+
+    .club-price-specify {
+      border-radius:         10px;
+      -moz-border-radius:    10px;
+      -webkit-border-radius: 10px;
+
+      border: 5px solid #0077CB;
+
+      .club-price-current {
+        font-style: italic;
+
+        .club-price-heading,
+        .club-price-currency,
+        .club-price {
+          display: inline-block;
+        }
+
+        .club-price-currency {
+          color:       #FD9A06;
+          font-weight: bold;
+        }
+
+        .club-price {
+          color:       #FD9A06;
+          font-weight: bold;
+          margin-left: -3px;
+        }
+      }
+
+      .club-price-input-currency {
+        display:        inline-block;
+        font-size:      20px;
+        vertical-align: middle;
+      }
+
+      input {
+        margin: 15px auto;
+      }
+
+      input[type='text'] {
+        text-align:     center;
+        vertical-align: top;
+        width:          100px;
+      }
+
+      input[type='submit'] {
+        height: 30px;
+        width:  100px;
+      }
+
+      .club-price-errors {
+        color:       red;
+        font-size:   15px;
+        font-weight: bold;
+      }
+
+      .club-price-note {
+        margin-top: 15px;
+        width:      100%;
+
+        .club-price-heading,
+        .club-price-content {
+          display:   inline-block;
+          font-size: 12px;
+        }
+
+        .club-price-heading {
+          font-weight:    bold;
+          vertical-align: top;
+          width:          60px;
+        }
+
+        .club-price-content {
+          margin-bottom: 12px;
+          text-align:    left;
+          width:         300px;
         }
       }
     }
