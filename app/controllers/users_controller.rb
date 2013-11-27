@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     if user_signed_in?
       @user = User.find params[:id]
       authorize! :update, @user
+
+      if params[:admin_page] and params[:admin_page].to_s == 'true'
+        @admin_page = true
+      end
     else
       render :template => "devise/sessions/new"
     end
