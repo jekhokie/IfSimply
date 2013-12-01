@@ -1,4 +1,5 @@
-.terms-and-conditions {
+.terms-and-conditions,
+.privacy-policy {
   font-family: "Arial serif";
   margin-top:  15px;
 
@@ -20,7 +21,8 @@
     text-align: left;
   }
 
-  .terms-heading {
+  .terms-heading,
+  .privacy-heading {
     font-weight: bold;
     text-align:  center;
 
@@ -29,11 +31,16 @@
     }
   }
 
-  .terms-summary {
+  .terms-summary,
+  .privacy-summary {
     margin-top: 15px;
 
     .summary-heading {
       text-decoration: underline;
     }
+  }
+
+  .privacy-summary {
+    font-style: italic;
   }
 }
