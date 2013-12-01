@@ -62,7 +62,7 @@ describe "billing" do
       end
 
       describe "for a day that does not line up with the subscribers' anniversary" do
-        let!(:subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.today - 1.day }
+        let!(:subscription) { FactoryGirl.create :subscription, :level => 'pro', :preapproval_key => "LAGIHEIGLHI", :pro_status => "ACTIVE", :anniversary_date => Date.today - 1.month }
 
         describe "when there is an existing payment for that month" do
           let!(:payment) { FactoryGirl.create :payment, :payer_email => subscription.user.email }

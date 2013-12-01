@@ -48,7 +48,7 @@
   default_discussion_forums_desc:  "Community is a crucial part of the growth process. Connect with folks just like you to learn, share, and grow."
 :users:
   default_description: "Tell the IfSimply community about yourself. We want to know your hopes and dreams. Click here to change it. To change your photo, drag and drop a new one from your desktop"
-  default_icon:        "/assets/iS_club_thumb.jpg"
+  default_icon:        "/assets/user_avatar.gif"
 :email:
   address:              <SMTP_ADDRESS>      # common: 'smtp.gmail.com'
   port:                 <SMTP_PORT>         # common: 587

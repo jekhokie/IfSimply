@@ -21,7 +21,7 @@ describe "users/show.html.erb" do
 
       it "shows the 'Your Club' label" do
         within ".user-clubs-listing .owned-clubs" do
-          page.should have_selector("div.clubs-label", :text => "Your Club:")
+          page.should have_selector("div.user-club-label", :text => "My Club")
         end
       end
 
@@ -33,14 +33,16 @@ describe "users/show.html.erb" do
 
       it "shows the 'Memberships' label" do
         within ".user-clubs-listing .subscribed-clubs" do
-          page.should have_selector("div.clubs-label", :text => "Memberships:")
+          page.should have_selector("div.user-subscriptions-label", :text => "My Memberships")
         end
       end
 
-      it "shows the user's memberships with the associated level" do
+      it "shows the user's memberships with the associated level and delete link" do
         user.subscriptions.each do |subscription|
           within ".user-clubs-listing .subscribed-clubs" do
-            page.should have_selector("a", :text => "(#{subscription.level.titleize}) #{subscription.club.name} #{subscription.club.sub_heading}")
+            page.should have_selector("i.icon-remove")
+            page.should have_selector(".subscription-level", :text => "(#{subscription.level.titleize})")
+            page.should have_selector(".subscription-club-name a", :text => "#{subscription.club.name} #{subscription.club.sub_heading}")
           end
         end
       end
@@ -58,7 +60,7 @@ describe "users/show.html.erb" do
 
       it "shows the 'User's Club' label" do
         within ".user-clubs-listing .owned-clubs" do
-          page.should have_selector("div.clubs-label", :text => "User's Club:")
+          page.should have_selector("div.user-club-label", :text => "User's Club")
         end
       end
 
@@ -70,13 +72,15 @@ describe "users/show.html.erb" do
 
       it "shows the 'Memberships' label" do
         within ".user-clubs-listing .subscribed-clubs" do
-          page.should have_selector("div.clubs-label", :text => "Memberships:")
+          page.should have_selector("div.user-subscriptions-label", :text => "User's Memberships")
         end
       end
 
-      it "shows the user's memberships without the associated level" do
+      it "shows the user's memberships without the associated level or delete link" do
         user.subscriptions.each do |subscription|
           within ".user-clubs-listing .subscribed-clubs" do
+            page.should_not have_selector("i.icon-remove")
+            page.should_not have_selector(".subscription-level", :text => "(#{subscription.level.titleize})")
             page.should have_selector("a", :text => "#{subscription.club.name} #{subscription.club.sub_heading}")
           end
         end

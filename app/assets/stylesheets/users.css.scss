@@ -7,27 +7,14 @@
       text-align: center;
 
       img {
-        max-height: 256px;
-        max-width:  220px;
-      }
+        box-shadow:         3px 3px 8px black;
+        -webkit-box-shadow: 3px 3px 8px black;
+        -moz-box-shadow:    3px 3px 8px black;
 
-      .upload-icon-button {
-        opacity:         0.85;
-        -moz-opacity:    0.85;
-        -webkit-opacity: 0.85;
-        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0.85);
-
-        font-size: 14px;
-        left:      23%;
-        position:  absolute;
-        top:       10%;
-      }
-
-      .upload-icon-button:hover {
-        opacity:         1;
-        -moz-opacity:    1;
-        -webkit-opacity: 1;
-        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=1);
+        border:     2px solid black;
+        padding:    5px;
+        max-height: 180px;
+        max-width:  180px;
       }
     }
 
@@ -38,10 +25,16 @@
         line-height: 34px;
       }
 
+      hr.blue-divider {
+        background-color: #0064CB;
+        height:           4px;
+        margin:           3px auto;
+      }
+
       .user-description {
-        font-size:   24px;
-        line-height: 28px;
-        margin-top:  15px;
+        font-size:   20px;
+        line-height: 25px;
+        margin-top:  10px;
         max-height:  235px;
         overflow:    hidden;
       }
@@ -49,58 +42,104 @@
   }
 
   .user-clubs-listing {
-    margin-top: 52px;
+    margin-top: 20px;
 
     .owned-clubs,
     .subscribed-clubs {
       line-height: 22px;
       margin-top:  12px;
 
-      .clubs-label {
-        font-size:   22px;
-        font-weight: bold;
-      }
-
       .clubs-listing {
-        font-size:  20px;
+        .user-club-label,
+        .user-subscriptions-label {
+          color:         #0064CB;
+          font-size:     30px;
+          font-weight:   bold;
+          line-height:   34px;
+          margin-bottom: 12px;
+          text-align:    center;
+        }
 
         .subscription-name {
-          font-style: italic;
-          margin-top: 9px;
+          font-size:   20px;
+          margin-top:  15px;
+          margin-left: 22px;
 
-          i.icon-remove {
-            color:           #b94a48;
-            text-decoration: none;
+          .resolve-form,
+          i.icon-remove,
+          .subscription-level,
+          .subscription-club-name {
+            vertical-align: middle;
           }
 
-          form {
-            display: inline;
+          .resolve-form {
+            display:     inline-block;
+            margin-left: -22px;
+            width:       75px;
 
-            input.resolve-subscription-submit {
-              border-radius:         3px;
-              -moz-border-radius:    3px;
-              -webkit-border-radius: 3px;
+            form {
+              input.resolve-subscription-submit {
+                border-radius:         3px;
+                -moz-border-radius:    3px;
+                -webkit-border-radius: 3px;
 
-              background-color: #f89406;
-              border:           0px;
-              color:            #fff;
-              font-family:      "Helvetica Neue", Helvetica, Arial, sans-serif;
-              font-weight:      bold;
-              height:           22px;
-              margin-top:       -2px;
-              text-shadow:      0 -1px 0 rgba(0, 0, 0, 0.25)
+                background-color: #f89406;
+                border:           0px;
+                color:            #fff;
+                font-family:      "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-weight:      bold;
+                height:           22px;
+                margin-top:       -2px;
+                text-shadow:      0 -1px 0 rgba(0, 0, 0, 0.25)
+              }
             }
           }
 
-          a {
-            color: #333;
+          i.icon-remove {
+            color:           #b94a48;
+            display:         inline-block;
+            text-decoration: none;
+          }
+
+          .subscription-level {
+            color:      #FF9900;
+            display:    inline-block;
+            text-align: center;
+            width:      65px;
+          }
+
+          .subscription-club-name {
+            display:   inline-block;
+            max-width: 545px;
+
+            a {
+              color:           #333;
+              text-decoration: underline;
+            }
           }
         }
+      }
+    }
 
-        .subscription-name.first {
-          margin-top: 0px;
+    .owned-clubs {
+      .clubs-listing {
+        border-radius:         10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius:    10px;
+
+        background-color: #FFFFCC;
+        border:           3px solid #FF9900;
+        padding:          8px;
+
+        .subscription-name {
+          margin-bottom: 12px;
+          margin-left:   20px;
         }
       }
+    }
+
+    .subscribed-clubs {
+      margin-top: 32px;
     }
   }
 }

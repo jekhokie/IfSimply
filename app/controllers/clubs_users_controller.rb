@@ -106,7 +106,7 @@ class ClubsUsersController < ApplicationController
       subscription.destroy
     end
 
-    redirect_to user_path(current_user)
+    redirect_to user_editor_path(current_user)
   end
 
   private
