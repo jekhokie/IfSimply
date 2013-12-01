@@ -7,21 +7,25 @@
     <div class="user-name-description span9">
       <div class="user-name"><%= @user.name %></div>
 
+      <hr class="blue-divider" />
+
       <div id="user_description" class="user-description" data-mercury="simple"><%= @user.description %></div>
     </div>
   </div>
 
   <div class="user-clubs-listing">
     <div class="owned-clubs row-fluid">
-      <div class="clubs-label span3">
-        <%- if user_signed_in? and @user == current_user %>
-          Your Club:
-        <%- else %>
-          User's Club:
-        <%- end %>
-      </div>
+      <div class="blank-spacer span3"></div>
 
       <div class="clubs-listing span9">
+        <div class="user-club-label">
+          <%- if user_signed_in? and @user == current_user %>
+            My Club
+          <%- else %>
+            User's Club
+          <%- end %>
+        </div>
+
         <div class="subscription-name first">
           <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", @user.clubs.first %>
         </div>
@@ -29,30 +33,50 @@
     </div>
 
     <div class="subscribed-clubs row-fluid">
-      <div class="clubs-label span3">
-        Memberships:
-      </div>
+      <div class="blank-spacer span3"></div>
 
       <div class="clubs-listing span9">
+        <div class="user-subscriptions-label">
+          <%- if user_signed_in? and @user == current_user %>
+            My Memberships
+          <%- else %>
+            User's Memberships
+          <%- end %>
+        </div>
+
         <%- if @user.subscriptions.blank? %>
-          None
+          <div class="subscription-name">
+            <div class="subscription-club-name">
+              None
+            </div>
+          </div>
         <%- else %>
           <%- @user.subscriptions.each_with_index do |subscription, i| %>
             <%- unless subscription.level == 'pro' and subscription.pro_status == 'INACTIVE' %>
               <div class="subscription-name <%= "first" if i == 0 %>">
-                <%= link_to raw("<i class='icon icon-remove'></i>"),
-                            clubs_user_path(subscription),
-                            :confirm => "Are you sure you wish to unsubscribe from: '#{subscription.club.name} #{subscription.club.sub_heading}'?",
-                            :method => :delete %>
+                <%- if user_signed_in? and @user == current_user %>
+                  <div class="resolve-form hide-preview">
+                    <%- if subscription.level == 'pro' and subscription.pro_status != 'ACTIVE' %>
+                      <%= form_tag add_member_to_club_path(subscription.club) do %>
+                        <%= hidden_field_tag :level, 'pro' %>
+                        <%= submit_tag "RESOLVE", :class => 'resolve-subscription-submit' %>
+                      <%- end %>
+                    <%- end %>
+                  </div>
 
-                <%- if subscription.pro_status != 'ACTIVE' %>
-                  <%= form_tag add_member_to_club_path(subscription.club) do %>
-                    <%= hidden_field_tag :level, 'pro' %>
-                    <%= submit_tag "RESOLVE", :class => 'resolve-subscription-submit' %>
-                  <%- end %>
+                  <%= link_to raw("<i class='icon icon-remove hide-preview'></i>"),
+                              clubs_user_path(subscription),
+                              :confirm => "Are you sure you wish to unsubscribe from: '#{subscription.club.name} #{subscription.club.sub_heading}'?",
+                              :method => :delete %>
+
+                  <div class="subscription-level hide-preview">
+                    (<%= subscription.level.titleize %>)
+                  </div>
                 <%- end %>
 
-                <%= link_to "#{"(#{subscription.level.titleize})" if (user_signed_in? and @user == current_user)} #{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
+                <div class="subscription-club-name">
+                  <%= link_to "#{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
+                </div>
               </div>
             <%- end %>
           <%- end %>
