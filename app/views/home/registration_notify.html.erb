@@ -1,8 +1,16 @@
 <div class="signup-confirmation">
-  <h1>Thank you for signing up!</h1>
+  <div class="thank-you-heading">Your Club is going to be Epic! We can feel it!</div>
+  <div class="thank-you-subheading">Check your email for a signup confirmation</div>
 
-  <p>
-    Please check your email for confirmation instructions and details
-    on how to start selling your knowledge!
-  </p>
+  <div class="thank-you-video">
+    <div class="video-iframe">
+      <%= render :partial => 'shared/video_iframe', :locals => { :video_url => "" } %>
+    </div>
+  </div>
+
+  <div class="thank-you-details">
+    We are really excited to help you create awesome clubs with no technical skills necessary.
+    We provide the tools and we will teach you how to create great content and build a profitable
+    and rewarding club.
+  </div>
 </div>
