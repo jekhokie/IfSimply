@@ -1,0 +1,17 @@
+<%- if current_user.verified? %>
+  <div class="club-live-indicator">
+    Your Club is <span class="club-live-highlight">Live!</span>
+  </div>
+
+  <div class="club-live-details club-live">
+    Your club is now accessible by members!
+  </div>
+<%- else %>
+  <div class="club-live-indicator">
+    Your Club is <span class="club-non-live-highlight">Not</span> Live
+  </div>
+
+  <div class="club-live-details club-non-live">
+    You must link your PayPal account and then your club will be active.
+  </div>
+<%- end %>
