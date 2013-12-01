@@ -450,7 +450,7 @@ describe ClubsUsersController do
       end
 
       it "redirects to the users show view" do
-        response.should redirect_to(user_path(subscribing_user))
+        response.should redirect_to(user_editor_path(subscribing_user))
       end
     end
 
@@ -465,7 +465,7 @@ describe ClubsUsersController do
       end
 
       it "redirects to the users show view" do
-        response.should redirect_to(user_path(subscribing_user))
+        response.should redirect_to(user_editor_path(subscribing_user))
       end
 
       it "re-assigns the pro_status to INACTIVE" do
