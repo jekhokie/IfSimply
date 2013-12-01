@@ -1,10 +1,17 @@
 .terms-and-conditions,
-.privacy-policy {
+.privacy-policy,
+.dmca-policy {
   font-family: "Arial serif";
   margin-top:  15px;
 
   span.hl {
     font-weight: bold;
+  }
+
+  span.hl-center {
+    display:    inline-block;
+    text-align: center;
+    width:      100%;
   }
 
   .legal-heading {
