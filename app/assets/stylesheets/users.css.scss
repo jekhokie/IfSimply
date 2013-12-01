@@ -134,6 +134,11 @@
         .subscription-name {
           margin-bottom: 12px;
           margin-left:   20px;
+
+          a {
+            color:           #000;
+            text-decoration: underline;
+          }
         }
       }
     }
