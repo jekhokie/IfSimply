@@ -1,58 +1,167 @@
 .devise-form {
-  form#edit_user {
-    .input {
-      margin: 8px 0px;
-
-      label {
-        font-size: 16px;
-      }
-
-      span.hint {
-        margin-left: 8px;
-      }
-    }
-
-    input.btn {
-      margin-top: 4px;
-      width:      100px;
-    }
+  .account-heading {
+    color:          #0064CB;
+    font-size:      28px;
+    font-weight:    bold;
+    letter-spacing: 1px;
+    line-height:    32px;
+    margin:         20px auto;
+    text-align:     center;
   }
 
-  .paypal-status {
-    font-size:  16px;
-    margin-top: 30px;
+  .account-password-status {
+    height: 320px;
 
-    .paypal-heading {
-      font-size:   24px;
-      font-weight: bold;
-      margin:      20px auto;
+    .account-password,
+    .account-status {
+      height: 100%;
 
-      .verified-nav-status {
-        margin-top:     1px;
-        vertical-align: top;
-      }
+      .account-password-heading,
+      .account-status-heading {
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
+        border-radius:         22px;
 
-      .verified-nav-status:hover {
-        cursor: pointer;
+        background-color: #333;
+        color:            #FFF;
+        height:           45px;
+        margin-bottom:    12px;
+        padding-left:     12px;
+        position:         relative;
+        text-align:       center;
+
+        h2 {
+          display:        inline;
+          font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size:      24px;
+          font-weight:    100;
+          letter-spacing: 1px;
+          position:       relative;
+          top:            2px;
+        }
       }
     }
 
-    .paypal-link {
-      .verification-text {
-        margin: 20px auto;
+    .account-password {
+      .account-password-text {
+        padding: 3px 12px;
 
-        span.paypal-email {
-          font-weight: bold;
+        form#edit_user {
+          .input {
+            margin: 3px 0px;
+
+            label {
+              font-size: 16px;
+            }
+
+            span.hint {
+              margin-left: 8px;
+            }
+
+            span.error {
+              color:   red;
+              display: inline-block;
+              margin:  3px auto;
+              width:   100%;
+            }
+          }
+
+          input {
+            margin-top: 3px;
+          }
+
+          input.btn {
+            margin-top: 4px;
+            width:      100px;
+          }
+        }
+      }
+    }
+
+    .account-status {
+      .account-status-text {
+        padding: 0px 8px;
+
+        .account-status-linked {
+          .club-live-indicator {
+            font-size:      24px;
+            height:         30px;
+            letter-spacing: 1px;
+            margin-bottom:  12px;
+            margin-top:     20px;
+            text-align:     center;
+
+            .club-live-highlight {
+              color:       green;
+              font-weight: bold;
+            }
+
+            .club-non-live-highlight {
+              color:       red;
+              font-weight: bold;
+            }
+          }
+
+          .club-live-details {
+            font-size:  14px;
+            text-align: center;
+          }
+
+          .club-live-details.club-live {
+            font-weight: bold;
+            color:       green;
+          }
+
+          .club-live-details.club-non-live {
+            font-weight: bold;
+            color:       red;
+          }
+        }
+
+        .account-status-paypal {
+          margin-top: 45px;
+
+          .paypal-heading {
+            font-size:      24px;
+            font-weight:    bold;
+            letter-spacing: 1px;
+            line-height:    28px;
+            margin-bottom:  12px;
+
+            span.label {
+              letter-spacing: 0px;
+              margin-top:     -3px;
+              vertical-align: middle;
+            }
+          }
+
+          .paypal-link {
+            .verification-text {
+              margin-bottom: 12px;
+
+              .paypal-email {
+                font-weight: bold;
+              }
+            }
+
+            .paypal-update-button {
+              padding: 4px 0px;
+              width:   100px;
+            }
+          }
         }
       }
     }
   }
 
-  p.cancel-account {
-    font-size: 16px;
+  .account-cancel {
+    font-size:   20px;
+    line-height: 24px;
+    text-align:  center;
 
     a {
-      margin-left: 6px;
+      color:           #333;
+      text-decoration: underline;
     }
   }
 }

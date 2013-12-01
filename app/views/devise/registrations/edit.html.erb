@@ -1,25 +1,45 @@
 <div class="devise-form">
-  <h2>Edit Account</h2>
+  <div class="account-heading">Account Settings</div>
 
-  <%= simple_form_for(resource, :as   => resource_name,
-                                :url  => registration_path(resource_name),
-                                :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
-    <%= f.error_notification %>
+  <div class="account-password-status row-fluid">
+    <div class="account-password span6">
+      <div class="account-password-heading">
+        <h2>Password</h2>
+      </div>
 
-    <%= f.input :password,              :required => false, :hint         => 'Leave blank to not change', :autocomplete => 'off' %>
-    <%= f.input :password_confirmation, :required => false, :autocomplete => 'off' %>
-    <%= f.input :current_password,      :required => true,  :hint         => 'To confirm changes' %>
+      <div class="account-password-text">
+        <%= simple_form_for(resource, :as   => resource_name,
+                                      :url  => registration_path(resource_name),
+                                      :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+          <%= f.error_notification %>
 
-    <%= f.submit 'Update', :class => 'btn btn-primary' %>
-  <% end %>
+          <%= f.input :password,              :required => false, :hint         => 'Leave blank to not change', :autocomplete => 'off' %>
+          <%= f.input :password_confirmation, :required => false, :autocomplete => 'off' %>
+          <%= f.input :current_password,      :required => true,  :hint         => 'To confirm changes' %>
 
-  <div class="paypal-status">
-    <%= render :partial => "devise/registrations/verified_status" %>
+          <%= f.submit 'Update', :class => 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="account-status span6">
+      <div class="account-status-heading">
+        <h2>Club Status</h2>
+      </div>
+
+      <div class="account-status-text">
+        <div class="account-status-linked">
+          <%= render :partial => 'users/club_live_status' %>
+        </div>
+
+        <div class="account-status-paypal">
+          <%= render :partial => "devise/registrations/verified_status" %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <h3>Cancel my account</h3>
-
-  <p class="cancel-account">
-    Unhappy? <%= link_to 'Cancel my account', registration_path(resource_name), :data => { :confirm => 'Are you sure?' }, :method => :delete %>
-  </p>
+  <div class="account-cancel">
+    Unhappy? <%= link_to 'Cancel Your Account', registration_path(resource_name), :data => { :confirm => 'Are you sure?' }, :method => :delete %>
+  </div>
 </div>
