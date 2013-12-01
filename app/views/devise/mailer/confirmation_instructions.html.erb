@@ -1,0 +1,22 @@
+Hey <%= @resource.name.split(' ').first %>!
+<br/><br/>
+We love you for signing up for IfSimply.com! IfSimply is the easiest way to create your own premium membership club.
+<br/><br/>
+Your club is going to be awesome and we are going to make sure of it. We have a ton of great self-serve content for you
+that will help you along the way. But before I get ahead of myself please click the link below to confirm your email
+(we do this so a bunch of bots don't try to take over the site and fill it with junk).
+<br/><br/>
+Click <%= link_to "here", confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %> to confirm
+your email and start filling your club with awesomsauce!
+<br/><br/>
+We are so excited to know you and help you. If you need anything, email me directly at Keith@IfSimply.com.
+<br/><br/>
+Go be great!
+<br/>
+Keith
+<br/><br/>
+----<br/>
+Keith Griffis<br/>
+Co-founder<br/>
+IfSimply.com - Stop Wishing, Start Growing<br/>
+The easiest way to create a membership club? IfSimply.com!
