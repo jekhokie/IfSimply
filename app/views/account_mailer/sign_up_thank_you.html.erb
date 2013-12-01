@@ -1,0 +1,26 @@
+Hey <%= @user.name.split(' ').first %>!
+<br/><br/>
+You are about to embark on what may turn out to be the most rewarding and profitable thing you have ever done online.
+<br/><br/>
+Building your online platform is important. We want to help millions of motivated and passionate people like you
+build real online businesses without all the technology gobbledygook.
+<br/><br/>
+We handle the tech so you can focus on what matters, your members and content.
+<br/><br/>
+Below is the link to your club that you can share on your blog, social profiles, and email.
+<br/><br/>
+<%= link_to "#{@request_protocol}#{@request_host}#{club_sales_page_path(@user.clubs.first)}", "#{@request_protocol}#{@request_host}#{club_path(@user.clubs.first)}" %>
+<br/><br/>
+To make sure your club is successful we give you free access to our club:
+<br/><br/>
+<%= link_to "Membership Secrets: How to build & grow a successful Club", "#{@request_protocol}#{@request_host}#{club_path(1)}" %>
+<br/><br/>
+Go be great!
+<br/>
+Keith
+<br/><br/>
+----<br/>
+Keith Griffis<br/>
+Co-founder<br/>
+IfSimply.com - Stop Wishing, Start Growing<br/>
+The easiest way to create a membership club? IfSimply.com!

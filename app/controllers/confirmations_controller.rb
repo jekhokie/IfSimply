@@ -8,6 +8,9 @@ class ConfirmationsController < Devise::ConfirmationsController
       user.icon        = Settings.users[:default_icon] if user.icon.blank?
 
       user.save
+
+      # send a thank-you for signing up email
+      AccountMailer.delay.sign_up_thank_you(user, request.protocol, request.host_with_port)
     end
 
     super
