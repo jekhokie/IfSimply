@@ -1,0 +1,39 @@
+.terms-and-conditions {
+  font-family: "Arial serif";
+  margin-top:  15px;
+
+  span.hl {
+    font-weight: bold;
+  }
+
+  .legal-heading {
+    font-weight: bold;
+    text-align:  left;
+  }
+
+  .dmca-agent {
+    text-align: center;
+    width:      100%;
+  }
+
+  .legal-details {
+    text-align: left;
+  }
+
+  .terms-heading {
+    font-weight: bold;
+    text-align:  center;
+
+    .effective-date {
+      font-weight: normal;
+    }
+  }
+
+  .terms-summary {
+    margin-top: 15px;
+
+    .summary-heading {
+      text-decoration: underline;
+    }
+  }
+}
