@@ -37,7 +37,7 @@ class CoursesController < ApplicationController
     lesson_list = []
     course_hash.each do |lesson_id, lesson_hash|
       if lesson_id =~ /lesson_.*/
-        lesson = lesson_list.first{ |lesson| lesson.id == lesson_id.split("_")[1] }
+        lesson = lesson_list.select{ |lesson| lesson.id.to_s == lesson_id.split("_")[1] }.first
         lesson = @course.lessons.find lesson_id.split("_")[1] if lesson.blank?
 
         unless lesson.blank?
