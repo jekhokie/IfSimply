@@ -1,4 +1,7 @@
 class Club < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, :use => [ :slugged, :history ]
+
   attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price
 
   after_create :create_discussion_board, :create_sales_page, :create_upsell_page
@@ -43,6 +46,10 @@ class Club < ActiveRecord::Base
   end
 
   private
+
+  def should_generate_new_friendly_id?
+    true
+  end
 
   def create_discussion_board
     discussion_board = DiscussionBoard.new
