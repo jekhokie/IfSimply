@@ -60,8 +60,8 @@
 :paypal:
   free_days:        14
   account_email:    <PAYPAL_EMAIL> # PayPal account email
-  club_owner_share: 0.6
-  ifsimply_share:   0.4
+  club_owner_share: 0.7
+  ifsimply_share:   0.3
 :social_media:
   :google_plus_share_link: "http://www.ifsimply.com/"
   :facebook_share_link:    "http://www.ifsimply.com/"
