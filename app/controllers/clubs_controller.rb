@@ -3,13 +3,19 @@ class ClubsController < ApplicationController
   before_filter :get_club
 
   def show
-    redirect_to club_sales_page_path(@club) unless user_signed_in? and can?(:read, @club)
+    redirect_to club_sales_page_path(@club) and return unless (user_signed_in? and can?(:read, @club))
+
+    if request.path != club_path(@club)
+      redirect_to @club, status: :moved_permanently and return
+    end
   end
 
   def edit
     authorize! :update, @club
 
-    render :text => '', :layout => "mercury"
+    if request.path != club_path(@club)
+      render club_editor_path(@club), :text => "", :status => :moved_permanently, :layout => "mercury" and return
+    end
   end
 
   def update
