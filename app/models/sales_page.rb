@@ -13,6 +13,10 @@ class SalesPage < ActiveRecord::Base
   validates :sub_heading,    :presence => { :message => "for sales page can't be blank" }
   validate  :url_exists
 
+  validates_format_of :video, :with        => /.*(youtube|youtu.be|vimeo|slideshare).*/,
+                              :message     => "must be a YouTube video, Vimeo Video, or Slideshare Presentation",
+                              :allow_blank => true
+
   def assign_defaults
     self.benefit1       = Settings.sales_pages[:default_benefit1]
     self.benefit2       = Settings.sales_pages[:default_benefit2]
