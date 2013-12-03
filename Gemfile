@@ -18,6 +18,9 @@ gem 'remotipart'
 gem 'redcarpet'
 gem 'sqlite3'
 
+# custom video player
+gem 'videojs_rails'
+
 # ordering courses
 gem 'acts_as_list'
 

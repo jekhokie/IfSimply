@@ -52,11 +52,11 @@
 
         .video-iframe {
           background-color: #FFF;
+          height:           250px;
           padding:          4px;
+          width:            436px;
 
-          iframe {
-            border:         1px solid black;
-            height:         250px;
+          .video-js {
             vertical-align: middle;
           }
         }

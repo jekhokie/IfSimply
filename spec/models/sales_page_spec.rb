@@ -38,15 +38,28 @@ describe SalesPage do
         FactoryGirl.build(:sales_page, :video => "bogus url").should_not be_valid
       end
 
-      it "returns true when the URL is reachable" do
-        FakeWeb.clean_registry
-        FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
-
-        FactoryGirl.build(:sales_page, :video => "http://www.ifsimply.com/").should be_valid
-      end
-
       it "returns true when URL is blank/not specified" do
         FactoryGirl.build(:sales_page, :video => "").should be_valid
+      end
+
+      it "returns true for a youtube video of type youtube" do
+        FactoryGirl.build(:sales_page, :video => "http://www.youtube.com/embed/xaELqAo4kkQ").should be_valid
+      end
+
+      it "returns true for a youtube video of type youtu.be" do
+        FactoryGirl.build(:sales_page, :video => "http://youtu.be/xaELqAo4kkQ").should be_valid
+      end
+
+      it "returns true for a vimeo video" do
+        FactoryGirl.build(:sales_page, :video => "http://vimeo.com/22977143").should be_valid
+      end
+
+      it "returns true for a slideshare presentation" do
+        FactoryGirl.build(:sales_page, :video => "http://www.slideshare.net/slideshow/embed_code/28625239").should be_valid
+      end
+
+      it "returns false for a non-youtube/vimeo/slideshare link" do
+        FactoryGirl.build(:sales_page, :video => "http://www.google.com/").should_not be_valid
       end
     end
 

@@ -15,6 +15,10 @@ class Lesson < ActiveRecord::Base
   validates :title,      :presence => { :message => "for lesson can't be blank" }
   validates :background, :presence => { :message => "for lesson can't be blank" }
 
+  validates_format_of :video, :with        => /.*(youtube|youtu.be|vimeo|slideshare).*/,
+                              :message     => "must be a YouTube video, Vimeo Video, or Slideshare Presentation",
+                              :allow_blank => true
+
   def club
     course.club
   end

@@ -46,9 +46,36 @@ jQuery(window).on "mercury:ready", ->
     if obj.region.element.parent().hasClass "video-related"
       unless obj.region.element.val() == window.videoSource
         videoSource = stripEmbedSource(obj.region.element.val())
-        window.videoSource = videoSource
-        obj.region.element.val videoSource
-        obj.region.element.closest(".video-container").find("iframe").attr "src", videoSource
+
+        if /.*(youtube|youtu\.be|vimeo|slideshare).*/.test(videoSource)
+          # get some DOM elements
+          playerContainer = obj.region.element.closest(".video-container").find(".video-iframe")
+
+          if $.contains($(playerContainer), $(".video-js"))
+            playerId    = $(playerContainer).find(".video-js").attr("id")
+            videoPlayer = videojs(playerId)
+            videoPlayer.dispose()
+          else
+            playerId = $(playerContainer).find("iframe").attr("id")
+
+          # determine type of video to display
+          if      /.*(youtube|youtu\.be).*/.test(videoSource)
+            # youtube
+            $(playerContainer).html("<video id='" + playerId + "' class='video-js vjs-default-skin vjs-big-play-centered' controls preload='auto' width='100%' height='100%'> </video>")
+            videojs( $(playerContainer).find(".video-js").attr("id"), { "techOrder": [ "youtube" ], "src": videoSource })
+          else if /.*vimeo.*/.test(videoSource)
+            # vimeo
+            if /.*player\.vimeo\.com.*/.test(videoSource)
+              videoSource = videoSource.replace("player.vimeo.com\/video", "vimeo.com")
+
+            $(playerContainer).html("<video id='" + playerId + "' class='video-js vjs-default-skin vjs-big-play-centered' controls preload='auto' width='100%' height='100%'> </video>")
+            videojs( $(playerContainer).find(".video-js").attr("id"), { "techOrder": [ "vimeo" ], "src": videoSource })
+          else if /.*slideshare.*/.test(videoSource)
+            # slideshare
+            $(playerContainer).html("<iframe src='" + videoSource + "' frameborder='0' width='100%' height='100%' webkitAllowFullScreen mozAllowFullScreen allowFullScreen> </iframe>")
+
+          window.videoSource = videoSource
+          obj.region.element.val videoSource
 
 # handle stripping out the src attribute of embed source for videos
 stripEmbedSource = (embedCode) ->
