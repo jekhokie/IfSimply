@@ -51,7 +51,7 @@ jQuery(window).on "mercury:ready", ->
           # get some DOM elements
           playerContainer = obj.region.element.closest(".video-container").find(".video-iframe")
 
-          if $.contains($(playerContainer), $(".video-js"))
+          if $(playerContainer).find(".video-js").length != 0
             playerId    = $(playerContainer).find(".video-js").attr("id")
             videoPlayer = videojs(playerId)
             videoPlayer.dispose()

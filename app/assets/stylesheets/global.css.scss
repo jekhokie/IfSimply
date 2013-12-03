@@ -243,5 +243,11 @@ div {
         cursor: pointer;
       }
     }
+
+    .video-related {
+      textarea {
+        min-height: 25px !important;
+      }
+    }
   }
 }
