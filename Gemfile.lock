@@ -254,6 +254,7 @@ GEM
     uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    videojs_rails (4.1.0)
     warden (1.2.3)
       rack (>= 1.0)
     whenever (0.8.4)
@@ -308,4 +309,5 @@ DEPENDENCIES
   therubyracer
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  videojs_rails
   whenever
