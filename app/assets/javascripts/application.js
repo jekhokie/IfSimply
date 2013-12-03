@@ -25,3 +25,6 @@
 //= require courses
 //= require devise
 //= require paypal
+//= require video
+//= require vjs.youtube
+//= require vjs.vimeo
