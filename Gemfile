@@ -27,6 +27,9 @@ gem 'acts_as_list'
 # scheduling for billing, etc.
 gem 'whenever'
 
+# friendly URLs
+gem 'friendly_id'
+
 # paypal capabilities
 gem 'paypal-sdk-adaptiveaccounts'
 gem 'paypal-sdk-adaptivepayments'
