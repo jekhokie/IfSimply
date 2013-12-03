@@ -35,7 +35,7 @@
       .course-title {
         font-size:     50px;
         font-weight:   bold;
-        max-height:    105px;
+        max-height:    110px;
         line-height:   53px;
         margin-bottom: 6px;
         overflow:      hidden;
@@ -169,7 +169,8 @@
               background-color: #151515;
               height:           405px;
               margin:           0px auto;
-              padding-top:      10px;
+              padding:          10px;
+              padding-bottom:   30px;
               width:            735px;
 
               .click-for-pro-link {
@@ -178,10 +179,16 @@
                 }
               }
 
+              .video-js-box,
               iframe {
                 border: 1px solid black;
                 height: 375px;
-                width:  710px;
+                margin: auto;
+                width:  730px;
+              }
+
+              .video-js {
+                margin: auto;
               }
             }
 

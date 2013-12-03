@@ -163,7 +163,12 @@
       margin-top: 40px;
 
       .how-video {
-        iframe {
+        height:        261px;
+        margin:        0px auto;
+        padding-right: 13px;
+        width:         426px;
+
+        .video-js {
           border: 8px solid #3c4348;
         }
       }
