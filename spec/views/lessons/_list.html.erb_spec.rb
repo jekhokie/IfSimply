@@ -4,7 +4,7 @@ describe "lessons/_list.html.erb" do
   include Warden::Test::Helpers
   Warden.test_mode!
 
-  let!(:video_src) { "http://www.ifsimply.com/" }
+  let!(:video_src) { "http://vimeo.com/22977143" }
   let!(:user)      { FactoryGirl.create :user }
   let!(:club)      { user.clubs.first }
   let!(:course)    { FactoryGirl.create :course, :club => club }
@@ -27,7 +27,7 @@ describe "lessons/_list.html.erb" do
 
       it "displays the lesson video" do
         within ".lesson-video .video-iframe" do
-          page.should have_selector("iframe")
+          page.should have_selector("video")
         end
       end
     end
@@ -51,7 +51,7 @@ describe "lessons/_list.html.erb" do
 
         it "displays the lesson video" do
           within ".lesson-video .video-iframe" do
-            page.should have_selector("iframe")
+            page.should have_selector("video")
           end
         end
       end
@@ -65,7 +65,7 @@ describe "lessons/_list.html.erb" do
 
         it "does not display the lesson video" do
           within ".lesson-video .video-iframe" do
-            page.should_not have_selector("iframe")
+            page.should_not have_selector("video")
           end
         end
 
@@ -102,7 +102,7 @@ describe "lessons/_list.html.erb" do
 
         it "displays the lesson video" do
           within ".lesson-video .video-iframe" do
-            page.should have_selector("iframe")
+            page.should have_selector("video")
           end
         end
       end
@@ -116,7 +116,7 @@ describe "lessons/_list.html.erb" do
 
         it "displays the lesson video" do
           within ".lesson-video .video-iframe" do
-            page.should have_selector("iframe")
+            page.should have_selector("video")
           end
         end
       end
