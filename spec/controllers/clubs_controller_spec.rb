@@ -15,12 +15,12 @@ describe ClubsController do
           get 'show', :id => club.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the club show view" do
-          response.should render_template("clubs/show")
+        it "redirects to the club name view" do
+          response.should redirect_to(club_path(club))
         end
 
         it "returns the club" do
@@ -39,12 +39,12 @@ describe ClubsController do
           get 'show', :id => club.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the club show view" do
-          response.should render_template("clubs/show")
+        it "redirects to the club name view" do
+          response.should redirect_to(club_path(club))
         end
 
         it "returns the club" do
@@ -137,8 +137,12 @@ describe ClubsController do
           get 'edit', :id => user.clubs.first.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
+        end
+
+        it "redirects the user to the club name path" do
+          response.should redirect_to(club_editor_path(user.clubs.first.id))
         end
 
         it "returns the club" do
