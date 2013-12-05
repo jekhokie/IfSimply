@@ -4,7 +4,20 @@ class CoursesController < ApplicationController
   before_filter :get_course, :only => [ :show, :edit, :update ]
 
   def show
-    redirect_to club_sales_page_path(@course.club) unless user_signed_in? and can?(:read, @course)
+    redirect_to club_sales_page_path(@course.club) and return unless (user_signed_in? and can?(:read, @course))
+
+    if request.path != course_path(@course)
+      redirect_to course_path(@course), status: :moved_permanently and return
+    end
+  end
+
+  def edit
+    authorize! :update, @course
+    @club = @course.club
+
+    if request.path != course_path(@course)
+      render course_editor_path(@course), :text => "", :status => :moved_permanently, :layout => "mercury" and return
+    end
   end
 
   def create
@@ -16,13 +29,6 @@ class CoursesController < ApplicationController
     @course.save
 
     redirect_to course_editor_path(@course)
-  end
-
-  def edit
-    authorize! :update, @course
-    @club = @course.club
-
-    render :text => '', :layout => "mercury"
   end
 
   def update
