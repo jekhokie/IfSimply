@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :email, :use => [ :slugged, :history ]
+
   devise :async, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :confirmable, :lockable, :validatable, :timeoutable
@@ -32,6 +35,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def should_generate_new_friendly_id?
+    true
+  end
 
   def create_club
     club = self.clubs.new
