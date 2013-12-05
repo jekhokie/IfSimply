@@ -16,12 +16,12 @@ describe ArticlesController do
           get 'show', :id => article.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the article show view" do
-          response.should render_template("articles/show")
+        it "redirects to the article title view" do
+          response.should redirect_to(article_path(article))
         end
 
         it "returns the article" do
@@ -43,12 +43,12 @@ describe ArticlesController do
             get 'show', :id => free_article.id
           end
 
-          it "returns http success" do
-            response.should be_success
+          it "returns http redirect" do
+            response.should be_redirect
           end
 
-          it "renders the article show view" do
-            response.should render_template("articles/show")
+          it "redirects to the article title view" do
+            response.should redirect_to(article_path(assigns(:article)))
           end
 
           it "returns the article" do
@@ -90,12 +90,12 @@ describe ArticlesController do
             get 'show', :id => free_article.id
           end
 
-          it "returns http success" do
-            response.should be_success
+          it "returns http redirect" do
+            response.should be_redirect
           end
 
-          it "renders the article show view" do
-            response.should render_template("articles/show")
+          it "redirects to the article title view" do
+            response.should redirect_to(article_path(free_article))
           end
 
           it "returns the article" do
@@ -113,12 +113,12 @@ describe ArticlesController do
             get 'show', :id => paid_article.id
           end
 
-          it "returns http success" do
-            response.should be_success
+          it "returns http redirect" do
+            response.should be_redirect
           end
 
-          it "renders the article show view" do
-            response.should render_template("articles/show")
+          it "redirects to the article title view" do
+            response.should redirect_to(article_path(paid_article))
           end
 
           it "returns the article" do
@@ -248,8 +248,12 @@ describe ArticlesController do
           get 'edit', :id => article.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
+        end
+
+        it "redirects to the article title view" do
+          response.should redirect_to(article_editor_path(article.id))
         end
 
         it "returns the club" do
