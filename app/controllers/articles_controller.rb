@@ -4,7 +4,20 @@ class ArticlesController < ApplicationController
   before_filter :get_article, :only => [ :show, :edit, :update ]
 
   def show
-    redirect_to club_sales_page_path(@article.club) unless user_signed_in? and can?(:read, @article)
+    redirect_to club_sales_page_path(@article.club) and return unless (user_signed_in? and can?(:read, @article))
+
+    if request.path != article_path(@article)
+      redirect_to article_path(@article), status: :moved_permanently and return
+    end
+  end
+
+  def edit
+    authorize! :edit, @article
+    @club = @article.club
+
+    if request.path != article_path(@article)
+      render article_editor_path(@article), :text => "", :status => :moved_permanently, :layout => "mercury" and return
+    end
   end
 
   def create
@@ -16,13 +29,6 @@ class ArticlesController < ApplicationController
     @article.save
 
     redirect_to article_editor_path(@article)
-  end
-
-  def edit
-    authorize! :edit, @article
-    @club = @article.club
-
-    render :text => '', :layout => "mercury"
   end
 
   def update

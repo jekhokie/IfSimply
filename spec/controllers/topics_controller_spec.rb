@@ -19,12 +19,12 @@ describe TopicsController do
           get 'show', :id => owned_topic.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the topic show view" do
-          response.should render_template("topics/show")
+        it "redirects to the topic subject view" do
+          response.should redirect_to(topic_path(owned_topic))
         end
 
         it "returns the topic" do
@@ -43,12 +43,12 @@ describe TopicsController do
           get 'show', :id => topic.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the topic show view" do
-          response.should render_template("topics/show")
+        it "redirects to the topic subject view" do
+          response.should redirect_to(topic_path(topic))
         end
 
         it "returns the topic" do

@@ -17,7 +17,7 @@ describe Lesson do
   describe "valid?" do
     before :each do
       FakeWeb.clean_registry
-      FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+      FakeWeb.register_uri(:head, "http://vimeo.com/22977143", :body => "", :status => [ "200", "OK" ])
     end
 
     # title

@@ -1,4 +1,7 @@
 class Topic < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :subject, :use => [ :slugged, :history ]
+
   attr_accessible :description, :subject, :user_id
 
   validates :subject,     :presence => { :message => "for topic can't be blank" }
@@ -22,5 +25,11 @@ class Topic < ActiveRecord::Base
 
   def club
     discussion_board.club
+  end
+
+  private
+
+  def should_generate_new_friendly_id?
+    true
   end
 end

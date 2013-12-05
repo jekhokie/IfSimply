@@ -79,11 +79,6 @@ describe UpsellPage do
   describe "user" do
     let(:club) { FactoryGirl.create :club }
 
-    before :each do
-      FakeWeb.clean_registry
-      FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
-    end
-
     it "returns the corresponding upsell_page's user" do
       FactoryGirl.create(:upsell_page, :club_id => club.id).user.should == club.user
     end

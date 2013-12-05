@@ -16,12 +16,12 @@ describe CoursesController do
           get 'show', :id => course.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the course show view" do
-          response.should render_template("courses/show")
+        it "redirects to the course title view" do
+          response.should redirect_to(course_path(course))
         end
 
         it "returns the course" do
@@ -40,12 +40,12 @@ describe CoursesController do
           get 'show', :id => course.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the course show view" do
-          response.should render_template("courses/show")
+        it "redirects to the course title view" do
+          response.should redirect_to(course_path(course))
         end
 
         it "returns the course" do
@@ -170,8 +170,12 @@ describe CoursesController do
           get 'edit', :id => course.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
+        end
+
+        it "redirects to the course title view" do
+          response.should redirect_to(course_editor_path(course.id))
         end
 
         it "returns the club" do
@@ -247,7 +251,7 @@ describe CoursesController do
 
       before :each do
         FakeWeb.clean_registry
-        FakeWeb.register_uri(:head, "http://www.ifsimply.com/", :body => "", :status => [ "200", "OK" ])
+        FakeWeb.register_uri(:head, "http://vimeo.com/22977143", :body => "", :status => [ "200", "OK" ])
       end
 
       describe "for a lesson with valid attributes" do

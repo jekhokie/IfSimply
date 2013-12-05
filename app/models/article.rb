@@ -1,4 +1,7 @@
 class Article < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, :use => [ :slugged, :history ]
+
   attr_accessible :content, :free, :image, :title
 
   default_scope order('created_at ASC')
@@ -26,6 +29,10 @@ class Article < ActiveRecord::Base
   end
 
   private
+
+  def should_generate_new_friendly_id?
+    true
+  end
 
   def free_is_valid
     unless free.to_s =~ /(true|false)/

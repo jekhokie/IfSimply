@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125005235) do
+ActiveRecord::Schema.define(:version => 20131205032222) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(:version => 20131125005235) do
     t.datetime "updated_at", :null => false
     t.boolean  "free"
     t.string   "image"
+    t.string   "slug"
   end
 
   add_index "articles", ["club_id"], :name => "index_blogs_on_club_id"
+  add_index "articles", ["slug"], :name => "index_articles_on_slug", :unique => true
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
@@ -35,8 +37,10 @@ ActiveRecord::Schema.define(:version => 20131125005235) do
     t.datetime "created_at",                                                                           :null => false
     t.datetime "updated_at",                                                                           :null => false
     t.string   "sub_heading",    :default => "Subheading Here (i.e. 'How to be #1 in Digital Media')"
+    t.string   "slug"
   end
 
+  add_index "clubs", ["slug"], :name => "index_clubs_on_slug", :unique => true
   add_index "clubs", ["user_id"], :name => "index_clubs_on_user_id"
 
   create_table "clubs_users", :force => true do |t|
@@ -63,9 +67,11 @@ ActiveRecord::Schema.define(:version => 20131125005235) do
     t.datetime "updated_at",  :null => false
     t.string   "logo"
     t.integer  "position"
+    t.string   "slug"
   end
 
   add_index "courses", ["club_id"], :name => "index_courses_on_club_id"
+  add_index "courses", ["slug"], :name => "index_courses_on_slug", :unique => true
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -89,9 +95,22 @@ ActiveRecord::Schema.define(:version => 20131125005235) do
     t.integer  "club_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "slug"
   end
 
   add_index "discussion_boards", ["club_id"], :name => "index_discussion_boards_on_club_id"
+  add_index "discussion_boards", ["slug"], :name => "index_discussion_boards_on_slug", :unique => true
+
+  create_table "friendly_id_slugs", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "sluggable_id",                 :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
+  add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "lessons", :force => true do |t|
     t.string   "title"
@@ -168,9 +187,11 @@ ActiveRecord::Schema.define(:version => 20131125005235) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "user_id"
+    t.string   "slug"
   end
 
   add_index "topics", ["discussion_board_id"], :name => "index_topics_on_discussion_board_id"
+  add_index "topics", ["slug"], :name => "index_topics_on_slug", :unique => true
   add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "upsell_pages", :force => true do |t|
@@ -211,11 +232,13 @@ ActiveRecord::Schema.define(:version => 20131125005235) do
     t.string   "icon"
     t.boolean  "verified",               :default => false
     t.string   "payment_email"
+    t.string   "slug"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
 end
