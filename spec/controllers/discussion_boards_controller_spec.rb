@@ -5,7 +5,7 @@ describe DiscussionBoardsController do
 
   describe "GET 'show'" do
     let!(:club)             { user.clubs.first }
-    let!(:discussion_board) { club.discussion_board }
+    let!(:discussion_board) { FactoryGirl.create :discussion_board, :club => club }
 
     describe "for a signed-in user" do
       describe "for the club owner" do
@@ -16,12 +16,12 @@ describe DiscussionBoardsController do
           get 'show', :id => discussion_board.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the discussion_board show view" do
-          response.should render_template("discussion_boards/show")
+        it "redirects to the discussion_board name view" do
+          response.should redirect_to(discussion_board_path(discussion_board))
         end
 
         it "returns the discussion_board" do
@@ -44,12 +44,12 @@ describe DiscussionBoardsController do
           get 'show', :id => discussion_board.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the discussion_board show view" do
-          response.should render_template("discussion_boards/show")
+        it "redirects to the discussion_board name view" do
+          response.should redirect_to(discussion_board_path(discussion_board))
         end
 
         it "returns the discussion_board" do
@@ -106,8 +106,12 @@ describe DiscussionBoardsController do
       get 'edit', :id => discussion_board.id
     end
 
-    it "returns http success" do
-      response.should be_success
+    it "returns http redirect" do
+      response.should be_redirect
+    end
+
+    it "redirects to the discussion_board name view" do
+      response.should redirect_to(discussion_board_editor_path(discussion_board.id))
     end
 
     it "returns the club" do
