@@ -15,12 +15,12 @@ describe UsersController do
           get 'show', :id => user.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the user show view" do
-          response.should render_template("users/show")
+        it "redirects to the user email view" do
+          response.should redirect_to(user_path(user))
         end
 
         it "returns the user" do
@@ -35,12 +35,12 @@ describe UsersController do
           get 'show', :id => other_user.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
         end
 
-        it "renders the user show view" do
-          response.should render_template("users/show")
+        it "redirects to the user email view" do
+          response.should redirect_to(user_path(other_user))
         end
 
         it "returns the user" do
@@ -72,8 +72,12 @@ describe UsersController do
           get 'edit', :id => user.id
         end
 
-        it "returns http success" do
-          response.should be_success
+        it "returns http redirect" do
+          response.should be_redirect
+        end
+
+        it "redirects to the user email view" do
+          response.should redirect_to(user_editor_path(user.id))
         end
 
         it "assigns user" do
