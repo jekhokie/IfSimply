@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find params[:id]
 
-    redirect_to new_user_session_path unless user_signed_in? and can?(:read, @user)
+    redirect_to new_user_session_path and return unless (user_signed_in? and can?(:read, @user))
+
+    if request.path != user_path(@user)
+      redirect_to user_path(@user), status: :moved_permanently and return
+    end
   end
 
   def edit
@@ -10,7 +14,9 @@ class UsersController < ApplicationController
       @user = User.find params[:id]
       authorize! :update, @user
 
-      render :text => '', :layout => "mercury"
+      if request.path != user_path(@user)
+        render user_editor_path(@user), :text => "", :status => :moved_permanently, :layout => "mercury" and return
+      end
     else
       redirect_to new_user_session_path
     end
