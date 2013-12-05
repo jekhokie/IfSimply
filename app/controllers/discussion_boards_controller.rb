@@ -4,13 +4,19 @@ class DiscussionBoardsController < ApplicationController
   before_filter :get_club, :only => [ :show, :edit ]
 
   def show
-    redirect_to club_sales_page_path(@discussion_board.club) unless user_signed_in? and can?(:read, @discussion_board)
+    redirect_to club_sales_page_path(@discussion_board.club) and return unless (user_signed_in? and can?(:read, @discussion_board))
+
+    if request.path != discussion_board_path(@discussion_board)
+      redirect_to discussion_board_path(@discussion_board), status: :moved_permanently and return
+    end
   end
 
   def edit
     authorize! :edit, @discussion_board
 
-    render :text => '', :layout => "mercury"
+    if request.path != discussion_board_path(@discussion_board)
+      render discussion_board_editor_path(@discussion_board), :text => "", :status => :moved_permanently, :layout => "mercury" and return
+    end
   end
 
   def update
