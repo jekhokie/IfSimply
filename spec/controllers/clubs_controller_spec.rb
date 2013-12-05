@@ -3,6 +3,11 @@ require 'spec_helper'
 describe ClubsController do
   let(:user) { FactoryGirl.create :user }
 
+  before :each do
+    FakeWeb.clean_registry
+    FakeWeb.register_uri(:head, "http://vimeo.com/22977143", :body => "", :status => [ "200", "OK" ])
+  end
+
   describe "GET 'show'" do
     let(:club) { user.clubs.first }
 
