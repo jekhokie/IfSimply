@@ -32,7 +32,11 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find params[:id]
 
-    redirect_to club_sales_page_path(@topic.club) unless user_signed_in? and can?(:read, @topic)
+    redirect_to club_sales_page_path(@topic.club) and return unless (user_signed_in? and can?(:read, @topic))
+
+    if request.path != topic_path(@topic)
+      redirect_to topic_path(@topic), status: :moved_permanently and return
+    end
   end
 
   private
