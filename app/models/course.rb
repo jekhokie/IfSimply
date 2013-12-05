@@ -1,4 +1,7 @@
 class Course < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, :use => [ :slugged, :history ]
+
   attr_accessible :description, :logo, :title
 
   acts_as_list :scope => :club
@@ -23,5 +26,11 @@ class Course < ActiveRecord::Base
     self.title       = Settings.courses[:default_title]
     self.description = Settings.courses[:default_description]
     self.logo        = Settings.courses[:default_logo]
+  end
+
+  private
+
+  def should_generate_new_friendly_id?
+    true
   end
 end
