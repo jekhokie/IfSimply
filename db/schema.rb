@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205010552) do
+ActiveRecord::Schema.define(:version => 20131205015938) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(:version => 20131205010552) do
     t.datetime "updated_at", :null => false
     t.boolean  "free"
     t.string   "image"
+    t.string   "slug"
   end
 
   add_index "articles", ["club_id"], :name => "index_blogs_on_club_id"
+  add_index "articles", ["slug"], :name => "index_articles_on_slug", :unique => true
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
