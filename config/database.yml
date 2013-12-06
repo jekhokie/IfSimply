@@ -7,7 +7,7 @@ sqlite: &sqlite
 mysql: &mysql
   adapter:  mysql2
   username: root
-  password:
+  password: root100
 
 # default values
 defaults: &defaults
@@ -24,8 +24,7 @@ test: &test
   <<: *defaults
 
 production:
-  database: db/production.sqlite3
-  <<: *defaults
+  <<: *mysql
 
 cucumber:
   <<: *test
