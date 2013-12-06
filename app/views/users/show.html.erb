@@ -27,7 +27,11 @@
         </div>
 
         <div class="subscription-name first">
-          <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", @user.clubs.first %>
+          <%- if user_signed_in? and @user == current_user %>
+            <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", club_editor_path(@user.clubs.first) %>
+          <%- else %>
+            <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", @user.clubs.first %>
+          <%- end %>
         </div>
       </div>
     </div>
