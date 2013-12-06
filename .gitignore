@@ -19,10 +19,12 @@
 *.swp
 *.swo
 
-# Ignore dynamically uploaded digital media
+# Ignore dynamically uploaded digital media and assets
 public/system/*
 public/uploads/*
+public/assets/*
 private/*
+vendor/bundle
 
 # Ignore any non-sample configuration files
 config/settings.yml
