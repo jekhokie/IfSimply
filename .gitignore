@@ -27,8 +27,10 @@ private/*
 vendor/bundle
 
 # Ignore any non-sample configuration files
+config/database.yml
 config/settings.yml
 config/paypal.yml
+config/newrelic.yml
 
 # Ignore email debugging
 lib/development_mail_interceptor.rb
