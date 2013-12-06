@@ -6,6 +6,8 @@ sqlite: &sqlite
 
 mysql: &mysql
   adapter:  mysql2
+  encoding: utf8
+  database: ifsimply_production
   username: root
   password: root100
 
