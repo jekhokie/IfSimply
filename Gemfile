@@ -18,6 +18,12 @@ gem 'rails_config'
 gem 'remotipart'
 gem 'redcarpet'
 
+# web services
+gem 'passenger'
+
+# profiling
+gem 'newrelic_rpm'
+
 # custom video player
 gem 'videojs_rails'
 
@@ -37,11 +43,13 @@ gem 'paypal-sdk-adaptivepayments'
 # handling of uploads
 gem 'paperclip'
 
+# required to be outside assets
+gem 'coffee-rails', '~> 3.2.1'
+gem 'simple_form'
+
 group :assets do
-  gem 'coffee-rails', '~> 3.2.1'
   gem 'less-rails'
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'simple_form'
   gem 'therubyracer', :platforms => :ruby
   gem 'twitter-bootstrap-rails'
   gem 'uglifier', '>= 1.0.3'
