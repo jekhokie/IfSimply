@@ -15,6 +15,11 @@ $(document).ready ->
           courses: $("#courses-list").sortable("toArray")
           club_id: $("#courses-list").attr("data-club")
         dataType: "script"
+        headers:
+          'X-Transaction':
+            'POST Example'
+          'X-CSRF-Token':
+            $('meta[name="csrf-token"]').attr('content')
 
 # show helper modal for Featured
 $("#courses-list .top-three-label i.icon-question-sign").livequery ->
