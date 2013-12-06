@@ -1,7 +1,6 @@
 # disable the submit button when clicked to verify email
-$(".paypal-confirm-modal .paypal-email input.submit-payment-email").livequery ->
-  $(this).click ->
-    $(this).attr "disabled", true
-    $(this).val "Processing..."
-    $(this).closest("form").submit()
-    $(this).closest("form").find("input[type='text']").attr "disabled", true
+$(".paypal-confirm-modal form.paypal-email").livequery ->
+  $(this).submit ->
+    if $(this).find("#payment_email").val() != ""
+      $(this).find("input[type='submit']").attr "disabled", true
+      $(this).closest("form").find("input[type='text']").attr "readonly", "readonly"
