@@ -74,7 +74,7 @@
 
     <div class="sign-up-how-it-works">
       <div class="sign-up">
-        <a type="button" class="btn btn-large btn-warning submit-sign-up" href="<%= user_signed_in? ? club_editor_path(current_user.clubs.first) : new_user_registration_path %>">
+        <a type="button" class="btn btn-large btn-warning submit-sign-up" data-remote="true" href="<%= user_signed_in? ? club_editor_path(current_user.clubs.first) : new_user_registration_path %>">
           <span class="btn-text"><%= user_signed_in? ? "My Club" : "Start A Club Now" %></span>
         </a>
       </div>

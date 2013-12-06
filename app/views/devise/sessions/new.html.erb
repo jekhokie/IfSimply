@@ -26,7 +26,8 @@
           <%= f.check_box :remember_me %> <%= f.label :remember_me %>
         </div>
 
-        <div class="signin"><%= f.submit "Sign in", :class => "btn btn-warning sign-in-submit-button" %></div>
+        <div class="signin"><%= f.submit "Sign in", :class => "btn btn-warning sign-in-submit-button",
+                                                    :data  => { :disable_with => "Processing..." } %></div>
       </div>
     </div>
   <% end %>

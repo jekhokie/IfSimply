@@ -13,7 +13,8 @@
     <%- end %>
 
     <%= text_field_tag :payment_email %>
-    <%= submit_tag "Confirm", :class => "btn btn-primary submit-payment-email" %>
+    <%= submit_tag "Confirm", :class => "btn btn-primary submit-payment-email",
+                              :data  => { :disable_with => "Processing..." } %>
 
     <div class="paypal-note">
       <div class="paypal-note-heading">

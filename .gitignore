@@ -9,6 +9,7 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
+/db/*.sqlite
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -18,14 +19,18 @@
 *.swp
 *.swo
 
-# Ignore dynamically uploaded digital media
+# Ignore dynamically uploaded digital media and assets
 public/system/*
 public/uploads/*
+public/assets/*
 private/*
+vendor/bundle
 
 # Ignore any non-sample configuration files
+config/database.yml
 config/settings.yml
 config/paypal.yml
+config/newrelic.yml
 
 # Ignore email debugging
 lib/development_mail_interceptor.rb

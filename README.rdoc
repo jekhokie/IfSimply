@@ -11,6 +11,12 @@ RAILS_ENV=development script/delayed_job start
 RAILS_ENV=development script/delayed_job stop
 ```
 
+- Or, you can manually work off jobs during production:
+```
+RAILS_ENV=production rake jobs:work     # work all jobs and persist
+RAILS_ENV=production rake jobs:workoff	# work all jobs and exit
+```
+
 == Settings
 
 - Copy and update the settings file:
@@ -25,6 +31,20 @@ vim config/settings.yml   # update all values to reflect current machine/VM
 ```
 cp config/database.yml.sample config/database.yml
 vim config/database.yml   # update all values for database being used
+```
+
+- Copy and update the PayPal settings file:
+
+```
+cp config/paypal.yml.sample config/paypal.yml
+vim config/paypal.yml   # update all values for PayPal live API
+```
+
+- Copy and update the NewRelic settings file:
+
+```
+cp config/newrelic.yml.sample config/newrelic.yml
+vim config/newrelic.yml   # update all values for NewRelic monitoring
 ```
 
 == Whenever (crontab scheduling)
@@ -51,6 +71,7 @@ rake db:seed    RAILS_ENV=production
 - Precompile all assets
 
 ```
+rm -rf public/assets/*
 rake assets:precompile RAILS_ENV=production
 ```
 
@@ -64,15 +85,14 @@ gem install passenger
 passenger-install-apache2-module  # PAY ATTENTION TO END OF THIS - COPY 3 REQUIRED LINES
 ```
 
-- Add required lines from the step above into /etc/httpd/conf/httpd.conf
+- Add the following to the /etc/httpd/conf/httpd.conf, noting that the first 3 lines are from
+the passenger-install-apache2-module command above:
 
 ```
-sudo vim /etc/httpd/conf/httpd.conf
-```
+LoadModule passenger_module /home/jekhokie/.rvm/gems/ruby-1.9.3-p194@ifsimply/gems/passenger-4.0.27/buildout/apache2/mod_passenger.so
+PassengerRoot /home/jekhokie/.rvm/gems/ruby-1.9.3-p194@ifsimply/gems/passenger-4.0.27
+PassengerDefaultRuby /home/jekhokie/.rvm/wrappers/ruby-1.9.3-p194@ifsimply/ruby
 
-- Add the following to the /etc/httpd/conf/httpd.conf:
-
-```
 <VirtualHost *:3999>
   ServerName www.example.com
   DocumentRoot /opt/ifsimply/public
