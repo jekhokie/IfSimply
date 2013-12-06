@@ -74,5 +74,8 @@ module Ifsimply
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Include additional asset path for precompilation
+    config.assets.paths << Rails.root.join("vendor", "assets", "javascripts")
   end
 end
