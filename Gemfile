@@ -12,11 +12,11 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'mercury-rails', :git => 'git://github.com/jekhokie/mercury.git'
 gem 'money-rails'
+gem 'mysql2'
 gem 'rails', '3.2.14'
 gem 'rails_config'
 gem 'remotipart'
 gem 'redcarpet'
-gem 'sqlite3'
 
 # custom video player
 gem 'videojs_rails'
@@ -68,4 +68,5 @@ group :test, :development do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'sqlite3'
 end
