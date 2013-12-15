@@ -41,8 +41,11 @@
     font-size:   18px;
     font-weight: bold;
     margin-left: 50px;
+    width:       85%;
   }
 
+  .unlock-reset-elements,
+  .confirmation-resend-elements,
   .login-elements {
     margin-left: 50px;
 
@@ -61,7 +64,13 @@
       margin-top: 10px;
 
       .remember-me {
-        display: inline-block;
+        display:    inline-block;
+        margin-top: 9px;
+
+        input,
+        label {
+          display: inline-block;
+        }
       }
 
       .signin {
@@ -103,6 +112,38 @@
     }
 
     .signup {
+      display:    inline-block;
+      margin-top: 5px;
+
+      input {
+        color:     #000;
+        font-size: 15px;
+        width:     140px;
+      }
+    }
+  }
+
+  .password-reset-elements {
+    margin-left: 50px;
+
+    .email-fields {
+      label {
+        font-size:   16px;
+        font-weight: 200;
+        line-height: 16px;
+      }
+
+      span.error {
+        color:          red;
+        display:        inline-table;
+        float:          right;
+        margin-left:    5px;
+        vertical-align: bottom;
+        width:          120px;
+      }
+    }
+
+    .resetpass {
       display:    inline-block;
       margin-top: 5px;
 

@@ -1,0 +1,32 @@
+<div class="devise-information">
+  <div class="devise-heading">Never Received<br/> Confirmation Instructions?</div>
+  <div class="devise-sub-heading">No worries - specify your email and we'll<br/> send another confirmation!</div>
+
+  <%= form_for(resource, :as     => resource_name,
+                         :class  => "confirmation-resend-form",
+                         :url    => confirmation_path(resource_name),
+                         :remote => true) do |f| %>
+    <div class="devise-errors">
+      <%= flash[:alert] unless flash[:alert].blank? %>
+    </div>
+
+    <div class="confirmation-resend-elements">
+      <div class="email-fields">
+        <%= f.label :email, "Login (email)" %>
+        <%= f.email_field :email, :autofocus => true, :placeholder => "Email" %>
+      </div>
+
+      <div class="resetpass"><%= f.submit "Resend Confirmation", :class => "btn btn-warning confirmation-resend-submit-button",
+                                                                 :data  => { :disable_with => "Processing..." } %></div>
+    </div>
+  <% end %>
+
+  <div class="other-links">
+    <%= link_to "Account already confirmed?",          new_session_path(resource_name),      :remote => true %><br />
+    <%= link_to "Not a member yet?",                   new_registration_path(resource_name), :remote => true %><br />
+    <%= link_to "Forgot your password?",               new_password_path(resource_name),     :remote => true %><br />
+    <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name),       :remote => true %><br />
+  </div>
+
+  <%= render :partial => "shared/powered_by" %>
+</div>

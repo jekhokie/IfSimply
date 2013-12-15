@@ -1,5 +1,9 @@
 Ifsimply::Application.routes.draw do
-  devise_for :users, :controllers => { :registrations => 'registrations', :sessions => 'sessions', :confirmations => 'confirmations' }
+  devise_for :users, :controllers => { :registrations => 'registrations',
+                                       :sessions      => 'sessions',
+                                       :confirmations => 'confirmations',
+                                       :unlocks       => 'unlocks',
+                                       :passwords     => 'passwords' }
 
   namespace :mercury do
     resources :images
@@ -19,6 +23,7 @@ Ifsimply::Application.routes.draw do
     match '/terms_and_conditions' => 'home#terms_and_conditions', :as => :terms_and_conditions
     match '/privacy_policy'       => 'home#privacy_policy',       :as => :privacy_policy
     match '/dmca_policy'          => 'home#dmca_policy',          :as => :dmca_policy
+    match '/after_devise'         => 'home#after_devise',         :as => :after_devise
   end
 
   # paypal-related routing

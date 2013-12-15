@@ -2,6 +2,9 @@ class HomeController < ApplicationController
   def index
   end
 
+  def after_devise
+  end
+
   def registration_notify
   end
 
