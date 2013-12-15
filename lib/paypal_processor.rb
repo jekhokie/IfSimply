@@ -19,12 +19,15 @@ module PaypalProcessor
     end
   end
 
-  def self.request_preapproval(monthly_amount, cancel_url, return_url, member_name, club_name, start_date)
+  def self.request_preapproval(monthly_amount, total_amount, cancel_url, return_url, member_name, club_name, start_date, end_date)
     return {} if monthly_amount.blank?
+    return {} if total_amount.blank?
     return {} if cancel_url.blank?
     return {} if return_url.blank?
     return {} if member_name.blank?
     return {} if club_name.blank?
+    return {} if start_date.blank?
+    return {} if end_date.blank?
 
     @api = PayPal::SDK::AdaptivePayments::API.new
 
@@ -39,8 +42,10 @@ module PaypalProcessor
       :memo                         => "Membership To: #{club_name}",
       :cancelUrl                    => cancel_url,
       :currencyCode                 => "USD",
+      :endingDate                   => end_date,
       :maxAmountPerPayment          => monthly_amount,
       :maxNumberOfPaymentsPerPeriod => 1,
+      :maxTotalAmountOfAllPayments  => total_amount,
       :paymentPeriod                => "MONTHLY",
       :returnUrl                    => return_url,
       :requireInstantFundingSource  => true,

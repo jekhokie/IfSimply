@@ -1,6 +1,6 @@
 :general:
   default_application_name: "IfSimply"
-  default_partner_name:     "Simple Media Technology"
+  default_partner_name:     "IfSimply"
   protocol:                 http
   host:                     localhost
   port:                     3000

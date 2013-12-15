@@ -20,7 +20,10 @@ class ClubsUsersController < ApplicationController
         @subscription.user = current_user if @subscription.user.nil?
         session.delete(:subscription) unless session[:subscription].blank?
 
-        render :js => "window.location = '#{club_upsell_page_path(@club)}'" and return
+        respond_to do |format|
+          format.html { redirect_to club_upsell_page_path(@club) }
+          format.js   { render :js => "window.location = '#{club_upsell_page_path(@club)}'" }
+        end
       end
     else
       session[:subscription] = @subscription
@@ -60,13 +63,17 @@ class ClubsUsersController < ApplicationController
               start_date = DateTime.now
             end
 
+            end_date = start_date + 1.year
+
             @subscription.preapproval_uuid = SecureRandom.uuid
             preapproval_hash = PaypalProcessor.request_preapproval(@club.price.dollars,
+                                                                   "%.2f" % (@club.price.dollars * 12),
                                                                    "#{prefix}#{subscribe_to_club_path(@club)}",
                                                                    "#{prefix}/adaptive_payments/preapproval?club_id=#{@club.id}&xuuid=#{@subscription.preapproval_uuid}",
                                                                    current_user.name,
                                                                    @club.name,
-                                                                   start_date)
+                                                                   start_date,
+                                                                   end_date)
 
             if preapproval_hash.blank?
               flash[:error] = "Unexpected behavior from PayPal - Please check back later"
