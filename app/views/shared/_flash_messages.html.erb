@@ -1,10 +1,7 @@
 <div class="flash-box">
   <% flash.each do |key, value| %>
     <%- unless key.to_s == 'timedout' %>
-      <div class="<%= flash_class(key) %> fade in">
-        <a href="#" data-dismiss="alert" class="close">×</a>
-        <%= value %>
-      </div>
+      <%= render :partial => "shared/flash_message", :locals => { :key => key, :value => value } %>
     <%- end %>
   <% end %>
 </div>
