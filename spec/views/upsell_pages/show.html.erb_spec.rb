@@ -5,7 +5,8 @@ describe "upsell_pages/show.html.erb" do
   Warden.test_mode!
 
   describe "GET 'new'" do
-    let!(:club) { FactoryGirl.create :club }
+    let!(:club_user) { FactoryGirl.create :user, :verified => true }
+    let!(:club)      { club_user.clubs.first }
 
     describe "for a non-subscribed user" do
       let!(:user) { FactoryGirl.create :user }
@@ -14,7 +15,7 @@ describe "upsell_pages/show.html.erb" do
         user.confirm!
         login_as user, :scope => :user
 
-        visit subscribe_to_club_path(club)
+        visit club_upsell_page_path(club)
       end
 
       it "does not contain an upgrade message" do
@@ -32,7 +33,7 @@ describe "upsell_pages/show.html.erb" do
         basic_user.confirm!
         login_as basic_user, :scope => :user
 
-        visit subscribe_to_club_path(club)
+        visit club_upsell_page_path(club)
       end
 
       it "contains a disabled 'Basic' button with the text 'SUBSCRIBED' in the header section" do
@@ -68,7 +69,7 @@ describe "upsell_pages/show.html.erb" do
         pro_user.confirm!
         login_as pro_user, :scope => :user
 
-        visit subscribe_to_club_path(club)
+        visit club_upsell_page_path(club)
       end
 
       it "contains a 'Basic' button with the text 'BASIC ONLY' in the header section" do

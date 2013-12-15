@@ -10,8 +10,12 @@ describe ClubsUsersController do
         get 'new', :id => club.id
       end
 
-      it "redirects to a new user registration path" do
-        response.should redirect_to(new_user_registration_path)
+      it "returns success" do
+        response.should be_success
+      end
+
+      it "returns a JS response" do
+        response.content_type.should == Mime::JS
       end
 
       it "returns the club" do
@@ -43,8 +47,12 @@ describe ClubsUsersController do
           get 'new', :id => user_club.id
         end
 
-        it "redirects to the upsell_page editor view" do
-          response.should redirect_to(upsell_page_editor_path(user_club))
+        it "returns success" do
+          response.should be_success
+        end
+
+        it "returns a JS response" do
+          response.content_type.should == Mime::JS
         end
 
         it "returns the club" do
@@ -66,6 +74,10 @@ describe ClubsUsersController do
 
         it "returns http success" do
           response.should be_success
+        end
+
+        it "returns a JS response" do
+          response.content_type.should == Mime::JS
         end
 
         it "returns the club" do

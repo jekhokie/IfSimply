@@ -21,8 +21,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     # assign defaults
     unless user.blank?
       user.description = Settings.users[:default_description] if user.description.blank?
-      user.icon        = Settings.users[:default_icon] if user.icon.blank?
-
+      user.icon        = Settings.users[:default_icon]        if user.icon.blank?
       user.save
 
       # send a thank-you for signing up email

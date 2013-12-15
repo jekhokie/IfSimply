@@ -15,15 +15,17 @@ class ClubsUsersController < ApplicationController
 
     if user_signed_in?
       if current_user == @club.user
-        redirect_to upsell_page_editor_path(@club)
+        render :js => "window.location = '#{upsell_page_editor_path(@club)}'" and return
       else
         @subscription.user = current_user if @subscription.user.nil?
         session.delete(:subscription) unless session[:subscription].blank?
+
+        render :js => "window.location = '#{club_upsell_page_path(@club)}'" and return
       end
     else
       session[:subscription] = @subscription
 
-      redirect_to new_user_registration_path
+      render :template => "devise/sessions/new", :formats => [ :js ], :handlers => [ :coffee ] and return
     end
   end
 
