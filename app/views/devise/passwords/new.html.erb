@@ -1,0 +1,31 @@
+<div class="devise-information">
+  <div class="devise-heading">Forgot Your Password?</div>
+  <div class="devise-sub-heading">No worries - specify your email and we'll<br/> send a reset link!</div>
+
+  <%= form_for(resource, :as     => resource_name,
+                         :class  => "password-reset-form",
+                         :url    => password_path(resource_name),
+                         :remote => true) do |f| %>
+    <div class="devise-errors">
+      <%= flash[:alert] unless flash[:alert].blank? %>
+    </div>
+
+    <div class="password-reset-elements">
+      <div class="email-fields">
+        <%= f.label :email, "Login (email)" %>
+        <%= f.email_field :email, :autofocus => true, :placeholder => "Email" %>
+      </div>
+
+      <div class="resetpass"><%= f.submit "Send Instructions", :class => "btn btn-warning password-reset-submit-button",
+                                                               :data  => { :disable_with => "Processing..." } %></div>
+    </div>
+  <% end %>
+
+  <div class="other-links">
+    <%= link_to "Not a member yet?", new_registration_path(resource_name), :remote => true %><br />
+    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+    <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+  </div>
+
+  <%= render :partial => "shared/powered_by" %>
+</div>
