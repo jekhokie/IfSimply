@@ -2,6 +2,7 @@ Ifsimply::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations',
                                        :sessions      => 'sessions',
                                        :confirmations => 'confirmations',
+                                       :unlocks       => 'unlocks',
                                        :passwords     => 'passwords' }
 
   namespace :mercury do
