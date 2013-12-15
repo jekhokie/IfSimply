@@ -41,8 +41,10 @@
     font-size:   18px;
     font-weight: bold;
     margin-left: 50px;
+    width:       85%;
   }
 
+  .confirmation-resend-elements,
   .login-elements {
     margin-left: 50px;
 
@@ -61,7 +63,13 @@
       margin-top: 10px;
 
       .remember-me {
-        display: inline-block;
+        display:    inline-block;
+        margin-top: 9px;
+
+        input,
+        label {
+          display: inline-block;
+        }
       }
 
       .signin {
