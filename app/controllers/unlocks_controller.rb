@@ -20,4 +20,8 @@ class UnlocksController < Devise::UnlocksController
   def after_sending_unlock_instructions_path_for(resource)
     after_devise_path
   end
+
+  def after_unlock_path_for(resource)
+    root_path
+  end
 end
