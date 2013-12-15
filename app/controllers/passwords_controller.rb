@@ -9,6 +9,8 @@ class PasswordsController < Devise::PasswordsController
     else
       super
     end
+
+    flash.discard
   end
 
   protected
