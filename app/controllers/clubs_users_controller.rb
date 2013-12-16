@@ -47,11 +47,10 @@ class ClubsUsersController < ApplicationController
             @subscription = existing_membership
           else
             @subscription       = ClubsUsers.new
+            @subscription.level = requested_level
             @subscription.club  = @club
             @subscription.user  = current_user
           end
-
-          @subscription.level = requested_level
 
           if requested_level == 'pro'
             # generate the root URL
@@ -80,12 +79,15 @@ class ClubsUsersController < ApplicationController
               render :new
             else
               @subscription.preapproval_key = preapproval_hash[:preapproval_key]
-              @subscription.pro_status      = "FAILED_PREAPPROVAL"
+              @subscription.pro_status = (existing_membership ? "PRO_CHANGE" : "FAILED_PREAPPROVAL")
               @subscription.save
 
               redirect_to preapproval_hash[:preapproval_url]
             end
           else
+            @subscription.level      = requested_level
+            @subscription.pro_status = 'INACTIVE'
+
             if @subscription.save
               redirect_to club_path(@club)
             else
