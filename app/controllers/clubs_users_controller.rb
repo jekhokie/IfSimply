@@ -58,8 +58,12 @@ class ClubsUsersController < ApplicationController
 
             # determine if we need a trial period or not
             start_date = DateTime.now + Settings.paypal[:free_days].days
-            if existing_membership and existing_membership.anniversary_date and existing_membership.anniversary_date < Date.today
-              start_date = DateTime.now
+            if existing_membership and existing_membership.anniversary_date
+              if existing_membership.anniversary_date < Date.today
+                start_date = DateTime.now
+              else
+                start_date = existing_membership.anniversary_date
+              end
             end
 
             end_date = start_date + 1.year
