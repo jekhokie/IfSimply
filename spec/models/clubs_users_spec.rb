@@ -15,6 +15,10 @@ describe ClubsUsers do
     ClubsUsers.new.pro_status.should == "INACTIVE"
   end
 
+  it "assigns was_pro as false on initial create" do
+    ClubsUsers.new.was_pro.should == false
+  end
+
   describe ".paying scope" do
     let!(:pro_active_subscription)     { FactoryGirl.create :subscription, :level => 'pro', :pro_status => "ACTIVE" }
     let!(:pro_inactive_subscription)   { FactoryGirl.create :subscription, :level => 'pro', :pro_status => "INACTIVE" }
