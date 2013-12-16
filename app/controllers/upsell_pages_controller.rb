@@ -3,7 +3,9 @@ class UpsellPagesController < ApplicationController
   before_filter :get_club_and_upsell_page
 
   def show
-    unless can?(:read, @upsell_page)
+    @subscription = @club.subscriptions.find_by_user_id(current_user.id) if user_signed_in?
+
+    if !can?(:read, @upsell_page)
       flash[:error] = "Club Owner is not verified - please let them know they need to verify their account!"
 
       redirect_to root_path
