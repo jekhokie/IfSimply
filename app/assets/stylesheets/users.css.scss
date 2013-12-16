@@ -66,10 +66,31 @@
           margin-left: 22px;
 
           .resolve-form,
+          .change-form,
           i.icon-remove,
           .subscription-level,
           .subscription-club-name {
             vertical-align: middle;
+          }
+
+          .change-form {
+            display:     inline-block;
+            margin-left: 4px;
+            width:       117px;
+
+            input.change-subscription-submit {
+              border-radius:         3px;
+              -moz-border-radius:    3px;
+              -webkit-border-radius: 3px;
+
+              background-color: #f89406;
+              border:           0px;
+              color:            #fff;
+              font-family:      "Helvetica Neue", Helvetica, Arial, sans-serif;
+              height:           22px;
+              margin-top:       -2px;
+              text-shadow:      0 -1px 0 rgba(0, 0, 0, 0.25)
+            }
           }
 
           .resolve-form {
@@ -87,7 +108,6 @@
                 border:           0px;
                 color:            #fff;
                 font-family:      "Helvetica Neue", Helvetica, Arial, sans-serif;
-                font-weight:      bold;
                 height:           22px;
                 margin-top:       -2px;
                 text-shadow:      0 -1px 0 rgba(0, 0, 0, 0.25)
@@ -104,7 +124,7 @@
           .subscription-level {
             color:      #FF9900;
             display:    inline-block;
-            text-align: center;
+            text-align: left;
             width:      65px;
           }
 
