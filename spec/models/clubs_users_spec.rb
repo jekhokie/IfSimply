@@ -5,7 +5,7 @@ describe ClubsUsers do
   it { should belong_to :user }
 
   it { should ensure_inclusion_of(:level).in_array      [ "basic", "pro" ] }
-  it { should ensure_inclusion_of(:pro_status).in_array [ "ACTIVE", "INACTIVE", "FAILED_PAYMENT", "FAILED_PREAPPROVAL" ] }
+  it { should ensure_inclusion_of(:pro_status).in_array [ "ACTIVE", "INACTIVE", "FAILED_PAYMENT", "FAILED_PREAPPROVAL", "PRO_CHANGE" ] }
 
   it "can be instantiated" do
     ClubsUsers.new.should be_an_instance_of(ClubsUsers)
@@ -13,6 +13,10 @@ describe ClubsUsers do
 
   it "assigns pro_status as INACTIVE on initial create" do
     ClubsUsers.new.pro_status.should == "INACTIVE"
+  end
+
+  it "assigns was_pro as false on initial create" do
+    ClubsUsers.new.was_pro.should == false
   end
 
   describe ".paying scope" do

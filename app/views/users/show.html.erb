@@ -73,6 +73,13 @@
                               :confirm => "Are you sure you wish to unsubscribe from: '#{subscription.club.name} #{subscription.club.sub_heading}'?",
                               :method => :delete %>
 
+                  <div class="change-form hide-preview">
+                    <%= form_tag club_upsell_page_path(subscription.club), :method => :get do %>
+                      <%= hidden_field_tag :level, 'pro' %>
+                      <%= submit_tag "CHANGE LEVEL", :class => 'change-subscription-submit' %>
+                    <%- end %>
+                  </div>
+
                   <div class="subscription-level hide-preview">
                     (<%= subscription.level.titleize %>)
                   </div>

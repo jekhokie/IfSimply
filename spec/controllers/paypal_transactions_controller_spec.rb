@@ -105,6 +105,16 @@ describe PaypalTransactionsController do
           subscription.pro_status.should == "ACTIVE"
         end
 
+        it "assigns the level as 'pro'" do
+          subscription.reload
+          subscription.level.to_s.should == 'pro'
+        end
+
+        it "assigns the was_pro as true" do
+          subscription.reload
+          subscription.was_pro.should be_true
+        end
+
         it "redirects to the club path" do
           response.should redirect_to(club_path(club))
         end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205032222) do
+ActiveRecord::Schema.define(:version => 20131215231442) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20131205032222) do
     t.string   "preapproval_uuid"
     t.date     "anniversary_date"
     t.string   "error"
+    t.boolean  "was_pro",          :default => false
   end
 
   add_index "clubs_users", ["club_id"], :name => "index_clubs_users_on_club_id"

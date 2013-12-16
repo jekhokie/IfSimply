@@ -5,7 +5,8 @@
        onclick="javascript: void(0);">
       <span class="btn-text"><%= button_text %></span>
     </a>
-  <%- elsif user_signed_in? and current_user.subscriptions.find_by_club_id(club.id).try(:level) == level %>
+  <%- elsif user_signed_in? and (level.to_s == 'pro'   and subscription and (subscription.level == level and subscription.was_pro and (!subscription.anniversary_date.blank? or subscription.pro_status != "PRO_CHANGE"))) or
+                                (level.to_s == 'basic' and subscription and (subscription.level == level or (subscription.anniversary_date.blank? and subscription.pro_status == "PRO_CHANGE") or (!subscription.anniversary_date.blank? and subscription.was_pro == false))) %>
     <a type="button"
        class="btn btn-large btn-warning subscribe-button"
        disabled="disabled">

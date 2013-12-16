@@ -14,15 +14,15 @@
           <div class="member-label">BASIC MEMBER</div>
           <div class="cost-label">FREE!</div>
           <div class="subscribe-button-container heading-basic-subscribe">
-            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                 :level       => 'basic',
-                                                                                 :button_text => 'BASIC ONLY' } %>
+            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club         => club,
+                                                                                 :level        => 'basic',
+                                                                                 :subscription => subscription,
+                                                                                 :button_text  => 'BASIC ONLY' } %>
           </div>
         </th>
         <th class="pro-number pro-number-heading">
           <div class="member-label">PRO MEMBER</div>
-            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
-                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
+            <%- if user_signed_in? and (subscription.blank? or !subscription.was_pro) %>
             <div class="cost-label">
             <%- else %>
             <div class="cost-label" style="margin-top: 11px; margin-bottom: 10px;">
@@ -32,21 +32,21 @@
             <div class="club-price-frequency">/ mo</div>
           </div>
           <div class="free-trial-label">
-            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
-                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
+            <%- if user_signed_in? and (subscription.blank? or !subscription.was_pro) %>
               free <%= Settings.paypal[:free_days] %> day trial!
             <%- end %>
           </div>
           <div class="subscribe-button-container heading-pro-subscribe">
-            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
-                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
-              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                   :level       => 'pro',
-                                                                                   :button_text => 'FREE TRIAL' } %>
+            <%- if user_signed_in? and (subscription.blank? or !subscription.was_pro) %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club         => club,
+                                                                                   :level        => 'pro',
+                                                                                   :subscription => subscription,
+                                                                                   :button_text  => 'FREE TRIAL' } %>
             <%- else %>
-              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                   :level       => 'pro',
-                                                                                   :button_text => 'PRO' } %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club         => club,
+                                                                                   :level        => 'pro',
+                                                                                   :subscription => subscription,
+                                                                                   :button_text  => 'PRO' } %>
             <%- end %>
           </div>
         </th>
@@ -117,22 +117,24 @@
         <td class="meta meta-footer"></th>
         <td class="basic-number basic-number-footer">
           <div class="subscribe-button-container">
-            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                 :level       => 'basic',
-                                                                                 :button_text => 'BASIC ONLY' } %>
+            <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club         => club,
+                                                                                 :level        => 'basic',
+                                                                                 :subscription => subscription,
+                                                                                 :button_text  => 'BASIC ONLY' } %>
           </div>
         </th>
         <td class="pro-number pro-number-footer">
           <div class="subscribe-button-container">
-            <%- if user_signed_in? and (current_user.subscriptions.find_by_club_id(club.id).blank? or
-                                        current_user.subscriptions.find_by_club_id(club.id).preapproval_key.blank?) %>
-              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                   :level       => 'pro',
-                                                                                   :button_text => 'FREE TRIAL' } %>
+            <%- if user_signed_in? and (subscription.blank? or !subscription.was_pro) %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club         => club,
+                                                                                   :level        => 'pro',
+                                                                                   :subscription => subscription,
+                                                                                   :button_text  => 'FREE TRIAL' } %>
             <%- else %>
-              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club        => club,
-                                                                                   :level       => 'pro',
-                                                                                   :button_text => 'PRO' } %>
+              <%= render :partial => 'upsell_pages/subscribe_button', :locals => { :club         => club,
+                                                                                   :level        => 'pro',
+                                                                                   :subscription => subscription,
+                                                                                   :button_text  => 'PRO' } %>
             <%- end %>
           </div>
         </th>

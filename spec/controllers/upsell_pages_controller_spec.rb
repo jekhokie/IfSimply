@@ -49,6 +49,37 @@ describe UpsellPagesController do
         flash[:error].should_not be_blank
       end
     end
+
+    describe "for a User with an existing subscription" do
+      let!(:user)         { FactoryGirl.create :user, :verified => true }
+      let!(:club)         { FactoryGirl.create :club, :user => user }
+      let!(:upsell_page)  { club.upsell_page }
+      let!(:subscriber)   { FactoryGirl.create :user }
+      let!(:subscription) { FactoryGirl.create :subscription, :club_id => club.id, :user_id => subscriber.id, :level => 'basic' }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in subscriber
+
+        get 'show', :club_id => upsell_page.club.id
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "returns the club" do
+        assigns(:club).should == upsell_page.club
+      end
+
+      it "returns the upsell_page" do
+        assigns(:upsell_page).should == upsell_page
+      end
+
+      it "returns the existing subscription" do
+        assigns(:subscription).should == subscription
+      end
+    end
   end
 
   describe "GET 'edit'" do

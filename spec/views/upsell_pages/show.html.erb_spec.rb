@@ -63,7 +63,7 @@ describe "upsell_pages/show.html.erb" do
 
     describe "for a pro-subscribed user" do
       let!(:pro_user)         { FactoryGirl.create :user }
-      let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE" }
+      let!(:pro_subscription) { FactoryGirl.create :subscription, :user => pro_user, :club => club, :level => 'pro', :pro_status => "ACTIVE", :was_pro => true }
 
       before :each do
         pro_user.confirm!
