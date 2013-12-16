@@ -5,7 +5,7 @@ describe ClubsUsers do
   it { should belong_to :user }
 
   it { should ensure_inclusion_of(:level).in_array      [ "basic", "pro" ] }
-  it { should ensure_inclusion_of(:pro_status).in_array [ "ACTIVE", "INACTIVE", "FAILED_PAYMENT", "FAILED_PREAPPROVAL" ] }
+  it { should ensure_inclusion_of(:pro_status).in_array [ "ACTIVE", "INACTIVE", "FAILED_PAYMENT", "FAILED_PREAPPROVAL", "PRO_CHANGE" ] }
 
   it "can be instantiated" do
     ClubsUsers.new.should be_an_instance_of(ClubsUsers)
