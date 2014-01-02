@@ -38,6 +38,7 @@
   default_call_details:   "Join the club to access exclusive courses, articles and discussions that are members only. This is the good stuff that we only share with our favorite people like you!<div><br></div><div>Join for free now and get access right away!</div><div></div>"
   default_heading:        "This is Your Awesome Heading (Change This)"
   default_sub_heading:    "Create a catchy & descriptive subheading"
+  default_video:          "http://youtu.be/Mmuu9X1djCg"
 :upsell_pages:
   default_heading:                 "Want to get WAY more out of this club?"
   default_sub_heading:             "Sign up for a Pro Membership!"

@@ -26,6 +26,7 @@ class SalesPage < ActiveRecord::Base
     self.call_details   = Settings.sales_pages[:default_call_details]
     self.heading        = Settings.sales_pages[:default_heading]
     self.sub_heading    = Settings.sales_pages[:default_sub_heading]
+    self.video          = Settings.sales_pages[:default_video]
   end
 
   def user

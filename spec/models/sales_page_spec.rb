@@ -138,5 +138,9 @@ describe SalesPage do
     it "assigns the correct default details" do
       @sales_page.details.should == Settings.sales_pages[:default_details]
     end
+
+    it "assigns the correct default video" do
+      @sales_page.video.should == Settings.sales_pages[:default_video]
+    end
   end
 end
