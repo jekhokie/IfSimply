@@ -149,25 +149,22 @@
 
   .thank-you-video {
     display:    inline-block;
+    height:     450px;
     margin:     15px auto 0px auto;
     text-align: center;
-    width:      100%;
+    width:      680px;
 
     .video-iframe {
-      background-color: #FFF;
-      padding:          4px;
+      border-radius:         0 0 50% 50% / 0 0 25px 25px;
+      -webkit-border-radius: 0 0 50% 50% / 0 0 25px 25px;
+      -moz-border-radius:    0 0 50% 50% / 0 0 25px 25px;
 
-      iframe {
-        border-radius:         0 0 50% 50% / 0 0 25px 25px;
-        -webkit-border-radius: 0 0 50% 50% / 0 0 25px 25px;
-        -moz-border-radius:    0 0 50% 50% / 0 0 25px 25px;
-
-        background-color: #151515;
-        height:           405px;
-        margin:           0px auto;
-        padding-top:      10px;
-        width:            735px;
-      }
+      background-color: #151515;
+      height:           405px;
+      margin:           0px auto;
+      padding:          10px;
+      padding-bottom:   30px;
+      width:            660px;
     }
   }
 }

@@ -4,10 +4,10 @@
 <%- elsif video_url =~ /.*(slideshare).*/ %>
   <iframe id="vid_<%= id %>" src="<%= video_url %>" frameborder="0" width="100%" height="100%" webkitAllowFullScreen mozAllowFullScreen allowFullScreen>
   </iframe>
-<%- elsif video_url == 'HomePage' and controller_name == 'home' %>
+<%- elsif controller_name == 'home' # handle home page and thank you videos %>
   <video id="vid_<%= id %>" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="100%" height="100%" data-setup>
-    <source type="video/mp4"  src="/assets/HomePage.mp4"  codecs="avc1.42E01E, mp4a.40.2" />
-    <source type="video/webm" src="/assets/HomePage.webm" codecs="vp8, vorbis"            />
-    <source type="video/ogg"  src="/assets/HomePage.ogv"  codecs="theora, vorbis"         />
+    <source type="video/mp4"  src="/assets/<%= video_url %>.mp4"  codecs="avc1.42E01E, mp4a.40.2" />
+    <source type="video/webm" src="/assets/<%= video_url %>.webm" codecs="vp8, vorbis"            />
+    <source type="video/ogg"  src="/assets/<%= video_url %>.ogv"  codecs="theora, vorbis"         />
   </video>
 <%- end %>
