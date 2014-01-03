@@ -22,7 +22,7 @@
           <div class="spacer">
             <div class="top-three-label"><i class="icon-question-sign"></i> Featured Courses</div>
           </div>
-          <div class="top-three-capture"></div>
+          <div class="top-three-capture" style="height: <%= case @courses.count; when 1; '190px;'; when 2; '360px;'; else '520px;'; end %>"></div>
         <%- end %>
         <%- @courses.each do |course| %>
           <div id="course_<%= course.id %>" class="club-course">
