@@ -67,11 +67,11 @@
             <div class="article-title-date">
               <span class="article-title">
                 <%- if can?(:update, @club) %>
-                  <%= link_to trim_length(article.title, 65), article_editor_path(article) %>
+                  <%= link_to truncate_html(article.title, :length => 35), article_editor_path(article) %>
                 <%- elsif can?(:read, article) %>
-                  <%= link_to trim_length(article.title, 65), article_path(article) %>
+                  <%= link_to truncate_html(article.title, :length => 35), article_path(article) %>
                 <%- else %>
-                  <%= link_to trim_length(article.title, 65), subscribe_to_club_path(@club) %>
+                  <%= link_to truncate_html(article.title, :length => 35), subscribe_to_club_path(@club) %>
                 <%- end %>
               </span>
               <span class="article-date"><%= I18n.l article.created_at, :format => :default %></span>
@@ -85,7 +85,7 @@
               </div>
 
               <div class="article-content">
-                <%= raw(trim_length article.content, 275) %>
+                <%= truncate_html(raw(article.content), :length => 275) %>
               </div>
             </div>
           <%- end %>
@@ -116,7 +116,7 @@
             <div class="topic-recent">
               <div class="topic-subject-date">
                 <div class="topic-subject">
-                  <%= link_to trim_length(topic.subject, 50), topic %>
+                  <%= link_to truncate_html(raw(topic.subject), :length => 35), topic %>
                 </div>
 
                 <div class="topic-date">
@@ -125,7 +125,7 @@
               </div>
 
               <div class="topic-description">
-                <%= trim_length topic.description, 120 %>
+                <%= truncate_html(topic.description, :length => 120) %>
               </div>
             </div>
           <%- end %>

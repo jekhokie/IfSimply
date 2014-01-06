@@ -18,6 +18,9 @@ gem 'rails_config'
 gem 'remotipart'
 gem 'redcarpet'
 
+# safe html truncating
+gem 'truncate_html'
+
 # web services
 gem 'passenger'
 

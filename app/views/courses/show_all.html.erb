@@ -36,11 +36,11 @@
 
             <div class="course-title-description">
               <div class="course-title">
-                <%= link_to trim_length(course.title, 65), (can?(:update, course) ? course_editor_path(course) : course_path(course)) %>
+                <%= link_to truncate_html(raw(course.title), :length => 65), (can?(:update, course) ? course_editor_path(course) : course_path(course)) %>
               </div>
 
               <div class="course-description">
-                <%= trim_length course.description, 400 %>
+                <%= truncate_html(raw(course.description), :length => 400) %>
               </div>
             </div>
           </div>

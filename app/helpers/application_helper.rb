@@ -23,10 +23,6 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
-
-  def trim_length(content, max_length)
-    content.length > max_length ? "#{content[0...max_length]}..." : content
-  end
 end
 
 module ActionView

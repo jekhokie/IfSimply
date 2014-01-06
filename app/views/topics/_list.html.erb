@@ -24,7 +24,7 @@
       <li class="<%= "first-topic" if i == 0 %>">
         <div class="subject-started-by">
           <div class="subject">
-            <%= link_to trim_length(topic.subject, 60), topic %>
+            <%= link_to truncate_html(topic.subject, :length => 60), topic %>
           </div>
 
           <div class="started-by">

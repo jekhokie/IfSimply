@@ -36,11 +36,11 @@
               <%- end %>
 
               <%- if can?(:update, @club) %>
-                <%= link_to trim_length(article.title, 65), article_editor_path(article) %>
+                <%= link_to truncate_html(article.title, :length => 65), article_editor_path(article) %>
               <%- elsif can?(:read, article) %>
-                <%= link_to trim_length(article.title, 65), article_path(article) %>
+                <%= link_to truncate_html(article.title, :length => 65), article_path(article) %>
               <%- else %>
-                <%= link_to trim_length(article.title, 65), subscribe_to_club_path(@club) %>
+                <%= link_to truncate_html(article.title, :length => 65), subscribe_to_club_path(@club) %>
               <%- end %>
             </div>
 
@@ -49,7 +49,7 @@
             </div>
 
             <div class="article-content">
-              <%= trim_length raw(article.content), 400 %>
+              <%= truncate_html(raw(article.content), :length => 400) %>
             </div>
           </div>
         </div>

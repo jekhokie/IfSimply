@@ -254,6 +254,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    truncate_html (0.9.2)
     twitter-bootstrap-rails (2.2.8)
       actionpack (>= 3.1)
       execjs
@@ -320,6 +321,7 @@ DEPENDENCIES
   simplecov
   sqlite3
   therubyracer
+  truncate_html
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   videojs_rails
