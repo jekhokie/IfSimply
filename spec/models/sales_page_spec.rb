@@ -82,6 +82,11 @@ describe SalesPage do
     it "returns false when no details is specified" do
       FactoryGirl.build(:sales_page, :details => "").should_not be_valid
     end
+
+    # about_owner
+    it "returns false when no about_owner is specified" do
+      FactoryGirl.build(:sales_page, :about_owner => "").should_not be_valid
+    end
   end
 
   describe "user" do
@@ -141,6 +146,10 @@ describe SalesPage do
 
     it "assigns the correct default video" do
       @sales_page.video.should == Settings.sales_pages[:default_video]
+    end
+
+    it "assigns the correct about owner" do
+      @sales_page.about_owner.should == Settings.sales_pages[:default_about_owner]
     end
   end
 end
