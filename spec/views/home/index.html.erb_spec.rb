@@ -12,15 +12,15 @@ describe "home/learn_more.html.erb" do
         visit '/'
       end
 
-      it "displays a sign-up header button" do
+      it "displays a Learn More header button" do
         within ".sign-up-club" do
-          page.should have_selector("a", :text => "Sign Up Now!")
+          page.should have_selector("a", :text => "Learn More!")
         end
       end
 
-      it "displays a sign-up main button" do
+      it "displays a learn more main button" do
         within ".submit-sign-up" do
-          page.should have_selector("span", :text => "Start A Club Now")
+          page.should have_selector("span", :text => "Click to Learn More")
         end
       end
     end
