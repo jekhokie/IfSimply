@@ -7,14 +7,14 @@
     <div class="post-information">
       <div class="poster-icon-name">
         <div class="poster-icon">
-          <%= image_tag "#{post.poster.icon}" %>
+          <%= link_to image_tag("#{post.poster.icon}"), user_path(post.poster) %>
         </div>
 
         <div class="poster-name">
           <%- if post.poster == post.club.user %>
-            <span class="icon-star"> <%= post.poster.name.split(' ').first %></i>
+            <span class="icon-star"> <%= link_to post.poster.name.split(' ').first, user_path(post.poster) %></i>
           <%- else %>
-            <%= post.poster.name.split(' ').first %>
+            <%= link_to post.poster.name.split(' ').first, user_path(post.poster) %>
           <%- end %>
         </div>
       </div>
@@ -37,7 +37,7 @@
       </div>
 
       <div class="ifsimply-since">
-        <span class="post-info-label">ifSimply Since:</span>
+        <span class="post-info-label">IfSimply Since:</span>
         <span class="post-info-value"><%= I18n.l post.poster.created_at, :format => :date_only %></span>
       </div>
     </div>
