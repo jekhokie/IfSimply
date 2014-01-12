@@ -97,14 +97,15 @@ describe SalesPagesController do
     describe "for valid attributes" do
       before :each do
         put 'update', :club_id => sales_page.club.id, :content => { :sales_page_heading        => { :value => new_heading },
-                                                                    :sales_page_sub_heading    => { :value => "abc" },
-                                                                    :sales_page_call_to_action => { :value => "123" },
-                                                                    :sales_page_call_details   => { :value => "sgh" },
+                                                                    :sales_page_sub_heading    => { :value => "abc"  },
+                                                                    :sales_page_call_to_action => { :value => "123"  },
+                                                                    :sales_page_call_details   => { :value => "sgh"  },
                                                                     :sales_page_video_url      => { :value => "http://vimeo.com/22977143" },
-                                                                    :sales_page_benefit1       => { :value => "abc" },
-                                                                    :sales_page_benefit2       => { :value => "abc" },
-                                                                    :sales_page_benefit3       => { :value => "abc" },
-                                                                    :sales_page_details        => { :value => "test" } }
+                                                                    :sales_page_benefit1       => { :value => "abc"  },
+                                                                    :sales_page_benefit2       => { :value => "abc"  },
+                                                                    :sales_page_benefit3       => { :value => "abc"  },
+                                                                    :sales_page_details        => { :value => "test" },
+                                                                    :sales_page_about_owner    => { :value => "123"  } }
       end
 
       it "returns http success" do
@@ -132,15 +133,16 @@ describe SalesPagesController do
     describe "for invalid attributes" do
       before :each do
         @old_heading = sales_page.heading
-        put 'update', :club_id => sales_page.club.id, :content => { :sales_page_heading        => { :value => "" },
-                                                                    :sales_page_sub_heading    => { :value => "abc" },
-                                                                    :sales_page_call_to_action => { :value => "123" },
-                                                                    :sales_page_call_details   => { :value => "sgh" },
+        put 'update', :club_id => sales_page.club.id, :content => { :sales_page_heading        => { :value => ""     },
+                                                                    :sales_page_sub_heading    => { :value => "abc"  },
+                                                                    :sales_page_call_to_action => { :value => "123"  },
+                                                                    :sales_page_call_details   => { :value => "sgh"  },
                                                                     :sales_page_video_url      => { :value => "http://vimeo.com/22977143" },
-                                                                    :sales_page_benefit1       => { :value => "abc" },
-                                                                    :sales_page_benefit2       => { :value => "abc" },
-                                                                    :sales_page_benefit3       => { :value => "abc" },
-                                                                    :sales_page_details        => { :value => "test" } }
+                                                                    :sales_page_benefit1       => { :value => "abc"  },
+                                                                    :sales_page_benefit2       => { :value => "abc"  },
+                                                                    :sales_page_benefit3       => { :value => "abc"  },
+                                                                    :sales_page_details        => { :value => "test" },
+                                                                    :sales_page_about_owner    => { :value => "123"  } }
       end
 
       it "returns http unprocessable" do
