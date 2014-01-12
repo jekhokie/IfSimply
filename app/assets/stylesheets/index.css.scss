@@ -160,20 +160,13 @@
     }
 
     .how-it-works {
-      margin-top: 40px;
+      margin: 40px auto 0px auto;
 
       .how-video {
-        height:        261px;
-        margin:        0px auto;
-        padding-right: 13px;
-        width:         426px;
-
-        .video-js {
-          border: 8px solid #3c4348;
-        }
-      }
-
-      .how-learn {
+        border: 8px solid #3c4348;
+        height: 337px;
+        margin: 0px auto;
+        width:  600px;
       }
     }
   }
