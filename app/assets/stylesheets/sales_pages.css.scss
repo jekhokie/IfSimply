@@ -213,4 +213,30 @@
     text-align:     left;
     width:          973px;
   }
+
+  .about-owner-container {
+    color:          #333333;
+    letter-spacing: 1px;
+    margin:         25px auto;
+    margin-bottom:  50px;
+    margin-top:     15px;
+    text-align:     left;
+    width:          973px;
+
+    .sales-page-about-owner {
+      font-size: 26px;
+    }
+
+    .about-owner {
+      .sales-page-about-owner {
+        color:          #333333;
+        font-size:      20px;
+        letter-spacing: 1px;
+        line-height:    25px;
+        margin:         0px auto;
+        text-align:     left;
+        width:          973px;
+      }
+    }
+  }
 }

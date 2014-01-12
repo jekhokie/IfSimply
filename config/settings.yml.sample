@@ -39,6 +39,7 @@
   default_heading:        "This is Your Awesome Heading (Change This)"
   default_sub_heading:    "Create a catchy & descriptive subheading"
   default_video:          "http://youtu.be/Mmuu9X1djCg"
+  default_about_owner:    "Tell everyone about yourself and why you are qualified to host this Club. Share some accomplishments, degrees, or just why you are passionate about your topic. We think you are awesome and this is where you share that."
 :upsell_pages:
   default_heading:                 "Want to get WAY more out of this club?"
   default_sub_heading:             "Sign up for a Pro Membership!"

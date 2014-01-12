@@ -11,5 +11,6 @@ FactoryGirl.define do
     heading        { Faker::Lorem.words(rand(3) + 3).join " "  }
     sub_heading    { Faker::Lorem.words(rand(5) + 3).join " "  }
     video          { "http://vimeo.com/22977143" }
+    about_owner    { Faker::Lorem.words(rand(22) + 1).join " " }
   end
 end

@@ -1,5 +1,6 @@
 class SalesPage < ActiveRecord::Base
-  attr_accessible :benefit1, :benefit2, :benefit3, :call_to_action, :call_details, :heading, :sub_heading, :video, :details
+  attr_accessible :benefit1, :benefit2, :benefit3, :call_to_action, :call_details,
+                  :heading, :sub_heading, :video, :details, :about_owner
 
   belongs_to :club
 
@@ -11,6 +12,8 @@ class SalesPage < ActiveRecord::Base
   validates :call_details,   :presence => { :message => "for sales page can't be blank" }
   validates :heading,        :presence => { :message => "for sales page can't be blank" }
   validates :sub_heading,    :presence => { :message => "for sales page can't be blank" }
+  validates :about_owner,    :presence => { :message => "for sales page can't be blank" }
+  validate  :url_exists
   validate  :url_exists
 
   validates_format_of :video, :with        => /.*(youtube|youtu.be|vimeo|slideshare).*/,
@@ -27,6 +30,7 @@ class SalesPage < ActiveRecord::Base
     self.heading        = Settings.sales_pages[:default_heading]
     self.sub_heading    = Settings.sales_pages[:default_sub_heading]
     self.video          = Settings.sales_pages[:default_video]
+    self.about_owner    = Settings.sales_pages[:default_about_owner]
   end
 
   def user

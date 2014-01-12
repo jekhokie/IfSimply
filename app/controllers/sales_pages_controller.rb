@@ -29,6 +29,7 @@ class SalesPagesController < ApplicationController
     @sales_page.benefit2       = sales_page_hash[:sales_page_benefit2][:value]
     @sales_page.benefit3       = sales_page_hash[:sales_page_benefit3][:value]
     @sales_page.details        = sales_page_hash[:sales_page_details][:value]
+    @sales_page.about_owner    = sales_page_hash[:sales_page_about_owner][:value]
 
     if @sales_page.save
       render :text => ""
