@@ -24,6 +24,7 @@ Ifsimply::Application.routes.draw do
     match '/privacy_policy'       => 'home#privacy_policy',       :as => :privacy_policy
     match '/dmca_policy'          => 'home#dmca_policy',          :as => :dmca_policy
     match '/after_devise'         => 'home#after_devise',         :as => :after_devise
+    match '/learn_more'           => 'home#learn_more',           :as => :learn_more
   end
 
   # paypal-related routing
