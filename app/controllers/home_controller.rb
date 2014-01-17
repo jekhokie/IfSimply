@@ -20,4 +20,7 @@ class HomeController < ApplicationController
 
   def dmca_policy
   end
+
+  def learn_more
+  end
 end
