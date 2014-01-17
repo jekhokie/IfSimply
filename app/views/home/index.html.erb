@@ -11,8 +11,7 @@
             <span class="btn-text">My Club</span>
           </a>
         <%- else %>
-          <span>Not yet a member?</span> <%= link_to "Learn More!", new_user_registration_path,
-                                                                    :remote => true,
+          <span>Not yet a member?</span> <%= link_to "Learn More!", learn_more_path,
                                                                     :class => "btn btn-primary learn-more-button" %>
         <%- end %>
       </div>
@@ -74,7 +73,7 @@
 
     <div class="sign-up-how-it-works">
       <div class="sign-up">
-        <a type="button" class="btn btn-large btn-warning submit-sign-up" data-remote="true" href="<%= user_signed_in? ? club_editor_path(current_user.clubs.first) : new_user_registration_path %>">
+        <a type="button" class="btn btn-large btn-warning submit-sign-up" href="<%= user_signed_in? ? club_editor_path(current_user.clubs.first) : learn_more_path %>">
           <span class="btn-text"><%= user_signed_in? ? "My Club" : "Click to Learn More" %></span>
         </a>
       </div>
