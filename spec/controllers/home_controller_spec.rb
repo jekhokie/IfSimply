@@ -51,4 +51,11 @@ describe HomeController do
       response.should be_success
     end
   end
+
+  describe "GET 'learn_more'" do
+    it "is successful" do
+      get 'learn_more'
+      response.should be_success
+    end
+  end
 end
