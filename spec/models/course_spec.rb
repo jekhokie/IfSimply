@@ -43,8 +43,23 @@ describe Course do
       @course.description.should == Settings.courses[:default_description]
     end
 
-    it "assigns the default logo" do
-      @course.logo.to_s.should == Settings.courses[:default_logo]
+    describe "for a Club that has no other Courses" do
+      it "assigns the default initial logo" do
+        @course.logo.to_s.should == Settings.courses[:default_initial_logo]
+      end
+    end
+
+    describe "for a Club that has other Courses" do
+      before :each do
+        @new_course = Course.new
+        @new_course.club_id = club.id
+        @new_course.assign_defaults
+        @new_course.save
+      end
+
+      it "assigns the default non-initial logo" do
+        @new_course.logo.to_s.should == Settings.courses[:default_logo]
+      end
     end
   end
 
