@@ -19,9 +19,10 @@
   default_initial_logo: "/assets/default_initial_course_logo.jpg"
   default_logo:         "/assets/default_course_logo.jpg"
 :lessons:
-  default_title:      "Your Lesson Name Here (Keep it Focused)"
-  default_background: "Place a description, video notes, and background information on the lesson here. Click in here and delete any text. When done, click save above (upper left icon in the edit bar).<div><br></div><div><u>Key Take-aways from this lesson:</u></div><div><ol><li>You are an incredible person</li><li>No Seriously, you rock for using IfSimply</li><li>You really, really, are an amazing person and we are so thankful for you</li></ol></div>"
-  default_free:       false
+  default_title:         "Your Lesson Name Here (Keep it Focused)"
+  default_background:    "Place a description, video notes, and background information on the lesson here. Click in here and delete any text. When done, click save above (upper left icon in the edit bar).<div><br></div><div><u>Key Take-aways from this lesson:</u></div><div><ol><li>You are an incredible person</li><li>No Seriously, you rock for using IfSimply</li><li>You really, really, are an amazing person and we are so thankful for you</li></ol></div>"
+  default_free:          false
+  default_initial_video: "http://youtu.be/X72FZkJYkiI"
 :articles:
   default_title:   "Your Article Post Title Here"
   default_content: "Article content here. To change your article photo or insert photos into your article, drag and drop a new one from your desktop."
