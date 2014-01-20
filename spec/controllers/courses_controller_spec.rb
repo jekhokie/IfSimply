@@ -127,6 +127,10 @@ describe CoursesController do
       it "creates a first Lesson" do
         assigns(:course).lessons.count.should == 1
       end
+
+      it "creates the first Lesson with the default_initial_video" do
+        assigns(:course).lessons.first.video.should == Settings.lessons[:default_initial_video]
+      end
     end
 
     describe "for a Club that has Courses" do

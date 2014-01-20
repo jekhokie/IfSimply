@@ -111,5 +111,39 @@ describe Lesson do
     it "assigns the correct default free boolean" do
       @lesson.free.should == Settings.lessons[:default_free]
     end
+
+    describe "for the first Lesson of the first Course" do
+      it "assigns a default video" do
+        @lesson.video.should == Settings.lessons[:default_initial_video]
+      end
+    end
+
+    describe "for a Lesson of a Course that is not the only Course" do
+      let!(:new_course) { FactoryGirl.create :course, :club_id => course.club.id }
+
+      before :each do
+        @new_lesson = Lesson.new
+        @new_lesson.course_id = new_course.id
+        @new_lesson.assign_defaults
+        @new_lesson.save
+      end
+
+      it "does not assign a default video" do
+        @new_lesson.video.should be_blank
+      end
+    end
+
+    describe "for the non-first Lesson of a Course" do
+      before :each do
+        @new_lesson = Lesson.new
+        @new_lesson.course_id = course.id
+        @new_lesson.assign_defaults
+        @new_lesson.save
+      end
+
+      it "does not assign a default video" do
+        @new_lesson.video.should be_blank
+      end
+    end
   end
 end
