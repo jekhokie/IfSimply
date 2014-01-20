@@ -81,8 +81,21 @@ describe Article do
       @article.free.should == Settings.articles[:default_free]
     end
 
-    it "assigns the correct default image" do
-      @article.image.should == Settings.articles[:default_image]
+    it "assigns the default initial image" do
+      @article.image.to_s.should == Settings.articles[:default_initial_image]
+    end
+
+    describe "for a Club that has other Articles" do
+      before :each do
+        @new_article = Article.new
+        @new_article.club_id = club.id
+        @new_article.assign_defaults
+        @new_article.save
+      end
+
+      it "assigns the default non-initial image" do
+        @new_article.image.to_s.should == Settings.articles[:default_image]
+      end
     end
   end
 end
