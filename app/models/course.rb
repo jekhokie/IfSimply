@@ -25,7 +25,12 @@ class Course < ActiveRecord::Base
   def assign_defaults
     self.title       = Settings.courses[:default_title]
     self.description = Settings.courses[:default_description]
-    self.logo        = Settings.courses[:default_logo]
+
+    if self.club.courses.empty?
+      self.logo = Settings.courses[:default_initial_logo]
+    else
+      self.logo = Settings.courses[:default_logo]
+    end
   end
 
   private
