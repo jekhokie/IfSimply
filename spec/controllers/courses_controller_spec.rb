@@ -123,6 +123,10 @@ describe CoursesController do
       it "assigns the default description" do
         assigns(:course).description.should == Settings.courses[:default_description]
       end
+
+      it "creates a first Lesson" do
+        assigns(:course).lessons.count.should == 1
+      end
     end
 
     describe "for a Club that has Courses" do
@@ -155,6 +159,10 @@ describe CoursesController do
 
       it "assigns the default description" do
         assigns(:course).description.should == Settings.courses[:default_description]
+      end
+
+      it "does not create a first Lesson" do
+        assigns(:course).lessons.count.should == 0
       end
     end
   end
