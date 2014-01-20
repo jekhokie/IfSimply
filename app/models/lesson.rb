@@ -31,6 +31,10 @@ class Lesson < ActiveRecord::Base
     self.title      = "Lesson #{(course.lessons.count + 1)} - #{Settings.lessons[:default_title]}"
     self.background = Settings.lessons[:default_background]
     self.free       = Settings.lessons[:default_free]
+
+    if self.club.courses.count == 1 and self.course.lessons.count == 0  # default video for first Lesson of first Course
+      self.video = Settings.lessons[:default_initial_video]
+    end
   end
 
   private

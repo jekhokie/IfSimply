@@ -26,7 +26,12 @@ class CoursesController < ApplicationController
     authorize! :create, @course
 
     @course.assign_defaults
-    @course.save
+
+    if @course.save and @club.courses.count == 1  # first Course - build initial Lesson
+      @lesson = @course.lessons.new
+      @lesson.assign_defaults
+      @lesson.save
+    end
 
     redirect_to course_editor_path(@course)
   end

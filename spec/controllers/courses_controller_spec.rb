@@ -92,29 +92,82 @@ describe CoursesController do
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:users]
       sign_in user
-
-      post 'create', :club_id => user.clubs.first.id
     end
 
-    it "redirects to the edit view" do
-      response.should redirect_to(course_editor_path(assigns(:course)))
+    describe "for a Club that has no Courses" do
+      before :each do
+        post 'create', :club_id => user.clubs.first.id
+      end
+
+      it "redirects to the edit view" do
+        response.should redirect_to(course_editor_path(assigns(:course)))
+      end
+
+      it "returns the club" do
+        assigns(:club).should_not be_nil
+      end
+
+      it "returns the course belonging to the club" do
+        assigns(:course).should_not be_nil
+        assigns(:course).club.should == assigns(:club)
+      end
+
+      it "assigns the default initial logo" do
+        assigns(:course).logo.should == Settings.courses[:default_initial_logo]
+      end
+
+      it "assigns the default title" do
+        assigns(:course).title.should == Settings.courses[:default_title]
+      end
+
+      it "assigns the default description" do
+        assigns(:course).description.should == Settings.courses[:default_description]
+      end
+
+      it "creates a first Lesson" do
+        assigns(:course).lessons.count.should == 1
+      end
+
+      it "creates the first Lesson with the default_initial_video" do
+        assigns(:course).lessons.first.video.should == Settings.lessons[:default_initial_video]
+      end
     end
 
-    it "returns the club" do
-      assigns(:club).should_not be_nil
-    end
+    describe "for a Club that has Courses" do
+      let!(:existing_course) { FactoryGirl.create :course, :club_id => user.clubs.first.id }
 
-    it "returns the course belonging to the club" do
-      assigns(:course).should_not be_nil
-      assigns(:course).club.should == assigns(:club)
-    end
+      before :each do
+        post 'create', :club_id => user.clubs.first.id
+      end
 
-    it "assigns the default title" do
-      assigns(:course).title.should == Settings.courses[:default_title]
-    end
+      it "redirects to the edit view" do
+        response.should redirect_to(course_editor_path(assigns(:course)))
+      end
 
-    it "assigns the default description" do
-      assigns(:course).description.should == Settings.courses[:default_description]
+      it "returns the club" do
+        assigns(:club).should_not be_nil
+      end
+
+      it "returns the course belonging to the club" do
+        assigns(:course).should_not be_nil
+        assigns(:course).club.should == assigns(:club)
+      end
+
+      it "assigns the default non-initial logo" do
+        assigns(:course).logo.should == Settings.courses[:default_logo]
+      end
+
+      it "assigns the default title" do
+        assigns(:course).title.should == Settings.courses[:default_title]
+      end
+
+      it "assigns the default description" do
+        assigns(:course).description.should == Settings.courses[:default_description]
+      end
+
+      it "does not create a first Lesson" do
+        assigns(:course).lessons.count.should == 0
+      end
     end
   end
 
