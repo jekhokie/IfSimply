@@ -25,7 +25,12 @@ class Article < ActiveRecord::Base
     self.title   = Settings.articles[:default_title]
     self.content = Settings.articles[:default_content]
     self.free    = Settings.articles[:default_free]
-    self.image   = Settings.articles[:default_image]
+
+    if self.club.articles.empty?
+      self.image = Settings.articles[:default_initial_image]
+    else
+      self.image = Settings.articles[:default_image]
+    end
   end
 
   private
