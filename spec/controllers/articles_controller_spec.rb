@@ -166,33 +166,70 @@ describe ArticlesController do
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:users]
       sign_in user
-
-      post 'create', :club_id => user.clubs.first.id
     end
 
-    it "redirects to the edit view" do
-      response.should redirect_to(article_editor_path(assigns(:article)))
+    describe "for a Club that has no Articles" do
+      before :each do
+        post 'create', :club_id => user.clubs.first.id
+      end
+
+      it "redirects to the edit view" do
+        response.should redirect_to(article_editor_path(assigns(:article)))
+      end
+
+      it "returns the club" do
+        assigns(:club).should_not be_nil
+      end
+
+      it "returns the article belonging to the club" do
+        assigns(:article).should_not be_nil
+        assigns(:article).club.should == assigns(:club)
+      end
+
+      it "assigns the default title" do
+        assigns(:article).title.should == Settings.articles[:default_title]
+      end
+
+      it "assigns the default content" do
+        assigns(:article).content.should == Settings.articles[:default_content]
+      end
+
+      it "assigns the default initial image" do
+        assigns(:article).image.should == Settings.articles[:default_initial_image]
+      end
     end
 
-    it "returns the club" do
-      assigns(:club).should_not be_nil
-    end
+    describe "for a Club that has no Articles" do
+      let!(:existing_article) { FactoryGirl.create :article, :club_id => user.clubs.first.id }
 
-    it "returns the article belonging to the club" do
-      assigns(:article).should_not be_nil
-      assigns(:article).club.should == assigns(:club)
-    end
+      before :each do
+        post 'create', :club_id => user.clubs.first.id
+      end
 
-    it "assigns the default title" do
-      assigns(:article).title.should == Settings.articles[:default_title]
-    end
+      it "redirects to the edit view" do
+        response.should redirect_to(article_editor_path(assigns(:article)))
+      end
 
-    it "assigns the default content" do
-      assigns(:article).content.should == Settings.articles[:default_content]
-    end
+      it "returns the club" do
+        assigns(:club).should_not be_nil
+      end
 
-    it "assigns the default image" do
-      assigns(:article).image.should == Settings.articles[:default_image]
+      it "returns the article belonging to the club" do
+        assigns(:article).should_not be_nil
+        assigns(:article).club.should == assigns(:club)
+      end
+
+      it "assigns the default title" do
+        assigns(:article).title.should == Settings.articles[:default_title]
+      end
+
+      it "assigns the default content" do
+        assigns(:article).content.should == Settings.articles[:default_content]
+      end
+
+      it "assigns the default image" do
+        assigns(:article).image.should == Settings.articles[:default_image]
+      end
     end
   end
 

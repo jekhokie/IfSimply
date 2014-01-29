@@ -43,10 +43,8 @@ describe Course do
       @course.description.should == Settings.courses[:default_description]
     end
 
-    describe "for a Club that has no other Courses" do
-      it "assigns the default initial logo" do
-        @course.logo.to_s.should == Settings.courses[:default_initial_logo]
-      end
+    it "assigns the default initial logo" do
+      @course.logo.to_s.should == Settings.courses[:default_initial_logo]
     end
 
     describe "for a Club that has other Courses" do
