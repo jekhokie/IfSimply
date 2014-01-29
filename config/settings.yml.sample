@@ -24,8 +24,8 @@
   default_free:          false
   default_initial_video: "http://youtu.be/X72FZkJYkiI"
 :articles:
-  default_title:         "Your Article Post Title Here"
-  default_content:       "Article content here. To change your article photo or insert photos into your article, drag and drop a new one from your desktop."
+  default_title:         "Getting Started with Your Article Area"
+  default_content:       "Getting started with your article area is simple. You will want to replace this with your own text. If you have existing articles (or blog posts) you can copy and paste the text here. To start writing from scratch, just type it in here and hit Save above when done.<div><br></div><div><b><u>To change any formatting of text use the gray formatting bar above.</u></b><br></div><div><br></div><div><img src=\"/assets/article_start.png\"><br></div><div><br></div><div><b><u>To add an image, just drag and drop it into this text area or drag it over the logo to change it.</u></b></div><div><br></div><div><img src=\"/assets/image_demo.png\"><br></div><div><br></div><div><b><u>Save Your Changes by Clicking \"Save\" in the Gray Editor Bar at the top of the screen.</u></b><br></div><div><br></div><div><img src=\"/assets/formatting_bar.png\"><br></div><div><br></div>"
   default_free:          false
   default_initial_image: "/assets/default_initial_article_image.jpg"
   default_image:         "/assets/default_article_image.jpg"
