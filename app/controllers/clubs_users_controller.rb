@@ -5,7 +5,7 @@ class ClubsUsersController < ApplicationController
 
   def new
     if user_signed_in? and current_user != @club.user
-      @subscription = ClubsUsers.first{ |subscription| subscription.user == current_user and subscription.club == @club }
+      @subscription = ClubsUsers.where(:user_id => current_user.id, :club_id => @club.id).first
     end
 
     if @subscription.nil? and !(user_signed_in? and current_user == @club.user)
