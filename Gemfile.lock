@@ -1,12 +1,12 @@
 GIT
-  remote: git://github.com/jekhokie/Google-Webfonts-Helper.git
+  remote: http://github.com/jekhokie/Google-Webfonts-Helper.git
   revision: d522a6e8dd8374fee72b25f5c1de598881303636
   specs:
     google-webfonts (0.1.3)
       actionpack (>= 3.0.0)
 
 GIT
-  remote: git://github.com/jekhokie/best_in_place.git
+  remote: http://github.com/jekhokie/best_in_place.git
   revision: f19abd1359e95c96e43f450665d2b73c4ef4115f
   specs:
     best_in_place (2.1.1)
@@ -14,7 +14,7 @@ GIT
       rails (>= 3.1)
 
 GIT
-  remote: git://github.com/jekhokie/mercury.git
+  remote: http://github.com/jekhokie/mercury.git
   revision: e1087f0e97b3d600d553177442cf6c9203906e54
   specs:
     mercury-rails (0.9.0)
