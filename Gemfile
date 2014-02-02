@@ -60,7 +60,6 @@ end
 
 group :test do
   gem 'cucumber-rails', :require => false
-  gem 'faker'
   gem 'simplecov', :require => false
 end
 
