@@ -154,6 +154,11 @@ describe Ability do
     let(:owned_lesson)     { FactoryGirl.create :lesson, :course => course }
     let(:non_owned_lesson) { FactoryGirl.create :course }
 
+    before :each do
+      FakeWeb.clean_registry
+      FakeWeb.register_uri(:head, "http://vimeo.com/22977143", :body => "", :status => [ "200", "OK" ])
+    end
+
     context "create" do
       it "succeeds when the user owns the corresponding club" do
         ability.should be_able_to(:create, owned_lesson)
@@ -620,6 +625,11 @@ describe Ability do
   describe "SalesPage" do
     let(:owned_sales_page)     { FactoryGirl.create :sales_page, :club => user.clubs.first }
     let(:non_owned_sales_page) { FactoryGirl.create :sales_page }
+
+    before :each do
+      FakeWeb.clean_registry
+      FakeWeb.register_uri(:head, "http://vimeo.com/22977143", :body => "", :status => [ "200", "OK" ])
+    end
 
     context "read" do
       let(:ability) { Ability.new FactoryGirl.create(:user) }
