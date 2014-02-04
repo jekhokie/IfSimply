@@ -42,7 +42,7 @@ describe "users/show.html.erb" do
           within ".user-clubs-listing .subscribed-clubs" do
             page.should have_selector("i.icon-remove")
             page.should have_selector(".subscription-level", :text => "(#{subscription.level.titleize})")
-            page.should have_selector(".subscription-club-name a", :text => "#{subscription.club.name} #{subscription.club.sub_heading}")
+            page.should have_selector(".subscription-club-name a", :text => "#{subscription.club.name}")
           end
         end
       end
