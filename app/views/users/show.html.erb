@@ -29,6 +29,15 @@
         <div class="subscription-name first">
           <%- if user_signed_in? and @user == current_user %>
             <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", club_editor_path(@user.clubs.first) %>
+
+            <%- unless @user.subscriptions.map(&:club_id).include?(1) %>
+              <span class="ifsimply-club-question">
+                Want some help creating your own club? Want to know how to build and grow it fast?
+              </span>
+              <span class="ifsimply-club-visit">
+                Visit the official IfSimply.com "<%= link_to Club.find(1).name, club_sales_page_path(1) %>" Club for free!
+              </span>
+            <%- end %>
           <%- else %>
             <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", @user.clubs.first %>
           <%- end %>

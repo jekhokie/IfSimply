@@ -48,6 +48,43 @@ describe "users/show.html.erb" do
       end
     end
 
+    describe "for a User not belonging to the IfSimply Club" do
+      let!(:user) { FactoryGirl.create :user }
+
+      before :each do
+        user.confirm!
+        login_as user, :scope => :user
+
+        visit user_path(user)
+      end
+
+      it "shows the label to subscribe to the IfSimply Club" do
+        within ".user-clubs-listing .owned-clubs .ifsimply-club-visit" do
+          page.should have_selector("a", :text => Club.find(1).name)
+        end
+      end
+    end
+
+    describe "for a User belonging to the IfSimply Club" do
+      let!(:user)         { FactoryGirl.create :user }
+      let!(:subscription) { FactoryGirl.create :subscription, :user  => user,
+                                                              :club  => Club.find(1),
+                                                              :level => 'basic' }
+
+      before :each do
+        user.confirm!
+        login_as user, :scope => :user
+
+        visit user_path(user)
+      end
+
+      it "does not show the label to subscribe to the IfSimply Club" do
+        within ".user-clubs-listing .owned-clubs" do
+          page.should_not have_selector(".ifsimply-club-visit")
+        end
+      end
+    end
+
     describe "for a different user" do
       let!(:visitor) { FactoryGirl.create :user }
 
