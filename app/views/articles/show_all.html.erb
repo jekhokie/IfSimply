@@ -35,7 +35,7 @@
                 <span class="article-is-pro">Pro</span>
               <%- end %>
 
-              <%- if can?(:update, @club) %>
+              <%- if can?(:update, article) %>
                 <%= link_to truncate_html(article.title, :length => 65), article_editor_path(article) %>
               <%- elsif can?(:read, article) %>
                 <%= link_to truncate_html(article.title, :length => 65), article_path(article) %>
@@ -49,8 +49,17 @@
             </div>
 
             <div class="article-content">
-              <%= truncate_html(raw(article.content), :length => 400) %>
+              <%= truncate_html(raw(article.content), :length => 315) %>
             </div>
+
+            <%- if can? :destroy, article %>
+              <div class="destroy-article">
+                Delete this article?
+                <%= link_to "Click Here", article_path(article),
+                            :confirm => "Are you sure you wish to delete '#{article.title}'?",
+                            :method  => :delete %>
+              </div>
+            <%- end %>
           </div>
         </div>
       <%- end %>

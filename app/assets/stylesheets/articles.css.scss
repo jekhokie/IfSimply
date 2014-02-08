@@ -130,7 +130,7 @@
     }
 
     .article-post {
-      height: 128px;
+      height: 145px;
       margin: 12px auto;
 
       .article-logo {
@@ -147,12 +147,12 @@
 
       .article-title-created-content {
         display:        inline-block;
-        height:         128px;
         vertical-align: top;
         width:          700px;
 
         .article-title {
           font-size: 18px;
+          height:    22px;
 
           .article-is-pro {
             color:        red;
@@ -170,8 +170,21 @@
         }
 
         .article-content {
-          height:   80px;
+          height:   65px;
           overflow: hidden;
+        }
+
+        .destroy-article {
+          color:      red;
+          font-size:  18px;
+          margin-top: 8px;
+          width:      100%;
+
+          a {
+            color:       red;
+            font-style:  italic;
+            font-weight: bold;
+          }
         }
       }
     }
