@@ -313,9 +313,23 @@
             font-size:     20px;
             margin-bottom: 25px;
             max-height:    300px;
+            padding:       6px;
 
             textarea {
               width: 100%;
+            }
+          }
+
+          .destroy-lesson {
+            color:      red;
+            font-size:  22px;
+            text-align: center;
+            width:      100%;
+
+            a {
+              color:       red;
+              font-style:  italic;
+              font-weight: bold;
             }
           }
         }
