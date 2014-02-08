@@ -56,6 +56,19 @@ class ArticlesController < ApplicationController
     @articles = @club.articles
   end
 
+  def destroy
+    article = Article.find params[:id]
+    @club   = article.club
+
+    authorize! :destroy, article
+
+    flash[:error] = "An error occurred destroying the Article" unless article.destroy
+
+    redirect_to show_all_club_articles_path(@club)
+
+    flash.discard
+  end
+
   private
 
   def get_club
