@@ -10,7 +10,7 @@ class Ability
       subscription.user == user
     end
 
-    can [ :create, :edit, :update ], Course do |course|
+    can [ :create, :edit, :update, :destroy ], Course do |course|
       course.user == user
     end
 
