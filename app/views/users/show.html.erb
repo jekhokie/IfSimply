@@ -28,7 +28,7 @@
 
         <div class="subscription-name first">
           <%- if user_signed_in? and @user == current_user %>
-            <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", club_editor_path(@user.clubs.first) %>
+            <%= link_to "#{@user.clubs.first.name}: #{@user.clubs.first.sub_heading}", club_editor_path(@user.clubs.first) %>
 
             <%- unless @user.id == 1 or @user.subscriptions.map(&:club_id).include?(1) %>
               <span class="ifsimply-club-question">
@@ -39,7 +39,7 @@
               </span>
             <%- end %>
           <%- else %>
-            <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", @user.clubs.first %>
+            <%= link_to "#{@user.clubs.first.name}: #{@user.clubs.first.sub_heading}", @user.clubs.first %>
           <%- end %>
         </div>
       </div>
