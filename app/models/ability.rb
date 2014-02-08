@@ -18,7 +18,7 @@ class Ability
       lesson.user == user
     end
 
-    can [ :create, :edit, :update ], Article do |article|
+    can [ :create, :edit, :update, :destroy ], Article do |article|
       article.user == user
     end
 

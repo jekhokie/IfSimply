@@ -382,6 +382,21 @@ describe Ability do
         end
       end
     end
+
+    context "destroy" do
+      let!(:club)              { FactoryGirl.create :club }
+      let!(:owned_article)     { FactoryGirl.create :article, :club => club }
+      let!(:non_owned_article) { FactoryGirl.create :article }
+      let!(:user_ability)      { Ability.new club.user }
+
+      it "succeeds when the user owns the Article" do
+        user_ability.should be_able_to(:destroy, owned_article)
+      end
+
+      it "fails when the user does not own the Article" do
+        user_ability.should_not be_able_to(:destroy, non_owned_article)
+      end
+    end
   end
 
   describe "DiscussionBoard" do
