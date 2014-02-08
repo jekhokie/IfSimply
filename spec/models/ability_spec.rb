@@ -605,8 +605,8 @@ describe Ability do
           let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_user, :club => topic.club, :level => 'basic' }
           let!(:basic_ability)      { Ability.new basic_user }
 
-          it "fails" do
-            basic_ability.should_not be_able_to(:create, topic.posts.new)
+          it "succeeds" do
+            basic_ability.should be_able_to(:create, topic.posts.new)
           end
         end
       end

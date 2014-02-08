@@ -75,7 +75,7 @@ class Ability
 
     can :create, Post do |post|
       membership = user.subscriptions.find_by_club_id post.club.id
-      post.club.user == user or (!membership.blank? and (membership.level.to_s == "pro" and membership.pro_status == "ACTIVE"))
+      post.club.user == user or (!membership.blank? and membership.level.to_s == "basic") or (!membership.blank? and membership.level.to_s == "pro" and membership.pro_status != "INACTIVE")
     end
 
     # global defaults
