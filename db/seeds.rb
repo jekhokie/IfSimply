@@ -17,7 +17,7 @@ ifsimply_user.confirm!
 # IfSimply Club
 ifsimply_club             = ifsimply_user.clubs.first
 ifsimply_club.id          = 1
-ifsimply_club.name        = "Membership Club Secrets:"
+ifsimply_club.name        = "Membership Club Secrets"
 ifsimply_club.sub_heading = "How to Build & Grow a Successful Club"
 ifsimply_club.description = "Want to create a profitable and successful membership club? We will teach you how to get " +
                             "up and running fast, the essential elements of a club, and take you step by step through " +
