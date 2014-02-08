@@ -88,6 +88,8 @@ Ifsimply::Application.routes.draw do
     end
   end
 
+  resources :lessons, :only => [ :destroy ]
+
   resources :articles, :only => [ :show, :update ]
 
   resources :discussion_boards, :only => [ :show, :update ] do
