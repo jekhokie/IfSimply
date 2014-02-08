@@ -21,10 +21,12 @@
   default_initial_logo:        "/assets/default_initial_course_logo.jpg"
   default_logo:                "/assets/default_course_logo.jpg"
 :lessons:
-  default_title:         "Your Lesson Name Here (Keep it Focused)"
-  default_background:    "Place a description, video notes, and background information on the lesson here. Click in here and delete any text. When done, click save above (upper left icon in the edit bar).<div><br></div><div><u>Key Take-aways from this lesson:</u></div><div><ol><li>You are an incredible person</li><li>No Seriously, you rock for using IfSimply</li><li>You really, really, are an amazing person and we are so thankful for you</li></ol></div>"
-  default_free:          false
-  default_initial_video: "http://youtu.be/X72FZkJYkiI"
+  default_initial_title: "Intro to IfSimply Courses"
+  default_title:              "Your Lesson Name Here (Keep it Focused)"
+  default_initial_background: "This area is where you should describe what they will learn in this lesson.<br/><br/>Key Take-aways from this lesson:<br/>1. Put the first thing they will learn here<br/>2. Put the second thing they will learn here<br/>3. Put the third thing they will learn here"
+  default_background:         "Place a description, video notes, and background information on the lesson here. Click in here and delete any text. When done, click save above (upper left icon in the edit bar).<br/><br/>Key Take-aways from this lesson:<br/>1. Put the first thing they will learn here<br/>2. Put the second thing they will learn here<br/>3. Put the third thing they will learn here"
+  default_free:               false
+  default_initial_video:      "http://youtu.be/X72FZkJYkiI"
 :articles:
   default_title:         "Getting Started with Your Article Area"
   default_content:       "Getting started with your article area is simple. You will want to replace this with your own text. If you have existing articles (or blog posts) you can copy and paste the text here. To start writing from scratch, just type it in here and hit Save above when done.<div><br></div><div><b><u>To change any formatting of text use the gray formatting bar above.</u></b><br></div><div><br></div><div><img src=\"/assets/article_start.png\"><br></div><div><br></div><div><b><u>To add an image, just drag and drop it into this text area or drag it over the logo to change it.</u></b></div><div><br></div><div><img src=\"/assets/image_demo.png\"><br></div><div><br></div><div><b><u>Save Your Changes by Clicking \"Save\" in the Gray Editor Bar at the top of the screen.</u></b><br></div><div><br></div><div><img src=\"/assets/formatting_bar.png\"><br></div><div><br></div>"
