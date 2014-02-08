@@ -5,9 +5,9 @@
   host:                     localhost
   port:                     3000
 :clubs:
-  default_name:           "Your Club Name Here (i.e. Marketing Rockstars)"
-  default_sub_heading:    "Subheading Here (i.e. 'How to be #1 in Digital Media')"
-  default_description:    "Tell Your Members what your club is about here. Make it upbeat and enticing, but keep it brief."
+  default_name:           "Your Club Name Goes Here"
+  default_sub_heading:    "Add Your Subheading Here"
+  default_description:    "Tell Your Members about your club and what they will get (i.e. \"You will learn to grow a multi-million dollar enterprise\" or \"We will teach you how to raise your child on a 100% Vegan diet\"). Make it upbeat and enticing, but keep it brief. Most text on ifSimply can be edited just by clicking and overwriting it. To change an image just drag the new one from your desktop over the existing image."
   default_logo:           "/assets/default_club_logo.png"
   default_price_cents:    1997
   min_price_cents:        1000
