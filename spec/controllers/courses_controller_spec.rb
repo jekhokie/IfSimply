@@ -554,4 +554,65 @@ describe CoursesController do
       end
     end
   end
+
+  describe "DELETE 'destroy'" do
+    describe "for a signed in User" do
+      let!(:club) { user.clubs.first }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "who owns the Course" do
+        let!(:owned_course) { FactoryGirl.create :course, :club_id => club.id }
+
+        before :each do
+          Course.any_instance.should_receive(:destroy)
+
+          delete 'destroy', :id => owned_course.id
+        end
+
+        it "redirects to the Club show_all_courses view" do
+          response.should redirect_to(show_all_club_courses_path(club))
+        end
+
+        it "returns the club" do
+          assigns(:club).should == club
+        end
+      end
+
+      describe "who does not own the Course" do
+        let!(:non_owned_course) { FactoryGirl.create :course }
+
+        before :each do
+          Course.any_instance.should_not_receive(:destroy)
+
+          delete 'destroy', :id => non_owned_course.id
+        end
+
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+
+        it "returns the club" do
+          assigns(:club).should == non_owned_course.club
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      let!(:course) { FactoryGirl.create :course }
+
+      before :each do
+        Course.any_instance.should_not_receive(:destroy)
+
+        delete 'destroy', :id => course.id
+      end
+
+      it "redirects to the sign-in page" do
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+  end
 end

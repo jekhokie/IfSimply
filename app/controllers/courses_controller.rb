@@ -98,6 +98,19 @@ class CoursesController < ApplicationController
     render :nothing => true
   end
 
+  def destroy
+    course = Course.find params[:id]
+    @club  = course.club
+
+    authorize! :destroy, course
+
+    flash[:error] = "An error occurred destroying the Course" unless course.destroy
+
+    redirect_to show_all_club_courses_path(@club)
+
+    flash.discard
+  end
+
   private
 
   def get_club

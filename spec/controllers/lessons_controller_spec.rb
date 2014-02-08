@@ -384,4 +384,65 @@ describe LessonsController do
       end
     end
   end
+
+  describe "DELETE 'destroy'" do
+    let!(:course) { FactoryGirl.create :course, :club_id => user.clubs.first.id }
+
+    describe "for a signed in User" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "who owns the Lesson" do
+        let!(:owned_lesson) { FactoryGirl.create :lesson, :course_id => course.id }
+
+        before :each do
+          Lesson.any_instance.should_receive(:destroy)
+
+          delete 'destroy', :id => owned_lesson.id
+        end
+
+        it "redirects to the Course edit view" do
+          response.should redirect_to(course_editor_path(course))
+        end
+
+        it "returns the course" do
+          assigns(:course).should == owned_lesson.course
+        end
+      end
+
+      describe "who does not own the Lesson" do
+        let!(:non_owned_lesson) { FactoryGirl.create :lesson }
+
+        before :each do
+          Lesson.any_instance.should_not_receive(:destroy)
+
+          delete 'destroy', :id => non_owned_lesson.id
+        end
+
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+
+        it "returns the course" do
+          assigns(:course).should == non_owned_lesson.course
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      let!(:lesson) { FactoryGirl.create :lesson }
+
+      before :each do
+        Lesson.any_instance.should_not_receive(:destroy)
+
+        delete 'destroy', :id => course.id
+      end
+
+      it "redirects to the sign-in page" do
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+  end
 end

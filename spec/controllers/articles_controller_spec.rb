@@ -488,4 +488,65 @@ describe ArticlesController do
       end
     end
   end
+
+  describe "DELETE 'destroy'" do
+    describe "for a signed in User" do
+      let!(:club) { user.clubs.first }
+
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "who owns the Article" do
+        let!(:owned_article) { FactoryGirl.create :article, :club_id => club.id }
+
+        before :each do
+          Article.any_instance.should_receive(:destroy)
+
+          delete 'destroy', :id => owned_article.id
+        end
+
+        it "redirects to the Club show_all_courses view" do
+          response.should redirect_to(show_all_club_articles_path(club))
+        end
+
+        it "returns the club" do
+          assigns(:club).should == club
+        end
+      end
+
+      describe "who does not own the Article" do
+        let!(:non_owned_article) { FactoryGirl.create :article }
+
+        before :each do
+          Article.any_instance.should_not_receive(:destroy)
+
+          delete 'destroy', :id => non_owned_article.id
+        end
+
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+
+        it "returns the club" do
+          assigns(:club).should == non_owned_article.club
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      let!(:article) { FactoryGirl.create :article }
+
+      before :each do
+        Article.any_instance.should_not_receive(:destroy)
+
+        delete 'destroy', :id => article.id
+      end
+
+      it "redirects to the sign-in page" do
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+  end
 end

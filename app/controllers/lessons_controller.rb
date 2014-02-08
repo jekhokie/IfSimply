@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_course
+  before_filter :get_course, :except => [ :destroy ]
 
   def create
     @lesson = @course.lessons.new
@@ -32,6 +32,19 @@ class LessonsController < ApplicationController
       flash[:error] = "File attachment '#{@lesson.file_attachment.original_filename}' content type unsupported."
       @lesson.reload
     end
+
+    flash.discard
+  end
+
+  def destroy
+    lesson  = Lesson.find params[:id]
+    @course = lesson.course
+
+    authorize! :destroy, lesson
+
+    flash[:error] = "An error occurred destroying the Lesson" unless lesson.destroy
+
+    redirect_to course_editor_path(@course)
 
     flash.discard
   end

@@ -146,6 +146,21 @@ describe Ability do
         end
       end
     end
+
+    context "destroy" do
+      let!(:club)             { FactoryGirl.create :club }
+      let!(:owned_course)     { FactoryGirl.create :course, :club => club }
+      let!(:non_owned_course) { FactoryGirl.create :course }
+      let!(:user_ability)     { Ability.new club.user }
+
+      it "succeeds when the user owns the Course" do
+        user_ability.should be_able_to(:destroy, owned_course)
+      end
+
+      it "fails when the user does not own the Course" do
+        user_ability.should_not be_able_to(:destroy, non_owned_course)
+      end
+    end
   end
 
   describe "Lesson" do
@@ -247,7 +262,23 @@ describe Ability do
         end
       end
     end
- end
+
+    context "destroy" do
+      let!(:club)             { FactoryGirl.create :club }
+      let!(:course)           { FactoryGirl.create :course, :club => club }
+      let!(:owned_lesson)     { FactoryGirl.create :lesson, :course => course }
+      let!(:non_owned_lesson) { FactoryGirl.create :lesson }
+      let!(:user_ability)     { Ability.new club.user }
+
+      it "succeeds when the user owns the Lesson" do
+        user_ability.should be_able_to(:destroy, owned_lesson)
+      end
+
+      it "fails when the user does not own the Lesson" do
+        user_ability.should_not be_able_to(:destroy, non_owned_lesson)
+      end
+    end
+  end
 
   describe "Article" do
     let(:club)              { FactoryGirl.create :club, :user => user }
@@ -349,6 +380,21 @@ describe Ability do
         it "fails" do
           ability.should_not be_able_to(:read, article)
         end
+      end
+    end
+
+    context "destroy" do
+      let!(:club)              { FactoryGirl.create :club }
+      let!(:owned_article)     { FactoryGirl.create :article, :club => club }
+      let!(:non_owned_article) { FactoryGirl.create :article }
+      let!(:user_ability)      { Ability.new club.user }
+
+      it "succeeds when the user owns the Article" do
+        user_ability.should be_able_to(:destroy, owned_article)
+      end
+
+      it "fails when the user does not own the Article" do
+        user_ability.should_not be_able_to(:destroy, non_owned_article)
       end
     end
   end

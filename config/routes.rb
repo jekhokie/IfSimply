@@ -78,7 +78,7 @@ Ifsimply::Application.routes.draw do
 
   resources :clubs_users, :only => [ :destroy ]
 
-  resources :courses, :only => [ :show, :update ] do
+  resources :courses, :only => [ :show, :update, :destroy ] do
     collection do
       post 'sort'
     end
@@ -88,7 +88,9 @@ Ifsimply::Application.routes.draw do
     end
   end
 
-  resources :articles, :only => [ :show, :update ]
+  resources :lessons, :only => [ :destroy ]
+
+  resources :articles, :only => [ :show, :update, :destroy ]
 
   resources :discussion_boards, :only => [ :show, :update ] do
     resources :topics, :only => [ :new, :create ]

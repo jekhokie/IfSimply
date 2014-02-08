@@ -10,15 +10,15 @@ class Ability
       subscription.user == user
     end
 
-    can [ :create, :edit, :update ], Course do |course|
+    can [ :create, :edit, :update, :destroy ], Course do |course|
       course.user == user
     end
 
-    can [ :create, :update ], Lesson do |lesson|
+    can [ :create, :update, :destroy ], Lesson do |lesson|
       lesson.user == user
     end
 
-    can [ :create, :edit, :update ], Article do |article|
+    can [ :create, :edit, :update, :destroy ], Article do |article|
       article.user == user
     end
 
