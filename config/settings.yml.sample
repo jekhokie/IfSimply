@@ -14,10 +14,12 @@
   name_max_length:        50
   sub_heading_max_length: 55
 :courses:
-  default_title:        "Your Course Name Here (Keep it Catchy)"
-  default_description:  "Provide a quick course description here. It should be brief yet enticing. To change the course photo, drag and drop a new one from your desktop."
-  default_initial_logo: "/assets/default_initial_course_logo.jpg"
-  default_logo:         "/assets/default_course_logo.jpg"
+  default_initial_title:       "Your First Course"
+  default_title:               "Your Course Name Here (Keep it Catchy)"
+  default_initial_description: "This is your first course on IfSimply.com. Watch the video in Lesson 1 to get a quick overview. Visit the Membership Site Secrets Club via your My Profile page to get more tips and details on creating an awesome course. Quick Tip: Keep videos under 5-10 minutes and add a PDF or other download to help your members get more out of each lesson."
+  default_description:         "Put your course description here. Watch the video in Lesson 1 to get a quick overview. Visit the Membership Site Secrets Club via your My Profile page to get more tips and details on creating an awesome course."
+  default_initial_logo:        "/assets/default_initial_course_logo.jpg"
+  default_logo:                "/assets/default_course_logo.jpg"
 :lessons:
   default_title:         "Your Lesson Name Here (Keep it Focused)"
   default_background:    "Place a description, video notes, and background information on the lesson here. Click in here and delete any text. When done, click save above (upper left icon in the edit bar).<div><br></div><div><u>Key Take-aways from this lesson:</u></div><div><ol><li>You are an incredible person</li><li>No Seriously, you rock for using IfSimply</li><li>You really, really, are an amazing person and we are so thankful for you</li></ol></div>"
