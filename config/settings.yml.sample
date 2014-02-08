@@ -5,24 +5,28 @@
   host:                     localhost
   port:                     3000
 :clubs:
-  default_name:           "Your Club Name Here (i.e. Marketing Rockstars)"
-  default_sub_heading:    "Subheading Here (i.e. 'How to be #1 in Digital Media')"
-  default_description:    "Tell Your Members what your club is about here. Make it upbeat and enticing, but keep it brief."
+  default_name:           "Your Club Name Goes Here"
+  default_sub_heading:    "Add Your Subheading Here"
+  default_description:    "Tell Your Members about your club and what they will get (i.e. \"You will learn to grow a multi-million dollar enterprise\" or \"We will teach you how to raise your child on a 100% Vegan diet\"). Make it upbeat and enticing, but keep it brief. Most text on ifSimply can be edited just by clicking and overwriting it. To change an image just drag the new one from your desktop over the existing image."
   default_logo:           "/assets/default_club_logo.png"
   default_price_cents:    1997
   min_price_cents:        1000
   name_max_length:        50
   sub_heading_max_length: 55
 :courses:
-  default_title:        "Your Course Name Here (Keep it Catchy)"
-  default_description:  "Provide a quick course description here. It should be brief yet enticing. To change the course photo, drag and drop a new one from your desktop."
-  default_initial_logo: "/assets/default_initial_course_logo.jpg"
-  default_logo:         "/assets/default_course_logo.jpg"
+  default_initial_title:       "Your First Course"
+  default_title:               "Your Course Name Here (Keep it Catchy)"
+  default_initial_description: "This is your first course on IfSimply.com. Watch the video in Lesson 1 to get a quick overview. Visit the Membership Site Secrets Club via your My Profile page to get more tips and details on creating an awesome course. Quick Tip: Keep videos under 5-10 minutes and add a PDF or other download to help your members get more out of each lesson."
+  default_description:         "Put your course description here. Watch the video in Lesson 1 to get a quick overview. Visit the Membership Site Secrets Club via your My Profile page to get more tips and details on creating an awesome course."
+  default_initial_logo:        "/assets/default_initial_course_logo.jpg"
+  default_logo:                "/assets/default_course_logo.jpg"
 :lessons:
-  default_title:         "Your Lesson Name Here (Keep it Focused)"
-  default_background:    "Place a description, video notes, and background information on the lesson here. Click in here and delete any text. When done, click save above (upper left icon in the edit bar).<div><br></div><div><u>Key Take-aways from this lesson:</u></div><div><ol><li>You are an incredible person</li><li>No Seriously, you rock for using IfSimply</li><li>You really, really, are an amazing person and we are so thankful for you</li></ol></div>"
-  default_free:          false
-  default_initial_video: "http://youtu.be/X72FZkJYkiI"
+  default_initial_title: "Intro to IfSimply Courses"
+  default_title:              "Your Lesson Name Here (Keep it Focused)"
+  default_initial_background: "This area is where you should describe what they will learn in this lesson.<br/><br/>Key Take-aways from this lesson:<br/>1. Put the first thing they will learn here<br/>2. Put the second thing they will learn here<br/>3. Put the third thing they will learn here"
+  default_background:         "Place a description, video notes, and background information on the lesson here. Click in here and delete any text. When done, click save above (upper left icon in the edit bar).<br/><br/>Key Take-aways from this lesson:<br/>1. Put the first thing they will learn here<br/>2. Put the second thing they will learn here<br/>3. Put the third thing they will learn here"
+  default_free:               false
+  default_initial_video:      "http://youtu.be/X72FZkJYkiI"
 :articles:
   default_title:         "Getting Started with Your Article Area"
   default_content:       "Getting started with your article area is simple. You will want to replace this with your own text. If you have existing articles (or blog posts) you can copy and paste the text here. To start writing from scratch, just type it in here and hit Save above when done.<div><br></div><div><b><u>To change any formatting of text use the gray formatting bar above.</u></b><br></div><div><br></div><div><img src=\"/assets/article_start.png\"><br></div><div><br></div><div><b><u>To add an image, just drag and drop it into this text area or drag it over the logo to change it.</u></b></div><div><br></div><div><img src=\"/assets/image_demo.png\"><br></div><div><br></div><div><b><u>Save Your Changes by Clicking \"Save\" in the Gray Editor Bar at the top of the screen.</u></b><br></div><div><br></div><div><img src=\"/assets/formatting_bar.png\"><br></div><div><br></div>"

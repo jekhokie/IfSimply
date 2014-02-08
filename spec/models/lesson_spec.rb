@@ -91,58 +91,83 @@ describe Lesson do
   end
 
   describe "assign_defaults" do
-    let(:course) { FactoryGirl.create :course }
-
     before :each do
+      @course = FactoryGirl.create :course
+
       @lesson = Lesson.new
-      @lesson.course_id = course.id
+      @lesson.course_id = @course.id
       @lesson.assign_defaults
       @lesson.save
-    end
-
-    it "assigns the correct default title" do
-      @lesson.title.should == "Lesson 1 - #{Settings.lessons[:default_title]}"
-    end
-
-    it "assigns the correct default background" do
-      @lesson.background.should == Settings.lessons[:default_background]
     end
 
     it "assigns the correct default free boolean" do
       @lesson.free.should == Settings.lessons[:default_free]
     end
 
-    describe "for the first Lesson of the first Course" do
-      it "assigns a default video" do
-        @lesson.video.should == Settings.lessons[:default_initial_video]
-      end
+    it "assigns the correct default initial title" do
+      @lesson.title.should == "Lesson 1 - #{Settings.lessons[:default_initial_title]}"
     end
 
-    describe "for a Lesson of a Course that is not the only Course" do
-      let!(:new_course) { FactoryGirl.create :course, :club_id => course.club.id }
+    it "assigns the correct default initial background" do
+      @lesson.background.should == Settings.lessons[:default_initial_background]
+    end
 
-      before :each do
-        @new_lesson = Lesson.new
-        @new_lesson.course_id = new_course.id
-        @new_lesson.assign_defaults
-        @new_lesson.save
-      end
-
-      it "does not assign a default video" do
-        @new_lesson.video.should be_blank
-      end
+    it "assigns the correct default initial video" do
+      @lesson.video.should == Settings.lessons[:default_initial_video]
     end
 
     describe "for the non-first Lesson of a Course" do
       before :each do
+        lesson  = FactoryGirl.create :lesson
+
         @new_lesson = Lesson.new
-        @new_lesson.course_id = course.id
+        @new_lesson.course_id = lesson.course.id
         @new_lesson.assign_defaults
         @new_lesson.save
       end
 
+      it "assigns the correct default free boolean" do
+        @new_lesson.free.should == Settings.lessons[:default_free]
+      end
+
+      it "assigns the correct default non-initial title" do
+        @new_lesson.title.should == "Lesson 2 - #{Settings.lessons[:default_title]}"
+      end
+
+      it "assigns the correct default non-initial background" do
+        @new_lesson.background.should == Settings.lessons[:default_background]
+      end
+
       it "does not assign a default video" do
         @new_lesson.video.should be_blank
+      end
+    end
+
+    describe "for a Lesson of a Course that is not the only Course" do
+      before :each do
+        course1 = FactoryGirl.create(:course)
+        course2 = FactoryGirl.create(:course, :club_id => course1.club.id)
+
+        @new_lesson = Lesson.new
+        @new_lesson.course_id = course2.id
+        @new_lesson.assign_defaults
+        @new_lesson.save
+      end
+
+      it "assigns the correct default free boolean" do
+        @new_lesson.free.should == Settings.lessons[:default_free]
+      end
+
+      it "assigns the correct default initial title" do
+        @new_lesson.title.should == "Lesson 1 - #{Settings.lessons[:default_initial_title]}"
+      end
+
+      it "assigns the correct default initial background" do
+        @new_lesson.background.should == Settings.lessons[:default_initial_background]
+      end
+
+      it "assigns the correct default initial video" do
+        @new_lesson.video.should == Settings.lessons[:default_initial_video]
       end
     end
   end

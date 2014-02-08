@@ -30,12 +30,12 @@ describe LessonsController do
       assigns(:lesson).course.should == assigns(:course)
     end
 
-    it "assigns the default title" do
-      assigns(:lesson).title.should == "Lesson 1 - #{Settings.lessons[:default_title]}"
+    it "assigns the default initial title" do
+      assigns(:lesson).title.should == "Lesson 1 - #{Settings.lessons[:default_initial_title]}"
     end
 
-    it "assigns the default background" do
-      assigns(:lesson).background.should == Settings.lessons[:default_background]
+    it "assigns the default initial background" do
+      assigns(:lesson).background.should == Settings.lessons[:default_initial_background]
     end
   end
 

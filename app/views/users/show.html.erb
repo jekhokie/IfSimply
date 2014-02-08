@@ -30,7 +30,7 @@
           <%- if user_signed_in? and @user == current_user %>
             <%= link_to "#{@user.clubs.first.name} #{@user.clubs.first.sub_heading}", club_editor_path(@user.clubs.first) %>
 
-            <%- unless @user.subscriptions.map(&:club_id).include?(1) %>
+            <%- unless @user.id == 1 or @user.subscriptions.map(&:club_id).include?(1) %>
               <span class="ifsimply-club-question">
                 Want some help creating your own club? Want to know how to build and grow it fast?
               </span>

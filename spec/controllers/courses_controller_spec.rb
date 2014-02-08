@@ -116,12 +116,12 @@ describe CoursesController do
         assigns(:course).logo.should == Settings.courses[:default_initial_logo]
       end
 
-      it "assigns the default title" do
-        assigns(:course).title.should == Settings.courses[:default_title]
+      it "assigns the default initial title" do
+        assigns(:course).title.should == Settings.courses[:default_initial_title]
       end
 
-      it "assigns the default description" do
-        assigns(:course).description.should == Settings.courses[:default_description]
+      it "assigns the default initial description" do
+        assigns(:course).description.should == Settings.courses[:default_initial_description]
       end
 
       it "creates a first Lesson" do

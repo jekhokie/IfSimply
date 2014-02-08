@@ -49,13 +49,13 @@ describe "users/show.html.erb" do
     end
 
     describe "for a User not belonging to the IfSimply Club" do
-      let!(:user) { FactoryGirl.create :user }
+      let!(:other_user) { FactoryGirl.create :user }
 
       before :each do
-        user.confirm!
-        login_as user, :scope => :user
+        other_user.confirm!
+        login_as other_user, :scope => :user
 
-        visit user_path(user)
+        visit user_path(other_user)
       end
 
       it "shows the label to subscribe to the IfSimply Club" do
@@ -66,16 +66,16 @@ describe "users/show.html.erb" do
     end
 
     describe "for a User belonging to the IfSimply Club" do
-      let!(:user)         { FactoryGirl.create :user }
-      let!(:subscription) { FactoryGirl.create :subscription, :user  => user,
+      let!(:other_user)   { FactoryGirl.create :user }
+      let!(:subscription) { FactoryGirl.create :subscription, :user  => other_user,
                                                               :club  => Club.find(1),
                                                               :level => 'basic' }
 
       before :each do
-        user.confirm!
-        login_as user, :scope => :user
+        other_user.confirm!
+        login_as other_user, :scope => :user
 
-        visit user_path(user)
+        visit user_path(other_user)
       end
 
       it "does not show the label to subscribe to the IfSimply Club" do

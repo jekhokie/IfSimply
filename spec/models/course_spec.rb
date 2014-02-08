@@ -35,15 +35,15 @@ describe Course do
       @course.save
     end
 
-    it "assigns the correct default title" do
-      @course.title.should == Settings.courses[:default_title]
+    it "assigns the correct default initial title" do
+      @course.title.should == Settings.courses[:default_initial_title]
     end
 
-    it "assigns the correct default description" do
-      @course.description.should == Settings.courses[:default_description]
+    it "assigns the correct default initial description" do
+      @course.description.should == Settings.courses[:default_initial_description]
     end
 
-    it "assigns the default initial logo" do
+    it "assigns the correct default initial logo" do
       @course.logo.to_s.should == Settings.courses[:default_initial_logo]
     end
 
@@ -55,7 +55,15 @@ describe Course do
         @new_course.save
       end
 
-      it "assigns the default non-initial logo" do
+      it "assigns the correct default non-initial title" do
+        @new_course.title.should == Settings.courses[:default_title]
+      end
+
+      it "assigns the correct default non-initial description" do
+        @new_course.description.to_s.should == Settings.courses[:default_description]
+      end
+
+      it "assigns the correct default non-initial logo" do
         @new_course.logo.to_s.should == Settings.courses[:default_logo]
       end
     end
