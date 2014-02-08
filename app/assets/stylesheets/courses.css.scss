@@ -490,10 +490,28 @@
 
           .course-title {
             font-size:     18px;
+            height:        22px;
             margin-bottom: 12px;
 
             a {
               color: black;
+            }
+          }
+
+          .course-description {
+            height: 65px;
+          }
+
+          .destroy-course {
+            color:      red;
+            font-size:  18px;
+            margin-top: 8px;
+            width:      100%;
+
+            a {
+              color:       red;
+              font-style:  italic;
+              font-weight: bold;
             }
           }
         }
