@@ -96,7 +96,7 @@
 
                 <div class="subscription-club-name">
                   <%- if user_signed_in? and @user == current_user %>
-                    <%= link_to truncate_html("#{subscription.club.name}", :length => 50), subscription.club %>
+                    <%= link_to truncate_html("#{subscription.club.name}", :length => 45), subscription.club %>
                   <%- else %>
                     <%= link_to "#{subscription.club.name} #{subscription.club.sub_heading}", subscription.club %>
                   <%- end %>
