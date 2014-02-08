@@ -121,3 +121,24 @@ PassengerDefaultRuby /home/jekhokie/.rvm/wrappers/ruby-1.9.3-p194@ifsimply/ruby
 ```
 sudo service httpd start
 ```
+
+== Database Backups/Restores
+
+- Back up the database without the 'create database' statement.
+
+NOTE: If you get a "failed to write to /tmp/#..." error, restart mysqld service - this is due to the
+      fact that the default tmpdir is specified as /tmp, but it's mounted from within the mysqld
+      process, and that /tmp directory is auto-cleaned on a routine basis by the Linux OS.
+
+```
+mysqldump -v -u root -p --no-create-db ifsimply_production > ~/ifsimply_prod_<YYYYMMDD>.sql
+```
+
+- Restore database data to a particular database name:
+
+```
+mysql -u root -p
+sql> CREATE DATABASE 'ifsimply_backup';
+sql> quit;
+mysql -u root -p ifsimply_backup < ifsimply_prod_<YYYYMMDD>.sql
+```
