@@ -90,7 +90,7 @@ Ifsimply::Application.routes.draw do
 
   resources :lessons, :only => [ :destroy ]
 
-  resources :articles, :only => [ :show, :update ]
+  resources :articles, :only => [ :show, :update, :destroy ]
 
   resources :discussion_boards, :only => [ :show, :update ] do
     resources :topics, :only => [ :new, :create ]
