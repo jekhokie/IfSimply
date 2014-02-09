@@ -1,13 +1,26 @@
 .learn-logo-container {
+  height: 130px;
   margin: 0px auto;
   width:  850px;
 
-  span {
-    background: url(logo_200w_121h.png) no-repeat 0 0;
-    display:    inline-table;
-    height:     115px;
-    margin:     0px auto;
-    width:      195px;
+  span.how-it-works-logo {
+    background:  url(logo_200w_121h.png) no-repeat 0 0;
+    height:      115px;
+    margin-left: -90px;
+    position:    absolute;
+    width:       195px;
+  }
+
+  .how-it-works-header {
+    color:          #0077cb;
+    display:        inline-block;
+    font-family:    "Fredericka the Great";
+    font-size:      75px;
+    letter-spacing: 2px;
+    line-height:    48px;
+    margin-top:     45px;
+    text-align:     center;
+    width:          100%;
   }
 }
 
