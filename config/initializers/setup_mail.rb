@@ -8,4 +8,12 @@ ActionMailer::Base.smtp_settings = {
   :enable_starttls_auto => Settings.email[:enable_starttls_auto]
 }
 
-Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development? or Rails.env.test?
+ActionMailer::Base.default_url_options = {
+  :host => "#{Settings.general[:host]}:#{Settings.general[:port]}"
+}
+
+if Rails.env.development? or Rails.env.test?
+  puts "Setting up development mail interceptor..."
+  Mail.register_interceptor(DevelopmentMailInterceptor)
+  puts "Development mail interceptor set up."
+end

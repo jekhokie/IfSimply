@@ -17,9 +17,6 @@ end
 
 module Ifsimply
   class Application < Rails::Application
-    # Default host for emails
-    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
     # Skip RSpec tests for views and helpers
     config.generators do |g|
       g.test_framework :rspec, :fixture => false
