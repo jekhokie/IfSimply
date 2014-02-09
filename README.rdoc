@@ -37,11 +37,34 @@ vim config/paypal.yml   # update all values for PayPal live API
 scp Downloads/newrelic.yml <target>:ifsimply/config/   # newrelic config file with key
 ```
 
-- (Optional) HostMonster .htaccess file:
+== HostMonster (on the HostMonster server)
+
+- .htaccess file:
 
 ```
 cp config/htaccess.sample public/.htaccess
 vim public/.htaccess   # update all values for htaccess
+```
+
+- Environment settings for Ruby/Gems:
+
+```
+vim ~/.bashrc
+
+# add the following to the .bashrc file
+export HPATH=$HOME
+export GEM_HOME=$HPATH/ruby/gems
+export GEM_PATH=$GEM_HOME:/lib64/ruby/gems/1.9.3
+export GEM_CACHE=$GEM_HOME/cache
+export PATH=$PATH:$HPATH/ruby/gems/bin
+export PATH=$PATH:$HPATH/ruby/gems
+```
+
+- Symlink for active application:
+
+```
+mkdir -p ~/public_html/ifSimply/
+ln -s ~/ifsimply/public ~/public_html/ifSimply/HTML
 ```
 
 == Background Mailers
