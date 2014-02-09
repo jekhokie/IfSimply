@@ -37,6 +37,7 @@ config/database.yml
 config/settings.yml
 config/paypal.yml
 config/newrelic.yml
+public/.htaccess
 
 # Ignore email debugging
 lib/development_mail_interceptor.rb
