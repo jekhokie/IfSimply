@@ -42,7 +42,7 @@ scp Downloads/newrelic.yml <target>:ifsimply/config/   # newrelic config file wi
 - Start the mailer
 
 ```
-RAILS_ENV=development script/delayed_job start
+RAILS_ENV=development script/delayed_job start -n 3   # start with 3 workers
 RAILS_ENV=development script/delayed_job stop
 ```
 
