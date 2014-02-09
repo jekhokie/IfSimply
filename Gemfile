@@ -26,6 +26,7 @@ gem 'passenger'
 
 # profiling
 gem 'newrelic_rpm'
+gem 'google-analytics-rails'
 
 # custom video player
 gem 'videojs_rails'

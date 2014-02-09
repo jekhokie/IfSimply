@@ -1,6 +1,9 @@
 Ifsimply::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # Google Analytics
+  GA.tracker = Settings.metrics[:google_analytics_tracking]
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
