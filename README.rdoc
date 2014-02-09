@@ -69,6 +69,9 @@ ln -s ~/ifsimply/public ~/public_html/ifSimply/HTML
 
 == Background Mailers
 
+WARNING: DelayedJob caches all configs, including email URLs and views for mailers.
+         If ANY of these change, it requires a restart of the delayed_job service.
+
 - Start the mailer
 
 ```
