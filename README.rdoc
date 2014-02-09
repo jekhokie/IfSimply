@@ -37,6 +37,13 @@ vim config/paypal.yml   # update all values for PayPal live API
 scp Downloads/newrelic.yml <target>:ifsimply/config/   # newrelic config file with key
 ```
 
+- (Optional) HostMonster .htaccess file:
+
+```
+cp config/htaccess.sample public/.htaccess
+vim public/.htaccess   # update all values for htaccess
+```
+
 == Background Mailers
 
 - Start the mailer
