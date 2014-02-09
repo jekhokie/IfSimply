@@ -16,6 +16,7 @@
 /tmp/cache
 /tmp/capybara
 /tmp/performance
+/tmp/pids/*.pid
 
 # Ignore backup files
 *.bak
