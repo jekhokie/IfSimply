@@ -81,3 +81,5 @@
   :linkedin_share_title:   "IfSimply - Stop Wishing, Start Growing"
   :linkedin_share_summary: "Check out IfSimply (http://www.ifsimply.com/) - the better way to market!"
   :linkedin_share_source:  "http://www.ifsimply.com/"
+:metrics:
+  :google_analytics_tracking: <GOOGLE_ANALYTICS_TRACKING_CODE>
