@@ -5,11 +5,12 @@ sqlite: &sqlite
   timeout: 5000
 
 mysql: &mysql
-  adapter:  mysql2
-  encoding: utf8
-  database: ifsimply_production
-  username: root
-  password: root100
+  adapter:   mysql2
+  encoding:  utf8
+  database:  ifsimply_production
+  username:  root
+  password:  root100
+  reconnect: true
 
 # default values
 defaults: &defaults
