@@ -189,9 +189,11 @@
 }
 
 .paypal-confirm-modal {
+  height: 520px;
   width:  450px;
 
   .modal-body {
+    min-height: 520px;
     text-align: center;
 
     .paypal-verification {
@@ -199,7 +201,8 @@
       -moz-border-radius:    10px;
       -webkit-border-radius: 10px;
 
-      border: 5px solid #0077CB;
+      border:     5px solid #0077CB;
+      min-height: 480px;
 
       input {
         margin: 15px auto;
@@ -222,8 +225,33 @@
         font-weight: bold;
       }
 
+      .paypal-form-row {
+        label {
+          display:        inline-block;
+          font-size:      14px;
+          font-weight:    bold;
+          margin:         8px auto;
+          padding:        4px;
+          padding-top:    5px;
+          text-align:     left;
+          vertical-align: top;
+          width:          100px;
+        }
+
+        input {
+          margin:     8px auto;
+          padding:    4px;
+          text-align: left;
+          width:      200px;
+        }
+      }
+
+      input[type='submit'] {
+        margin: 4px auto;
+      }
+
       .paypal-note {
-        margin-top: 15px;
+        margin-top: 4px;
         width:      100%;
 
         .paypal-note-heading,
@@ -243,6 +271,10 @@
           width:      300px;
         }
       }
+    }
+
+    .powered-by-logo {
+      margin-top: 8px;
     }
   }
 }

@@ -62,8 +62,14 @@ class UsersController < ApplicationController
       if (payment_email = params[:payment_email]).blank?
         flash[:error] = "You must specify a valid email address"
         render :specify_paypal
+      elsif (first_name = params[:first_name]).blank?
+        flash[:error] = "You must specify a valid first name"
+        render :specify_paypal
+      elsif (last_name = params[:last_name]).blank?
+        flash[:error] = "You must specify a valid last name"
+        render :specify_paypal
       else
-        if PaypalProcessor.is_verified?(payment_email)
+        if PaypalProcessor.is_verified?(first_name, last_name, payment_email)
           current_user.payment_email = payment_email
           current_user.verified      = true
           current_user.save
@@ -73,7 +79,7 @@ class UsersController < ApplicationController
             render :template => 'admin/update_paypal'
           end
         else
-          flash[:error] = "Email not verified - please visit PayPal to verify"
+          flash[:error] = "Email not verified or error - please visit PayPal to verify"
           render :specify_paypal
         end
       end

@@ -1,5 +1,5 @@
 <div class="paypal-verification">
-  <h4>Please Verify your PayPal Email Address:</h4>
+  <h4>Please Verify Your PayPal Account:</h4>
 
   <%= form_tag verify_paypal_info_for_user_path(@user), :method => :put,
                                                         :remote => true,
@@ -12,7 +12,18 @@
       <%= hidden_field_tag :admin_page, true %>
     <%- end %>
 
-    <%= text_field_tag :payment_email %>
+    <div class="row paypal-form-row">
+      <%= label_tag 'First Name:' %>
+      <%= text_field_tag :first_name %>
+    </div>
+    <div class="row paypal-form-row">
+      <%= label_tag 'Last Name:' %>
+      <%= text_field_tag :last_name %>
+    </div>
+    <div class="row paypal-form-row">
+      <%= label_tag 'Email:' %>
+      <%= text_field_tag :payment_email %>
+    </div>
     <%= submit_tag "Confirm", :class => "btn btn-primary submit-payment-email",
                               :data  => { :disable_with => "Processing..." } %>
 
