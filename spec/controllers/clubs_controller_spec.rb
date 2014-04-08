@@ -216,6 +216,54 @@ describe ClubsController do
     end
   end
 
+  describe "PUT 'update_free_content'" do
+    let(:club)             { user.clubs.first }
+
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:users]
+      sign_in user
+    end
+
+    describe "for valid attributes" do
+      before :each do
+        put 'update_free_content', :id => club.id, :club => { :free_content => { :value => false } }
+      end
+
+      it "returns http success" do
+        response.should be_success
+      end
+
+      it "returns the club" do
+        assigns(:club).should_not be_nil
+      end
+
+      it "assigns the new free_content attribute" do
+        club.reload
+        club.free_content.should == false
+      end
+    end
+
+    describe "for invalid attributes" do
+      before :each do
+        @old_content = club.free_content
+        put 'update_free_content', :id => club.id, :club => { :free_content => "" }
+      end
+
+      it "returns http unprocessable" do
+        response.response_code.should == 422
+      end
+
+      it "returns the club" do
+        assigns(:club).should_not be_nil
+      end
+
+      it "does not update the attributes" do
+        club.reload
+        club.free_content.should == @old_content
+      end
+    end
+  end
+
   describe "GET 'specify_price'" do
     let!(:club) { user.clubs.first }
 
