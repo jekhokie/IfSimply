@@ -41,6 +41,10 @@ describe Club do
       club.price_cents.should == Settings.clubs[:default_price_cents]
     end
 
+    it "assigns the default free_content" do
+      club.free_content.should == Settings.clubs[:default_free_content]
+    end
+
     # discussion_board
     it "builds a default discussion_board" do
       club.discussion_board.should_not be_blank
@@ -92,6 +96,17 @@ describe Club do
 
     it "returns false when having a price of less than $10" do
       FactoryGirl.build(:club, :price_cents => "1").should_not be_valid
+    end
+
+    # free_content
+    describe "for free_content" do
+      it "returns false when no free_content is specified" do
+        FactoryGirl.build(:club, :free_content => "").should_not be_valid
+      end
+
+      it "returns true when free_content is a string of a boolean" do
+        FactoryGirl.build(:club, :free_content => true).should be_valid
+      end
     end
 
     # user association
