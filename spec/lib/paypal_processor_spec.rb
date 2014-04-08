@@ -1,13 +1,24 @@
 require 'spec_helper'
 
 describe "PaypalProcessor lib" do
-  describe ".is_verified?(paypal_email)" do
+  describe ".is_verified?(first_name, last_name, paypal_email)" do
+    let(:first_name) { "Someone" }
+    let(:last_name)  { "Newbie" }
+
+    it "returns false for a blank first name" do
+      PaypalProcessor.is_verified?("", last_name, "test@test.com").should == false
+    end
+
+    it "returns false for a blank last name" do
+      PaypalProcessor.is_verified?(first_name, "", "test@test.com").should == false
+    end
+
     it "returns false for a blank email address" do
-      PaypalProcessor.is_verified?("").should == false
+      PaypalProcessor.is_verified?(first_name, last_name, "").should == false
     end
 
     it "returns false for a malformed email address" do
-      PaypalProcessor.is_verified?("blah").should == false
+      PaypalProcessor.is_verified?(first_name, last_name, "blah").should == false
     end
 
     it "returns true for a verified email address" do
@@ -24,7 +35,7 @@ describe "PaypalProcessor lib" do
                                                                                                   :responseEnvelope => { :ack => "Success" }
       api.should_receive(:get_verified_status).with(verifier).and_return verified_response
 
-      PaypalProcessor.is_verified?(email_address).should == true
+      PaypalProcessor.is_verified?(first_name, last_name, email_address).should == true
     end
 
     it "returns false for a non-verified email address" do
@@ -41,7 +52,7 @@ describe "PaypalProcessor lib" do
                                                                                                   :responseEnvelope => { :ack => "Success" }
       api.should_receive(:get_verified_status).with(verifier).and_return verified_response
 
-      PaypalProcessor.is_verified?(email_address).should == false
+      PaypalProcessor.is_verified?(first_name, last_name, email_address).should == false
     end
 
     it "returns false for an invalid response from PayPal" do
@@ -58,7 +69,7 @@ describe "PaypalProcessor lib" do
                                                                                                   :responseEnvelope => { :ack => "Failure" }
       api.should_receive(:get_verified_status).with(verifier).and_return verified_response
 
-      PaypalProcessor.is_verified?(email_address).should == false
+      PaypalProcessor.is_verified?(first_name, last_name, email_address).should == false
     end
   end
 

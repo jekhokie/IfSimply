@@ -261,6 +261,8 @@ describe UsersController do
   describe "PUT 'verify_email'" do
     describe "for a signed-in user" do
       let(:payment_email) { "test@test.com" }
+      let(:first_name)    { "Someone" }
+      let(:last_name)     { "Newbie" }
 
       before :each do
         @request.env["devise.mapping"] = Devise.mappings[:users]
@@ -271,11 +273,13 @@ describe UsersController do
 
         describe "for valid attributes" do
           before :each do
-            PaypalProcessor.should_receive(:is_verified?).with(payment_email).and_return true
+            PaypalProcessor.should_receive(:is_verified?).with(first_name, last_name, payment_email).and_return true
 
             sign_in verified_user
 
-            put 'verify_paypal', :format => :js, :id => verified_user.id, :payment_email => payment_email
+            put 'verify_paypal', :format => :js, :id => verified_user.id, :payment_email => payment_email,
+                                                                          :first_name    => first_name,
+                                                                          :last_name     => last_name
           end
 
           it "returns http success" do
@@ -295,11 +299,13 @@ describe UsersController do
 
         describe "for valid attributes from the admin page" do
           before :each do
-            PaypalProcessor.should_receive(:is_verified?).with(payment_email).and_return true
+            PaypalProcessor.should_receive(:is_verified?).with(first_name, last_name, payment_email).and_return true
 
             sign_in verified_user
 
-            put 'verify_paypal', :admin_page => true, :format => :js, :id => verified_user.id, :payment_email => payment_email
+            put 'verify_paypal', :admin_page => true, :format => :js, :id => verified_user.id, :payment_email => payment_email,
+                                                                                               :first_name    => first_name,
+                                                                                               :last_name     => last_name
           end
 
           it "returns http success" do
@@ -348,11 +354,13 @@ describe UsersController do
           let(:other_user) { FactoryGirl.create :verified_user, :payment_email => payment_email }
 
           before :each do
-            PaypalProcessor.should_receive(:is_verified?).with(payment_email).and_return false
+            PaypalProcessor.should_receive(:is_verified?).with(first_name, last_name, payment_email).and_return false
 
             sign_in other_user
 
-            put 'verify_paypal', :format => :js, :id => other_user.id, :payment_email => payment_email
+            put 'verify_paypal', :format => :js, :id => other_user.id, :payment_email => payment_email,
+                                                                       :first_name    => first_name,
+                                                                       :last_name     => last_name
           end
 
           it "returns the user" do
