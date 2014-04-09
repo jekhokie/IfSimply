@@ -7,7 +7,9 @@ class UpsellPagesController < ApplicationController
 
     if !can?(:read, @upsell_page)
       flash[:error] = "Club Owner is not verified - please let them know they need to verify their account!"
-
+      redirect_to root_path
+    elsif ! @upsell_page.club.free_content
+      flash[:error] = "This club does not allow basic memberships - please subscribe through the sales page."
       redirect_to root_path
     end
   end
@@ -15,7 +17,12 @@ class UpsellPagesController < ApplicationController
   def edit
     authorize! :update, @upsell_page
 
-    render :text => '', :layout => "mercury"
+    if @upsell_page.club.free_content
+      render :text => '', :layout => "mercury"
+    else
+      flash[:error] = "You elected no free content, meaning there is no need for an upsell page. Please check your account page."
+      redirect_to club_editor_path(@upsell_page.club)
+    end
   end
 
   def update
