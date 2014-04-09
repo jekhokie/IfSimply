@@ -4,7 +4,7 @@ describe UpsellPagesController do
   describe "GET 'show'" do
     describe "for a Club owner with a verified PayPal account" do
       let!(:user)        { FactoryGirl.create :user, :verified => true }
-      let!(:club)        { FactoryGirl.create :club, :user => user }
+      let!(:club)        { FactoryGirl.create :club, :user => user, :free_content => true }
       let!(:upsell_page) { club.upsell_page }
 
       before :each do

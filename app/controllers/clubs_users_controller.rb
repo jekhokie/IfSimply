@@ -21,8 +21,20 @@ class ClubsUsersController < ApplicationController
         session.delete(:subscription) unless session[:subscription].blank?
 
         respond_to do |format|
-          format.html { redirect_to club_upsell_page_path(@club) }
-          format.js   { render :js => "window.location = '#{club_upsell_page_path(@club)}'" }
+          format.html do
+            if @club.free_content
+              redirect_to club_upsell_page_path(@club)
+            else
+              redirect_to add_member_to_club_path(@club, :level => 'pro')
+            end
+          end
+          format.js do
+            if @club.free_content
+              render :js => "window.location = '#{club_upsell_page_path(@club)}'"
+            else
+              render :js => "window.location = '#{add_member_to_club_path(@club, :level => 'pro')}'"
+            end
+          end
         end
       end
     else
@@ -38,65 +50,69 @@ class ClubsUsersController < ApplicationController
         existing_membership = @club.subscriptions.find_by_user_id(current_user.id)
         requested_level     = params[:level].blank? ? "" : params[:level].to_s
 
-        if existing_membership                           and
-           existing_membership.level  == requested_level and
-           (existing_membership.level == 'basic' or existing_membership.pro_status == "ACTIVE")
-          redirect_to club_path(@club)
+        if ! @club.free_content and requested_level == 'basic'
+          redirect_to root_path, :alert => "This club does not allow basic memberships."
         else
-          if existing_membership
-            @subscription = existing_membership
+          if existing_membership                           and
+             existing_membership.level  == requested_level and
+             (existing_membership.level == 'basic' or existing_membership.pro_status == "ACTIVE")
+            redirect_to club_path(@club)
           else
-            @subscription       = ClubsUsers.new
-            @subscription.level = requested_level
-            @subscription.club  = @club
-            @subscription.user  = current_user
-          end
+            if existing_membership
+              @subscription = existing_membership
+            else
+              @subscription       = ClubsUsers.new
+              @subscription.level = requested_level
+              @subscription.club  = @club
+              @subscription.user  = current_user
+            end
 
-          if requested_level == 'pro'
-            # generate the root URL
-            prefix = "#{Settings.general['protocol']}://#{Settings.general['host']}:#{Settings.general['port']}"
+            if requested_level == 'pro'
+              # generate the root URL
+              prefix = "#{Settings.general['protocol']}://#{Settings.general['host']}:#{Settings.general['port']}"
 
-            # determine if we need a trial period or not
-            start_date = DateTime.now + Settings.paypal[:free_days].days
-            if existing_membership and existing_membership.anniversary_date
-              if existing_membership.anniversary_date < Date.today
-                start_date = DateTime.now
-              else
-                start_date = existing_membership.anniversary_date
+              # determine if we need a trial period or not
+              start_date = DateTime.now + Settings.paypal[:free_days].days
+              if existing_membership and existing_membership.anniversary_date
+                if existing_membership.anniversary_date < Date.today
+                  start_date = DateTime.now
+                else
+                  start_date = existing_membership.anniversary_date
+                end
               end
-            end
 
-            end_date = start_date + 1.year
+              end_date = start_date + 1.year
 
-            @subscription.preapproval_uuid = SecureRandom.uuid
-            preapproval_hash = PaypalProcessor.request_preapproval(@club.price.dollars,
-                                                                   "%.2f" % (@club.price.dollars * 12),
-                                                                   "#{prefix}#{subscribe_to_club_path(@club)}",
-                                                                   "#{prefix}/adaptive_payments/preapproval?club_id=#{@club.id}&xuuid=#{@subscription.preapproval_uuid}",
-                                                                   current_user.name,
-                                                                   @club.name,
-                                                                   start_date,
-                                                                   end_date)
+              @subscription.preapproval_uuid = SecureRandom.uuid
+              preapproval_hash = PaypalProcessor.request_preapproval(@club.price.dollars,
+                                                                     "%.2f" % (@club.price.dollars * 12),
+                                                                     "#{prefix}#{subscribe_to_club_path(@club)}",
+                                                                     "#{prefix}/adaptive_payments/preapproval?club_id=#{@club.id}&xuuid=#{@subscription.preapproval_uuid}",
+                                                                     current_user.name,
+                                                                     @club.name,
+                                                                     start_date,
+                                                                     end_date)
 
-            if preapproval_hash.blank?
-              flash[:error] = "Unexpected behavior from PayPal - Please check back later"
-              render :new
+              if preapproval_hash.blank?
+                flash[:error] = "Unexpected behavior from PayPal - Please check back later"
+                render :new
+              else
+                @subscription.preapproval_key = preapproval_hash[:preapproval_key]
+                @subscription.pro_status = (existing_membership ? "PRO_CHANGE" : "FAILED_PREAPPROVAL")
+                @subscription.save
+
+                redirect_to preapproval_hash[:preapproval_url]
+              end
             else
-              @subscription.preapproval_key = preapproval_hash[:preapproval_key]
-              @subscription.pro_status = (existing_membership ? "PRO_CHANGE" : "FAILED_PREAPPROVAL")
-              @subscription.save
+              @subscription.level      = requested_level
+              @subscription.pro_status = 'INACTIVE'
 
-              redirect_to preapproval_hash[:preapproval_url]
-            end
-          else
-            @subscription.level      = requested_level
-            @subscription.pro_status = 'INACTIVE'
-
-            if @subscription.save
-              redirect_to club_path(@club)
-            else
-              flash[:error] = "Invalid membership level specified"
-              render :new
+              if @subscription.save
+                redirect_to club_path(@club)
+              else
+                flash[:error] = "Invalid membership level specified"
+                render :new
+              end
             end
           end
         end

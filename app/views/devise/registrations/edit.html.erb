@@ -35,6 +35,24 @@
         <div class="account-status-paypal">
           <%= render :partial => "devise/registrations/verified_status" %>
         </div>
+
+        <div class="account-status-paid-only">
+          <div class="paid-only-heading">
+            Free Content
+          </div>
+
+          <div class="paid-only-link">
+            <span class="paid-only-sub-heading">
+              Allow Free (Basic) Memberships to Your Club?
+            </span>
+
+            <%= best_in_place @user.clubs.first, :free_content, :type       => :checkbox,
+                                                                :path       => update_free_content_club_path(@user.clubs.first),
+                                                                :collection => [ raw("<i class='icon-check-empty'></i>"),
+                                                                                 raw("<i class='icon-check'></i>") ],
+                                                                :html_attrs => { :rows => '1' } %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

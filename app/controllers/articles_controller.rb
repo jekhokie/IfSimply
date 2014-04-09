@@ -6,6 +6,10 @@ class ArticlesController < ApplicationController
   def show
     redirect_to club_sales_page_path(@article.club) and return unless (user_signed_in? and can?(:read, @article))
 
+    if @article.free and ! @article.club.free_content
+      redirect_to show_all_club_articles_path(@article.club), :alert => "This article is for free memberships - please contact Club owner." and return
+    end
+
     if request.path != article_path(@article)
       redirect_to article_path(@article), status: :moved_permanently and return
     end
@@ -14,6 +18,10 @@ class ArticlesController < ApplicationController
   def edit
     authorize! :edit, @article
     @club = @article.club
+
+    if @article.free and ! @article.club.free_content
+      redirect_to show_all_club_articles_path(@article.club), :alert => "This article is for free memberships - please check your account settings." and return
+    end
 
     if request.path != article_path(@article)
       render article_editor_path(@article), :text => "", :status => :moved_permanently, :layout => "mercury" and return

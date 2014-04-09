@@ -34,6 +34,20 @@ class ClubsController < ApplicationController
     end
   end
 
+  def update_free_content
+    authorize! :update, @club
+
+    @club.free_content = params[:club][:free_content]
+
+    if @club.save
+      render :text => ""
+    else
+      respond_error_to_mercury [ @club ]
+    end
+
+    flash.discard
+  end
+
   def specify_price
     if user_signed_in?
       authorize! :update, @club

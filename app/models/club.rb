@@ -2,7 +2,7 @@ class Club < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => [ :slugged, :history ]
 
-  attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price
+  attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price, :default_free_content
 
   after_create :create_discussion_board, :create_sales_page, :create_upsell_page
 
@@ -15,6 +15,8 @@ class Club < ActiveRecord::Base
   validates :description, :presence => { :message => "for club can't be blank" }
   validates :price_cents, :presence => true
   validates :user_id,     :presence => true
+
+  validate :free_content_is_valid
 
   validates_numericality_of :price_cents, :greater_than_or_equal_to => Settings.clubs[:min_price_cents],
                                           :message                  => "must be at least $#{Settings.clubs[:min_price_cents]/100}"
@@ -38,11 +40,12 @@ class Club < ActiveRecord::Base
   end
 
   def assign_defaults
-    self.name        = Settings.clubs[:default_name]
-    self.sub_heading = Settings.clubs[:default_sub_heading]
-    self.description = Settings.clubs[:default_description]
-    self.price_cents = Settings.clubs[:default_price_cents]
-    self.logo        = Settings.clubs[:default_logo]
+    self.name         = Settings.clubs[:default_name]
+    self.sub_heading  = Settings.clubs[:default_sub_heading]
+    self.description  = Settings.clubs[:default_description]
+    self.free_content = Settings.clubs[:default_free_content]
+    self.price_cents  = Settings.clubs[:default_price_cents]
+    self.logo         = Settings.clubs[:default_logo]
   end
 
   private
@@ -81,6 +84,12 @@ class Club < ActiveRecord::Base
   def sub_heading_length
     unless sub_heading.blank?
       errors.add(:base, "Sub heading length too long - must be #{Settings.clubs[:sub_heading_max_length]} characters or less") unless self.sub_heading.length <= Settings.clubs[:sub_heading_max_length]
+    end
+  end
+
+  def free_content_is_valid
+    unless free_content.to_s =~ /(true|false)/
+      errors.add(:base, "Free content for club must be either true or false")
     end
   end
 end

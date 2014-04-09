@@ -10,7 +10,7 @@
   }
 
   .account-password-status {
-    height: 320px;
+    height: 370px;
 
     .account-password,
     .account-status {
@@ -119,7 +119,7 @@
         }
 
         .account-status-paypal {
-          margin-top: 45px;
+          margin-top: 35px;
 
           .paypal-heading {
             font-size:      24px;
@@ -147,6 +147,35 @@
             .paypal-update-button {
               padding: 4px 0px;
               width:   100px;
+            }
+          }
+        }
+
+        .account-status-paid-only {
+          margin-top: 25px;
+
+          .paid-only-heading {
+            font-size:      24px;
+            font-weight:    bold;
+            letter-spacing: 1px;
+            line-height:    28px;
+            margin-bottom:  12px;
+          }
+
+          .paid-only-link {
+            span.paid-only-sub-heading {
+              display: inline-block;
+            }
+
+            .best_in_place {
+              display:        inline-block;
+              font-size:      25px;
+              margin-left:    15px;
+              vertical-align: middle;
+            }
+
+            .best_in_place:hover {
+              cursor: pointer;
             }
           }
         }

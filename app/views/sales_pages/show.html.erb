@@ -22,11 +22,22 @@
 
           <div class="club-buy">
             <%- if user_signed_in? and current_user.clubs.first == @club %>
-              <div class="btn btn-warning subscribe-button-edit">Join Now. For Free</div>
+              <%- if @club.free_content %>
+                <div class="btn btn-warning subscribe-button-edit">Join Now. For Free</div>
+              <%- else %>
+                <div class="btn btn-warning subscribe-button-edit">Join Now for <%= currency_symbol %><%= @club.price %>/mo</div>
+              <%- end %>
             <%- else %>
-              <%= button_to "Join Now. For Free", subscribe_to_club_path(@club), :method => 'get',
-                                                                                 :remote => (user_signed_in? ? "true" : "false"),
-                                                                                 :class  => 'btn btn-warning subscribe-button' -%>
+              <%- if @club.free_content %>
+                <%= button_to "Join Now. For Free", subscribe_to_club_path(@club), :method => 'get',
+                                                                                   :remote => (user_signed_in? ? "true" : "false"),
+                                                                                   :class  => 'btn btn-warning subscribe-button' -%>
+              <%- else %>
+                <%= button_to "Join Now for $#{@club.price}/mo", subscribe_to_club_path(@club),
+                                                                 :method => 'get',
+                                                                 :remote => (user_signed_in? ? "true" : "false"),
+                                                                 :class  => 'btn btn-warning subscribe-button' -%>
+              <%- end %>
             <%- end %>
           </div>
         </div>
