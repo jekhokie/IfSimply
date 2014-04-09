@@ -6,7 +6,7 @@
       <img id="article_image" data-mercury="image" src="<%= @article.image %>">
 
       <div class="free-select hide-preview">
-        <%- if can?(:update, @article) %>
+        <%- if can?(:update, @article) and @article.club.free_content %>
           (Free?
           <%= best_in_place @article, :free, :type       => :checkbox,
                                              :path       => article_path(@article),

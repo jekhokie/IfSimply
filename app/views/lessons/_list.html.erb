@@ -1,100 +1,102 @@
 <%- lessons.sort_by(&:id).each_with_index do |lesson, i| %>
-  <%- if i > 0 %>
-    <hr />
-  <%- end %>
+  <%- unless lesson.free and ! lesson.club.free_content %>
+    <%- if i > 0 %>
+      <hr />
+    <%- end %>
 
-  <div class="lesson">
-    <div class="lesson-title">
-      <div id="lesson_<%= lesson.id %>_title" class="lesson-title-text" data-mercury="simple"><%= lesson.title %></div>
+    <div class="lesson">
+      <div class="lesson-title">
+        <div id="lesson_<%= lesson.id %>_title" class="lesson-title-text" data-mercury="simple"><%= lesson.title %></div>
 
-      <%- if can? :update, lesson %>
-        <div class="free-select hide-preview">
-          (Free?
-          <%= best_in_place lesson, :free, :type       => :checkbox,
-                                           :path       => course_lesson_path(lesson.course, lesson),
-                                           :html_attrs => { :rows => '1' } %>
-          )
-        </div>
-      <%- end %>
-    </div>
-
-    <div class="lesson-video video-container">
-      <div class="video-iframe">
-        <%- if can?(:read, lesson) %>
-          <%= render :partial => 'shared/video_iframe', :locals => { :id => lesson.id, :video_url => lesson.video } %>
-        <%- else %>
-          <a href="<%= subscribe_to_club_path(lesson.club) %>" class="click-for-pro-link">
-            <%= image_tag "click_for_pro.png", :alt => "click-for-pro" %>
-          </a>
+        <%- if can? :update, lesson and lesson.club.free_content %>
+          <div class="free-select hide-preview">
+            (Free?
+            <%= best_in_place lesson, :free, :type       => :checkbox,
+                                             :path       => course_lesson_path(lesson.course, lesson),
+                                             :html_attrs => { :rows => '1' } %>
+            )
+          </div>
         <%- end %>
       </div>
 
-      <%- if is_editing? %>
-        <div class="update-embed-url hide-preview">
-          <%- if can? :update, lesson %>
-            <div class="video-embed-source">
-              <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
-
-              <div id="lesson_<%= lesson.id %>_video" class="video-related" data-mercury="simple"><%= lesson.video %></div>
-            </div>
+      <div class="lesson-video video-container">
+        <div class="video-iframe">
+          <%- if can?(:read, lesson) %>
+            <%= render :partial => 'shared/video_iframe', :locals => { :id => lesson.id, :video_url => lesson.video } %>
+          <%- else %>
+            <a href="<%= subscribe_to_club_path(lesson.club) %>" class="click-for-pro-link">
+              <%= image_tag "click_for_pro.png", :alt => "click-for-pro" %>
+            </a>
           <%- end %>
+        </div>
+
+        <%- if is_editing? %>
+          <div class="update-embed-url hide-preview">
+            <%- if can? :update, lesson %>
+              <div class="video-embed-source">
+                <span class="video-embed-label"><i class="icon-question-sign"> Video Embed URL:</i></span>
+
+                <div id="lesson_<%= lesson.id %>_video" class="video-related" data-mercury="simple"><%= lesson.video %></div>
+              </div>
+            <%- end %>
+          </div>
+        <%- end %>
+      </div>
+
+      <div class="lesson-file-attachment lesson-file-attachment-<%= lesson.id %>">
+        <div class="update-file-attachment">
+          <div class="file-attachment-path">
+            <span class="file-attachment-label">Materials:</span>
+            <div class="file-attachment-errors hide-preview"></div>
+
+            <%- if can?(:update, lesson) %>
+              <%= form_for lesson, :url    => course_lesson_update_file_attachment_path(lesson.course, lesson),
+                                   :remote => true,
+                                   :html   => { :multipart => true,
+                                                :onchange  => "$(this).find('input[type=\"submit\"]').click()" } do |f| %>
+                <%= image_tag "paperclip.png", :alt => "multimedia-add" %>
+                <div class="lesson-filename">
+                  <%- if lesson.file_attachment_content_type.blank? %>
+                    Name of Materials
+                  <%- else %>
+                    <%= render :partial => "lessons/file_link", :locals => { :material => lesson.file_attachment } %>
+                  <%- end %>
+                </div>
+
+                <%= f.submit "Submit", :class => "hide-preview" %>
+                <%= f.file_field :file_attachment, :class => "hide-preview" %>
+
+                <a class="btn btn-primary upload-button hide-preview" onclick="$(this).closest('form').find('input[type=\'file\']').click();">Upload File</a>
+              <% end %>
+            <%- else %>
+              <%= image_tag "paperclip.png", :alt => "multimedia-add" %>
+              <div class="lesson-<%= lesson.id %>-filename lesson-filename">
+                <%- if lesson.file_attachment_content_type.blank? %>
+                  No Supplemental Materials
+                <%- else %>
+                  <%- if can?(:read, lesson) %>
+                    <%= render :partial => "lessons/file_link", :locals => { :material => lesson.file_attachment } %>
+                  <%- else %>
+                    <%= link_to lesson.file_attachment.original_filename, subscribe_to_club_path(lesson.club) %>
+                  <%- end %>
+                <%- end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-background-label">Notes:</div>
+      <div id="lesson_<%= lesson.id %>_background" class="lesson-background" data-mercury="full"><%= raw lesson.background %></div>
+
+      <%- if can? :destroy, lesson %>
+        <div class="destroy-lesson hide-preview">
+          Delete above lesson?
+          <%= link_to "Click Here", lesson_path(lesson),
+                      :confirm => "Are you sure you wish to delete '#{lesson.title}'?",
+                      :method  => :delete %>
         </div>
       <%- end %>
     </div>
-
-    <div class="lesson-file-attachment lesson-file-attachment-<%= lesson.id %>">
-      <div class="update-file-attachment">
-        <div class="file-attachment-path">
-          <span class="file-attachment-label">Materials:</span>
-          <div class="file-attachment-errors hide-preview"></div>
-
-          <%- if can?(:update, lesson) %>
-            <%= form_for lesson, :url    => course_lesson_update_file_attachment_path(lesson.course, lesson),
-                                 :remote => true,
-                                 :html   => { :multipart => true,
-                                              :onchange  => "$(this).find('input[type=\"submit\"]').click()" } do |f| %>
-              <%= image_tag "paperclip.png", :alt => "multimedia-add" %>
-              <div class="lesson-filename">
-                <%- if lesson.file_attachment_content_type.blank? %>
-                  Name of Materials
-                <%- else %>
-                  <%= render :partial => "lessons/file_link", :locals => { :material => lesson.file_attachment } %>
-                <%- end %>
-              </div>
-
-              <%= f.submit "Submit", :class => "hide-preview" %>
-              <%= f.file_field :file_attachment, :class => "hide-preview" %>
-
-              <a class="btn btn-primary upload-button hide-preview" onclick="$(this).closest('form').find('input[type=\'file\']').click();">Upload File</a>
-            <% end %>
-          <%- else %>
-            <%= image_tag "paperclip.png", :alt => "multimedia-add" %>
-            <div class="lesson-<%= lesson.id %>-filename lesson-filename">
-              <%- if lesson.file_attachment_content_type.blank? %>
-                No Supplemental Materials
-              <%- else %>
-                <%- if can?(:read, lesson) %>
-                  <%= render :partial => "lessons/file_link", :locals => { :material => lesson.file_attachment } %>
-                <%- else %>
-                  <%= link_to lesson.file_attachment.original_filename, subscribe_to_club_path(lesson.club) %>
-                <%- end %>
-              <%- end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="lesson-background-label">Notes:</div>
-    <div id="lesson_<%= lesson.id %>_background" class="lesson-background" data-mercury="full"><%= raw lesson.background %></div>
-
-    <%- if can? :destroy, lesson %>
-      <div class="destroy-lesson hide-preview">
-        Delete above lesson?
-        <%= link_to "Click Here", lesson_path(lesson),
-                    :confirm => "Are you sure you wish to delete '#{lesson.title}'?",
-                    :method  => :delete %>
-      </div>
-    <%- end %>
-  </div>
+  <%- end %>
 <%- end %>
