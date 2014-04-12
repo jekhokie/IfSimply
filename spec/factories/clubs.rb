@@ -6,6 +6,6 @@ FactoryGirl.define do
     sub_heading  { Faker::Lorem.words(1).first }
     description  { Faker::Lorem.sentence }
     price_cents  { rand(9000) + 1000 }
-    free_content { [ true, false ].sample }
+    free_content { true }
   end
 end
