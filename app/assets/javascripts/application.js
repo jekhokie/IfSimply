@@ -5,7 +5,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
 //= require jquery.remotipart
 //= require jquery-1.7.min
 //= require jquery.livequery.min

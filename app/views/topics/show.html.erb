@@ -23,15 +23,13 @@
     <%= render :partial => "posts/list", :locals => { :topic => @topic } %>
   </div>
 
-  <%- unless @topic.posts.select{ |post| !post.new_record? }.blank? %>
-    <div class="topic-controls">
-      <div class="add-topic-post">
-        <%- if can?(:create, @topic.posts.build) %>
-          <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="add-topic-post-link">Reply</a>
-        <%- else %>
-          <a href="<%= subscribe_to_club_path(@topic.club) %>" class="add-topic-post-link">Reply</a>
-        <%- end %>
-      </div>
+  <div class="topic-controls">
+    <div class="add-topic-post">
+      <%- if can?(:create, @topic.posts.build) %>
+        <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="add-topic-post-link">Reply</a>
+      <%- else %>
+        <a href="<%= subscribe_to_club_path(@topic.club) %>" class="add-topic-post-link">Reply</a>
+      <%- end %>
     </div>
-  <%- end %>
+  </div>
 </div>

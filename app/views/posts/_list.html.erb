@@ -1,5 +1,5 @@
 <%- if topic.posts.select{ |post| !post.new_record? }.blank? %>
-  <h2>
+  <h2 class="first-post-header">
     No Replies yet. Be the first to Reply!
     <%- if can?(:create, topic.posts.build) %>
       <a href="<%= new_topic_post_path(topic) %>" data-remote="true" class="create-first-topic-post-link">Click Here!</a>
