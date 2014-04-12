@@ -7,8 +7,8 @@
     <%= simple_form_for [ topic, post ], :remote => true, :validate => true do |f| %>
       <%= f.input :content, :label => false, :type => :textarea, :html_attrs => { :rows => '10' } %>
 
-      <%= f.submit "Submit Post", :class => "btn" %>
-      <a href="<%= topic_path(topic) %>" class="btn">Cancel</a>
+      <%= f.submit "Submit Post", :class => "btn btn-primary" %>
+      <a href="<%= topic_path(topic) %>" class="btn btn-primary">Cancel</a>
     <%- end %>
   </div>
 </div>
