@@ -178,6 +178,17 @@
   .topic-posts {
     width: 100%;
 
+    h2 {
+      font-size:   24px;
+      font-weight: normal;
+
+      .create-first-topic-post-link {
+        color:       #333;
+        font-style:  italic;
+        font-weight: bold;
+      }
+    }
+
     .post {
       border: 1px solid #666;
       margin: 6px auto;

@@ -1,3 +1,14 @@
-<%- topic.posts.select{ |post| !post.new_record? }.sort_by(&:created_at).each_with_index do |post, i| %>
-  <%= render :partial => post %>
+<%- if topic.posts.select{ |post| !post.new_record? }.blank? %>
+  <h2>
+    No Replies yet. Be the first to Reply!
+    <%- if can?(:create, topic.posts.build) %>
+      <a href="<%= new_topic_post_path(topic) %>" data-remote="true" class="create-first-topic-post-link">Click Here!</a>
+    <%- else %>
+      <a href="<%= subscribe_to_club_path(topic.club) %>" class="create-first-topic-post-link">Click Here!</a>
+    <%- end %>
+  </h2>
+<%- else %>
+  <%- topic.posts.select{ |post| !post.new_record? }.sort_by(&:created_at).each_with_index do |post, i| %>
+    <%= render :partial => post %>
+  <%- end %>
 <%- end %>
