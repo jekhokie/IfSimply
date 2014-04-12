@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div class="club-promote row-fluid">
+  <div class="club-promote-free-content row-fluid">
     <div class="club-promote span6">
       <div class="club-promote-heading">
         <h2>Promotion</h2>
@@ -46,6 +46,21 @@
 
       <div class="club-promote-text">
         <%= render :partial => 'admin/club_promote', :locals => { :club => @club } %>
+      </div>
+    </div>
+
+    <div class="club-free-content span6">
+      <div class="club-free-content-heading">
+        <h2>Free Content</h2>
+      </div>
+
+      <div class="club-free-content-text">
+        <%= render :partial => 'admin/club_free_content', :locals => { :club => @club } %>
+      </div>
+
+      <div class="club-free-content-supplemental">
+        Creating free content and allowing Basic memberships is a great way to entice potential Members to
+        get a taste of your expertise before committing to a paid Membership.
       </div>
     </div>
   </div>

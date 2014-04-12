@@ -71,6 +71,7 @@
 
         .club-live-indicator {
           font-size:     24px;
+          font-weight:   bold;
           height:        30px;
           margin-bottom: 12px;
           margin-top:    20px;
@@ -176,14 +177,15 @@
     }
   }
 
-  .club-promote {
+  .club-promote-free-content {
     height: 325px;
 
-    .club-promote {
-      height:      100%;
-      margin-left: 0px;
+    .club-promote,
+    .club-free-content {
+      height: 100%;
 
-      .club-promote-heading {
+      .club-promote-heading,
+      .club-free-content-heading {
         -webkit-border-radius: 22px;
         -moz-border-radius:    22px;
         border-radius:         22px;
@@ -228,6 +230,34 @@
             text-decoration: underline;
           }
         }
+      }
+    }
+
+    .club-free-content {
+      .club-free-content-text {
+        letter-spacing: 1px;
+        margin-top:     20px;
+        padding:        0px 15px;
+
+        .paid-only-heading {
+          display:       inline-block;
+          font-size:     24px;
+          font-weight:   bold;
+          height:        30px;
+          text-align:    center;
+          width:         100%;
+
+          .best_in_place {
+            display:        inline-block;
+            margin-left:    15px;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      .club-free-content-supplemental {
+        letter-spacing: 1px;
+        padding:        15px;
       }
     }
   }

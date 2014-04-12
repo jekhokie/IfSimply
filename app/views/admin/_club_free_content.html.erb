@@ -1,0 +1,8 @@
+<div class="paid-only-heading">
+  Promote Free Content?
+  <%= best_in_place club, :free_content, :type       => :checkbox,
+                                         :path       => update_free_content_club_path(club),
+                                         :collection => [ raw("<i class='icon-check-empty'></i>"),
+                                                          raw("<i class='icon-check'></i>") ],
+                                         :html_attrs => { :rows => '1' } %>
+</div>
