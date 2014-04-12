@@ -5,8 +5,8 @@ describe "lessons/_list.html.erb" do
   Warden.test_mode!
 
   let!(:video_src) { "http://vimeo.com/22977143" }
-  let!(:user)      { FactoryGirl.create :user }
-  let!(:club)      { user.clubs.first }
+  let!(:club)      { FactoryGirl.create :club, :free_content => true }
+  let!(:user)      { club.user }
   let!(:course)    { FactoryGirl.create :course, :club => club }
 
   before :each do
@@ -33,7 +33,8 @@ describe "lessons/_list.html.erb" do
     end
 
     describe "for a basic subscriber" do
-      let!(:course)          { FactoryGirl.create :course }
+      let!(:club)            { FactoryGirl.create :club, :free_content => true }
+      let!(:course)          { FactoryGirl.create :course, :club => club }
       let!(:subscribed_user) { FactoryGirl.create :user }
       let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => 'basic' }
 
@@ -84,7 +85,8 @@ describe "lessons/_list.html.erb" do
     end
 
     describe "for a pro subscriber" do
-      let!(:course)          { FactoryGirl.create :course }
+      let!(:club)            { FactoryGirl.create :club, :free_content => true }
+      let!(:course)          { FactoryGirl.create :course, :club => club }
       let!(:subscribed_user) { FactoryGirl.create :user }
       let!(:subscription)    { FactoryGirl.create :subscription, :user => subscribed_user, :club => course.club, :level => 'pro', :pro_status => "ACTIVE" }
 
