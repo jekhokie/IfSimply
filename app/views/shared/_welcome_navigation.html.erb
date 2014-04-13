@@ -26,10 +26,13 @@
           <div class="admin-links-container">
             <a href="<%= sales_page_editor_path(club) %>"
                class="sales-page-link <%= 'selected' if controller_name == 'sales_pages' %>">Sales Page</a>
-           <%- if club.free_content %>
-              <a href="<%= upsell_page_editor_path(club) %>"
-                 class="upsell-page-link <%= 'selected' if controller_name == 'upsell_pages' %>">Upsell Page</a>
-           <%- end %>
+            <a href="<%= upsell_page_editor_path(club) %>"
+               class="upsell-page-link
+                     <%= 'selected'      if     controller_name == 'upsell_pages' %>
+                     <%= 'non-free-hide' unless club.free_content %>"
+               >
+               Upsell Page
+             </a>
             <a href="<%= admin_page_for_club_path(club) %>"
                class="admin-page-link <%= 'selected' if controller_name == 'admin' %>">Admin</a>
            </div>
