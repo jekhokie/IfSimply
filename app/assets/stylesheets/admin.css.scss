@@ -178,7 +178,7 @@
   }
 
   .club-promote-free-content {
-    height: 325px;
+    height: 220px;
 
     .club-promote,
     .club-free-content {
@@ -258,6 +258,74 @@
       .club-free-content-supplemental {
         letter-spacing: 1px;
         padding:        15px;
+      }
+    }
+  }
+
+  .club-embed-info {
+    height: 325px;
+
+    .club-embed {
+      height: 100%;
+
+      .club-embed-heading {
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
+        border-radius:         22px;
+
+        background-color: #333;
+        color:            #FFF;
+        height:           45px;
+        margin-bottom:    12px;
+        padding-left:     12px;
+        position:         relative;
+        text-align:       center;
+
+        h2 {
+          display:        inline;
+          font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size:      24px;
+          font-weight:    100;
+          letter-spacing: 1px;
+          position:       relative;
+          top:            2px;
+        }
+      }
+
+      .club-embed-text {
+        letter-spacing: 1px;
+        margin-top:     20px;
+        padding:        0px 15px;
+      }
+
+      .club-embed-supplemental {
+        letter-spacing: 1px;
+        margin-top:     15px;
+        padding-left:   14px;
+
+        .note-supplemental {
+          color:          #FD9A06;
+          display:        inline-block;
+          vertical-align: top;
+        }
+
+        .note-supplemental-text {
+          display:     inline-block;
+          margin-left: 6px;
+          width:       390px;
+
+          a {
+            font-weight:     bold;
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .club-embed-link {
+        font-family:  "Courier New";
+        font-weight:  bold;
+        margin-top:   18px;
+        padding-left: 12px;
       }
     }
   }
