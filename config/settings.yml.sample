@@ -5,15 +5,18 @@
   host:                     localhost
   port:                     3000
 :clubs:
-  default_name:           "Your Club Name Goes Here"
-  default_sub_heading:    "Add Your Subheading Here"
-  default_description:    "Tell Your Members about your club and what they will get (i.e. \"You will learn to grow a multi-million dollar enterprise\" or \"We will teach you how to raise your child on a 100% Vegan diet\"). Make it upbeat and enticing, but keep it brief. Most text on ifSimply can be edited just by clicking and overwriting it. To change an image just drag the new one from your desktop over the existing image."
-  default_logo:           "/assets/default_club_logo.png"
-  default_free_content:   true
-  default_price_cents:    1997
-  min_price_cents:        1000
-  name_max_length:        50
-  sub_heading_max_length: 55
+  default_name:               "Your Club Name Goes Here"
+  default_sub_heading:        "Add Your Subheading Here"
+  default_description:        "Tell Your Members about your club and what they will get (i.e. \"You will learn to grow a multi-million dollar enterprise\" or \"We will teach you how to raise your child on a 100% Vegan diet\"). Make it upbeat and enticing, but keep it brief. Most text on ifSimply can be edited just by clicking and overwriting it. To change an image just drag the new one from your desktop over the existing image."
+  default_logo:                "/assets/default_club_logo.png"
+  default_free_content:        true
+  default_price_cents:         1997
+  min_price_cents:             1000
+  name_max_length:             50
+  sub_heading_max_length:      55
+  default_courses_heading:     "Courses"
+  default_articles_heading:    "Articles"
+  default_discussions_heading: "Discussions"
 :courses:
   default_initial_title:       "Your First Course"
   default_title:               "Your Course Name Here (Keep it Catchy)"
