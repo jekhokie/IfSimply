@@ -25,7 +25,7 @@
 
     <div class="course-lesson-listing span12">
       <%- if @course.lessons.blank? %>
-        <h2>No Lessons Yet
+        <h2>No Content Yet
           <%- if can? :update, @course %>
             - Go Ahead and <a href="<%= course_lessons_path(@course) %>" data-method="post" class="create-first-lesson-link">Create your First!</a>
           <%- end %>

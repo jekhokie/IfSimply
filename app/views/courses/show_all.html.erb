@@ -4,14 +4,14 @@
   <div class="course-controls">
     <%- if can? :update, @club %>
       <div class="add-course">
-        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-course-link">Add Course</a>
+        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-course-link">Add</a>
       </div>
     <%- end %>
   </div>
 
   <div class="club-courses-list row-fluid">
     <%- if @courses.blank? %>
-      <h2 class="no-courses-text">No Courses Yet
+      <h2 class="no-courses-text">No Content Yet
         <%- if can? :update, @club %>
           - <a href="<%= club_courses_path(@club) %>" data-method="post" class="create-first-course-link">Create your First!</a>
         <%- end %>

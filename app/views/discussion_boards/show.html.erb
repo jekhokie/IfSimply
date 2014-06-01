@@ -7,7 +7,7 @@
   <div class="discussion-board-topics row-fluid">
     <div class="discussion-board-topic-listing span12">
       <%- if @discussion_board.topics.blank? %>
-        <h2>No Topics Yet
+        <h2>No Content Yet
           - Go Ahead and
           <%- if can? :create, @discussion_board.topics.build %>
             <a href="<%= new_discussion_board_topic_path(@discussion_board) %>" class="create-first-topic-link">Create the First!</a>
