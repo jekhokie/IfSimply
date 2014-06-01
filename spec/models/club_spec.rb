@@ -45,6 +45,19 @@ describe Club do
       club.free_content.should == Settings.clubs[:default_free_content]
     end
 
+    # custom headings
+    it "assigns the default courses_heading" do
+      club.courses_heading.should == Settings.clubs[:default_courses_heading]
+    end
+
+    it "assigns the default articles_heading" do
+      club.articles_heading.should == Settings.clubs[:default_articles_heading]
+    end
+
+    it "assigns the default discussions_heading" do
+      club.discussions_heading.should == Settings.clubs[:default_discussions_heading]
+    end
+
     # discussion_board
     it "builds a default discussion_board" do
       club.discussion_board.should_not be_blank
@@ -107,6 +120,21 @@ describe Club do
       it "returns true when free_content is a string of a boolean" do
         FactoryGirl.build(:club, :free_content => true).should be_valid
       end
+    end
+
+    # courses_heading
+    it "returns false when no courses_heading is specified" do
+      FactoryGirl.build(:club, :courses_heading => "").should_not be_valid
+    end
+
+    # articles_heading
+    it "returns false when no articles_heading is specified" do
+      FactoryGirl.build(:club, :articles_heading => "").should_not be_valid
+    end
+
+    # discussions_heading
+    it "returns false when no discussions_heading is specified" do
+      FactoryGirl.build(:club, :discussions_heading => "").should_not be_valid
     end
 
     # user association
