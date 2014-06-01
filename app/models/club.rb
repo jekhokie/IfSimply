@@ -2,19 +2,23 @@ class Club < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => [ :slugged, :history ]
 
-  attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price, :default_free_content
+  attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price, :default_free_content,
+                  :courses_heading, :articles_heading, :discussions_heading
 
   after_create :create_discussion_board, :create_sales_page, :create_upsell_page
 
   monetize :price_cents
 
-  validates :name,        :presence => { :message => "for club can't be blank" }
+  validates :name,                :presence => { :message => "for club can't be blank" }
   validate  :name_length
-  validates :sub_heading, :presence => { :message => "for club can't be blank" }
+  validates :sub_heading,         :presence => { :message => "for club can't be blank" }
   validate  :sub_heading_length
-  validates :description, :presence => { :message => "for club can't be blank" }
-  validates :price_cents, :presence => true
-  validates :user_id,     :presence => true
+  validates :courses_heading,     :presence => { :message => "for club can't be blank" }
+  validates :articles_heading,    :presence => { :message => "for club can't be blank" }
+  validates :discussions_heading, :presence => { :message => "for club can't be blank" }
+  validates :description,         :presence => { :message => "for club can't be blank" }
+  validates :price_cents,         :presence => true
+  validates :user_id,             :presence => true
 
   validate :free_content_is_valid
 
@@ -46,6 +50,11 @@ class Club < ActiveRecord::Base
     self.free_content = Settings.clubs[:default_free_content]
     self.price_cents  = Settings.clubs[:default_price_cents]
     self.logo         = Settings.clubs[:default_logo]
+
+    # defaults for renaming headings
+    self.courses_heading     = Settings.clubs[:default_courses_heading]
+    self.articles_heading    = Settings.clubs[:default_articles_heading]
+    self.discussions_heading = Settings.clubs[:default_discussions_heading]
   end
 
   private
