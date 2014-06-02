@@ -43,7 +43,7 @@
     </div>
 
     <div class="post-content">
-      <%= post.content %>
+      <%= auto_link(post.content, :html => { :target => '_blank' }) %>
     </div>
   </div>
 </div>
