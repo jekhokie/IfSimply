@@ -39,10 +39,11 @@ class CoursesController < ApplicationController
   def update
     authorize! :update, @course
 
-    course_hash         = params[:content]
-    @course.title       = course_hash[:course_title][:value]
-    @course.description = course_hash[:course_description][:value]
-    @course.logo        = course_hash[:course_logo][:attributes][:src]
+    course_hash                  = params[:content]
+    @course.title                = course_hash[:course_title][:value]
+    @course.description          = course_hash[:course_description][:value]
+    @course.logo                 = course_hash[:course_logo][:attributes][:src]
+    @course.club.lessons_heading = course_hash[:club_lessons_heading][:value]
 
     # update the corresponding lessons for the course
     lesson_list = []
@@ -67,6 +68,7 @@ class CoursesController < ApplicationController
     lesson_list.each do |lesson|
       error_resources << lesson unless lesson.save
     end
+    error_resources << @course.club unless @course.club.save
 
     if error_resources.blank?
       render :text => ""
