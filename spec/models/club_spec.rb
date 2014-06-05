@@ -131,9 +131,17 @@ describe Club do
       FactoryGirl.build(:club, :courses_heading => "").should_not be_valid
     end
 
+    it "returns false when courses_heading is greater than max characters" do
+      FactoryGirl.build(:club, :courses_heading => Faker::Lorem.characters(Settings.clubs[:courses_heading_max_length] + 1)).should_not be_valid
+    end
+
     # articles_heading
     it "returns false when no articles_heading is specified" do
       FactoryGirl.build(:club, :articles_heading => "").should_not be_valid
+    end
+
+    it "returns false when articles_heading is greater than max characters" do
+      FactoryGirl.build(:club, :articles_heading => Faker::Lorem.characters(Settings.clubs[:articles_heading_max_length] + 1)).should_not be_valid
     end
 
     # discussions_heading
@@ -141,9 +149,17 @@ describe Club do
       FactoryGirl.build(:club, :discussions_heading => "").should_not be_valid
     end
 
+    it "returns false when discussions_heading is greater than max characters" do
+      FactoryGirl.build(:club, :discussions_heading => Faker::Lorem.characters(Settings.clubs[:discussions_heading_max_length] + 1)).should_not be_valid
+    end
+
     # lessons_heading
     it "returns false when no lessons_heading is specified" do
       FactoryGirl.build(:club, :lessons_heading => "").should_not be_valid
+    end
+
+    it "returns false when lessons_heading is greater than max characters" do
+      FactoryGirl.build(:club, :lessons_heading => Faker::Lorem.characters(Settings.clubs[:lessons_heading_max_length] + 1)).should_not be_valid
     end
 
     # user association
