@@ -4,14 +4,14 @@
   <div class="article-controls">
     <%- if can? :update, @club %>
       <div class="add-article-post">
-        <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-article-post-link">Add Article</a>
+        <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-article-post-link">Add New</a>
       </div>
     <%- end %>
   </div>
 
   <div class="article-posts row-fluid">
     <%- if @articles.blank? %>
-      <h2 class="no-articles-text">No Articles Yet
+      <h2 class="no-articles-text">No Content Yet
         <%- if can? :update, @club %>
           - <a href="<%= club_articles_path(@club) %>" data-method="post" class="create-first-article-link">Create your First!</a>
         <%- end %>
@@ -55,7 +55,7 @@
 
               <%- if can? :destroy, article %>
                 <div class="destroy-article">
-                  Delete this article?
+                  Delete?
                   <%= link_to "Click Here", article_path(article),
                               :confirm => "Are you sure you wish to delete '#{article.title}'?",
                               :method  => :delete %>
@@ -72,7 +72,7 @@
     <div class="article-controls">
       <%- if can? :update, @club %>
         <div class="add-article-post">
-          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-article-post-link">Add Article</a>
+          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-article-post-link">Add New</a>
         </div>
       <%- end %>
     </div>

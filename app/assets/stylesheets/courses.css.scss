@@ -86,13 +86,24 @@
         font-weight: 200;
         position:    relative;
         top:         2px;
+
+        #club_lessons_heading {
+          display: inline-block;
+          width:   auto;
+
+          textarea {
+            margin-top: -3px !important;
+            width:      325px !important;
+          }
+        }
       }
 
       .add-course-lesson {
-        display:  inline;
-        position: absolute;
-        right:    15px;
-        top:      13px;
+        display:        inline-block;
+        position:       absolute;
+        right:          15px;
+        top:            13px;
+        vertical-align: top;
 
         .add-course-lesson-link {
           color:          #FFF;

@@ -103,6 +103,21 @@
       position:    relative;
       top:         2px;
 
+      #club_courses_heading {
+        display: inline-block;
+        width:   auto;
+
+        textarea {
+          margin-top: -3px !important;
+          width:      810px !important;
+        }
+      }
+
+      .club-courses-link {
+        display:        inline-block;
+        vertical-align: top;
+      }
+
       span.courses-count {
         font-size:   22px;
         position:    absolute;
@@ -232,6 +247,23 @@
         font-weight: 200;
         position:    relative;
         top:         2px;
+
+        #club_articles_heading,
+        #club_discussions_heading {
+          display: inline-block;
+          width:   auto;
+
+          textarea {
+            margin-top: -3px !important;
+            width:      325px !important;
+          }
+        }
+
+        .club-articles-link,
+        .club-discussions-link {
+          display:        inline-block;
+          vertical-align: top;
+        }
 
         span.articles-count,
         span.discussion-board-count {

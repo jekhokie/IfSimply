@@ -1,23 +1,23 @@
 <div class="welcome-navigation row-fluid">
-  <div class="welcome-container span5">
+  <div class="welcome-container span3">
     <span class="welcome-text">Hi, <%= user_signed_in? ? current_user.name.split(' ').first : "Guest" %>!</span>
   </div>
 
-  <div class="user-navigation-container span7">
+  <div class="user-navigation-container span9">
     <%- unless !user_signed_in? or (controller_name == 'sales_pages' and !can?(:update, club) or (controller_name == 'clubs_users' and action_name == 'new')) %>
       <div class="non-admin-links">
         <a href="<%= can?(:update, club) ? club_editor_path(club) : club_path(club) %>"
            class="club-link <%= 'selected' if controller_name == 'clubs' %>">Club Home</a>
 
-        <a href="<%= show_all_club_courses_path(club) %>"
-           class="courses-link <%= 'selected' if controller_name == 'courses' %>">Courses</a>
+        <a href="<%= show_all_club_courses_path(club) %>" id="courses-link"
+           class="courses-link <%= 'selected' if controller_name == 'courses' %>"><%= club.courses_heading %></a>
 
-        <a href="<%= show_all_club_articles_path(club) %>"
-           class="article-posts-link <%= 'selected' if controller_name == 'articles'%>">Articles</a>
+        <a href="<%= show_all_club_articles_path(club) %>" id="articles-link"
+           class="article-posts-link <%= 'selected' if controller_name == 'articles'%>"><%= club.articles_heading %></a>
 
-        <a href="<%= can?(:update, club) ? discussion_board_editor_path(club.discussion_board) : discussion_board_path(club.discussion_board) %>"
+        <a href="<%= can?(:update, club) ? discussion_board_editor_path(club.discussion_board) : discussion_board_path(club.discussion_board) %>" id="discussions-link"
            class="discussions-link <%= 'selected' if controller_name == 'discussion_boards' or
-                                                     controller_name == 'topics' %>">Discussions</a>
+                                                     controller_name == 'topics' %>"><%= club.discussions_heading %></a>
       </div>
 
       <%- if user_signed_in? and can?(:update, club) %>

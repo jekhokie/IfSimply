@@ -4,14 +4,14 @@
   <div class="course-controls">
     <%- if can? :update, @club %>
       <div class="add-course">
-        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-course-link">Add Course</a>
+        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-course-link">Add New</a>
       </div>
     <%- end %>
   </div>
 
   <div class="club-courses-list row-fluid">
     <%- if @courses.blank? %>
-      <h2 class="no-courses-text">No Courses Yet
+      <h2 class="no-courses-text">No Content Yet
         <%- if can? :update, @club %>
           - <a href="<%= club_courses_path(@club) %>" data-method="post" class="create-first-course-link">Create your First!</a>
         <%- end %>
@@ -20,7 +20,7 @@
       <div id="courses-list" data-club="<%= @club.id %>">
         <%- if can? :update, @club %>
           <div class="spacer">
-            <div class="top-three-label"><i class="icon-question-sign"></i> Featured Courses</div>
+            <div class="top-three-label"><i class="icon-question-sign"></i> Featured</div>
           </div>
           <div class="top-three-capture" style="height: <%= case @courses.count; when 1; '190px;'; when 2; '360px;'; else '520px;'; end %>"></div>
         <%- end %>
@@ -45,7 +45,7 @@
 
               <%- if can? :destroy, course %>
                 <div class="destroy-course">
-                  Delete this course?
+                  Delete?
                   <%= link_to "Click Here", course_path(course),
                               :confirm => "Are you sure you wish to delete '#{course.title}'?",
                               :method  => :delete %>
@@ -62,7 +62,7 @@
     <div class="course-controls">
       <%- if can? :update, @club %>
         <div class="add-course">
-          <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-course-link">Add Course</a>
+          <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-course-link">Add New</a>
         </div>
       <%- end %>
     </div>

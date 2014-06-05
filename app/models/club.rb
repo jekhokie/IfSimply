@@ -2,19 +2,29 @@ class Club < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => [ :slugged, :history ]
 
-  attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price, :default_free_content
+  attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price, :default_free_content,
+                  :courses_heading, :articles_heading, :discussions_heading, :lessons_heading
 
   after_create :create_discussion_board, :create_sales_page, :create_upsell_page
 
   monetize :price_cents
 
-  validates :name,        :presence => { :message => "for club can't be blank" }
+  validates :name,                :presence => { :message => "for club can't be blank" }
+  validates :sub_heading,         :presence => { :message => "for club can't be blank" }
+  validates :description,         :presence => { :message => "for club can't be blank" }
+  validates :price_cents,         :presence => true
+  validates :user_id,             :presence => true
   validate  :name_length
-  validates :sub_heading, :presence => { :message => "for club can't be blank" }
   validate  :sub_heading_length
-  validates :description, :presence => { :message => "for club can't be blank" }
-  validates :price_cents, :presence => true
-  validates :user_id,     :presence => true
+
+  validates :courses_heading,     :presence => { :message => "for club can't be blank" }
+  validates :articles_heading,    :presence => { :message => "for club can't be blank" }
+  validates :discussions_heading, :presence => { :message => "for club can't be blank" }
+  validates :lessons_heading,     :presence => { :message => "for club can't be blank" }
+  validate  :courses_heading_length
+  validate  :articles_heading_length
+  validate  :discussions_heading_length
+  validate  :lessons_heading_length
 
   validate :free_content_is_valid
 
@@ -46,6 +56,12 @@ class Club < ActiveRecord::Base
     self.free_content = Settings.clubs[:default_free_content]
     self.price_cents  = Settings.clubs[:default_price_cents]
     self.logo         = Settings.clubs[:default_logo]
+
+    # defaults for renaming headings
+    self.courses_heading     = Settings.clubs[:default_courses_heading]
+    self.articles_heading    = Settings.clubs[:default_articles_heading]
+    self.discussions_heading = Settings.clubs[:default_discussions_heading]
+    self.lessons_heading     = Settings.clubs[:default_lessons_heading]
   end
 
   private
@@ -84,6 +100,30 @@ class Club < ActiveRecord::Base
   def sub_heading_length
     unless sub_heading.blank?
       errors.add(:base, "Sub heading length too long - must be #{Settings.clubs[:sub_heading_max_length]} characters or less") unless self.sub_heading.length <= Settings.clubs[:sub_heading_max_length]
+    end
+  end
+
+  def courses_heading_length
+    unless courses_heading.blank?
+      errors.add(:base, "Courses heading length too long - must be #{Settings.clubs[:courses_heading_max_length]} characters or less") unless self.courses_heading.length <= Settings.clubs[:courses_heading_max_length]
+    end
+  end
+
+  def articles_heading_length
+    unless articles_heading.blank?
+      errors.add(:base, "Articles heading length too long - must be #{Settings.clubs[:articles_heading_max_length]} characters or less") unless self.articles_heading.length <= Settings.clubs[:articles_heading_max_length]
+    end
+  end
+
+  def discussions_heading_length
+    unless discussions_heading.blank?
+      errors.add(:base, "Discussions heading length too long - must be #{Settings.clubs[:discussions_heading_max_length]} characters or less") unless self.discussions_heading.length <= Settings.clubs[:discussions_heading_max_length]
+    end
+  end
+
+  def lessons_heading_length
+    unless lessons_heading.blank?
+      errors.add(:base, "Lessons heading length too long - must be #{Settings.clubs[:lessons_heading_max_length]} characters or less") unless self.lessons_heading.length <= Settings.clubs[:lessons_heading_max_length]
     end
   end
 

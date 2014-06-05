@@ -14,18 +14,24 @@
 
   <div class="course-lessons row-fluid">
     <div class="lesson-listing-heading">
-      <h2>Lessons</h2>
-
       <%- if can? :update, @course %>
+        <h2>
+          <div id="club_lessons_heading" class="club-lessons-heading" data-mercury="simple"><%= @course.club.lessons_heading %></div>
+        </h2>
+
         <div class="add-course-lesson">
-          <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-course-lesson-link">Add Lesson</a>
+          <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-course-lesson-link">Add New</a>
         </div>
+      <%- else %>
+        <h2>
+          <%= @course.club.lessons_heading %>
+        </h2>
       <%- end %>
     </div>
 
     <div class="course-lesson-listing span12">
       <%- if @course.lessons.blank? %>
-        <h2>No Lessons Yet
+        <h2>No Content Yet
           <%- if can? :update, @course %>
             - Go Ahead and <a href="<%= course_lessons_path(@course) %>" data-method="post" class="create-first-lesson-link">Create your First!</a>
           <%- end %>
@@ -37,7 +43,7 @@
 
         <%- if can? :update, @course %>
           <div class="add-lesson-text hide-preview">
-            Want to add another lesson? <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-lesson-link">Click Here!</a>
+            Want to add another? <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-lesson-link">Click Here!</a>
           </div>
         <%- end %>
       <%- end %>

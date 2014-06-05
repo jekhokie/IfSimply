@@ -30,6 +30,25 @@ $(document).ready ->
   jQuery(window).on "mercury:ready", ->
     # page saved successfully
     Mercury.on "saved", (event, element) ->
+      # account for whether user is in preview mode or not
+      $("#club_courses_heading").each ->
+        if $(this).find("textarea").length > 0
+          $("#courses-link").html($(this).find("textarea").val()).css("width", "auto")
+        else
+          $("#courses-link").html($(this).html()).css("width", "auto")
+
+      $("#club_articles_heading").each ->
+        if $(this).find("textarea").length > 0
+          $("#articles-link").html($(this).find("textarea").val()).css("width", "auto")
+        else
+          $("#articles-link").html($(this).html()).css("width", "auto")
+
+      $("#club_discussions_heading").each ->
+        if $(this).find("textarea").length > 0
+          $("#discussions-link").html($(this).find("textarea").val()).css("width", "auto")
+        else
+          $("#discussions-link").html($(this).html()).css("width", "auto")
+
       alert "Page saved successfully!"
 
     Mercury.on "mode", (event, eventType) ->
