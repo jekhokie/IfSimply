@@ -21,11 +21,14 @@ class ClubsController < ApplicationController
   def update
     authorize! :update, @club
 
-    club_hash         = params[:content]
-    @club.name        = club_hash[:club_name][:value]
-    @club.sub_heading = club_hash[:club_sub_heading][:value]
-    @club.description = club_hash[:club_description][:value]
-    @club.logo        = club_hash[:club_logo][:attributes][:src]
+    club_hash                 = params[:content]
+    @club.name                = club_hash[:club_name][:value]
+    @club.sub_heading         = club_hash[:club_sub_heading][:value]
+    @club.description         = club_hash[:club_description][:value]
+    @club.courses_heading     = club_hash[:club_courses_heading][:value]
+    @club.articles_heading    = club_hash[:club_articles_heading][:value]
+    @club.discussions_heading = club_hash[:club_discussions_heading][:value]
+    @club.logo                = club_hash[:club_logo][:attributes][:src]
 
     if @club.save
       render :text => ""
