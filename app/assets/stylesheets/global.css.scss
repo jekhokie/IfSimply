@@ -138,7 +138,7 @@ div {
   padding:       12px 0px;
 
   .welcome-container {
-    width: 360px;
+    width: 265px;
 
     .welcome-text {
       display:     inline-block;
@@ -150,10 +150,11 @@ div {
   }
 
   .user-navigation-container {
+    float:       right;
     height:      100%;
     margin-left: 3px;
     text-align:  right;
-    width:       590px;
+    width:       705px;
 
     a {
       color:           #000;
@@ -190,16 +191,16 @@ div {
       }
 
       a.courses-link {
-        width: 60px;
+        width: auto;
       }
 
       a.article-posts-link {
-        width: 55px;
+        width: auto;
       }
 
       a.discussions-link {
         margin-right: 4px;
-        width:        85px;
+        width:        auto;
       }
     }
 
