@@ -10,5 +10,6 @@ FactoryGirl.define do
     courses_heading      { Faker::Lorem.words(1).first }
     articles_heading     { Faker::Lorem.words(1).first }
     discussions_heading  { Faker::Lorem.words(1).first }
+    lessons_heading      { Faker::Lorem.words(1).first }
   end
 end

@@ -58,6 +58,10 @@ describe Club do
       club.discussions_heading.should == Settings.clubs[:default_discussions_heading]
     end
 
+    it "assigns the default lessons_heading" do
+      club.lessons_heading.should == Settings.clubs[:default_lessons_heading]
+    end
+
     # discussion_board
     it "builds a default discussion_board" do
       club.discussion_board.should_not be_blank
@@ -135,6 +139,11 @@ describe Club do
     # discussions_heading
     it "returns false when no discussions_heading is specified" do
       FactoryGirl.build(:club, :discussions_heading => "").should_not be_valid
+    end
+
+    # lessons_heading
+    it "returns false when no lessons_heading is specified" do
+      FactoryGirl.build(:club, :lessons_heading => "").should_not be_valid
     end
 
     # user association
