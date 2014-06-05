@@ -257,9 +257,10 @@ describe CoursesController do
 
     describe "for valid attributes" do
       before :each do
-        put 'update', :id => course.id, :content => { :course_title       => { :value => new_title },
-                                                      :course_description => { :value => "123" },
-                                                      :course_logo        => { :attributes => { :src => "abc" } } }
+        put 'update', :id => course.id, :content => { :course_title         => { :value => new_title },
+                                                      :course_description   => { :value => "123" },
+                                                      :course_logo          => { :attributes => { :src => "abc" } },
+                                                      :club_lessons_heading => { :value => "Lessons" } }
       end
 
       it "returns http success" do
@@ -281,7 +282,8 @@ describe CoursesController do
         @old_title = course.title
         put 'update', :id => course.id, :content => { :course_title       => { :value => "" },
                                                       :course_description => { :value => "123" },
-                                                      :course_logo        => { :attributes => { :src => "abc" } } }
+                                                      :course_logo        => { :attributes => { :src => "abc" } },
+                                                      :club_lessons_heading => { :value => "Lessons" } }
       end
 
       it "returns http unprocessable" do
@@ -309,9 +311,10 @@ describe CoursesController do
 
       describe "for a lesson with valid attributes" do
         before :each do
-          put 'update', :id => course.id, :content => { :course_title       => { :value => "Test Title" },
-                                                        :course_description => { :value => "123" },
-                                                        :course_logo        => { :attributes => { :src => "abc" } },
+          put 'update', :id => course.id, :content => { :course_title         => { :value => "Test Title" },
+                                                        :course_description   => { :value => "123" },
+                                                        :course_logo          => { :attributes => { :src => "abc" } },
+                                                        :club_lessons_heading => { :value => "Lessons" },
                                                         :"lesson_#{lesson.id}_title" => { :value => new_lesson_title } }
         end
 
@@ -332,9 +335,10 @@ describe CoursesController do
       describe "for a lesson with invalid attributes" do
         before :each do
           @old_lesson_title = lesson.title
-          put 'update', :id => course.id, :content => { :course_title       => { :value => "" },
-                                                        :course_description => { :value => "123" },
-                                                        :course_logo        => { :attributes => { :src => "abc" } },
+          put 'update', :id => course.id, :content => { :course_title         => { :value => "" },
+                                                        :course_description   => { :value => "123" },
+                                                        :course_logo          => { :attributes => { :src => "abc" } },
+                                                        :club_lessons_heading => { :value => "Lessons" },
                                                         :"lesson_#{lesson.id}_title" => { :value => "" } }
         end
 
