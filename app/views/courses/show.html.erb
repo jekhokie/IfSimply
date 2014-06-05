@@ -18,7 +18,7 @@
 
       <%- if can? :update, @course %>
         <div class="add-course-lesson">
-          <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-course-lesson-link">Add Lesson</a>
+          <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-course-lesson-link">Add New</a>
         </div>
       <%- end %>
     </div>
@@ -37,7 +37,7 @@
 
         <%- if can? :update, @course %>
           <div class="add-lesson-text hide-preview">
-            Want to add another lesson? <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-lesson-link">Click Here!</a>
+            Want to add another? <a href="<%= course_lessons_path(@course) %>" data-method="post" class="add-lesson-link">Click Here!</a>
           </div>
         <%- end %>
       <%- end %>

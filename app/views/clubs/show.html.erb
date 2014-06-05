@@ -15,12 +15,19 @@
 <div class="club-courses row-fluid">
   <div class="course-listing-heading">
     <h2>
-      <a href="<%= show_all_club_courses_path(@club) %>" class="hover-heading"><%= @club.courses_heading %> <span class="courses-count header-count">(<%= @club.courses.count %>)</span></a>
+      <%- if can? :update, @club %>
+        <div id="club_courses_heading" class="club-courses-heading" data-mercury="simple"><%= @club.courses_heading %></div>
+        <div class="club-courses-link">
+          <a href="<%= show_all_club_courses_path(@club) %>" class="hover-heading"> <span class="courses-count header-count">(<%= @club.courses.count %>)</span></a>
+        </div>
+      <%- else %>
+        <a href="<%= show_all_club_courses_path(@club) %>" class="hover-heading"><%= @club.courses_heading %> <span class="courses-count header-count">(<%= @club.courses.count %>)</span></a>
+      <%- end %>
     </h2>
 
     <%- if can? :update, @club %>
       <div class="add-club-course">
-        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-club-course-link">Add Course</a>
+        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-club-course-link">Add New</a>
       </div>
     <%- end %>
   </div>
@@ -44,12 +51,19 @@
   <div class="club-articles span6">
     <div class="article-listing-heading">
       <h2>
-        <a href="<%= show_all_club_articles_path(@club) %>" class="hover-heading"><%= @club.articles_heading %> <span class="articles-count header-count">(<%= @club.articles.count %>)</span></a>
+        <%- if can? :update, @club %>
+          <div id="club_articles_heading" class="club-courses-heading" data-mercury="simple"><%= @club.articles_heading %></div>
+          <div class="club-articles-link">
+            <a href="<%= show_all_club_articles_path(@club) %>" class="hover-heading"> <span class="articles-count header-count">(<%= @club.articles.count %>)</span></a>
+          </div>
+        <%- else %>
+          <a href="<%= show_all_club_articles_path(@club) %>" class="hover-heading"><%= @club.articles_heading %> <span class="articles-count header-count">(<%= @club.articles.count %>)</span></a>
+        <%- end %>
       </h2>
 
       <%- if can? :update, @club %>
         <div class="add-club-article">
-          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-club-article-link">Add Post</a>
+          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-club-article-link">Add New</a>
         </div>
       <%- end %>
     </div>
@@ -97,9 +111,14 @@
   <div class="club-discussion-board span6">
     <div class="discussion-board-listing-heading">
       <h2>
-        <a href="<%= can?(:update, @club) ? discussion_board_editor_path(@club.discussion_board) : discussion_board_path(@club.discussion_board) %>" class="hover-heading">
-          <%= @club.discussions_heading %> <span class="discussion-board-count header-count">(<%= @club.topics.count %>)</span>
-        </a>
+        <%- if can? :update, @club %>
+          <div id="club_discussions_heading" class="club-discussions-heading" data-mercury="simple"><%= @club.discussions_heading %></div>
+          <div class="club-discussions-link">
+            <a href="<%= discussion_board_editor_path(@club.discussion_board) %>" class="hover-heading"> <span class="discussion-board-count header-count">(<%= @club.topics.count %>)</span></a>
+          </div>
+        <%- else %>
+          <a href="<%= discussion_board_path(@club.discussion_board) %>" class="hover-heading"><%= @club.discussions_heading %> <span class="discussions-count header-count">(<%= @club.topics.count %>)</span></a>
+        <%- end %>
       </h2>
     </div>
 

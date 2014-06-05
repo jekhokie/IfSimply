@@ -58,7 +58,7 @@
           <span class="basic-articles-icon meta-icon">
             <%= image_tag "paperclip.png", :alt => "paperclip" %>
           </span>
-          <span class="meta-label">Basic Articles</span>
+          <span class="meta-label">Basic <%= club.articles_heading %></span>
           <div id="upsell_page_basic_articles_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.basic_articles_desc %></div>
         </td>
         <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
@@ -69,7 +69,7 @@
           <span class="exclusive-articles-icon meta-icon">
             <%= image_tag "notebook.png", :alt => "notebook" %>
           </span>
-          <span class="meta-label">Exclusive Articles</span>
+          <span class="meta-label">Exclusive <%= club.articles_heading %></span>
           <div id="upsell_page_exclusive_articles_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.exclusive_articles_desc %></div>
         </td>
         <td class="basic-number"><%= image_tag "unavailable.png", :alt => "x-no", :class => "unavailable-icon" %></td>
@@ -80,7 +80,7 @@
           <span class="basic-courses-icon meta-icon">
             <%= image_tag "presentation.png", :alt => "presentation" %>
           </span>
-          <span class="meta-label">Basic Courses</span>
+          <span class="meta-label">Basic <%= club.courses_heading %></span>
           <div id="upsell_page_basic_courses_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.basic_courses_desc %></div>
         </td>
         <td class="basic-number"><%= image_tag "checkmark.png", :alt => "checkmark-yes", :class => "available-icon" %></td>
@@ -91,7 +91,7 @@
           <span class="in-depth-courses-icon meta-icon">
             <%= image_tag "star.png", :alt => "star" %>
           </span>
-          <span class="meta-label">In-depth Courses</span>
+          <span class="meta-label">In-depth <%= club.courses_heading %></span>
           <div id="upsell_page_in_depth_courses_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.in_depth_courses_desc %></div>
         </td>
         <td class="basic-number"><%= image_tag "unavailable.png", :alt => "x-no", :class => "unavailable-icon" %></td>
@@ -102,7 +102,7 @@
           <span class="discussion-forums-icon meta-icon">
             <%= image_tag "discussion.png", :alt => "discussion" %>
           </span>
-          <span class="meta-label">Discussion Forums</span>
+          <span class="meta-label"><%= club.discussions_heading %></span>
           <div id="upsell_page_discussion_forums_desc" class="meta-information" data-mercury="simple"><%= club.upsell_page.discussion_forums_desc %></div>
         </td>
         <td class="basic-number last">
