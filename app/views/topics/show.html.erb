@@ -11,6 +11,11 @@
 
   <div class="topic-controls">
     <div class="add-topic-post">
+      <a href="<%= can?(:update, @topic.club) ? discussion_board_editor_path(@topic.discussion_board) : discussion_board_path(@topic.discussion_board) %>"
+         class="navigate-back-discussions-link">
+        Back
+      </a>
+
       <%- if can?(:create, @topic.posts.build) %>
         <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="add-topic-post-link">Reply</a>
       <%- else %>
@@ -25,6 +30,11 @@
 
   <div class="topic-controls">
     <div class="add-topic-post">
+      <a href="<%= can?(:update, @topic.club) ? discussion_board_editor_path(@topic.discussion_board) : discussion_board_path(@topic.discussion_board) %>"
+         class="navigate-back-discussions-link">
+        Back
+      </a>
+
       <%- if can?(:create, @topic.posts.build) %>
         <a href="<%= new_topic_post_path(@topic) %>" data-remote="true" class="add-topic-post-link">Reply</a>
       <%- else %>

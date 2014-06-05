@@ -168,9 +168,14 @@
       right:    15px;
       top:      13px;
 
+      .navigate-back-discussions-link,
       .add-topic-post-link {
         color:          #FFF;
         padding-bottom: 3px;
+      }
+
+      .navigate-back-discussions-link {
+        margin-right: 9px;
       }
     }
   }
