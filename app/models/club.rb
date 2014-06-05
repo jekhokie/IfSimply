@@ -3,7 +3,7 @@ class Club < ActiveRecord::Base
   friendly_id :name, :use => [ :slugged, :history ]
 
   attr_accessible :name, :sub_heading, :description, :price_cents, :logo, :price, :default_free_content,
-                  :courses_heading, :articles_heading, :discussions_heading
+                  :courses_heading, :articles_heading, :discussions_heading, :lessons_heading
 
   after_create :create_discussion_board, :create_sales_page, :create_upsell_page
 
@@ -16,6 +16,7 @@ class Club < ActiveRecord::Base
   validates :courses_heading,     :presence => { :message => "for club can't be blank" }
   validates :articles_heading,    :presence => { :message => "for club can't be blank" }
   validates :discussions_heading, :presence => { :message => "for club can't be blank" }
+  validates :lessons_heading,     :presence => { :message => "for club can't be blank" }
   validates :description,         :presence => { :message => "for club can't be blank" }
   validates :price_cents,         :presence => true
   validates :user_id,             :presence => true
@@ -55,6 +56,7 @@ class Club < ActiveRecord::Base
     self.courses_heading     = Settings.clubs[:default_courses_heading]
     self.articles_heading    = Settings.clubs[:default_articles_heading]
     self.discussions_heading = Settings.clubs[:default_discussions_heading]
+    self.lessons_heading     = Settings.clubs[:default_lessons_heading]
   end
 
   private

@@ -17,6 +17,7 @@
   default_courses_heading:     "Courses"
   default_articles_heading:    "Articles"
   default_discussions_heading: "Discussions"
+  default_lessons_heading:     "Lessons"
 :courses:
   default_initial_title:       "Your First Course"
   default_title:               "Your Course Name Here (Keep it Catchy)"
