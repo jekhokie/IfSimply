@@ -172,10 +172,13 @@ describe ClubsController do
 
     describe "for valid attributes" do
       before :each do
-        put 'update', :id => club.id, :content => { :club_name        => { :value => new_name },
-                                                    :club_sub_heading => { :value => "abc" },
-                                                    :club_description => { :value => "123" },
-                                                    :club_logo        => { :attributes => { :src => "abc" } } }
+        put 'update', :id => club.id, :content => { :club_name                => { :value => new_name },
+                                                    :club_sub_heading         => { :value => "abc" },
+                                                    :club_description         => { :value => "123" },
+                                                    :club_courses_heading     => { :value => "456" },
+                                                    :club_articles_heading    => { :value => "1ty" },
+                                                    :club_discussions_heading => { :value => "tad" },
+                                                    :club_logo                => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http success" do
@@ -195,10 +198,13 @@ describe ClubsController do
     describe "for invalid attributes" do
       before :each do
         @old_name = club.name
-        put 'update', :id => club.id, :content => { :club_name        => { :value => "" },
-                                                    :club_sub_heading => { :value => "" },
-                                                    :club_description => { :value => "" },
-                                                    :club_logo        => { :attributes => { :src => "abc" } } }
+        put 'update', :id => club.id, :content => { :club_name                => { :value => "" },
+                                                    :club_sub_heading         => { :value => "" },
+                                                    :club_description         => { :value => "" },
+                                                    :club_courses_heading     => { :value => "" },
+                                                    :club_articles_heading    => { :value => "" },
+                                                    :club_discussions_heading => { :value => "" },
+                                                    :club_logo                => { :attributes => { :src => "abc" } } }
       end
 
       it "returns http unprocessable" do
