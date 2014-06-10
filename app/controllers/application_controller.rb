@@ -19,6 +19,12 @@ class ApplicationController < ActionController::Base
     render :text => "error", :status => 422
   end
 
+  # used for active_admin capability
+  def authenticate_admin_user!
+    redirect_to '/' and return if user_signed_in? && !["jekhokie@gmail.com", "keith.griffis@gmail.com"].include?(current_user.email)
+    authenticate_user!
+  end
+
   private
 
   def is_editing?

@@ -1,9 +1,16 @@
 Ifsimply::Application.routes.draw do
+  root :to => 'home#index'
+
+  ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :registrations => 'registrations',
                                        :sessions      => 'sessions',
                                        :confirmations => 'confirmations',
                                        :unlocks       => 'unlocks',
                                        :passwords     => 'passwords' }
+
+  # required for activeadmin since it always does a :get for
+  # a user sign_out path
+  devise_scope :user do get '/users/sign_out' => 'devise/sessions#destroy' end
 
   namespace :mercury do
     resources :images
@@ -14,8 +21,6 @@ Ifsimply::Application.routes.draw do
     get 'snippets/:name/options' => "mercury#snippet_options"
     get 'snippets/:name/preview' => "mercury#snippet_preview"
   end
-
-  root :to => 'home#index'
 
   scope '/' do
     match '/registration_notify'  => 'home#registration_notify',  :as => :registration_notify

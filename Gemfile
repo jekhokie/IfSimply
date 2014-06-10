@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'activeadmin'
 gem 'best_in_place', :git => 'http://github.com/jekhokie/best_in_place.git'
 gem 'cancan'
 gem 'daemons'
