@@ -132,8 +132,12 @@ describe User do
     let!(:subscriber)   { FactoryGirl.create :user }
     let!(:subscription) { FactoryGirl.create :subscription, :club => club, :user => subscriber }
 
-    it "should report the list of memberships" do
+    it "reports the list of memberships" do
       subscriber.memberships.should include(club)
+    end
+
+    it "destroys all associated memberships on destroy" do
+      expect { subscriber.destroy }.to change(ClubsUsers, :count).by(-1)
     end
   end
 
