@@ -139,36 +139,132 @@
     }
   }
 
-  .sign-up-how-it-works {
-    margin:     20px auto;
-    text-align: center;
-    width:      972px;
+  .people-saying {
+    margin: 0px auto 25px auto;
+    width:  972px;
 
-    .sign-up {
-      margin-bottom: 25px;
-      margin-top:    -15px;
-      position:      relative;
+    .people-heading {
+      color: #0077CB;
+      font-size:     24px;
+      line-height:   34px;
+      margin-bottom: 0px auto 25px auto;
+    }
 
-      a.submit-sign-up {
-        height: 28px;
-        width:  250px;
+    .people-refs {
+      display: inline-block;
 
-        .btn-text {
-          color:       black;
-          font-size:   24px;
-          font-weight: bold;
+      .face-image {
+        margin-right: 12px;
+        height:       150px;
+      }
+
+      .media-body {
+        display:     table;
+        font-size:   16px;
+        font-weight: bold;
+        height:      150px;
+        line-height: 26px;
+
+        .media-content {
+          display:        table-cell;
+          vertical-align: middle;
         }
       }
     }
 
+    .people-refs.right-ref {
+      float: right;
+    }
+  }
+
+  .info-signup-container {
+    height: 1025px;
+
+    .sign-up-button {
+      margin-top: 12px;
+      text-align: center;
+      width:      100%;
+
+      .arrow-left,
+      .arrow-right {
+        height: 50px;
+        width:  150px;
+      }
+
+      .arrow-left {
+        margin-right: 12px;
+      }
+
+      .arrow-right {
+        margin-left: 12px;
+      }
+
+      a {
+        color:       #000;
+        font-size:   22px;
+        font-weight: bold;
+        margin:      auto;
+        width:       250px;
+      }
+    }
+
     .how-it-works {
-      margin: 40px auto 0px auto;
+      margin: 12px auto 0px auto;
 
       .how-video {
         border: 8px solid #3c4348;
         height: 337px;
         margin: 0px auto;
         width:  600px;
+      }
+    }
+
+    .learn-about {
+      margin: 25px auto 0px auto;
+      height: 550px;
+      width:  930px;
+
+      .learn-about-heading {
+        color:         #0077CB;
+        font-size:     24px;
+        line-height:   34px;
+        margin-bottom: 25px;
+        text-align:    center;
+      }
+
+      .learn-topic-row {
+        color:       #888;
+        height:      225px;
+        margin-left: 0px;
+        width:       930px;
+
+        .learn-topic {
+          display:     inline-block;
+          margin-left: 90px;
+          text-align:  center;
+          width:       250px;
+
+          .learn-icon {
+            img {
+              max-height: 95px;
+            }
+          }
+
+          .learn-heading {
+            font-family: "Londrina Solid";
+            font-size:   21px;
+            font-weight: bold;
+            margin:      12px auto;
+          }
+
+          .learn-details {
+            font-size: 18px;
+          }
+        }
+
+        .learn-topic.first {
+          margin-left: 0px;
+        }
       }
     }
   }

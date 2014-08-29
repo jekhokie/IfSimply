@@ -1,0 +1,54 @@
+.download-guide {
+  margin:     20px auto;
+  text-align: center;
+  width:      972px;
+
+  .guide-container {
+    margin-bottom: 25px;
+    margin-top:    -15px;
+    position:      relative;
+
+    .guide-headings {
+      font-weight: normal;
+
+      .guide-heading {
+        color:       #0077CB;
+        font-size:   24px;
+        font-style:  italic;
+        line-height: 34px;
+      }
+
+      .guide-sub-heading {
+        color:         #FD8500;
+        font-size:     28px;
+        line-height:   40px;
+        margin-bottom: 8px;
+      }
+    }
+
+    form.download-guide {
+      input::input-placeholder         { color: #0077CB; }
+      input::-webkit-input-placeholder { color: #0077CB; }
+      input::-moz-input-placeholder    { color: #0077CB; }
+      input::-ms-input-placeholder     { color: #0077CB; }
+
+      input {
+        border-color: #0077CB;
+        color:        #0077CB;
+      }
+
+      a.submit-download-form {
+        height:  18px;
+        padding: 5px;
+        width:   195px;
+
+        .btn-text {
+          color:       black;
+          font-size:   17px;
+          font-weight: bold;
+          line-height: 17px;
+        }
+      }
+    }
+  }
+}

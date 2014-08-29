@@ -1,0 +1,22 @@
+<div class="guide-container">
+  <div class="guide-headings">
+    <div class="guide-heading">
+      Download our Free Guide:
+    </div>
+
+    <div class="guide-sub-heading">
+      "6 Essential Elements of a Successful Membership Club"
+    </div>
+  </div>
+
+  <%= form_tag "#", :method => :post,
+                    :remote => true,
+                    :class => 'download-guide form-horizontal' do |f| %>
+    <%= text_field_tag :name,  nil, :placeholder => "Enter Your Name" %>
+    <%= text_field_tag :email, nil, :placeholder => "Enter Your Email" %>
+
+    <a type="button" class="btn btn-large btn-warning submit-download-form" href="#" onclick="$(this).closest('form').submit();">
+      <span class="btn-text">Download Now</span>
+    </a>
+  <%- end %>
+</div>
