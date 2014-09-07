@@ -52,9 +52,9 @@ describe HomeController do
     end
   end
 
-  describe "GET 'learn_more'" do
+  describe "GET 'faq'" do
     it "is successful" do
-      get 'learn_more'
+      get 'faq'
       response.should be_success
     end
   end

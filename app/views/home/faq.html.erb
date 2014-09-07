@@ -1,0 +1,397 @@
+<%= content_for :outside_container do %>
+  <div class="learn-more-container inner-container">
+    <div class="logo-sign-up-container">
+      <div class="logo logo-inverse">
+        <span></span>
+      </div>
+
+      <div class="sign-up-club">
+        <%= render :partial => "home/club_button" %>
+      </div>
+    </div>
+
+    <% cache do %>
+      <div class="capture-graphics-container">
+        <div class="graphics-container faq">
+          <div class="clouds-top">
+            <span></span>
+          </div>
+
+          <div class="clouds-internal">
+            <div class="faq-heading">
+              Frequently Asked Questions
+            </div>
+          </div>
+
+          <div class="clouds-bottom">
+            <span></span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="download-guide">
+      <%= render :partial => "home/download_guide" %>
+    </div>
+
+    <% cache do %>
+      <div class="questions-container">
+        <div class="questions-heading">
+          Basic Questions
+        </div>
+
+        <hr class="questions-divider"></hr>
+
+        <div class="questions-content">
+          <div class="question">
+            <div class="question-subject">
+              1. What is a Membership Club?
+            </div>
+
+            <div class="question-content">
+              A membership club is the same as a membership site, except it is hosted on our servers
+              (so no need to worry about software updates or bug fixes). A membership club is a
+              password-protected website where people pay (or it can be free) to get access to your
+              exclusive video courses, articles, and discussion forum.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              2. What is a membership site?
+            </div>
+
+            <div class="question-content">
+              A membership site is the generic term for a site where you protect content so that it is only
+              viewable by members (same as a Membership club).
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              3. Why would I use IfSimply.com instead of a WordPress plugin?
+            </div>
+
+            <div class="question-content">
+              The major advantage of using IfSimply.com is the ease of use and simplicity of managing content.
+              There is no designer required, no setup, no software updates, or web hosting to worry about.
+              Everything in your club will look exactly like what your members will see immediately after you
+              create it. You just type over the text, upload your content and hit save.
+              <br/>
+              Common issues with membership plugins:
+              <ul>
+                <li>Must be installed</li>
+                <li>Must be configured</li>
+                <li>Require you to use shortcodes or other small "hooks" to lock certain content</li>
+                <li>Need to be updated regularly (as software updates occur)</li>
+                <li>Break when WordPress updates its software</li>
+                <li>They break when PayPal updates their API</li>
+                <li>Usually require a web designer to get them to look good</li>
+                <li>Usually require additional plugins for sales page templates and forums.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              4. How much does IfSimply.com cost?
+            </div>
+
+            <div class="question-content">
+              IfSimply.com is intended to be easy and affordable for anyone with a message to share with
+              the world. We have multiple options including a no-risk revenue sharing model so you can get started
+              for free. Visit our pricing page for more information.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              5. How hard is it to configure/setup an IfSimply.com membership club?
+            </div>
+
+            <div class="question-content">
+              It is ridiculously easy to setup. You signup, choose a title, add a description, and begin uploading
+              your content. Then you link your PayPal account (one simple step) and your club is live. You can now
+              share your club link all over the web.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              6. Do I need a web designer to set up my membership club?
+            </div>
+
+            <div class="question-content">
+              Absolutely not! IfSimply.com uses a standard design that has been validated through marketing and
+              learning model testing. This save you from having to "figure out" what it should look like. We love
+              web designers, but that is not what makes you money. We want you to focus on your content and
+              community, not your design.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              7. Do I need webhosting for my membership club?
+            </div>
+
+            <div class="question-content">
+              Nope. Your club is fully hosted on our server.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              8. Can I use my own URL for my membership club?
+            </div>
+
+            <div class="question-content">
+              If you want you can redirect a URL to your club link using a website host. For example, you could
+              register www.MyAwesomeMemberClub.com and point it to www.IfSimply.com/clubs/MyAwesomeMemberClub.
+              <br/>
+              This is simple and painless. Here is a tutorial: https://my.hostmonster.com/cgi/help/redirects
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              9. Is IfSimply.com a plugin or script?
+            </div>
+
+            <div class="question-content">
+              No. IfSimply.com is a platform for hosting your membership site. Scripts and plugins require you to manage
+              and configure them. IfSimply.com is an easy to use cloud based platform to securely host and manage your
+              membership club.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              10. What type of content can I put inside my membership club?
+            </div>
+
+            <div class="question-content">
+              You can post videos, PDFs, Word docs, PowerPoint files, MP3 files, articles, and slideshare documents.
+              Any other file types, you can just link to from your site.
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-heading">
+          Feature Questions
+        </div>
+
+        <hr class="questions-divider"></hr>
+
+        <div class="questions-content">
+          <div class="question">
+            <div class="question-subject">
+              11. What is included with a membership site on IfSimply.com?
+            </div>
+
+            <div class="question-content">
+              Your membership club includes three basic areas: Video courses, Articles, and Discussion Forums.
+              Each of those areas has some incredibly useful and easy features as well. For example, our custom
+              video player allows you to post YouTube, Vimeo, and SlideShare content and removes all the junk
+              that traditional players include.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              12. Can I post webinar replays in my club using Webinarjam or other tools?
+            </div>
+
+            <div class="question-content">
+              Yes. Although your club will be labeled to host video courses, you could post any type of video
+              content you want. Many users will post short clips of their webinars on their public website (i.e.
+              WordPress or Squarespace) and then send people to their membership club to see the full webinar replay.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              13. Can I host free and Paid membership levels?
+            </div>
+
+            <div class="question-content">
+              Yes. IfSImply.com allows you to use free membership levels to capture leads and paid membership levels.
+              You can choose whether to allow free content with one simple click. You can set any video or article to
+              paid by clicking a button next to the content during upload.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              14. Can I host courses using IfSimply.com?
+            </div>
+
+            <div class="question-content">
+              Yes. We allow you to host unlimited video courses on IfSImply.com. You want to upload your videos to
+              YouTube as “unlisted” so they don’t show in search results and then grab the embed code to post
+              underneath any video area inside you club.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              15. Can I host multiple membership sites?
+            </div>
+
+            <div class="question-content">
+              At this point, we have limited the service to one membership club per customer because our testing
+              has shown that people are more successful when they are more focused. We are considering this for future
+              releases. Have feedback, email questions@IfSimply.com.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              16. Does IfSimply.com work with WordPress?
+            </div>
+
+            <div class="question-content">
+              Yes, sort of. Your WordPress website will still be your public facing website. To send people from your
+              WordPress site to your IfSimply.com site, you would place your club link (i.e.
+              www.IfSimply.com/clubs/MyAwesomeClub wherever you want people to go join your club. When the click that
+              link, they will go to your sales page on IfSimply.com.
+              <br/>
+              Common ways people do this are:
+              <ul>
+                <li>Place a new link in the navigation bar that points to your club</ul>
+                <li>Place an image before or after a blog post that links to your club</ul>
+                <li>Place an image in your sidebar that links to your club</ul>
+                <li>
+                  Place a link on Facebook, Twitter, Pinterest, Instagram or other social networks that points to
+                  your club
+                </ul>
+              </ul>
+              <br/>
+              Some users have used an iframe to pull their IfSimply.com club into their site and make it appear as
+              part of their site. We caution you that this method may not produce great results because of the varied
+              width of some WordPress themes. Make sure you remove the sidebar if you do use this method.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              17. Can I offer multiple levels of membership?
+            </div>
+
+            <div class="question-content">
+              Currently we offer two levels, free (basic) and paid (pro) membership levels. Adding additional levels
+              can become cumbersome and usually result in lower sales. We urge you to raise your price to the level you
+              think someone will pay and then double it. You will get lower numbers of members, but they will be of higher quality.
+              <br/>
+              When you get higher quality members, they get better results and become advocates for your information.
+              This results in them attracting more of your ideal client.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              18. Can I drip content out over time?
+            </div>
+
+            <div class="question-content">
+              In our an upcoming update we will be adding this functionality. This will allow you make certain content visible
+              (i.e. specific course content or articles) over time. At this point, all members will see all content once they join.
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-heading">
+          Payment Questions
+        </div>
+
+        <hr class="questions-divider"></hr>
+
+        <div class="questions-content">
+          <div class="question">
+            <div class="question-subject">
+              19. Can I do recurring billing (i.e. charge a fee each month)?
+            </div>
+
+            <div class="question-content">
+              Absolutely. You can set the price each month and they will automatically be billed for their
+              membership each month.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              20. What payment processor does IfSimply support?
+            </div>
+
+            <div class="question-content">
+              IfSimply.com uses the most trusted and common payment processor PayPal.com. We have found that this
+              converts much higher than other payment processors (Stripe, Amazon) due to their brand recognition.
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-heading">
+          Usage Questions
+        </div>
+
+        <hr class="questions-divider"></hr>
+
+        <div class="questions-content">
+          <div class="question">
+            <div class="question-subject">
+              21. How do I upload videos to my Membership Club?
+            </div>
+
+            <div class="question-content">
+              You can easily embed videos anywhere you see a video player by copying and pasting the YouTube
+              or Vimeo embed codes.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              22. Do you support SlideShare?
+            </div>
+
+            <div class="question-content">
+              Yes. You can embed SlideShare documents into the video course areas.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              23. Do you support YouTube?
+            </div>
+
+            <div class="question-content">
+              Yes. You can embed YouTube videos into any location with a video player in your club.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              24. Do your YouTube videos show ads and other video options at the end of the video?
+            </div>
+
+            <div class="question-content">
+              No. We use a custom video player that strips out all the junk that the YouTube player builds in.
+              IfSimply.com will automatically pull in the thumbnail, remove ads, and prevent people from leaving
+              your club to go to YouTube. This is a huge benefit over WordPress based membership tools.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-subject">
+              25. How do I link to my membership club?
+            </div>
+
+            <div class="question-content">
+              Your club has a link in the format www.IfSimply.com/clubs/YourMembershipClubName. This link is located
+              on your admin page of your club. When someone clicks that link, they are brought to your sales page.
+              Members can then login or non-members can join your club.
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<%- end %>

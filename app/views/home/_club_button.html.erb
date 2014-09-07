@@ -1,0 +1,9 @@
+<%- if user_signed_in? %>
+  <a type="button" class="btn btn-primary myclub-button" href="<%= club_editor_path(current_user.clubs.first) %>">
+    <span class="btn-text">My Club</span>
+  </a>
+<%- else %>
+  <a type="button" class="btn btn-primary myclub-button" data-remote="true" href="<%= new_user_registration_path %>">
+    <span class="btn-text">Get Started!</span>
+  </a>
+<%- end %>

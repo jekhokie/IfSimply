@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "home/learn_more.html.erb" do
+describe "home/index.html.erb" do
   include Warden::Test::Helpers
   Warden.test_mode!
 
