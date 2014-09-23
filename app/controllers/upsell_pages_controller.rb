@@ -5,6 +5,17 @@ class UpsellPagesController < ApplicationController
   def show
     @subscription = @club.subscriptions.find_by_user_id(current_user.id) if user_signed_in?
 
+    # map the subscribe path based on logged in/not logged in/same user
+    if user_signed_in?
+      if current_user == @club.user
+        @subscribe_button_path = ''
+      else
+        @subscribe_button_path = add_member_to_club_path(@club)
+      end
+    else
+      @subscribe_button_path = subscribe_to_club_path(@club)
+    end
+
     if !can?(:read, @upsell_page)
       flash[:error] = "Club Owner is not verified - please let them know they need to verify their account!"
       redirect_to root_path

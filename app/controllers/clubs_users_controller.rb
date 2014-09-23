@@ -13,6 +13,17 @@ class ClubsUsersController < ApplicationController
       @subscription.club = @club
     end
 
+    # map the subscribe path based on logged in/not logged in/same user
+    if user_signed_in?
+      if current_user == @club.user
+        @subscribe_button_path = ''
+      else
+        @subscribe_button_path = add_member_to_club_path(@club)
+      end
+    else
+      @subscribe_button_path = subscribe_to_club_path(@club)
+    end
+
     if user_signed_in?
       if current_user == @club.user
         render :js => "window.location = '#{upsell_page_editor_path(@club)}'" and return
