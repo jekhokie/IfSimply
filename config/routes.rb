@@ -30,6 +30,7 @@ Ifsimply::Application.routes.draw do
     match '/dmca_policy'          => 'home#dmca_policy',          :as => :dmca_policy
     match '/after_devise'         => 'home#after_devise',         :as => :after_devise
     match '/faq'                  => 'home#faq',                  :as => :faq
+    match '/free_ebook'           => 'home#free_ebook',           :as => :free_ebook
   end
 
   # paypal-related routing

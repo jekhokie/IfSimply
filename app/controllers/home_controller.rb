@@ -23,4 +23,8 @@ class HomeController < ApplicationController
 
   def faq
   end
+
+  def free_ebook
+    redirect_to "home/index" unless (params[:keycode] and params[:keycode] == Settings[:general].free_ebook_keycode)
+  end
 end

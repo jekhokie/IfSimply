@@ -58,4 +58,27 @@ describe HomeController do
       response.should be_success
     end
   end
+
+  describe "GET 'free_ebook'" do
+    describe "for a missing keycode" do
+      it "redirects to the index page" do
+        get 'free_ebook'
+        response.should redirect_to("home/index")
+      end
+    end
+
+    describe "for a valid keycode" do
+      it "is successful" do
+        get 'free_ebook', :keycode => "p4R3-sabpXq5zVxkAhaN-_NLFSo3fHwQ8ONdmWKkndKRB4JAFfeIATEnlbKUawqJjZIoqLPRNTxhsskNFvYLhQ"
+        response.should be_success
+      end
+    end
+
+    describe "for an invalid keycode" do
+      it "redirects to the index page" do
+        get 'free_ebook', :keycode => "OIEHG()YE*()YH#*H)W#HG)#HG"
+        response.should redirect_to("home/index")
+      end
+    end
+  end
 end
