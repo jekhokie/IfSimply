@@ -31,6 +31,7 @@ Ifsimply::Application.routes.draw do
     match '/after_devise'         => 'home#after_devise',         :as => :after_devise
     match '/faq'                  => 'home#faq',                  :as => :faq
     match '/free_ebook'           => 'home#free_ebook',           :as => :free_ebook
+    match '/download_ebook'       => 'home#download_ebook',       :as => :download_ebook
   end
 
   # paypal-related routing

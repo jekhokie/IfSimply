@@ -81,4 +81,24 @@ describe HomeController do
       end
     end
   end
+
+  describe "GET 'download_ebook'" do
+    describe "for a non-ifsimply site source" do
+      it "redirects to the index page" do
+        request.env["SERVER_NAME"] = 'blahblah'
+        get 'download_ebook'
+
+        response.should redirect_to(root_path)
+      end
+    end
+
+    describe "for an ifsimply site source" do
+      it "returns a download file of the free ebook" do
+        controller.should_receive(:send_data).and_return{ controller.render :nothing => true }
+
+        request.env["SERVER_NAME"] = "www.ifsimply.com"
+        get 'download_ebook'
+      end
+    end
+  end
 end
