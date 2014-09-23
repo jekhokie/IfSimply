@@ -9,14 +9,26 @@
     </div>
   </div>
 
-  <%= form_tag "#", :method => :post,
-                    :remote => true,
-                    :class => 'download-guide form-horizontal' do |f| %>
-    <%= text_field_tag :name,  nil, :placeholder => "Enter Your Name" %>
-    <%= text_field_tag :email, nil, :placeholder => "Enter Your Email" %>
-
-    <a type="button" class="btn btn-large btn-warning submit-download-form" href="#" onclick="$(this).closest('form').submit();">
-      <span class="btn-text">Download Now</span>
-    </a>
-  <%- end %>
+  <div id="mc_embed_signup">
+    <%= form_tag '//SimpleMediaMarketing.us2.list-manage.com/subscribe/post?u=70e66c7e5ef76bf8710513eeb&amp;id=d7919119ce', :method => :post, :id => 'mc-embedded-subscribe-form', :name => 'mc-embedded-subscribe-form', :class => 'download-guide form-horizontal validate', :target => '_blank' do |f| %>
+      <div class="mc-field-group">
+        <%= text_field_tag :name, nil, :name => "FNAME", :placeholder => "Enter Your Name", :id => "mce-FNAME" %>
+      </div>
+      <div class="mc-field-group">
+        <%= text_field_tag :email, nil, :name => "EMAIL", :placeholder => "Enter Your Email", :id => "mce-EMAIL" %>
+      </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response"   style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>
+      <div style="position: absolute; left: -5000px;">
+        <input type="text" name="b_70e66c7e5ef76bf8710513eeb_d7919119ce" tabindex="-1" value="">
+      </div>
+      <div class="clear">
+        <a type="button" class="btn btn-large btn-warning submit-download-form" id="mc-embed-subscribe" href="#" onclick="$(this).closest('form').submit();">
+          <span class="btn-text">Download Now</span>
+        </a>
+      </div>
+    <%- end %>
+  </div>
 </div>

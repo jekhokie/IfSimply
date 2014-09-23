@@ -32,21 +32,29 @@
       input::-moz-input-placeholder    { color: #0077CB; }
       input::-ms-input-placeholder     { color: #0077CB; }
 
-      input {
-        border-color: #0077CB;
-        color:        #0077CB;
+      .mc-field-group {
+        display: inline-block;
+
+        input {
+          border-color: #0077CB;
+          color:        #0077CB;
+        }
       }
 
-      a.submit-download-form {
-        height:  18px;
-        padding: 5px;
-        width:   195px;
+      .clear {
+        display: inline-block;
 
-        .btn-text {
-          color:       black;
-          font-size:   17px;
-          font-weight: bold;
-          line-height: 17px;
+        a.submit-download-form {
+          height:  18px;
+          padding: 5px;
+          width:   195px;
+
+          .btn-text {
+            color:       black;
+            font-size:   17px;
+            font-weight: bold;
+            line-height: 17px;
+          }
         }
       }
     }
