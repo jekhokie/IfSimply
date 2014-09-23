@@ -63,7 +63,7 @@ describe HomeController do
     describe "for a missing keycode" do
       it "redirects to the index page" do
         get 'free_ebook'
-        response.should redirect_to("home/index")
+        response.should redirect_to(root_path)
       end
     end
 
@@ -77,7 +77,7 @@ describe HomeController do
     describe "for an invalid keycode" do
       it "redirects to the index page" do
         get 'free_ebook', :keycode => "OIEHG()YE*()YH#*H)W#HG)#HG"
-        response.should redirect_to("home/index")
+        response.should redirect_to(root_path)
       end
     end
   end
