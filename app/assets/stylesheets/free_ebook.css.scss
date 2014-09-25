@@ -1,0 +1,80 @@
+.learn-more-container {
+  .capture-graphics-container {
+    .graphics-container.free-download {
+      height: 250px;
+
+      .clouds-internal {
+        display:    inline-block;
+        height:     90px;
+        text-align: center;
+        width:      100%;
+
+        .free-download-heading {
+          font-size:   45px;
+          line-height: 90px;
+        }
+      }
+    }
+  }
+
+  .free-guide-steps {
+    text-align: center;
+
+    .step {
+      margin-bottom: 36px;
+
+      .step-heading {
+        font-size:   34px;
+        line-height: 44px;
+      }
+
+      .guide-heading {
+        color:       #0077CB;
+        font-size:   28px;
+        font-style:  italic;
+        line-height: 36px;
+      }
+
+      .guide-sub-heading {
+        color:         #FD8500;
+        font-size:     28px;
+        line-height:   40px;
+        margin-bottom: 8px;
+      }
+
+      .guide-download,
+      .club-join {
+        a.guide-download-link,
+        a.club-join-link {
+          height:  34px;
+          padding: 5px;
+          width:   345px;
+
+          .btn-text {
+            color:       black;
+            font-size:   24px;
+            line-height: 32px;
+          }
+        }
+      }
+
+      .guide-share-links {
+        color:      #FD8500;
+        margin-top: 12px;
+
+        .guide-link {
+          display:        inline-block;
+          vertical-align: top;
+        }
+
+        .guide-link.first {
+          margin-right: 12px;
+        }
+
+        .guide-link.last {
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+}

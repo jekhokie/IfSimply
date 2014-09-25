@@ -1,0 +1,93 @@
+<%= content_for :outside_container do %>
+  <div class="learn-more-container inner-container">
+    <div class="logo-sign-up-container">
+      <div class="logo logo-inverse">
+        <span></span>
+      </div>
+
+      <div class="sign-up-club">
+        <%= render :partial => "home/club_button" %>
+      </div>
+    </div>
+
+    <% cache do %>
+      <div class="capture-graphics-container">
+        <div class="graphics-container free-download">
+          <div class="clouds-top">
+            <span></span>
+          </div>
+
+          <div class="clouds-internal">
+            <div class="free-download-heading">
+              Your Free Download is Below
+            </div>
+          </div>
+
+          <div class="clouds-bottom">
+            <span></span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="free-guide-steps">
+      <div class="step">
+        <div class="step-heading">Step 1:</div>
+
+        <div class="guide-heading">
+          Download our Free Guide:
+        </div>
+
+        <div class="guide-sub-heading">
+          "6 Essential Elements of a Successful Membership Club"
+        </div>
+
+        <div class="guide-download">
+          <a type="button" class="btn btn-large btn-warning guide-download-link" href="<%= download_ebook_path %>">
+            <span class="btn-text">Click Here to Download</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-heading">Step 2:</div>
+
+        <div class="guide-heading">
+          Share this on Facebook and Twitter:
+        </div>
+
+        <div class="guide-share-links">
+          <div class="guide-link first">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=www.IfSimply.com" target="_blank">
+              <%= image_tag "facebook.png", :alt => "Share on Facebook" %>
+            </a>
+          </div>
+
+          <div class="guide-link last">
+            <a href="http://ctt.ec/RcM1O+" target="_blank">
+              <%= image_tag "twitter.png", :alt => "Tweet: I just downloaded this free #ebook '6 essential elements of a successful #membershipsite' from http://ctt.ec/RcM1O+ #OnlineMarketing" %>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-heading">Step 3:</div>
+
+        <div class="guide-heading">
+          Join Our Club:
+        </div>
+
+        <div class="guide-sub-heading">
+          "<%= Club.find(1).name %>"
+        </div>
+
+        <div class="club-join">
+          <a type="button" class="btn btn-large btn-warning club-join-link" href="<%= club_upsell_page_path(Club.find(1)) %>">
+            <span class="btn-text">Click Here to Join for Free</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- end %>
