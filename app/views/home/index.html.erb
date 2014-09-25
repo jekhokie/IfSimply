@@ -105,7 +105,7 @@
       </div>
 
       <div class="info-signup-container">
-        <div class="sign-up-button">
+        <div class="sign-up-button top">
           <img src="<%= image_path('arrow_left.png') %>" class="arrow-left" />
 
           <a type="button" class="btn btn-large btn-warning submit-sign-up" data-remote="true" href="<%= user_signed_in? ? club_editor_path(current_user.clubs.first) : new_user_registration_path %>">
@@ -124,7 +124,7 @@
           </div>
         </div>
 
-        <div class="sign-up-button">
+        <div class="sign-up-button bottom">
           <img src="<%= image_path('arrow_left.png') %>" class="arrow-left" />
 
           <a type="button" class="btn btn-large btn-warning submit-sign-up" data-remote="true" href="<%= user_signed_in? ? club_editor_path(current_user.clubs.first) : new_user_registration_path %>">
