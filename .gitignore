@@ -29,7 +29,6 @@
 public/system/*
 public/uploads/*
 public/assets/*
-private/*
 vendor/bundle
 
 # Ignore any non-sample configuration files
