@@ -41,39 +41,26 @@
 
     .capture-container {
       height: 90px;
-      margin: 0px auto 12px auto;
+      margin: 0px auto;
       width:  780px;
 
       .capture-super {
-        color:       #fd8500;
-        font-family: "Londrina Solid";
-        font-size:   32px;
-        height:      40px;
-        line-height: 40px;
-
-        .capture-left,
-        .capture-right {
-          display: inline-block;
-          width:   49%;
-        }
-
-        .capture-left {
-          float:      left;
-          text-align: left;
-        }
-
-        .capture-right {
-          float:      right;
-          text-align: right;
-        }
+        color:          #0077cb;
+        font-family:    "Fredericka the Great";
+        font-size:      50px;
+        line-height:    52px;
+        letter-spacing: 1px;
+        text-align:     center;
       }
 
       .capture-sub {
-        color:          #0077cb;
-        font-family:    "Fredericka the Great";
-        font-size:      48px;
-        letter-spacing: 2px;
-        line-height:    48px;
+        color:          #fd8500;
+        font-family:    "Londrina Solid";
+        font-size:      32px;
+        font-style:     italic;
+        height:         40px;
+        letter-spacing: 5px;
+        line-height:    40px;
         text-align:     center;
       }
     }
@@ -95,6 +82,7 @@
           display:    inline-table;
           height:     54px;
           margin:     0px auto;
+          margin-top: -2px;
           width:      651px;
         }
       }
