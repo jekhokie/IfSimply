@@ -60,6 +60,15 @@ export PATH=$PATH:$HPATH/ruby/gems/bin
 export PATH=$PATH:$HPATH/ruby/gems
 ```
 
+- restart.txt to force Passenger restart:
+
+```
+touch tmp/restart.txt
+# this will force passenger to restart on next request
+# note that it will not delete the restart.txt but, rather, use the timestamp
+# to determine whether it needs to restart from this point forth
+```
+
 - Symlink for active application:
 
 ```
