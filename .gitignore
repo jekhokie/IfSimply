@@ -18,6 +18,9 @@
 /tmp/performance
 /tmp/pids/*.pid
 
+# Ignore the Passenger restart file
+/tmp/restart.txt
+
 # Ignore backup files
 *.bak
 
