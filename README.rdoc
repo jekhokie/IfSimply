@@ -171,12 +171,20 @@ NOTE: If you get a "failed to write to /tmp/#..." error, restart mysqld service 
       process, and that /tmp directory is auto-cleaned on a routine basis by the Linux OS.
 
 ```
+# PostgreSQL 8.x
+pg_dump -U root ifsimply_production > ~/ifsimply_prod_pg_<YYYYMMDD>.sql
+
+# MySQL
 mysqldump -v -u root -p --no-create-db ifsimply_production > ~/ifsimply_prod_<YYYYMMDD>.sql
 ```
 
 - Restore database data to a particular database name:
 
 ```
+# PostgreSQL 8.x
+psql -U root ifsimply_production < ifsimply_prod_pg_<YYYYMMDD>.sql
+
+# MySQL
 mysql -u root -p
 sql> CREATE DATABASE 'ifsimply_backup';
 sql> quit;
