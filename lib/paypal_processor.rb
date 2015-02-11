@@ -80,7 +80,7 @@ module PaypalProcessor
     @payment = @api.build_pay({
       :actionType         => "PAY",
       :currencyCode       => "USD",
-      :feesPayer          => "SECONDARYONLY",
+      :feesPayer          => "PRIMARYRECEIVER",
       :cancelUrl          => "http://www.ifsimply.com/",
       :returnUrl          => "http://www.ifsimply.com/",
       :ipnNotificationUrl => "http://www.ifsimply.com/",
@@ -90,12 +90,6 @@ module PaypalProcessor
             :primary     => true,
             :email       => payment_email,
             :amount      => primary_amount,
-            :paymentType => "DIGITALGOODS"
-          },
-          {
-            :primary     => false,
-            :email       => Settings.paypal[:account_email],
-            :amount      => ifsimply_amount,
             :paymentType => "DIGITALGOODS"
           }
         ]
