@@ -31,16 +31,16 @@ ActiveRecord::Schema.define(:version => 20140611234626) do
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.text     "content"
+    t.string   "slug"
     t.integer  "club_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.boolean  "free"
     t.string   "image"
-    t.string   "slug"
   end
 
   add_index "articles", ["club_id"], :name => "index_blogs_on_club_id"
-  add_index "articles", ["slug"], :name => "index_articles_on_slug", :unique => true
+  add_index "articles", ["slug"], :name => "index_blogs_on_slug", :unique => true
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(:version => 20140611234626) do
     t.string   "logo"
     t.integer  "price_cents",         :default => 0,                          :null => false
     t.string   "price_currency",      :default => "USD",                      :null => false
+    t.string   "slug"
     t.integer  "user_id"
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
     t.string   "sub_heading",         :default => "Add Your Subheading Here"
-    t.string   "slug"
     t.boolean  "free_content",        :default => true
     t.string   "courses_heading",     :default => "Courses"
     t.string   "articles_heading",    :default => "Articles"
@@ -83,12 +83,12 @@ ActiveRecord::Schema.define(:version => 20140611234626) do
   create_table "courses", :force => true do |t|
     t.string   "title"
     t.text     "description"
+    t.string   "slug"
     t.integer  "club_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "logo"
     t.integer  "position"
-    t.string   "slug"
   end
 
   add_index "courses", ["club_id"], :name => "index_courses_on_club_id"
@@ -113,10 +113,10 @@ ActiveRecord::Schema.define(:version => 20140611234626) do
   create_table "discussion_boards", :force => true do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "slug"
     t.integer  "club_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "slug"
   end
 
   add_index "discussion_boards", ["club_id"], :name => "index_discussion_boards_on_club_id"
@@ -205,11 +205,11 @@ ActiveRecord::Schema.define(:version => 20140611234626) do
   create_table "topics", :force => true do |t|
     t.string   "subject"
     t.text     "description"
+    t.string   "slug"
     t.integer  "discussion_board_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "user_id"
-    t.string   "slug"
   end
 
   add_index "topics", ["discussion_board_id"], :name => "index_topics_on_discussion_board_id"
@@ -248,13 +248,13 @@ ActiveRecord::Schema.define(:version => 20140611234626) do
     t.integer  "failed_attempts",        :default => 3
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.string   "slug"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.text     "description"
     t.string   "icon"
     t.boolean  "verified",               :default => false
     t.string   "payment_email"
-    t.string   "slug"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

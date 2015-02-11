@@ -1,10 +1,4 @@
 class DeviseCreateUsers < ActiveRecord::Migration
-  def migrate(direction)
-    super
-    # Create a default user
-    User.create!(:email => 'admin@example.com', :password => 'password', :password_confirmation => 'password') if direction == :up
-  end
-
   def change
     create_table(:users) do |t|
       t.string :name,               :null => false, :default => ""
@@ -38,8 +32,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
-      ## Token authenticatable
-      # t.string :authentication_token
+      ## Friendly ID
+      t.string   :slug
 
       t.timestamps
     end
@@ -48,6 +42,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :reset_password_token, :unique => true
     add_index :users, :confirmation_token,   :unique => true
     add_index :users, :unlock_token,         :unique => true
-    # add_index :users, :authentication_token, :unique => true
+    add_index :users, :slug,                 :unique => true
   end
 end

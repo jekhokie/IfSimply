@@ -7,11 +7,14 @@ class CreateClubs < ActiveRecord::Migration
 
       t.money :price
 
+      t.string :slug
+
       t.references :user
 
       t.timestamps
     end
 
     add_index :clubs, :user_id
+    add_index :clubs, :slug, :unique => true
   end
 end

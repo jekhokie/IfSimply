@@ -4,11 +4,14 @@ class CreateCourses < ActiveRecord::Migration
       t.string :title
       t.string :description
 
+      t.string :slug
+
       t.references :club
 
       t.timestamps
     end
 
     add_index :courses, :club_id
+    add_index :courses, :slug, :unique => true
   end
 end
