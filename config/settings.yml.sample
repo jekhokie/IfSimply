@@ -76,6 +76,7 @@
   password:             <ACCOUNT_PASSWORD>
   authentication:       <AUTH_TYPE>         # common: 'plain'
   enable_starttls_auto: <BOOLEAN_ENABLE>    # common: 'true'
+  development_address:  <DEV_EMAIL_ADDRESS> # email address used by email interceptor
 :paypal:
   free_days:        14
   account_email:    <PAYPAL_EMAIL> # PayPal account email
