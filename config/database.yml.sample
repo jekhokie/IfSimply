@@ -12,6 +12,14 @@ mysql: &mysql
   password:  root100
   reconnect: true
 
+postgres: &postgres
+  adapter:  postgresql
+  encoding: unicode
+  database: ifsimply_production
+  pool:     5
+  username: root
+  password: root100
+
 # default values
 defaults: &defaults
   min_messages: ERROR
@@ -27,7 +35,7 @@ test: &test
   <<: *defaults
 
 production:
-  <<: *mysql
+  <<: *postgres
 
 cucumber:
   <<: *test
