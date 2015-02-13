@@ -13,7 +13,6 @@ gem 'jquery-rails', '~> 2.3.0'
 gem 'jquery-ui-rails'
 gem 'mercury-rails', :git => 'http://github.com/jekhokie/mercury.git'
 gem 'money-rails'
-gem 'pg'
 gem 'rails', '3.2.13'
 gem 'rails_autolink'
 gem 'rails_config'
@@ -82,4 +81,8 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
