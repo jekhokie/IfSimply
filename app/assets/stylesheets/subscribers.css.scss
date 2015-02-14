@@ -1,0 +1,74 @@
+.subscriber-information {
+  margin-top: 22px;
+
+  .subscriber-heading {
+    -webkit-border-radius: 4px;
+    -moz-border-radius:    4px;
+    border-radius:         4px;
+
+    background-color: #333;
+    color:            #FFF;
+    height:           45px;
+    margin-bottom:    12px;
+    padding-left:     12px;
+    position:         relative;
+    text-align:       center;
+
+    h2 {
+      display:     inline;
+      font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 200;
+      position:    relative;
+      top:         2px;
+    }
+  }
+
+  .subscriber-text {
+    letter-spacing: 1px;
+    margin-top:     22px;
+    margin-bottom:  25px;
+
+    a {
+      font-weight:    bold;
+    }
+  }
+
+  .club-subscriber-settings {
+    .club-subscriber {
+      .club-subscriber-heading {
+        -webkit-border-radius: 22px;
+        -moz-border-radius:    22px;
+        border-radius:         22px;
+
+        background-color: #333;
+        color:            #FFF;
+        height:           45px;
+        margin-bottom:    12px;
+        padding-left:     12px;
+        position:         relative;
+        text-align:       center;
+
+        h2 {
+          display:        inline;
+          font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size:      24px;
+          font-weight:    100;
+          letter-spacing: 1px;
+          position:       relative;
+          top:            2px;
+        }
+      }
+
+      .club-subscriber-text {
+        letter-spacing: 1px;
+        padding:        0px 15px;
+
+        .member-list {
+          list-style-type: none;
+          margin:          0px;
+          padding:         0px;
+        }
+      }
+    }
+  }
+}

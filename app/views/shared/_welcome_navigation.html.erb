@@ -32,7 +32,10 @@
                      <%= 'non-free-hide' unless club.free_content %>"
                >
                Upsell Page
-             </a>
+            </a>
+            <a href="<%= subscribers_to_club_path(club) %>"
+               class="subscribers-page-link <%= 'selected' if controller_name == 'clubs' and
+                                                              action_name     == 'subscribers' %>">Members</a>
             <a href="<%= admin_page_for_club_path(club) %>"
                class="admin-page-link <%= 'selected' if controller_name == 'admin' %>">Admin</a>
            </div>

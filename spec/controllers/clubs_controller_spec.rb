@@ -394,4 +394,63 @@ describe ClubsController do
       end
     end
   end
+
+  describe "GET 'subscribers'" do
+    let!(:club)               { user.clubs.first }
+    let!(:basic_subscriber)   { FactoryGirl.create :user }
+    let!(:pro_subscriber)     { FactoryGirl.create :user }
+    let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_subscriber, :club => club, :level => "basic" }
+    let!(:pro_subscription)   { FactoryGirl.create :subscription, :user => pro_subscriber,   :club => club, :level => "pro" }
+
+    describe "for a signed-in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "who owns the club" do
+        before :each do
+          get 'subscribers', :id => club.id
+        end
+
+        it "returns http success" do
+          response.should be_success
+        end
+
+        it "assigns the club" do
+          assigns(:club).should == club
+        end
+
+        it "includes the basic subscribers" do
+          assigns(:basic_subscriptions).should include(basic_subscription)
+        end
+
+        it "includes the pro subscribers" do
+          assigns(:pro_subscriptions).should include(pro_subscription)
+        end
+      end
+
+      describe "who does not own the club" do
+        let!(:other_user) { FactoryGirl.create :user }
+
+        before :each do
+          get 'subscribers', :id => other_user.clubs.first.id
+        end
+
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      before :each do
+        get 'subscribers', :id => club.id
+      end
+
+      it "renders the sign in view" do
+        response.should render_template("devise/sessions/new")
+      end
+    end
+  end
 end

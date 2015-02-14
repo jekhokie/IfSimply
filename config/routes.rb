@@ -64,6 +64,7 @@ Ifsimply::Application.routes.draw do
       match '/admin'         => 'admin#show',          :as => 'admin_page_for'
       match '/specify_price' => 'clubs#specify_price', :as => 'specify_price_for'
       match '/update_price'  => 'clubs#update_price',  :as => 'update_price_for'
+      match '/subscribers'   => 'clubs#subscribers',   :as => 'subscribers_to'
 
       put 'update_free_content'
     end

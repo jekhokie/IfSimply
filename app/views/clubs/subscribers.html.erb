@@ -1,0 +1,45 @@
+<%= render :partial => 'shared/welcome_navigation', :locals => { :club => @club } %>
+
+<div class="subscriber-information">
+  <div class="subscriber-heading">
+    <h2>Members</h2>
+  </div>
+
+  <div class="subscriber-text">
+    Here's a list of members who are subscribed to your club - keep up the great work!
+  </div>
+
+  <div class="club-subscriber-settings row-fluid">
+    <div class="club-subscriber span6">
+      <div class="club-subscriber-heading">
+        <h2>Basic Members (<%= @basic_subscriptions.count %>)</h2>
+      </div>
+
+      <div class="club-subscriber-text">
+        <ul class="member-list">
+          <% @basic_subscriptions.each do |subscription| %>
+            <li>
+              <%= subscription.user.name %> (<%= subscription.user.email %>)
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="club-subscriber span6">
+      <div class="club-subscriber-heading">
+        <h2>Pro Members (<%= @pro_subscriptions.count %>)</h2>
+      </div>
+
+      <div class="club-subscriber-text">
+        <ul class="member-list">
+          <% @pro_subscriptions.each do |subscription| %>
+            <li>
+              <%= subscription.user.name %> (<%= subscription.user.email %>)
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

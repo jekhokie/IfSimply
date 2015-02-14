@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_filter :authenticate_user!, :except => [ :show, :specify_price, :update_price ]
+  before_filter :authenticate_user!, :except => [ :show, :specify_price, :update_price, :subscribers ]
   before_filter :get_club
 
   def show
@@ -80,6 +80,17 @@ class ClubsController < ApplicationController
     end
 
     flash.discard
+  end
+
+  def subscribers
+    if user_signed_in?
+      authorize! :update, @club
+
+      @basic_subscriptions = @club.subscriptions.where(:level => "basic")
+      @pro_subscriptions   = @club.subscriptions.where(:level => "pro")
+    else
+      render :template => "devise/sessions/new"
+    end
   end
 
   private
