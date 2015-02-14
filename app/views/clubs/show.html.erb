@@ -27,7 +27,7 @@
 
     <%- if can? :update, @club %>
       <div class="add-club-course">
-        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-club-course-link">Add New</a>
+        <a href="<%= club_courses_path(@club) %>" data-method="post" class="add-club-course-link hide-preview">Add New</a>
       </div>
     <%- end %>
   </div>
@@ -36,7 +36,7 @@
     <%- if @club.courses.blank? %>
       <h2>No Content Yet
         <%- if can? :update, @club %>
-          - Go Ahead and <a href="<%= club_courses_path(@club) %>" data-method="post" class="create-first-course-link">Create your First!</a>
+          - Go Ahead and <a href="<%= club_courses_path(@club) %>" data-method="post" class="create-first-course-link hide-preview">Create your First!</a>
         <%- end %>
       </h2>
     <%- else %>
@@ -63,7 +63,7 @@
 
       <%- if can? :update, @club %>
         <div class="add-club-article">
-          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-club-article-link">Add New</a>
+          <a href="<%= club_articles_path(@club) %>" data-method="post" class="add-club-article-link hide-preview">Add New</a>
         </div>
       <%- end %>
     </div>
@@ -72,7 +72,7 @@
       <%- if @club.articles.blank? %>
         <h2>No Content Yet
           <%- if can? :update, @club %>
-            - <a href="<%= club_articles_path(@club) %>" data-method="post" class="create-first-article-link">Create your First!</a>
+            - <a href="<%= club_articles_path(@club) %>" data-method="post" class="create-first-article-link hide-preview">Create your First!</a>
           <%- end %>
         </h2>
       <%- else %>

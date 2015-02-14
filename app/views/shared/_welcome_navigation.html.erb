@@ -23,7 +23,7 @@
       </div>
 
       <%- if user_signed_in? and can?(:update, club) %>
-        <div class="admin-links">
+        <div class="admin-links hide-preview">
           <div class="admin-heading">(Admin View Only)</div>
           <div class="admin-links-container">
             <a href="<%= sales_page_editor_path(club) %>"
