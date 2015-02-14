@@ -18,6 +18,8 @@
         <a href="<%= can?(:update, club) ? discussion_board_editor_path(club.discussion_board) : discussion_board_path(club.discussion_board) %>" id="discussions-link"
            class="discussions-link <%= 'selected' if controller_name == 'discussion_boards' or
                                                      controller_name == 'topics' %>"><%= club.discussions_heading %></a>
+        <a href="<%= can?(:update, club) ? user_editor_path(club.user) : user_path(club.user) %>" id="owner-link"
+           class="owner-link <%= 'selected' if controller_name == 'users' %>">About</a>
       </div>
 
       <%- if user_signed_in? and can?(:update, club) %>

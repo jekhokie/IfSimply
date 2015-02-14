@@ -138,7 +138,7 @@ div {
   padding:       12px 0px;
 
   .welcome-container {
-    width: 265px;
+    width: 220px;
 
     .welcome-text {
       display:     inline-block;
@@ -154,7 +154,7 @@ div {
     height:      100%;
     margin-left: 3px;
     text-align:  right;
-    width:       705px;
+    width:       750px;
 
     a {
       color:           #000;
@@ -199,6 +199,10 @@ div {
       }
 
       a.discussions-link {
+        width: auto;
+      }
+
+      a.owner-link {
         margin-right: 4px;
         width:        auto;
       }
