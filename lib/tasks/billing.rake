@@ -5,11 +5,14 @@ namespace :billing do
     ClubsUsers.paying.try(:map, &:id).try(:each) do |subscription_id|
       subscription = ClubsUsers.find subscription_id
 
+      # pass over any ifsimply test accounts we have
+      next if subscription.user.email =~ /.*@ifsimply\.com/
+
       puts "#{Time.now} -- [INFO] -- Assessing subscription with ID: #{subscription.id}"
 
       # need to double-check that the subscription is still valid for billing
       # since the last query since it may have changed in the time lapse
-      if subscription.level == 'pro' and subscription.pro_status == "ACTIVE"
+      if subscription.level == 'pro' and subscription.pro_status != "INACTIVE"
         preapproval_key = subscription.preapproval_key
 
         if preapproval_key.nil? or preapproval_key.empty?
@@ -33,7 +36,8 @@ namespace :billing do
           # - today is greater than the anniversary day and there is no payment for this month
           if today_date.day  == anniversary_date.day    or
              (today_date     == today_date.end_of_month and today_date.end_of_month.day <  anniversary_date.day) or
-             (today_date.day >  anniversary_date.day    and (!last_payment or last_payment.month != today_date.month))
+             (today_date     >  anniversary_date        and (!last_payment or last_payment.month != today_date.month))
+
             # make sure a user is not double-billed in the same month
             if last_payment.nil? or last_payment.month != today_date.month
               # determine shares for each user and information about each
@@ -64,6 +68,7 @@ namespace :billing do
                 subscription.save
 
                 puts "#{Time.now} -- [ERROR] -- Failed attempted payment for subscription with ID: #{subscription.id}"
+                puts "#{Time.now} -- [ERROR] -- Error was: #{pay_response[:error]}"
 
                 PaymentMailer.delay.failed_payment_notification(subscription.user.email,
                                                                 subscription.user.name,

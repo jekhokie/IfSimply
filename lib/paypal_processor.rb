@@ -55,7 +55,7 @@ module PaypalProcessor
       :returnUrl                    => return_url,
       :requireInstantFundingSource  => true,
       :startingDate                 => start_date,
-      :feesPayer                    => "PRIMARYRECEIVER",
+      :feesPayer                    => "EACHRECEIVER",
       :displayMaxTotalAmount        => true })
 
     # Make API call & get response
@@ -80,14 +80,13 @@ module PaypalProcessor
     @payment = @api.build_pay({
       :actionType         => "PAY",
       :currencyCode       => "USD",
-      :feesPayer          => "PRIMARYRECEIVER",
+      :feesPayer          => "EACHRECEIVER",
       :cancelUrl          => "http://www.ifsimply.com/",
       :returnUrl          => "http://www.ifsimply.com/",
       :ipnNotificationUrl => "http://www.ifsimply.com/",
       :receiverList => {
         :receiver => [
           {
-            :primary     => true,
             :email       => payment_email,
             :amount      => primary_amount,
             :paymentType => "DIGITALGOODS"

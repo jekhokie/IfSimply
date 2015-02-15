@@ -72,10 +72,11 @@ class ClubsUsersController < ApplicationController
             if existing_membership
               @subscription = existing_membership
             else
-              @subscription       = ClubsUsers.new
-              @subscription.level = requested_level
-              @subscription.club  = @club
-              @subscription.user  = current_user
+              @subscription                  = ClubsUsers.new
+              @subscription.level            = requested_level
+              @subscription.club             = @club
+              @subscription.user             = current_user
+              @subscription.anniversary_date = Date.today + Settings.paypal[:free_days].days
             end
 
             if requested_level == 'pro'
