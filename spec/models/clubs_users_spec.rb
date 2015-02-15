@@ -34,16 +34,8 @@ describe ClubsUsers do
       ClubsUsers.paying.should_not include(basic_subscription)
     end
 
-    it "does not return pro subscriptions that are pro_status FAILED_PAYMENT" do
-      ClubsUsers.paying.should_not include(pro_failed_subscription)
-    end
-
-    it "does not return pro subscriptions that are pro_status FAILED_PREAPPROVAL" do
-      ClubsUsers.paying.should_not include(pro_failed_pre_subscription)
-    end
-
     it "does not return basic subscriptions" do
-      ClubsUsers.paying.should_not include(pro_inactive_subscription)
+      ClubsUsers.paying.should_not include(basic_subscription)
     end
   end
 
