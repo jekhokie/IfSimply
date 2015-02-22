@@ -19,6 +19,9 @@ gem 'rails_config'
 gem 'remotipart'
 gem 'redcarpet'
 
+# MailChimp support
+gem 'gibbon'
+
 # safe html truncating
 gem 'truncate_html'
 

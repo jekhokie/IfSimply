@@ -7,6 +7,8 @@ class RegistrationsController < Devise::RegistrationsController
 
     if params[:policy_agree] and params[:policy_agree] == 'true'
       if @user.valid?
+        # add the user to the IfSimply MailChimp account before sending registration confirmation
+        MailChimp.add_to_list(Settings.mailchimp[:ifsimply_api_key], Settings.mailchimp[:ifsimply_list_id], @user.name, @user.email)
         super
       end
     else

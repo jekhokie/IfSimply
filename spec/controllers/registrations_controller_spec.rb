@@ -15,6 +15,8 @@ describe RegistrationsController do
     end
 
     it "updates the users count" do
+      MailChimp.should_receive(:add_to_list).and_return true
+
       lambda{ post('create', :policy_agree => "true", :user => { :name                  => "Test",
                                                                  :email                 => "test@test.com",
                                                                  :password              => "someb0gusp4ss",
@@ -23,6 +25,8 @@ describe RegistrationsController do
 
     describe "for valid attributes" do
       before :each do
+        MailChimp.should_receive(:add_to_list).and_return true
+
         post 'create', :policy_agree => "true", :user => { :name                  => "Test",
                                                            :email                 => "test@test.com",
                                                            :password              => "someb0gusp4ss",
@@ -45,6 +49,8 @@ describe RegistrationsController do
     describe "for invalid attributes" do
       describe "when a parameter is blank" do
         before :each do
+          MailChimp.should_not_receive(:add_to_list)
+
           post 'create', :format => :js, :policy_agree => "true", :user => { :name                  => "",
                                                                              :email                 => "test@test.com",
                                                                              :password              => "someb0gusp4ss",
@@ -70,6 +76,8 @@ describe RegistrationsController do
 
       describe "when the passwords do not match" do
         before :each do
+          MailChimp.should_not_receive(:add_to_list)
+
           post 'create', :format => :js, :policy_agree => "true", :user => { :name                  => "Test",
                                                                              :email                 => "test@test.com",
                                                                              :password              => "someb0gusp4ss",
@@ -97,6 +105,8 @@ describe RegistrationsController do
         let!(:existing_user) { FactoryGirl.create :user, :email => "test@test.com" }
 
         before :each do
+          MailChimp.should_not_receive(:add_to_list)
+
           post 'create', :format => :js, :policy_agree => "true", :user => { :name                  => "Test",
                                                                              :email                 => "test@test.com",
                                                                              :password              => "someb0gusp4ss",
@@ -122,6 +132,8 @@ describe RegistrationsController do
 
       describe "when the user does not agree to the terms and conditions" do
         before :each do
+          MailChimp.should_not_receive(:add_to_list)
+
           post 'create', :format => :js, :user => { :name                  => "Test",
                                                     :email                 => "test@test.com",
                                                     :password              => "someb0gusp4ss",
