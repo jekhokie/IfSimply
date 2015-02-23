@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'csv'
 
 describe ClubsController do
   let(:user) { FactoryGirl.create :user }
@@ -440,6 +441,113 @@ describe ClubsController do
 
         before :each do
           get 'subscribers', :id => other_user.clubs.first.id
+        end
+
+        it "returns 403 unauthorized forbidden code" do
+          response.response_code.should == 403
+        end
+      end
+    end
+
+    describe "for a non signed-in user" do
+      before :each do
+        get 'subscribers', :id => club.id
+      end
+
+      it "renders the sign in view" do
+        response.should render_template("devise/sessions/new")
+      end
+    end
+  end
+
+  describe "GET 'export_subscribers'" do
+    let!(:club)               { user.clubs.first }
+    let!(:basic_subscriber)   { FactoryGirl.create :user }
+    let!(:pro_subscriber)     { FactoryGirl.create :user }
+    let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_subscriber, :club => club, :level => "basic" }
+    let!(:pro_subscription)   { FactoryGirl.create :subscription, :user => pro_subscriber,   :club => club, :level => "pro" }
+
+    describe "for a signed-in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:users]
+        sign_in user
+      end
+
+      describe "who owns the club" do
+        describe "for all members" do
+          before :each do
+            Club.any_instance.should_receive(:all_members_to_csv).and_return true
+            get 'export_subscribers', :id => club.id, :csv_type => :all
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "assigns the club" do
+            assigns(:club).should == club
+          end
+
+          it "returns a file type" do
+            response.header["Content-Type"].should == "text/csv"
+          end
+        end
+
+        describe "for basic members" do
+          before :each do
+            Club.any_instance.should_receive(:basic_members_to_csv).and_return true
+            get 'export_subscribers', :id => club.id, :csv_type => :basic
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "assigns the club" do
+            assigns(:club).should == club
+          end
+
+          it "returns a file type" do
+            response.header["Content-Type"].should == "text/csv"
+          end
+        end
+
+        describe "for pro members" do
+          before :each do
+            Club.any_instance.should_receive(:pro_members_to_csv).and_return true
+            get 'export_subscribers', :id => club.id, :csv_type => :pro
+          end
+
+          it "returns http success" do
+            response.should be_success
+          end
+
+          it "assigns the club" do
+            assigns(:club).should == club
+          end
+
+          it "returns a file type" do
+            response.header["Content-Type"].should == "text/csv"
+          end
+        end
+
+        describe "for an unknown member type" do
+          before :each do
+            club.should_not_receive(:bogus_members_to_csv)
+            get 'export_subscribers', :id => club.id, :csv_type => :bogus
+          end
+
+          it "returns blank content" do
+            response.body.should be_blank
+          end
+        end
+      end
+
+      describe "who does not own the club" do
+        let!(:other_user) { FactoryGirl.create :user }
+
+        before :each do
+          get 'export_subscribers', :id => other_user.clubs.first.id, :type => :basic
         end
 
         it "returns 403 unauthorized forbidden code" do

@@ -93,6 +93,25 @@ class ClubsController < ApplicationController
     end
   end
 
+  def export_subscribers
+    authorize! :update, @club
+
+    # formulate the CSV data
+    csv_data = ""
+    if (csv_type = params[:csv_type])
+      csv_data = case(csv_type.to_s)
+                 when "all"
+                   @club.all_members_to_csv
+                 when "basic"
+                   @club.basic_members_to_csv
+                 when "pro"
+                   @club.pro_members_to_csv
+                 end
+    end
+
+    send_data(csv_data, :type => "text/csv", :disposition => "attachment; filename=#{csv_type.capitalize}_Members.csv")
+  end
+
   private
 
   def get_club
