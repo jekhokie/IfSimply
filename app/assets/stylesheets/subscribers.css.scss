@@ -1,6 +1,25 @@
 .subscriber-information {
   margin-top: 22px;
 
+  .export-button {
+    background-image: -ms-linear-gradient(top, #fbb450, #f89406);
+    background-image: -moz-linear-gradient(top, #fbb450, #f89406);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
+    background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
+    background-image: -o-linear-gradient(top, #fbb450, #f89406);
+    background-image: linear-gradient(top, #fbb450, #f89406);
+
+    background-color: #faa732;
+    border-color:     rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-color:     #f89406 #f89406 #ad6704;
+    color:            #333;
+    line-height:      12px;
+  }
+
+  .export-button:hover {
+    background-color: #f89406;
+  }
+
   .subscriber-heading {
     -webkit-border-radius: 4px;
     -moz-border-radius:    4px;
@@ -23,13 +42,25 @@
     }
   }
 
-  .subscriber-text {
+  .subscriber-text-download {
+    display:        inline-block;
     letter-spacing: 1px;
-    margin-top:     22px;
-    margin-bottom:  25px;
+    margin-top:     10px;
+    margin-bottom:  22px;
+    width:          100%;
 
-    a {
-      font-weight:    bold;
+    .subscriber-text {
+      display:    inline-block;
+      margin-top: 3px;
+
+      a {
+        font-weight: bold;
+      }
+    }
+
+    .download-all-csv {
+      display: inline-block;
+      float:   right;
     }
   }
 
@@ -49,13 +80,22 @@
         text-align:       center;
 
         h2 {
-          display:        inline;
+          display:        inline-block;
           font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
           font-size:      24px;
           font-weight:    100;
           letter-spacing: 1px;
-          position:       relative;
-          top:            2px;
+          line-height:    25px;
+          vertical-align: middle;
+        }
+
+        a {
+          display:     inline;
+          margin-top:  2px;
+          margin-left: 8px;
+          position:    absolute;
+          right:       15px;
+          top:         10px;
         }
       }
 
