@@ -87,7 +87,7 @@ class ClubsController < ApplicationController
       authorize! :update, @club
 
       @basic_subscriptions = @club.subscriptions.where(:level => "basic")
-      @pro_subscriptions   = @club.subscriptions.where(:level => "pro")
+      @pro_subscriptions   = @club.subscriptions.where("level = 'pro' and pro_status != 'INACTIVE'")
     else
       render :template => "devise/sessions/new"
     end

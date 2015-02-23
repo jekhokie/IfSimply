@@ -400,7 +400,8 @@ describe ClubsController do
     let!(:basic_subscriber)   { FactoryGirl.create :user }
     let!(:pro_subscriber)     { FactoryGirl.create :user }
     let!(:basic_subscription) { FactoryGirl.create :subscription, :user => basic_subscriber, :club => club, :level => "basic" }
-    let!(:pro_subscription)   { FactoryGirl.create :subscription, :user => pro_subscriber,   :club => club, :level => "pro" }
+    let!(:pro_subscription)   { FactoryGirl.create :subscription, :pro_status => "ACTIVE", :user => pro_subscriber,   :club => club, :level => "pro" }
+    let!(:pro_inactive_subscription) { FactoryGirl.create :subscription, :pro_status => "INACTIVE", :club => club }
 
     describe "for a signed-in user" do
       before :each do
@@ -425,8 +426,12 @@ describe ClubsController do
           assigns(:basic_subscriptions).should include(basic_subscription)
         end
 
-        it "includes the pro subscribers" do
+        it "includes the pro subscribers that are active" do
           assigns(:pro_subscriptions).should include(pro_subscription)
+        end
+
+        it "excludes the pro subscribers that are inactive" do
+          assigns(:pro_subscriptions).should_not include(pro_inactive_subscription)
         end
       end
 
