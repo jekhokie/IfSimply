@@ -5,14 +5,21 @@
     <h2>Members</h2>
   </div>
 
-  <div class="subscriber-text">
-    Here's a list of members who are subscribed to your club - keep up the great work!
+  <div class="subscriber-text-download">
+    <div class="subscriber-text">
+      Here's a list of members who are subscribed to your club - keep up the great work!
+    </div>
+
+    <div class="download-all-csv">
+      <%= link_to "CSV Export All", export_subscribers_for_club_path(@club, :csv_type => "all"), :class => "btn btn-xs btn-primary export-button", "data-no-turbolink" => "" %>
+    </div>
   </div>
 
   <div class="club-subscriber-settings row-fluid">
     <div class="club-subscriber span6">
       <div class="club-subscriber-heading">
         <h2>Basic Members (<%= @basic_subscriptions.count %>)</h2>
+        <%= link_to "CSV Export", export_subscribers_for_club_path(@club, :csv_type => "basic"), :class => "btn btn-xs btn-primary export-button", "data-no-turbolink" => "" %>
       </div>
 
       <div class="club-subscriber-text">
@@ -29,6 +36,7 @@
     <div class="club-subscriber span6">
       <div class="club-subscriber-heading">
         <h2>Pro Members (<%= @pro_subscriptions.count %>)</h2>
+        <%= link_to "CSV Export", export_subscribers_for_club_path(@club, :csv_type => "pro"), :class => "btn btn-xs btn-primary export-button", "data-no-turbolink" => "" %>
       </div>
 
       <div class="club-subscriber-text">

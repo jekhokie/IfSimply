@@ -46,7 +46,20 @@ class Club < ActiveRecord::Base
   has_many :lessons, :through => :courses
 
   def members
-    User.find subscriptions.select{ |subscription| subscription.level == "basic" or subscription.pro_status == "ACTIVE" }.map(&:user_id)
+    User.find subscriptions.select{ |s| s.level == "basic" or s.pro_status == "ACTIVE" }.map(&:user_id)
+  end
+
+  # CSV-formatted output types
+  def all_members_to_csv
+    subscriptions.select{ |s| s.level == "basic" or s.pro_status != "INACTIVE" }.map(&:user).collect{ |u| "#{u.name},#{u.email}\n" }.join
+  end
+
+  def basic_members_to_csv
+    subscriptions.select{ |s| s.level == "basic" }.map(&:user).collect{ |u| "#{u.name},#{u.email}\n" }.join
+  end
+
+  def pro_members_to_csv
+    subscriptions.select{ |s| s.level == "pro" and s.pro_status != "INACTIVE" }.map(&:user).collect{ |u| "#{u.name},#{u.email}\n" }.join
   end
 
   def assign_defaults

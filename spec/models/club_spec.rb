@@ -258,4 +258,53 @@ describe Club do
       end
     end
   end
+
+  describe "csv format for" do
+    let!(:club)                      { FactoryGirl.create :club }
+    let!(:basic_subscription)        { FactoryGirl.create :subscription, :club => club, :level => 'basic' }
+    let!(:active_pro_subscription)   { FactoryGirl.create :subscription, :club => club, :level => 'pro', :pro_status => 'ACTIVE' }
+    let!(:inactive_pro_subscription) { FactoryGirl.create :subscription, :club => club, :level => 'pro', :pro_status => 'INACTIVE' }
+
+    describe ".all_members_to_csv" do
+      it "includes basic members" do
+        club.all_members_to_csv.should =~ /#{basic_subscription.user.email}/
+      end
+
+      it "includes active pro members" do
+        club.all_members_to_csv.should =~ /#{active_pro_subscription.user.email}/
+      end
+
+      it "excludes inactive pro members" do
+        club.all_members_to_csv.should_not =~ /#{inactive_pro_subscription.user.email}/
+      end
+    end
+
+    describe ".basic_members_to_csv" do
+      it "includes basic members" do
+        club.basic_members_to_csv.should =~ /#{basic_subscription.user.email}/
+      end
+
+      it "excludes active pro members" do
+        club.basic_members_to_csv.should_not =~ /#{active_pro_subscription.user.email}/
+      end
+
+      it "excludes inactive pro members" do
+        club.basic_members_to_csv.should_not =~ /#{inactive_pro_subscription.user.email}/
+      end
+    end
+
+    describe ".pro_members_to_csv" do
+      it "excludes basic members" do
+        club.pro_members_to_csv.should_not =~ /#{basic_subscription.user.email}/
+      end
+
+      it "includes active pro members" do
+        club.pro_members_to_csv.should =~ /#{active_pro_subscription.user.email}/
+      end
+
+      it "excludes inactive pro members" do
+        club.pro_members_to_csv.should_not =~ /#{inactive_pro_subscription.user.email}/
+      end
+    end
+  end
 end
