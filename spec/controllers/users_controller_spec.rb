@@ -118,7 +118,8 @@ describe UsersController do
   end
 
   describe "PUT 'update'" do
-    let(:new_description) { "Test Course" }
+    let(:new_description) { "Test Description" }
+    let(:new_name)        { "Test Name" }
 
     describe "for a signed-in user" do
       before :each do
@@ -130,7 +131,8 @@ describe UsersController do
         describe "for valid attributes" do
           before :each do
             put 'update', :id => user.id, :content => { :user_icon        => { :attributes => { :src => "abc" } },
-                                                        :user_description => { :value => new_description } }
+                                                        :user_description => { :value => new_description },
+                                                        :user_name        => { :value => new_name } }
           end
 
           it "returns http success" do
@@ -144,6 +146,7 @@ describe UsersController do
           it "assigns the new attributes" do
             user.reload
             user.description.should == new_description
+            user.name.should        == new_name
           end
         end
 
@@ -151,7 +154,8 @@ describe UsersController do
           before :each do
             @old_description = user.description
             put 'update', :id => user.id, :content => { :user_icon        => { :attributes => { :src => "abc" } },
-                                                        :user_description => { :value => "" } }
+                                                        :user_description => { :value => "" },
+                                                        :user_name        => { :value => "" } }
           end
 
           it "returns http unprocessable" do
@@ -174,7 +178,8 @@ describe UsersController do
 
         before :each do
           put 'update', :id => other_user.id, :content => { :user_icon        => { :attributes => { :src => "abc" } },
-                                                            :user_description => { :value => "123" } }
+                                                            :user_description => { :value => "123" },
+                                                            :user_name        => { :value => "test" } }
         end
 
         it "returns http forbidden" do
@@ -186,7 +191,8 @@ describe UsersController do
     describe "for a non signed-in user" do
       before :each do
         put 'update', :id => user.id, :content => { :user_icon        => { :attributes => { :src => "abc" } },
-                                                    :user_description => { :value => "123" } }
+                                                    :user_description => { :value => "123" },
+                                                    :user_name        => { :value => "test" } }
       end
 
       it "redirects to the sign-in page" do

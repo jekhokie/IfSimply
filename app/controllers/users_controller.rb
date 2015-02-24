@@ -28,6 +28,7 @@ class UsersController < ApplicationController
       authorize! :update, @user
 
       user_hash         = params[:content]
+      @user.name        = user_hash[:user_name][:value]
       @user.description = user_hash[:user_description][:value]
       @user.icon        = user_hash[:user_icon][:attributes][:src]
 
