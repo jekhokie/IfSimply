@@ -21,7 +21,12 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_inactive_sign_up_path_for(resource)
-    registration_notify_path
+    # determine if the user is coming from a club upsell page
+    if session[:subscription]
+      return club_registration_notify_path
+    else
+      return registration_notify_path
+    end
   end
 
   def after_update_path_for(resource)

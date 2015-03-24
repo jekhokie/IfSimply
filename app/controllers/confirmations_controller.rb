@@ -34,7 +34,14 @@ class ConfirmationsController < Devise::ConfirmationsController
   protected
 
   def after_confirmation_path_for(resource_name, resource)
-    user_editor_path(resource)
+    # determine if the user is coming from a club upsell page
+    if session[:subscription]
+      club_id = session[:subscription].club_id
+      session.delete(:subscription)
+      club_upsell_page_path(club_id)
+    else
+      user_editor_path(resource)
+    end
   end
 
   def after_resending_confirmation_instructions_path_for(resource_name)
