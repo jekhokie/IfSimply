@@ -23,15 +23,16 @@ Ifsimply::Application.routes.draw do
   end
 
   scope '/' do
-    match '/registration_notify'  => 'home#registration_notify',  :as => :registration_notify
-    match '/access_violation'     => 'home#access_violation',     :as => :access_violation
-    match '/terms_and_conditions' => 'home#terms_and_conditions', :as => :terms_and_conditions
-    match '/privacy_policy'       => 'home#privacy_policy',       :as => :privacy_policy
-    match '/dmca_policy'          => 'home#dmca_policy',          :as => :dmca_policy
-    match '/after_devise'         => 'home#after_devise',         :as => :after_devise
-    match '/faq'                  => 'home#faq',                  :as => :faq
-    match '/free_ebook'           => 'home#free_ebook',           :as => :free_ebook
-    match '/download_ebook'       => 'home#download_ebook',       :as => :download_ebook
+    match '/club_registration_notify' => 'home#club_registration_notify', :as => :club_registration_notify
+    match '/registration_notify'      => 'home#registration_notify',      :as => :registration_notify
+    match '/access_violation'         => 'home#access_violation',         :as => :access_violation
+    match '/terms_and_conditions'     => 'home#terms_and_conditions',     :as => :terms_and_conditions
+    match '/privacy_policy'           => 'home#privacy_policy',           :as => :privacy_policy
+    match '/dmca_policy'              => 'home#dmca_policy',              :as => :dmca_policy
+    match '/after_devise'             => 'home#after_devise',             :as => :after_devise
+    match '/faq'                      => 'home#faq',                      :as => :faq
+    match '/free_ebook'               => 'home#free_ebook',               :as => :free_ebook
+    match '/download_ebook'           => 'home#download_ebook',           :as => :download_ebook
   end
 
   # paypal-related routing

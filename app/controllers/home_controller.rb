@@ -8,6 +8,9 @@ class HomeController < ApplicationController
   def registration_notify
   end
 
+  def club_registration_notify
+  end
+
   def access_violation
     @violation = params[:exception]
   end
