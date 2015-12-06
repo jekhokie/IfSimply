@@ -15,6 +15,14 @@ NOTE: This repository contains the IfSimply website developed during ownership o
 but is free to use in part or in full and in accordance with the MIT license contained within
 this repository as the code can now be considered "Open Source".
 
+== Screenshots
+
+Below are some screenshots of the website capabilities.
+
+![Homepage](img/homepage.png "Homepage")
+
+![Inline Editor for Club](img/editor.png "Inline Editor for Club")
+
 == Clone
 
 - Clone the repository:
