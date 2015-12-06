@@ -5,6 +5,7 @@
 - Install gems for Production deployment:
 
 ```
+cd ifsimply/
 bundle install --without deveopment test
 ```
 
@@ -38,6 +39,8 @@ scp Downloads/newrelic.yml <target>:ifsimply/config/   # newrelic config file wi
 ```
 
 == HostMonster (on the HostMonster server)
+
+Perform the following if you are hosting the solution on HostMonster:
 
 - .htaccess file:
 
@@ -137,9 +140,9 @@ passenger-install-apache2-module  # PAY ATTENTION TO END OF THIS - COPY 3 REQUIR
 the passenger-install-apache2-module command above:
 
 ```
-LoadModule passenger_module /home/jekhokie/.rvm/gems/ruby-1.9.3-p194@ifsimply/gems/passenger-4.0.27/buildout/apache2/mod_passenger.so
-PassengerRoot /home/jekhokie/.rvm/gems/ruby-1.9.3-p194@ifsimply/gems/passenger-4.0.27
-PassengerDefaultRuby /home/jekhokie/.rvm/wrappers/ruby-1.9.3-p194@ifsimply/ruby
+LoadModule passenger_module /home/user/.rvm/gems/ruby-1.9.3-p194@ifsimply/gems/passenger-4.0.27/buildout/apache2/mod_passenger.so
+PassengerRoot /home/user/.rvm/gems/ruby-1.9.3-p194@ifsimply/gems/passenger-4.0.27
+PassengerDefaultRuby /home/user/.rvm/wrappers/ruby-1.9.3-p194@ifsimply/ruby
 
 <VirtualHost *:3999>
   ServerName www.example.com
