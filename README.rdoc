@@ -1,5 +1,28 @@
 = IfSimply
 
+IfSimply is a "What you see is what you get" membership building site. The code contained within
+is constructed to support end-users signing up and creating their own "Clubs" using the WYSIWYG
+style of interaction. Payments and billing are handled automatically through scheduled jobs and
+links with the PayPal billing service. The site was an attempt to foster community-constructed
+membership sites by providing proven out of box marketing techniques, allowing the user to focus
+solely on their content creation. The inline editing features of the site was specifically focused
+to allow non-technical and technical users alike to create content about a subject they are
+passionate about and are looking to either prompote for community collaboration or for monetary
+gain.
+
+NOTE: This repository contains the IfSimply website developed during ownership of the business
+"Simple Media Technology, LLC". The website code contains older libraries and functionality
+but is free to use in part or in full and in accordance with the MIT license contained within
+this repository as the code can now be considered "Open Source".
+
+== Clone
+
+- Clone the repository:
+
+```
+git clone <URL_TO_IFSIMPLY_CODE> ifsimply
+```
+
 == Bundler
 
 - Install gems for Production deployment:
