@@ -1,4 +1,4 @@
-= IfSimply
+# IfSimply
 
 IfSimply is a "What you see is what you get" membership building site. The code contained within
 is constructed to support end-users signing up and creating their own "Clubs" using the WYSIWYG
@@ -15,7 +15,7 @@ NOTE: This repository contains the IfSimply website developed during ownership o
 but is free to use in part or in full and in accordance with the MIT license contained within
 this repository as the code can now be considered "Open Source".
 
-== Screenshots
+## Screenshots
 
 Below are some screenshots of the website capabilities.
 
@@ -23,7 +23,7 @@ Below are some screenshots of the website capabilities.
 
 ![Inline Editor for Club](img/editor.png "Inline Editor for Club")
 
-== Clone
+## Clone
 
 - Clone the repository:
 
@@ -31,7 +31,7 @@ Below are some screenshots of the website capabilities.
 git clone <URL_TO_IFSIMPLY_CODE> ifsimply
 ```
 
-== Bundler
+## Bundler
 
 - Install gems for Production deployment:
 
@@ -40,7 +40,7 @@ cd ifsimply/
 bundle install --without deveopment test
 ```
 
-== Settings
+## Settings
 
 - Copy and update the settings file:
 
@@ -69,7 +69,7 @@ vim config/paypal.yml   # update all values for PayPal live API
 scp Downloads/newrelic.yml <target>:ifsimply/config/   # newrelic config file with key
 ```
 
-== HostMonster (on the HostMonster server)
+## HostMonster (on the HostMonster server)
 
 Perform the following if you are hosting the solution on HostMonster:
 
@@ -110,7 +110,7 @@ mkdir -p ~/public_html/ifSimply/
 ln -s ~/ifsimply/public ~/public_html/ifSimply/HTML
 ```
 
-== Background Mailers
+## Background Mailers
 
 WARNING: DelayedJob caches all configs, including email URLs and views for mailers.
          If ANY of these change, it requires a restart of the delayed_job service.
@@ -129,7 +129,7 @@ RAILS_ENV=production rake jobs:work     # work all jobs and persist
 RAILS_ENV=production rake jobs:workoff	# work all jobs and exit
 ```
 
-== Whenever (crontab scheduling)
+## Whenever (crontab scheduling)
 
 - Create the crontab entries for the billing process
 
@@ -138,7 +138,7 @@ whenever --write-crontab -s 'environment=production'
 crontab -l  # double-check the crontab entries
 ```
 
-== Database and Migrations
+## Database and Migrations
 
 - Create the database, create the schema, and populate with seed data
 
@@ -148,7 +148,7 @@ rake db:migrate RAILS_ENV=production
 rake db:seed    RAILS_ENV=production
 ```
 
-== Asset Pipeline
+## Asset Pipeline
 
 - Precompile all assets
 
@@ -157,7 +157,7 @@ rm -rf public/assets/*
 rake assets:precompile RAILS_ENV=production
 ```
 
-== Apache Web / Passenger
+## Apache Web / Passenger
 
 - Install Apache Web and Passenger:
 
@@ -196,7 +196,7 @@ PassengerDefaultRuby /home/user/.rvm/wrappers/ruby-1.9.3-p194@ifsimply/ruby
 sudo service httpd start
 ```
 
-== Database Backups/Restores
+## Database Backups/Restores
 
 - Back up the database without the 'create database' statement.
 
